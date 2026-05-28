@@ -1,5 +1,9 @@
 extends Node
 
+func LoadDevTasks() -> Dictionary:
+	var file = FileAccess.open("res://addons/DevTasks/tasks.txt", FileAccess.READ)
+	return file.get_var()
+
 func SaveAll():
 	SaveStoreHistory()
 	SaveRemoveHistory()

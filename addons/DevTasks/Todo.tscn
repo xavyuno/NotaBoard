@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg88hl5vikyec"]
+
+[ext_resource type="Script" uid="uid://bbjydfndujlj1" path="res://addons/DevTasks/dock.gd" id="1_285fa"]
+
+[node name="Todo" type="Control"]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 177.0
+grow_vertical = 2
+script = ExtResource("1_285fa")
+
+[node name="Holder" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Input" type="LineEdit" parent="Holder"]
+layout_mode = 2
+placeholder_text = "Task here"
+
+[node name="ReloadTasks" type="Button" parent="Holder"]
+layout_mode = 2
+text = "Reload Tasks"
+
+[node name="AddTask" type="Button" parent="Holder"]
+layout_mode = 2
+text = "Add Task"
+
+[node name="Tasks" type="ScrollContainer" parent="Holder"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Tasks"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
