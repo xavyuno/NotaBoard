@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=4 uid="uid://debqgvaqt7v50"]
+
+[ext_resource type="Script" uid="uid://doa1mfi4opg5u" path="res://App/Components/Ratio/ratio.gd" id="1"]
+
+[node name="Ratio" type="Button"]
+custom_minimum_size = Vector2(31, 0)
+text = "1:1"
+script = ExtResource("1")

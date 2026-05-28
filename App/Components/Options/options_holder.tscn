@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=4 uid="uid://cml6nsa2rwc0b"]
+
+[ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://debqgvaqt7v50" path="res://App/Components/Ratio/ratio.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="4"]
+
+[node name="OptionsHolder" type="HBoxContainer"]
+alignment = 2
+script = ExtResource("1")
+
+[node name="Ratio" parent="." instance=ExtResource("2")]
+layout_mode = 2
+
+[node name="Move" parent="." instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Close" parent="." instance=ExtResource("4")]
+layout_mode = 2

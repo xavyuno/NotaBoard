@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=4 uid="uid://chqtc4ro5f13w"]
+
+[ext_resource type="Script" uid="uid://cjnvsf22ms21g" path="res://App/Components/ExpandHolder/expand_holder.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://gjyfh3mvseex" path="res://App/Components/Expand/expand.tscn" id="2"]
+
+[node name="ExpandHolder" type="HBoxContainer"]
+alignment = 2
+script = ExtResource("1")
+
+[node name="Expand" parent="." instance=ExtResource("2")]
+layout_mode = 2

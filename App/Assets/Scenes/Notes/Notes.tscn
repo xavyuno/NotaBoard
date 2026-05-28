@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=4 uid="uid://bmhbuhyhf2tom"]
+
+[ext_resource type="Script" uid="uid://dd4v0ireotg4s" path="res://App/Assets/Scenes/Notes/notes.gd" id="1"]
+[ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://debqgvaqt7v50" path="res://App/Components/Ratio/ratio.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="8"]
+
+[node name="Note" type="VBoxContainer"]
+clip_children = 2
+custom_minimum_size = Vector2(0, 140)
+offset_right = 251.0
+offset_bottom = 110.0
+theme_override_constants/separation = 0
+script = ExtResource("1")
+
+[node name="OptionsHolder" type="HBoxContainer" parent="." node_paths=PackedStringArray("MainObject")]
+layout_mode = 2
+alignment = 2
+script = ExtResource("2")
+MainObject = NodePath("..")
+
+[node name="TitleOn" type="Button" parent="OptionsHolder"]
+custom_minimum_size = Vector2(32, 0)
+layout_direction = 2
+layout_mode = 2
+text = "Title"
+
+[node name="NoteOn" type="Button" parent="OptionsHolder"]
+custom_minimum_size = Vector2(32, 0)
+layout_direction = 2
+layout_mode = 2
+text = "Note"
+
+[node name="Ratio" parent="OptionsHolder" instance=ExtResource("3")]
+layout_mode = 2
+
+[node name="Move" parent="OptionsHolder" instance=ExtResource("4")]
+layout_mode = 2
+
+[node name="Close" parent="OptionsHolder" instance=ExtResource("5")]
+layout_mode = 2
+
+[node name="Title" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "Title"
+
+[node name="CheckFocus" parent="Title" node_paths=PackedStringArray("par") instance=ExtResource("6")]
+par = NodePath("..")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Notes" type="TextEdit" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+placeholder_text = "Store notes and any text here"
+wrap_mode = 1
+indent_wrapped_lines = true
+scroll_smooth = true
+scroll_past_end_of_file = true
+scroll_fit_content_height = true
+caret_blink = true
+highlight_all_occurrences = true
+
+[node name="CheckFocus" parent="ScrollContainer/Notes" node_paths=PackedStringArray("par") instance=ExtResource("6")]
+par = NodePath("..")
+
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("7")]
+layout_mode = 2
+MainObject = NodePath("..")
+
+[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("8")]
+Par = NodePath("..")
+
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="pressed" from="OptionsHolder/TitleOn" to="." method="_on_title_on_pressed"]
+[connection signal="pressed" from="OptionsHolder/NoteOn" to="." method="_on_note_on_pressed"]

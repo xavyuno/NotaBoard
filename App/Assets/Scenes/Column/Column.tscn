@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=4 uid="uid://dltgkc7h0py83"]
+
+[ext_resource type="Script" uid="uid://deib8yod0iwgh" path="res://App/Assets/Scenes/Column/column.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cml6nsa2rwc0b" path="res://App/Components/Options/options_holder.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="4"]
+
+[node name="Column" type="VBoxContainer"]
+custom_minimum_size = Vector2(248, 0)
+offset_right = 248.0
+offset_bottom = 72.0
+theme_override_constants/separation = 0
+script = ExtResource("1")
+
+[node name="OptionsHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("2")]
+layout_mode = 2
+size_flags_vertical = 0
+MainObject = NodePath("..")
+
+[node name="Title" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Title"
+alignment = 1
+
+[node name="Items" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+
+[node name="DropBar" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Info" type="Label" parent="DropBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Drag and drop item here"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("3")]
+layout_mode = 2
+size_flags_vertical = 8
+MainObject = NodePath("..")
+
+[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("4")]
+Par = NodePath("..")
+
+[connection signal="focus_entered" from="DropBar" to="." method="_on_drop_bar_focus_entered"]
+[connection signal="mouse_entered" from="DropBar" to="." method="_on_drop_bar_mouse_entered"]
+[connection signal="mouse_exited" from="DropBar" to="." method="_on_drop_bar_mouse_exited"]

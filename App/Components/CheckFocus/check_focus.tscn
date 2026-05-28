@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4 uid="uid://8r3y5vbqek01"]
+
+[ext_resource type="Script" uid="uid://lwkxqyvylo07" path="res://App/Components/CheckFocus/CheckFocus.gd" id="1"]
+
+[node name="CheckFocus" type="Node"]
+script = ExtResource("1")

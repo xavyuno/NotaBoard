@@ -1,0 +1,796 @@
+[gd_scene load_steps=37 format=4 uid="uid://kpyh8ufdds6l"]
+
+[ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
+[ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cv2wf8fgvgh4a" path="res://App/Assets/Scenes/NewBoard/NewBoard.tscn" id="3"]
+[ext_resource type="Script" uid="uid://x0i05wn17p02" path="res://App/Main/settings.gd" id="4"]
+[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="5"]
+[ext_resource type="PackedScene" uid="uid://bmhbuhyhf2tom" path="res://App/Assets/Scenes/Notes/Notes.tscn" id="6"]
+[ext_resource type="Script" uid="uid://dxq28n2arnb3y" path="res://App/Main/nodes.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://b7mj7mva78t6k" path="res://App/Assets/Icons/Notes.png" id="8"]
+[ext_resource type="PackedScene" uid="uid://m7lbemt2cow6" path="res://App/Components/DragNDrop/drag_n_drop.tscn" id="9"]
+[ext_resource type="Texture2D" uid="uid://d13qly4odg36w" path="res://App/Assets/Icons/ToDo.png" id="10"]
+[ext_resource type="PackedScene" uid="uid://dyefgf4hdrthy" path="res://App/Assets/Scenes/ToDo/ToDo.tscn" id="11"]
+[ext_resource type="Texture2D" uid="uid://oxeffc2jl1xn" path="res://App/Assets/Icons/Link.png" id="12"]
+[ext_resource type="PackedScene" uid="uid://b28gxoc2p2tpf" path="res://App/Assets/Scenes/Link/Link.tscn" id="13"]
+[ext_resource type="Texture2D" uid="uid://veo48dyjhje3" path="res://App/Assets/Icons/Column.png" id="14"]
+[ext_resource type="PackedScene" uid="uid://dltgkc7h0py83" path="res://App/Assets/Scenes/Column/Column.tscn" id="15"]
+[ext_resource type="Texture2D" uid="uid://b4c6vq7qdoyny" path="res://App/Assets/Icons/Board.png" id="16"]
+[ext_resource type="Script" uid="uid://d18aq5wcd7vom" path="res://App/Main/board_drag_n_drop.gd" id="17"]
+[ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/board.tscn" id="18"]
+[ext_resource type="Texture2D" uid="uid://cf6qp5npp6ljd" path="res://App/Assets/Icons/Line.png" id="19"]
+[ext_resource type="PackedScene" uid="uid://w5pbmrihdlp5" path="res://App/Assets/Scenes/Line/line.tscn" id="20"]
+[ext_resource type="Texture2D" uid="uid://130ufwwb2d1w" path="res://App/Assets/Icons/File.png" id="21"]
+[ext_resource type="PackedScene" uid="uid://ditwmlmi3ffb2" path="res://App/Assets/Scenes/File/File.tscn" id="22"]
+[ext_resource type="Script" uid="uid://b3qf3arcokllp" path="res://App/Main/canvas.gd" id="23"]
+[ext_resource type="Texture2D" uid="uid://dylix26uaoyu4" path="res://App/Assets/Icons/icons8-settings-32(1).png" id="24"]
+[ext_resource type="Script" uid="uid://dc5f3s7hw57t6" path="res://App/Main/board_display.gd" id="25"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yqhvp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xv0o8"]
+font = ExtResource("5")
+font_size = 55
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqkbx"]
+font = ExtResource("5")
+font_size = 30
+
+[sub_resource type="Gradient" id="Gradient_nqkbx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dbp5u"]
+gradient = SubResource("Gradient_nqkbx")
+
+[sub_resource type="Gradient" id="Gradient_d1pkp"]
+colors = PackedColorArray(0.0780884, 0.640844, 0.558948, 1, 9.62615e-08, 0.681619, 0.344828, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3dg"]
+gradient = SubResource("Gradient_d1pkp")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbp5u"]
+font_size = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nqkbx"]
+
+[sub_resource type="SystemFont" id="SystemFont_0ucvp"]
+font_names = PackedStringArray("Arial")
+generate_mipmaps = true
+force_autohinter = true
+multichannel_signed_distance_field = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etqv4"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -704.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(640, 352)
+script = ExtResource("1")
+
+[node name="ClearFocus" type="ColorRect" parent="Camera"]
+offset_left = -12416.0
+offset_top = -5824.0
+offset_right = 19392.0
+offset_bottom = 10560.0
+color = Color(0.188106, 0.412068, 0.74376, 1)
+
+[node name="Boards" type="TabContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 704.0
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_yqhvp")
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+script = ExtResource("2")
+
+[node name="Home" parent="Boards" instance=ExtResource("3")]
+visible = false
+layout_mode = 2
+
+[node name="Settings" type="Control" parent="Boards"]
+visible = false
+show_behind_parent = true
+light_mask = 0
+layout_mode = 2
+script = ExtResource("4")
+metadata/_tab_index = 1
+
+[node name="Title" type="Label" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 67.0
+offset_right = 590.0
+offset_bottom = 141.0
+text = "Settings"
+label_settings = SubResource("LabelSettings_xv0o8")
+
+[node name="Version" type="Label" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 189.0
+offset_right = 889.0
+offset_bottom = 226.0
+text = "Version: Alpha"
+label_settings = SubResource("LabelSettings_nqkbx")
+vertical_alignment = 2
+
+[node name="BGInfo" type="Label" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 158.0
+offset_right = 434.0
+offset_bottom = 178.0
+text = "Change Background Color"
+
+[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 205.0
+offset_top = 183.0
+offset_right = 451.0
+offset_bottom = 225.0
+edit_alpha = false
+
+[node name="Note" parent="Boards/Settings" instance=ExtResource("6")]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 232.0
+offset_right = 911.0
+offset_bottom = 438.0
+Options = false
+Expand = false
+CloseButton = false
+MoveButton = false
+TitleOn = false
+Title = "v"
+CanEdit = false
+UseData = false
+Text = "Keybinds:
+	ctrl + z: Undo
+	ctrl + c: Copy (Pastes item at mouse position)
+	ctrl + d: Duplicate (Pastes item in same position)
+	ctrl + r: Resets camera position
+	delete: deletes selected item
+	ctrl + LMB: select multiple items at once
+	I: Zoom in
+	O: Zoom out
+ngl, idk if scrolling even works"
+
+[node name="Note2" parent="Boards/Settings" instance=ExtResource("6")]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 447.0
+offset_right = 1274.0
+offset_bottom = 1080.0
+Options = false
+Expand = false
+CloseButton = false
+MoveButton = false
+TitleOn = false
+Title = "v"
+CanEdit = false
+UseData = false
+Text = "Additional Information:
+
+Items:
+	Link Item: When pasting the link of an image, it will try to display it
+	Board: Every board can have the same name but different ID, Each item placed inside of the board will be linked to the board's ID
+	Upload File: when selecting a file, it will try to display it's contents within the preview window, at a maximum of 100 lines. If the selected file is an image, it will try and display that image
+
+Misc:
+Holding RMB (Right mouse button) allows you to pan through the space, also works with middle mouse button and it captures your mouse in the process so moving isn't limited to your window (pretty lit if you ask me)
+The notes you're reading is made from the same notes that you can drag and drop
+Infact, the settings page uses the same Board system, all it does it change an already existing board within the program, Literally recycle, reuse, reduce or whatever
+
+Information Collected/Stored:
+only the items dragged and dropped, history and background color is stored into Save, removeHistory and settings files, respectively, basically anything you can physically see within the program
+Files are not stored, only the directory leading to them and contents are turned into text and displayed within
+
+Third Party use:
+Icons used: https://icons8.com/icons/set/settings
+Font: https://www.programmingfonts.org/#oxproto
+😎No AI used (it's pretty obvious if you look at how badly written the code is)
+
+The github repository will always have the latest updates and fixes than the releases (this is easier than exporting and continously uploading the export)"
+
+[node name="ProjectDir" type="Button" parent="Boards/Settings"]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+layout_mode = 0
+offset_left = 920.0
+offset_top = 400.0
+offset_right = 1243.0
+offset_bottom = 440.0
+text = "Open Project Directory"
+
+[node name="ProjectLink" type="Button" parent="Boards/Settings"]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+layout_mode = 0
+offset_left = 920.0
+offset_top = 352.0
+offset_right = 1200.0
+offset_bottom = 392.0
+text = "Open Github Project"
+
+[node name="Update" type="Button" parent="Boards/Settings"]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+clip_children = 2
+layout_mode = 0
+offset_left = 920.0
+offset_top = 304.0
+offset_right = 1160.0
+offset_bottom = 344.0
+
+[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Update"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 108903000.0
+step = 0.001
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_dbp5u")
+texture_progress = SubResource("GradientTexture2D_qt3dg")
+
+[node name="Info" type="Label" parent="Boards/Settings/Update"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+text = "Download Update"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="Boards/Settings/Update"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -13.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "v0.1-Alpha"
+label_settings = SubResource("LabelSettings_dbp5u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Download" type="HTTPRequest" parent="Boards/Settings/Update"]
+use_threads = true
+max_redirects = 64
+
+[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Update"]
+use_threads = true
+max_redirects = 64
+
+[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Update"]
+access = 2
+filters = PackedStringArray("*.exe")
+
+[node name="ToDo" type="VBoxContainer" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 1288.0
+offset_top = 456.0
+offset_right = 1564.0
+offset_bottom = 560.0
+theme_override_constants/separation = 1
+
+[node name="Title" type="LineEdit" parent="Boards/Settings/ToDo"]
+layout_mode = 2
+text = "Possible Future Updates"
+placeholder_text = "Title"
+editable = false
+
+[node name="List" type="VBoxContainer" parent="Boards/Settings/ToDo"]
+layout_mode = 2
+
+[node name="1" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Make items customize-able"
+
+[node name="2" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "MAYBE add draw functionality"
+
+[node name="4" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Add keybinds to mass move and resize items"
+
+[node name="9" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Add search bar"
+
+[node name="10" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Add report bugs bar"
+
+[node name="5" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Upload to itch.io"
+
+[node name="6" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Make boards possible within other boards"
+
+[node name="7" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Fix column scaling/resizing"
+
+[node name="8" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Try to get previews to show within the link items"
+
+[node name="3" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Make data transferable between devices (and MAYBE between users globally)"
+
+[node name="11" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Get the software in beta release"
+
+[node name="12" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Create plugin to connect software to editor and vice versa (far maybe, future)"
+
+[node name="13" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Create a detailed read.md for github"
+
+[node name="14" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Add mobile support"
+
+[node name="15" type="CheckBox" parent="Boards/Settings/ToDo/List"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_styles/focus = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/disabled = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxTexture_nqkbx")
+theme_override_styles/normal = SubResource("StyleBoxTexture_nqkbx")
+disabled = true
+text = "Make this to do list update in real time"
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Nodes" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 160.0
+offset_bottom = 704.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+script = ExtResource("7")
+
+[node name="BG" type="Panel" parent="UI/Nodes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="UI/Nodes"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 48.0
+offset_right = 143.0
+offset_bottom = 688.0
+
+[node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+follow_focus = true
+draw_focus_border = true
+
+[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/ItemHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Notes" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "Notes"
+icon = ExtResource("8")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" instance=ExtResource("9")]
+Item = ExtResource("6")
+
+[node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "ToDo
+"
+icon = ExtResource("10")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/ToDo" instance=ExtResource("9")]
+Item = ExtResource("11")
+
+[node name="Link" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "Link
+"
+icon = ExtResource("12")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Link" instance=ExtResource("9")]
+Item = ExtResource("13")
+
+[node name="Column" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "Column"
+icon = ExtResource("14")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Column" instance=ExtResource("9")]
+Item = ExtResource("15")
+
+[node name="Board" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "Board"
+icon = ExtResource("16")
+expand_icon = true
+
+[node name="BoardDragNDrop" type="Node" parent="UI/Nodes/Holder/ItemHolder/Items/Board"]
+script = ExtResource("17")
+Item = ExtResource("18")
+
+[node name="Line" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "Draw Line"
+icon = ExtResource("19")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Line" instance=ExtResource("9")]
+Item = ExtResource("20")
+
+[node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+layout_mode = 2
+text = "File"
+icon = ExtResource("21")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/File" instance=ExtResource("9")]
+Item = ExtResource("22")
+
+[node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="UI/Nodes/Holder/HistoryTitle"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "History"
+
+[node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HistoryHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="History" type="ItemList" parent="UI/Nodes/Holder/HistoryHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = SubResource("SystemFont_0ucvp")
+select_mode = 1
+allow_reselect = true
+allow_rmb_select = true
+auto_height = true
+text_overrun_behavior = 4
+
+[node name="Delete" type="Button" parent="UI/Nodes/Holder"]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 2
+text = "Delete All"
+
+[node name="Canvas" type="HBoxContainer" parent="UI"]
+clip_children = 2
+light_mask = 0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = 153.0
+offset_bottom = 39.0
+size_flags_horizontal = 3
+script = ExtResource("23")
+
+[node name="Close" type="Button" parent="UI/Canvas"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "<"
+
+[node name="Settings" type="Button" parent="UI/Canvas"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+icon = ExtResource("24")
+icon_alignment = 1
+expand_icon = true
+
+[node name="BoardDisplay" type="HBoxContainer" parent="UI"]
+anchors_preset = -1
+anchor_left = 0.919
+anchor_right = 0.998
+anchor_bottom = 0.034
+offset_left = -0.320068
+offset_right = 0.559937
+offset_bottom = 0.0639992
+grow_horizontal = 0
+theme_override_constants/separation = 2
+alignment = 2
+script = ExtResource("25")
+metadata/_edit_use_anchors_ = true
+
+[node name="Home" type="Button" parent="UI/BoardDisplay"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
+text = "Home/"
+
+[node name="NewBoard" type="Button" parent="UI/BoardDisplay"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
+text = "Untiled Board"
+
+[connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
+[connection signal="pressed" from="Boards/Settings/ProjectDir" to="Boards/Settings" method="_on_project_dir_pressed"]
+[connection signal="pressed" from="Boards/Settings/ProjectLink" to="Boards/Settings" method="_on_project_link_pressed"]
+[connection signal="pressed" from="Boards/Settings/Update" to="Boards/Settings" method="_on_update_pressed"]
+[connection signal="request_completed" from="Boards/Settings/Update/Download" to="Boards/Settings" method="_on_download_request_completed"]
+[connection signal="request_completed" from="Boards/Settings/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
+[connection signal="file_selected" from="Boards/Settings/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
+[connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
+[connection signal="pressed" from="UI/Nodes/Holder/Delete" to="UI/Nodes" method="_on_delete_pressed"]
+[connection signal="pressed" from="UI/Canvas/Close" to="UI/Canvas" method="_on_close_pressed"]
+[connection signal="pressed" from="UI/Canvas/Settings" to="UI/Canvas" method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/BoardDisplay/Home" to="UI/BoardDisplay" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/BoardDisplay/NewBoard" to="UI/BoardDisplay" method="_on_new_board_pressed"]

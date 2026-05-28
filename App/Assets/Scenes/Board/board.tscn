@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=4 uid="uid://byig8v87yy8yo"]
+
+[ext_resource type="Script" uid="uid://1bciud8wf734" path="res://App/Assets/Scenes/Board/board.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://cml6nsa2rwc0b" path="res://App/Components/Options/options_holder.tscn" id="2"]
+[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="3"]
+[ext_resource type="FontFile" uid="uid://cfo3bhqi4p5qu" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Regular.ttf" id="4"]
+[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
+
+[node name="Board" type="VBoxContainer"]
+offset_right = 170.0
+offset_bottom = 152.0
+theme_override_constants/separation = 0
+script = ExtResource("1")
+
+[node name="OptionsHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("2")]
+layout_mode = 2
+theme_override_constants/separation = 2
+MainObject = NodePath("..")
+
+[node name="New" type="Button" parent="."]
+self_modulate = Color(3.85046e-06, 0.970701, 0.700651, 1)
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 26
+text = "Open Board"
+
+[node name="Title" type="Label" parent="New"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 63.0
+offset_right = 67.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 14
+text = "ID:"
+vertical_alignment = 2
+
+[node name="ID" type="Label" parent="New"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 63.0
+offset_right = 142.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("4")
+theme_override_font_sizes/font_size = 14
+text = "Getting ID..."
+vertical_alignment = 2
+
+[node name="BoardName" type="LineEdit" parent="."]
+layout_mode = 2
+placeholder_text = "New Board"
+expand_to_text_length = true
+
+[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("5")]
+Par = NodePath("..")
+
+[node name="CheckFocus" parent="." node_paths=PackedStringArray("par") instance=ExtResource("6")]
+par = NodePath("../BoardName")
+
+[connection signal="pressed" from="New" to="." method="_on_new_pressed"]
+[connection signal="text_changed" from="BoardName" to="." method="_on_board_name_text_changed"]
+[connection signal="text_submitted" from="BoardName" to="." method="_on_board_name_text_submitted"]

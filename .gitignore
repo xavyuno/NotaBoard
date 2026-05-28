@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+.exe/
+
+*.exe
+*.dll
+*.msi
+debug/
+release/

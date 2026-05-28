@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=4 uid="uid://b28gxoc2p2tpf"]
+
+[ext_resource type="Script" uid="uid://bq27q2b2llxpa" path="res://App/Assets/Scenes/Link/link_card.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
+
+[node name="LinkCard" type="VBoxContainer"]
+offset_right = 256.0
+offset_bottom = 62.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+theme_override_constants/separation = 0
+script = ExtResource("1")
+
+[node name="Image" type="TextureRect" parent="."]
+visible = false
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="Holder" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_stretch_ratio = 0.1
+theme_override_constants/separation = 2
+
+[node name="Move" parent="Holder" node_paths=PackedStringArray("par") instance=ExtResource("2")]
+layout_mode = 2
+par = NodePath("../..")
+
+[node name="Close" parent="Holder" node_paths=PackedStringArray("par") instance=ExtResource("3")]
+layout_mode = 2
+par = NodePath("../..")
+
+[node name="Link" type="LineEdit" parent="Holder"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Https://Example.com"
+
+[node name="GoTo" type="Button" parent="Holder"]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+layout_mode = 2
+text = ">"
+
+[node name="GetLink" type="HTTPRequest" parent="."]
+
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("4")]
+layout_mode = 2
+MainObject = NodePath("..")
+
+[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("5")]
+Par = NodePath("..")
+
+[node name="CheckFocus" parent="." node_paths=PackedStringArray("par") instance=ExtResource("6")]
+par = NodePath("../Holder/Link")
+
+[connection signal="focus_exited" from="Holder/Link" to="." method="_on_link_focus_exited"]
+[connection signal="text_submitted" from="Holder/Link" to="." method="_on_link_text_submitted"]
+[connection signal="pressed" from="Holder/GoTo" to="." method="_on_go_to_pressed"]
+[connection signal="request_completed" from="GetLink" to="." method="_on_get_link_request_completed"]
