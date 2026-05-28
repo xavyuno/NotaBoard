@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://kpyh8ufdds6l"]
+[gd_scene load_steps=37 format=3 uid="uid://kpyh8ufdds6l"]
 
 [ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
@@ -101,7 +101,6 @@ tabs_visible = false
 script = ExtResource("2")
 
 [node name="Home" parent="Boards" instance=ExtResource("3")]
-visible = false
 layout_mode = 2
 
 [node name="Settings" type="Control" parent="Boards"]
@@ -243,7 +242,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-max_value = 108903000.0
+max_value = 1.08903e+08
 step = 0.001
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_dbp5u")

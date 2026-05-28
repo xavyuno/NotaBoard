@@ -1,46 +1,46 @@
 extends TabContainer
 
 func _ready() -> void :
-    User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
-    User.connect("SaveObjectData", Callable(self, "saveItems"))
-    User.emit_signal("ChangeBoard", "Home", "Home")
+	User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
+	User.connect("SaveObjectData", Callable(self, "saveItems"))
+	User.emit_signal("ChangeBoard", "Home", "Home")
 
 func _exit_tree() -> void :
-    saveItems()
+	saveItems()
 
 func saveItems():
-    if User.StillLoading:
-        return
-    User.StoredHistory = []
-    for i in get_children(true):
+	if User.StillLoading:
+		return
+	User.StoredHistory = []
+	for i in get_children(true):
 
-        if i.name.similarity("Settings") < 1:
-            if i.has_method("GetData"):
+		if i.name.similarity("Settings") < 1:
+			if i.has_method("GetData"):
 
-                User.StoredHistory.append(i.GetData())
-            for j in i.get_children(true):
+				User.StoredHistory.append(i.GetData())
+			for j in i.get_children(true):
 
-                if j.has_method("GetData"):
+				if j.has_method("GetData"):
 
-                    User.StoredHistory.append(j.GetData())
-    System.SaveAll()
+					User.StoredHistory.append(j.GetData())
+	System.SaveAll()
 
 func ChangeBoard(Board: String, Title: String):
-    User.PreviousPage = User.CurrentPage
-    User.PreviousTitle = User.PreviousTitle
-    var Found = false
-    for i in get_tab_count():
-        if get_tab_control(i).name == Board:
-            current_tab = i
-            User.CurrentPage = Board
-            User.PageTitle = Title
-            Found = true
+	User.PreviousPage = User.CurrentPage
+	User.PreviousTitle = User.PreviousTitle
+	var Found = false
+	for i in get_tab_count():
+		if get_tab_control(i).name == Board:
+			current_tab = i
+			User.CurrentPage = Board
+			User.PageTitle = Title
+			Found = true
 
-    if !Found:
-        var NewBoard = Control.new()
-        NewBoard.name = Board
-        get_parent().get_node("Boards/").add_child(NewBoard)
-        current_tab = get_tab_count() - 1
+	if !Found:
+		var NewBoard = Control.new()
+		NewBoard.name = Board
+		get_parent().get_node("Boards/").add_child(NewBoard)
+		current_tab = get_tab_count() - 1
 
-        User.CurrentPage = Board
-        User.PageTitle = Title
+		User.CurrentPage = Board
+		User.PageTitle = Title

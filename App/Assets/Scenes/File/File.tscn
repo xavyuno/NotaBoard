@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://ditwmlmi3ffb2"]
+[gd_scene load_steps=7 format=3 uid="uid://ditwmlmi3ffb2"]
 
 [ext_resource type="Script" uid="uid://55nfvi2wjybg" path="res://App/Assets/Scenes/File/file.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cml6nsa2rwc0b" path="res://App/Components/Options/options_holder.tscn" id="2"]

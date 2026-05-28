@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://dyefgf4hdrthy"]
+[gd_scene load_steps=9 format=3 uid="uid://dyefgf4hdrthy"]
 
 [ext_resource type="Script" uid="uid://27tro0bnk12m" path="res://App/Assets/Scenes/ToDo/to_do.gd" id="1"]
 [ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="2"]

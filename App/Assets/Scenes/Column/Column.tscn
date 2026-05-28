@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://dltgkc7h0py83"]
+[gd_scene load_steps=5 format=3 uid="uid://dltgkc7h0py83"]
 
 [ext_resource type="Script" uid="uid://deib8yod0iwgh" path="res://App/Assets/Scenes/Column/column.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cml6nsa2rwc0b" path="res://App/Components/Options/options_holder.tscn" id="2"]

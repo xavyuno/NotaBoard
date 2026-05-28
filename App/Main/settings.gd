@@ -8,66 +8,66 @@ var Downloading: = false
 var Version: = ""
 
 func _ready() -> void :
-    Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
-    $Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text()
+	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
+	$Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text()
 
 func _physics_process(delta: float) -> void :
-    if Downloading:
-        $Update / Progress.value = download.get_downloaded_bytes()
-        $Update / Info.text = "Downloading Update..."
-        $Update / Version.text = Version
-    $Update / Version.visible = Downloading
+	if Downloading:
+		$Update / Progress.value = download.get_downloaded_bytes()
+		$Update / Info.text = "Downloading Update..."
+		$Update / Version.text = Version
+	$Update / Version.visible = Downloading
 
 func SettingsChanged():
-    $BGPicker.color = Settings.BackgroundCol
+	$BGPicker.color = Settings.BackgroundCol
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
-    Settings.BackgroundCol = color
-    Settings.emit_signal("SettingsChanged")
+	Settings.BackgroundCol = color
+	Settings.emit_signal("SettingsChanged")
 
 func _on_project_dir_pressed() -> void :
-    OS.shell_open(ProjectSettings.globalize_path("user://"))
+	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
 func _on_project_link_pressed() -> void :
-    OS.shell_open("https://github.com/xavyuno/Task-Manager")
+	OS.shell_open("https://github.com/xavyuno/Task-Manager")
 
 func _on_update_pressed() -> void :
-    $Update / FileDialog.current_path = Settings.UpdatePath
-    $Update / FileDialog.popup(Rect2i(600, 600, 600, 600))
+	$Update / FileDialog.current_path = Settings.UpdatePath
+	$Update / FileDialog.popup(Rect2i(600, 600, 600, 600))
 
 func _on_download_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
-    Downloading = false
-    $Update / Info.text = "Update Finished!"
-    print("Retrieved Data")
-    if response_code == 200:
-        var file = FileAccess.open(Settings.UpdatePath, FileAccess.WRITE)
-        file.store_buffer(body)
-        file.close()
-        print("Update successful")
-    else:
-        print("Failed to get update")
-    await get_tree().create_timer(1).timeout
-    $Update / Info.text = "Download Update"
+	Downloading = false
+	$Update / Info.text = "Update Finished!"
+	print("Retrieved Data")
+	if response_code == 200:
+		var file = FileAccess.open(Settings.UpdatePath, FileAccess.WRITE)
+		file.store_buffer(body)
+		file.close()
+		print("Update successful")
+	else:
+		print("Failed to get update")
+	await get_tree().create_timer(1).timeout
+	$Update / Info.text = "Download Update"
 
 func _on_get_version_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
-    if response_code == 200:
-        Version = body.get_string_from_utf8()
-        if Version == FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text(true):
-            $Update / Info.text = "Already Up-to-date!"
-            await get_tree().create_timer(1).timeout
-            $Update / Info.text = "Download Update"
-            return
-        if !Version.is_empty():
-            $Update / Info.text = "Recieved Latest Version!"
-            print("Retrieved version: " + Version)
-            var url = "https://github.com/xavyuno/Task-Manager/releases/download/%s/TaskManager.exe" % Version.strip_escapes()
-            print("url: " + url)
-            download.request(url)
-            Downloading = true
-    else:
-        print("Failed to get version")
+	if response_code == 200:
+		Version = body.get_string_from_utf8()
+		if Version == FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text(true):
+			$Update / Info.text = "Already Up-to-date!"
+			await get_tree().create_timer(1).timeout
+			$Update / Info.text = "Download Update"
+			return
+		if !Version.is_empty():
+			$Update / Info.text = "Recieved Latest Version!"
+			print("Retrieved version: " + Version)
+			var url = "https://github.com/xavyuno/Task-Manager/releases/download/%s/TaskManager.exe" % Version.strip_escapes()
+			print("url: " + url)
+			download.request(url)
+			Downloading = true
+	else:
+		print("Failed to get version")
 
 func _on_file_dialog_file_selected(path: String) -> void :
-    $Update / Info.text = "Getting Latest Version"
-    Settings.UpdatePath = path
-    $Update / GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
+	$Update / Info.text = "Getting Latest Version"
+	Settings.UpdatePath = path
+	$Update / GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")

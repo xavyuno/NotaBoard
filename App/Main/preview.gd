@@ -1,19 +1,19 @@
 extends Control
 
 func _ready() -> void :
-    User.connect("StartedDragging", Callable(self, "StartedDragging"))
-    User.connect("StoppedDragging", Callable(self, "StoppedDragging"))
+	User.connect("StartedDragging", Callable(self, "StartedDragging"))
+	User.connect("StoppedDragging", Callable(self, "StoppedDragging"))
 
 func _process(delta: float) -> void :
-    global_position = User.MousePos
+	global_position = User.MousePos
 
 func StartedDragging():
-    if User.CurrentPage.similarity(get_parent().name) < 1:
-        return
-    var obj = User.DraggedObject.instantiate()
-    add_child(obj)
+	if User.CurrentPage.similarity(get_parent().name) < 1:
+		return
+	var obj = User.DraggedObject.instantiate()
+	add_child(obj)
 
 func StoppedDragging():
-    if get_child_count() >= 1:
-        for i in get_children():
-            i.queue_free()
+	if get_child_count() >= 1:
+		for i in get_children():
+			i.queue_free()

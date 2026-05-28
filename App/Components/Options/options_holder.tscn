@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://cml6nsa2rwc0b"]
+[gd_scene load_steps=5 format=3 uid="uid://cml6nsa2rwc0b"]
 
 [ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://debqgvaqt7v50" path="res://App/Components/Ratio/ratio.tscn" id="2"]
