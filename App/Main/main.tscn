@@ -95,16 +95,16 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_yqhvp")
-current_tab = 0
+current_tab = 1
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("2")
 
 [node name="Home" parent="Boards" instance=ExtResource("3")]
+visible = false
 layout_mode = 2
 
 [node name="Settings" type="Control" parent="Boards"]
-visible = false
 show_behind_parent = true
 light_mask = 0
 layout_mode = 2
