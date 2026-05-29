@@ -1,8 +1,2 @@
 res://App/Main/main.tscn
-res://App/Assets/Scenes/Board/board.tscn
-res://App/Assets/Scenes/Line/line.tscn
-res://App/Assets/Scenes/File/File.tscn
-res://App/Assets/Scenes/Link/Link.tscn
-res://App/Assets/Scenes/ToDo/ToDo.tscn
-res://App/Assets/Scenes/Column/Column.tscn
-res://App/Components/Options/options_holder.tscn
+res://App/Main/to_do.gd
