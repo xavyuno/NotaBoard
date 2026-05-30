@@ -2,3 +2,8 @@ Things Changed since: v0.3-Alpha
 -keybinds to mass resize and move items
 -plugin that updates the todo/checklist in settings
 -This file
+-updated keybinds
+-updated file preview from 100 lines to 10 (for performance)
+-added search bar that searches for that query in any item that has: title, note, ID and board (will have to check for other search queries within the data to search for)
+-removed the notes item being used in settings
+-more to do's

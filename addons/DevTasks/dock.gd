@@ -52,7 +52,7 @@ func Save():
 	DevTasks = {}
 	for i in tasks.get_child_count():
 		var taskinfo = tasks.get_child(i).get_node("Info").text
-		var value = tasks.get_child(i).get_node("Info").button_pressed
+		var value = tasks.get_child(i).get_node("Check").button_pressed
 		DevTasks.merge({taskinfo : value}, true)
 	var file = FileAccess.open(SaveFile, FileAccess.WRITE)
 	file.store_var(DevTasks)

@@ -6,7 +6,7 @@ func _ready() -> void:
 
 func UpdateData(taskinfo, value):
 	$Info.text = taskinfo
-	$Info.button_pressed = value
+	$Check.button_pressed = value
 
 func Pressed() -> void:
 	queue_free()

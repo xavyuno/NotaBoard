@@ -167,3 +167,6 @@ func _on_clear_pressed() -> void :
 	history.clear()
 	User.RemovedHistory.clear()
 	System.SaveRemoveHistory()
+
+func _on_search_text_submitted(new_text: String) -> void:
+	User.emit_signal("Searched", new_text)

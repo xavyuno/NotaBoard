@@ -6,6 +6,7 @@ var Action := ""
 
 func _ready() -> void :
 	User.connect("StoppedSelecting", Callable(self, "StoppedSelecting"))
+	User.connect("Searched", Callable(self, "Searched"))
 	for i in Par.get_children(true):
 		if i.get_child_count() >= 1:
 			for j in i.get_children(true):
@@ -17,6 +18,33 @@ func _ready() -> void :
 			i.connect("focus_entered", Callable(self, "FocusEntered"))
 		if i.has_signal("focus_exited"):
 			i.connect("focus_exited", Callable(self, "FocusExited"))
+
+func Searched(itemName):
+	if itemName == "":
+		Par.visible = true
+		return
+	if ValidateSearch(itemName, "Type"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Note"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Title"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Board"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "ID"):
+		Par.visible = true
+
+	else :
+		Par.visible = false
+
+func ValidateSearch(itemName : String, Type : String):
+	if Par.Data.has(Type):
+		if Par.Data[Type].similarity(itemName) >= 0.8 or itemName in Par.Data[Type]:
+			return true
+		else :
+			return false
+	else :
+		return false
 
 func StoppedSelecting():
 	Selected = false

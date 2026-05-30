@@ -64,7 +64,7 @@ theme_override_fonts/font = ExtResource("3")
 text = "preview"
 label_settings = SubResource("LabelSettings_0j5si")
 autowrap_mode = 3
-max_lines_visible = 100
+max_lines_visible = 10
 
 [node name="DirHolder" type="HBoxContainer" parent="."]
 layout_mode = 2
