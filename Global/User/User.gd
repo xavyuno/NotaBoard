@@ -6,6 +6,7 @@ signal ObjectAdded
 signal ObjectRemoved
 signal SaveObjectData
 signal ChangeBoard
+signal StoppedSelecting
 
 var RemovedHistory: = []
 var StoredHistory: = []

@@ -1,0 +1,4 @@
+Things Changed since: v0.3-Alpha
+-keybinds to mass resize and move items
+-plugin that updates the todo/checklist in settings
+-This file

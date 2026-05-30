@@ -81,6 +81,7 @@ func _physics_process(delta: float) -> void :
 		if User.MultiSelectedObjects.size() >= 1:
 			for i in User.MultiSelectedObjects:
 				initObj(get_node(i).Data, true)
+		User.emit_signal("StoppedSelecting")
 	if Input.is_action_just_pressed("Duplicate") and User.CopiedObject:
 		initObj(User.CopiedObject, true)
 
@@ -93,6 +94,7 @@ func _physics_process(delta: float) -> void :
 			for i in User.MultiSelectedObjects:
 				User.emit_signal("ObjectRemoved", get_node(i).Data)
 				get_node(i).queue_free()
+			User.emit_signal("StoppedSelecting")
 			User.MultiSelectedObjects = []
 
 func Undo(data):
