@@ -4,6 +4,10 @@ Things Changed since: v0.3-Alpha
 -This file
 -updated keybinds
 -updated file preview from 100 lines to 10 (for performance)
--added search bar that searches for that query in any item that has: title, note, ID and board (will have to check for other search queries within the data to search for)
+-added search bar that searches for that query in any item that has: title, note, ID and should be able to search for everything, except positions, sizes amd points
 -removed the notes item being used in settings
 -more to do's
+-notes now have formatting, e.g: [b]Bold[/b], [i]italic[/i], etc
+-preview button to make hyperlinks within notes click-able
+-fixed boards not updating their ID when placed in a column
+-Items are more visible even if the background color is completely white

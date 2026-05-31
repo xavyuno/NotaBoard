@@ -1,5 +1,5 @@
-res://addons/DevTasks/task.tscn
-res://addons/DevTasks/task.gd
+res://App/Assets/Scenes/Notes/Notes.tscn
+res://App/Assets/Scenes/Notes/notes.gd
 res://App/Main/main.tscn
 res://App/Assets/Scenes/Board/board.tscn
 res://App/Assets/Scenes/Line/line.tscn
@@ -8,5 +8,16 @@ res://App/Assets/Scenes/Link/Link.tscn
 res://App/Assets/Scenes/ToDo/ToDo.tscn
 res://App/Assets/Scenes/Column/Column.tscn
 res://App/Components/Options/options_holder.tscn
-res://App/Assets/Scenes/Notes/notes.gd
+res://App/Assets/Scenes/NewBoard/NewBoard.tscn
+res://Global/User/User.gd
+res://App/Main/canvas.gd
 res://Updates.txt
+res://App/Main/settings.gd
+res://App/Main/camera.gd
+res://App/Assets/Scenes/Board/board.gd
+res://App/Assets/Scenes/Column/column.gd
+res://App/Assets/Scenes/ToDo/check_list.tscn
+res://App/Assets/Scenes/ToDo/check_list.gd
+res://App/Components/DevTask/dev_task.tscn
+res://App/Components/SelectObject/select_object.gd
+res://README.md

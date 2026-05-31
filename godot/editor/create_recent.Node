@@ -1,9 +1,11 @@
-LineEdit
+Label
+RichTextLabel
+Button
+HBoxContainer
+MarginContainer
 Timer
+LineEdit
 VBoxContainer
 ScrollContainer
 CheckBox
 TextEdit
-Button
-Label
-HBoxContainer

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://bmhbuhyhf2tom"]
+[gd_scene load_steps=11 format=3 uid="uid://bmhbuhyhf2tom"]
 
 [ext_resource type="Script" uid="uid://dd4v0ireotg4s" path="res://App/Assets/Scenes/Notes/notes.gd" id="1"]
 [ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="2"]
@@ -8,6 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pocco"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rxk8"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="Note" type="VBoxContainer"]
 clip_children = 2
@@ -44,6 +53,14 @@ layout_mode = 2
 [node name="Close" parent="OptionsHolder" instance=ExtResource("5")]
 layout_mode = 2
 
+[node name="TextOptions" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="Bold" type="Button" parent="TextOptions"]
+layout_mode = 2
+text = "B"
+
 [node name="Title" type="LineEdit" parent="."]
 layout_mode = 2
 placeholder_text = "Title"
@@ -51,7 +68,54 @@ placeholder_text = "Title"
 [node name="CheckFocus" parent="Title" node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
+[node name="Preview" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+draw_focus_border = true
+
+[node name="Edit" type="Button" parent="Preview"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_pocco")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pocco")
+
+[node name="DoubleClick" type="Timer" parent="Preview/Edit"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Text" type="RichTextLabel" parent="Preview/Edit"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 2
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_5rxk8")
+theme_override_styles/background = SubResource("StyleBoxFlat_5rxk8")
+theme_override_styles/focus = SubResource("StyleBoxFlat_5rxk8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_5rxk8")
+bbcode_enabled = true
+fit_content = true
+threaded = true
+selection_enabled = true
+structured_text_bidi_override_options = ["test?"]
+
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
@@ -82,3 +146,8 @@ Par = NodePath("..")
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="pressed" from="OptionsHolder/TitleOn" to="." method="_on_title_on_pressed"]
 [connection signal="pressed" from="OptionsHolder/NoteOn" to="." method="_on_note_on_pressed"]
+[connection signal="pressed" from="TextOptions/Bold" to="." method="_on_bold_pressed"]
+[connection signal="pressed" from="Preview/Edit" to="." method="_on_edit_pressed"]
+[connection signal="timeout" from="Preview/Edit/DoubleClick" to="." method="_on_double_click_timeout"]
+[connection signal="meta_clicked" from="Preview/Edit/Text" to="." method="_on_text_meta_clicked"]
+[connection signal="focus_exited" from="ScrollContainer/Notes" to="." method="_on_notes_focus_exited"]

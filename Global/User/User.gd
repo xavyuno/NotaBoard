@@ -8,6 +8,7 @@ signal SaveObjectData
 signal ChangeBoard
 signal StoppedSelecting
 signal Searched
+signal PreviewNotes
 
 var RemovedHistory: = []
 var StoredHistory: = []
@@ -35,3 +36,5 @@ var CopiedObject = null
 
 var ProgressiveLoading: = true
 var LoadDur: = 0.1
+
+var PreviewingNotes := false

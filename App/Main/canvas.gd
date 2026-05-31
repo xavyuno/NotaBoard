@@ -14,3 +14,7 @@ func _on_settings_pressed() -> void :
 		User.emit_signal("ChangeBoard", "Settings", "Settings")
 	else:
 		User.emit_signal("ChangeBoard", User.PreviousPage, User.PreviousTitle)
+
+func _on_preview_pressed() -> void:
+	User.PreviewingNotes = !User.PreviewingNotes
+	User.emit_signal("PreviewNotes")

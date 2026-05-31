@@ -9,7 +9,7 @@ var Version: = ""
 
 func _ready() -> void :
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
-	$Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text()
+	$Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text().strip_edges()
 
 func _physics_process(delta: float) -> void :
 	if Downloading:
@@ -71,3 +71,7 @@ func _on_file_dialog_file_selected(path: String) -> void :
 	$Update / Info.text = "Getting Latest Version"
 	Settings.UpdatePath = path
 	$Update / GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
+
+
+func _on_notes_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))

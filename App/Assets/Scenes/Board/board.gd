@@ -11,7 +11,8 @@ var Data: = {
 
 func _ready() -> void :
 	UpdateValues($BoardName, "Title", "text")
-	UpdateValues($New / ID, "Board", "text")
+	UpdateValues($New/ID, "Board", "text")
+
 
 func UpdateValues(NODE, value, parameter):
 	if Data.has(value):

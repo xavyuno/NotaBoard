@@ -33,16 +33,32 @@ func Searched(itemName):
 		Par.visible = true
 	elif ValidateSearch(itemName, "ID"):
 		Par.visible = true
+	elif ValidateSearch(itemName, "List"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Dir"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Link"):
+		Par.visible = true
+	elif ValidateSearch(itemName, "Items"):
+		Par.visible = true
 
 	else :
 		Par.visible = false
 
 func ValidateSearch(itemName : String, Type : String):
+	if !Par.has_method("GetData"):
+		return
 	if Par.Data.has(Type):
-		if Par.Data[Type].similarity(itemName) >= 0.8 or itemName in Par.Data[Type]:
-			return true
+		if Par.Data is Dictionary or Par.Data is Array:
+			if itemName in Par.Data[Type]:
+				return true
+			else :
+				return false
 		else :
-			return false
+			if Par.Data[Type].similarity(itemName) >= 0.8:
+				return true
+			else :
+				return false
 	else :
 		return false
 
@@ -53,6 +69,7 @@ func StoppedSelecting():
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("Click") and (Action == "Moving" or Action == "Resizing"):
 		Action = ""
+		Selected = false
 	if Input.is_action_just_pressed("Move") and Selected:
 		if Action != "Moving":
 			Action = "Moving"
