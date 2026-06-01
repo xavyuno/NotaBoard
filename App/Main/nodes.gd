@@ -34,7 +34,7 @@ func _ready() -> void :
 			if User.ProgressiveLoading:
 				await get_tree().create_timer(User.LoadDur).timeout
 			if i["Type"] == "Board":
-				User.Boards.append(str(i["Board"]))
+				User.Boards.merge({i["Board"] : i["Title"]}, true)
 			initObj(i, false)
 
 	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
@@ -139,10 +139,7 @@ func _on_history_item_activated(index: int) -> void :
 			pass
 
 func ChangedBoard(Board: String, Title: String):
-	if Board.similarity("Home") < 1:
-		$Holder / ItemHolder / Items / Board.visible = false
-	else:
-		$Holder / ItemHolder / Items / Board.visible = true
+	pass
 
 func _exit_tree() -> void :
 	User.emit_signal("SaveObjectData")
@@ -151,7 +148,7 @@ func _on_delete_pressed() -> void :
 	history.clear()
 	User.StoredHistory.clear()
 	User.RemovedHistory.clear()
-	User.Boards = []
+	User.Boards = {}
 	System.SaveRemoveHistory()
 	System.SaveStoreHistory()
 	var boards = $"../../Boards"
@@ -159,7 +156,8 @@ func _on_delete_pressed() -> void :
 		if !(i.name in ["Home", "Settings"]):
 			i.queue_free()
 	for i in boards.get_node("Home").get_children():
-		i.queue_free()
+		if !(i.name in ["Button", "Preview"]):
+			i.queue_free()
 	User.emit_signal("ChangeBoard", "Home")
 
 

@@ -4,10 +4,11 @@ func _ready() -> void :
 	User.connect("ChangeBoard", Callable(self, "ChangedBoard"))
 
 func _on_button_pressed() -> void :
-	User.emit_signal("ChangeBoard", "Home", "Home")
+	User.emit_signal("ChangeBoard", User.PreviousPage, User.PreviousTitle)
+
 
 func ChangedBoard(Board: String, Title: String):
-	$NewBoard.text = User.PreviousTitle
+	$Home.text = User.PreviousTitle
 	if Board.similarity("Home") == 1:
 		$NewBoard.visible = false
 		$Home.visible = false

@@ -26,7 +26,7 @@ var CurrentPage: = "Home"
 var PageTitle: = "Home"
 var PreviousPage: = "Home"
 var PreviousTitle: = "Home"
-var Boards: = []
+var Boards: = {}
 
 var SelectedObject = null
 var MultiSelectedObjects = []

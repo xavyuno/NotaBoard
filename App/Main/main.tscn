@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://kpyh8ufdds6l"]
+[gd_scene load_steps=45 format=3 uid="uid://kpyh8ufdds6l"]
 
 [ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://veo48dyjhje3" path="res://App/Assets/Icons/Column.png" id="14"]
 [ext_resource type="PackedScene" uid="uid://dltgkc7h0py83" path="res://App/Assets/Scenes/Column/Column.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://b4c6vq7qdoyny" path="res://App/Assets/Icons/Board.png" id="16"]
-[ext_resource type="Script" uid="uid://d18aq5wcd7vom" path="res://App/Main/board_drag_n_drop.gd" id="17"]
 [ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/board.tscn" id="18"]
 [ext_resource type="Texture2D" uid="uid://cf6qp5npp6ljd" path="res://App/Assets/Icons/Line.png" id="19"]
 [ext_resource type="PackedScene" uid="uid://w5pbmrihdlp5" path="res://App/Assets/Scenes/Line/line.tscn" id="20"]
@@ -114,16 +113,16 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_yqhvp")
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("2")
 
 [node name="Home" parent="Boards" instance=ExtResource("3")]
-visible = false
 layout_mode = 2
 
 [node name="Settings" type="Control" parent="Boards"]
+visible = false
 show_behind_parent = true
 light_mask = 0
 layout_mode = 2
@@ -498,8 +497,7 @@ text = "Board"
 icon = ExtResource("16")
 expand_icon = true
 
-[node name="BoardDragNDrop" type="Node" parent="UI/Nodes/Holder/ItemHolder/Items/Board"]
-script = ExtResource("17")
+[node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Board" instance=ExtResource("9")]
 Item = ExtResource("18")
 
 [node name="Line" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
@@ -631,6 +629,7 @@ theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
+disabled = true
 text = "Untiled Board"
 
 [connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]

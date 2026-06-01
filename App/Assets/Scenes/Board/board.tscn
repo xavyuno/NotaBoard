@@ -50,7 +50,6 @@ text = "Getting ID..."
 vertical_alignment = 2
 
 [node name="BoardName" type="LineEdit" parent="."]
-visible = false
 layout_mode = 2
 placeholder_text = "New Board"
 expand_to_text_length = true

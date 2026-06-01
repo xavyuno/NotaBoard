@@ -89,7 +89,6 @@ func _input(event: InputEvent) -> void:
 			Par.size += event.relative / User.CamZoom
 
 func FocusEntered():
-	print("Focus for " + Par.name + " entered")
 	if User.MultiSelecting:
 		if !(Par.get_path() in User.MultiSelectedObjects):
 			User.MultiSelectedObjects.append(Par.get_path())
@@ -102,7 +101,6 @@ func FocusEntered():
 	User.emit_signal("SaveObjectData")
 
 func FocusExted():
-	print("Focus for " + Par.name + " exited")
 	User.emit_signal("SaveObjectData")
 	if !User.MultiSelecting:
 		Selected = false

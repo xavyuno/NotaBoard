@@ -26,8 +26,6 @@ func saveItems():
 	System.SaveAll()
 
 func ChangeBoard(Board: String, Title: String):
-	User.PreviousPage = User.CurrentPage
-	User.PreviousTitle = User.PreviousTitle
 	var Found = false
 	for i in get_tab_count():
 		if get_tab_control(i).name == Board:

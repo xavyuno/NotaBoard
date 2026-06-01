@@ -1,14 +1,13 @@
 extends Node
 
-func LoadDevTasks() -> Dictionary:
-	var file = FileAccess.open("res://addons/DevTasks/tasks.txt", FileAccess.READ)
-	return file.get_var()
-
 func SaveAll():
 	SaveStoreHistory()
 	SaveRemoveHistory()
 	SaveSettings()
-	print("Saved data!")
+
+func SearchBoardByTitle(title : String):
+	#for i in User.Boards
+	pass
 
 func SaveStoreHistory():
 	var fileSave = FileAccess.open("user://Save.txt", FileAccess.WRITE)

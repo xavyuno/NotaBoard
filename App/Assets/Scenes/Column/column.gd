@@ -67,8 +67,6 @@ func InitObject(object):
 	var item = object.instantiate()
 	if !(object in [
 		preload("res://App/Assets/Scenes/Notes/Notes.tscn"), 
-
-
 		]):
 		if item.has_node("ExpandHolder"):
 			item.get_node("ExpandHolder").visible = false
@@ -83,9 +81,6 @@ func InitObject(object):
 			item.get_node("OptionsHolder/Expand").DragYAxisOnly = true
 	if item.has_node("OptionsHolder"):
 		item.get_node("OptionsHolder").IncludeMove = false
-	if item.Data.has("Board"):
-		User.Boards.append(str(User.Boards.size()))
-		item.Data["Board"] = str(User.Boards.size())
 	$Items.add_child(item)
 	Data["Items"].append(item.Data)
 

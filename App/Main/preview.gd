@@ -11,6 +11,8 @@ func StartedDragging():
 	if User.CurrentPage.similarity(get_parent().name) < 1:
 		return
 	var obj = User.DraggedObject.instantiate()
+	if obj.Data.has("Board"):
+		obj.Preview = true
 	add_child(obj)
 
 func StoppedDragging():
