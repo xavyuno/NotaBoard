@@ -8,5 +8,6 @@ var UpdatePath: String = "user://TaskManager.exe"
 func GetSettings():
 	return [
 		BackgroundCol, 
-		UpdatePath
+		UpdatePath,
+		User.LoadDur
 	]

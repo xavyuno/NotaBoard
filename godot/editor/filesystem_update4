@@ -20,3 +20,7 @@ res://App/Main/preview.gd
 res://App/Components/SelectObject/select_object.gd
 res://Global/User/User.gd
 res://App/Assets/Scenes/Column/column.gd
+res://App/Main/settings.gd
+res://Global/System/Settings.gd
+res://Updates.txt
+res://App/Main/camera.gd

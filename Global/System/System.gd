@@ -35,7 +35,7 @@ func AddObject(item, atMouse = true, parent = null, extraData = {}, emit = true)
 	if !extraData.is_empty():
 		obj.Data = extraData
 	if parent != null:
-		if get_tree().current_scene.get_node("Boards/" + parent) == null:
+		if get_tree().current_scene.has_node("Boards/" + parent) != null:
 			var board = preload("res://App/Assets/Scenes/NewBoard/NewBoard.tscn").instantiate()
 			board.name = parent
 			get_tree().current_scene.get_node("Boards").add_child(board)

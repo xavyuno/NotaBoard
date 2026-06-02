@@ -35,7 +35,7 @@ func ChangeBoard(Board: String, Title: String):
 			Found = true
 
 	if !Found:
-		var NewBoard = Control.new()
+		var NewBoard = preload("res://App/Assets/Scenes/NewBoard/NewBoard.tscn").instantiate()
 		NewBoard.name = Board
 		get_parent().get_node("Boards/").add_child(NewBoard)
 		current_tab = get_tab_count() - 1

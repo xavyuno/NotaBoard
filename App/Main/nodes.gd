@@ -8,6 +8,20 @@ func _ready() -> void :
 	User.connect("ChangeBoard", Callable(self, "ChangedBoard"))
 	Settings.emit_signal("SettingsChanged")
 
+	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
+	if Settingsfile:
+		var data = Settingsfile.get_var(true)
+		if !(data is Array):
+			print("Error loading settings File!")
+			return
+		Settingsfile.close()
+
+		Settings.BackgroundCol = ValidateValue(data, 0)
+		Settings.UpdatePath = ValidateValue(data, 1)
+		User.LoadDur = ValidateValue(data, 2)
+
+		Settings.emit_signal("SettingsChanged")
+
 	var fileHistory = FileAccess.open("user://History.txt", FileAccess.READ)
 	if fileHistory:
 		var data = fileHistory.get_var(true)
@@ -34,21 +48,8 @@ func _ready() -> void :
 			if User.ProgressiveLoading:
 				await get_tree().create_timer(User.LoadDur).timeout
 			if i["Type"] == "Board":
-				User.Boards.merge({i["Board"] : i["Title"]}, true)
+				User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"]}}, true)
 			initObj(i, false)
-
-	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
-	if Settingsfile:
-		var data = Settingsfile.get_var(true)
-		if !(data is Array):
-			print("Error loading Save File!")
-			return
-		Settingsfile.close()
-
-		Settings.BackgroundCol = ValidateValue(data, 0)
-		Settings.UpdatePath = ValidateValue(data, 1)
-
-		Settings.emit_signal("SettingsChanged")
 
 	User.StillLoading = false
 

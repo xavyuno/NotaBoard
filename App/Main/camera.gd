@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void :
 	User.CamZoom = zoom
 	User.CamPos = position
 	if Input.is_action_just_pressed("ResetCam"):
-		position = Vector2(640, 360)
+		position = Vector2(640, 352)
 	if Input.is_action_pressed("Drag"):
 		Dragging = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED

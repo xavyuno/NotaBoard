@@ -168,8 +168,10 @@ metadata/_edit_use_anchors_ = true
 [node name="Version" type="Label" parent="Boards/Settings"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = -0.00426136
-anchor_bottom = -0.00426136
+anchor_left = 0.15
+anchor_top = -0.193182
+anchor_right = 0.15
+anchor_bottom = -0.193182
 offset_left = 464.0
 offset_top = 160.0
 offset_right = 889.0
@@ -407,6 +409,26 @@ expand_to_text_length = true
 [node name="List" type="VBoxContainer" parent="Boards/Settings/ToDo"]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 464.0
+offset_top = 168.0
+offset_right = 703.0
+offset_bottom = 220.0
+text = "Change duration between 
+loading items"
+
+[node name="LoadDur" type="SpinBox" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 600.0
+offset_top = 189.0
+offset_right = 776.0
+offset_bottom = 217.0
+max_value = 1.0
+step = 0.001
+alignment = 1
+suffix = "second(s)"
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="DragNDrop" parent="UI" instance=ExtResource("9")]
@@ -461,6 +483,9 @@ layout_mode = 2
 text = "Notes"
 icon = ExtResource("8")
 expand_icon = true
+
+[node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" instance=ExtResource("9")]
+Item = ExtResource("6")
 
 [node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
 layout_mode = 2
@@ -613,23 +638,10 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
 text = "Home/"
 
-[node name="NewBoard" type="Button" parent="UI/BoardDisplay"]
+[node name="NewBoard" type="Label" parent="UI/BoardDisplay"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
-disabled = true
 text = "Untiled Board"
 
 [connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
@@ -641,6 +653,7 @@ text = "Untiled Board"
 [connection signal="request_completed" from="Boards/Settings/Update/Download" to="Boards/Settings" method="_on_download_request_completed"]
 [connection signal="request_completed" from="Boards/Settings/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
 [connection signal="file_selected" from="Boards/Settings/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
+[connection signal="value_changed" from="Boards/Settings/LoadDur" to="Boards/Settings" method="_on_load_dur_value_changed"]
 [connection signal="text_submitted" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_submitted"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
@@ -649,4 +662,3 @@ text = "Untiled Board"
 [connection signal="pressed" from="UI/Canvas/Settings" to="UI/Canvas" method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/Canvas/Preview" to="UI/Canvas" method="_on_preview_pressed"]
 [connection signal="pressed" from="UI/BoardDisplay/Home" to="UI/BoardDisplay" method="_on_button_pressed"]
-[connection signal="pressed" from="UI/BoardDisplay/NewBoard" to="UI/BoardDisplay" method="_on_new_board_pressed"]

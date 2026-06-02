@@ -11,3 +11,7 @@ Things Changed since: v0.3-Alpha
 -preview button to make hyperlinks within notes click-able
 -fixed boards not updating their ID when placed in a column
 -Items are more visible even if the background color is completely white
+-boards can now be placed inside of other boards and will show their parent ID's
+-added a setting to change the interval between loading items
+-Settings page uses rich text
+-fixed bug where previews would not show inside of a newly created board

@@ -11,6 +11,7 @@ func _ready() -> void :
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
 	$Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text().strip_edges()
 
+
 func _physics_process(delta: float) -> void :
 	if Downloading:
 		$Update / Progress.value = download.get_downloaded_bytes()
@@ -20,6 +21,7 @@ func _physics_process(delta: float) -> void :
 
 func SettingsChanged():
 	$BGPicker.color = Settings.BackgroundCol
+	$LoadDur.value = User.LoadDur
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -75,3 +77,6 @@ func _on_file_dialog_file_selected(path: String) -> void :
 
 func _on_notes_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
+
+func _on_load_dur_value_changed(value: float) -> void:
+	User.LoadDur = value

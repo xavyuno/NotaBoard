@@ -15,7 +15,7 @@ func _ready() -> void :
 	UpdateValues($BoardName, "Title", "text")
 	if Data["Board"] == "Getting ID..." and !Preview:
 		Data["Board"] = str(User.Boards.size() + 1)
-		User.Boards.merge({Data["Board"] : Data["Title"]}, true)
+		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
 	UpdateValues($New/ID, "Board", "text")
 
 func UpdateValues(NODE, value, parameter):
@@ -32,12 +32,11 @@ func _process(delta: float) -> void :
 
 func _on_new_pressed() -> void :
 	User.emit_signal("ChangeBoard", Data["Board"], Data["Title"])
-	#User.PreviousTitle = 
 
 func _on_board_name_text_changed(new_text: String) -> void :
 	for i in User.Boards.keys():
 		if i == Data["Board"]:
-			User.Boards[i] = new_text
+			User.Boards[i]["Title"] = new_text
 	Data["Title"] = new_text
 	
 
