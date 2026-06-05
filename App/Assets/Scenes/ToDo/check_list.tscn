@@ -13,7 +13,7 @@ expand_margin_bottom = 5.0
 [node name="CheckList" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
 offset_right = 256.0
-offset_bottom = 31.0
+offset_bottom = 32.0
 script = ExtResource("1")
 
 [node name="Input" type="CheckBox" parent="."]

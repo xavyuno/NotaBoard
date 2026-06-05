@@ -9,7 +9,10 @@ var Version: = ""
 
 func _ready() -> void :
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
-	$Version.text = "Version: " + FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text().strip_edges()
+	var ver = FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text()
+	ver = ver.strip_edges(true, true)
+	ver = ver.strip_escapes()
+	$Version.text = "Version: " + ver.validate_filename()
 
 
 func _physics_process(delta: float) -> void :
@@ -18,10 +21,12 @@ func _physics_process(delta: float) -> void :
 		$Update / Info.text = "Downloading Update..."
 		$Update / Version.text = Version
 	$Update / Version.visible = Downloading
+	$TotalItems.text = "Total Items: " + str(User.TotalItems) + " / " + str(Settings.ItemLimit)
 
 func SettingsChanged():
 	$BGPicker.color = Settings.BackgroundCol
 	$LoadDur.value = User.LoadDur
+	$ItemLimit.value = Settings.ItemLimit
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -80,3 +85,19 @@ func _on_notes_meta_clicked(meta: Variant) -> void:
 
 func _on_load_dur_value_changed(value: float) -> void:
 	User.LoadDur = value
+
+func _on_submit_feedback_pressed() -> void:
+	if $Feedback.text == "":
+		return
+	var webhooklink := "https://discord.com/api/webhooks/1512253681985388603/T4NZY1aM-R0eH5kZWNmq0G_6NcLtxjspaavpoKZm14H9BWVd-Iez-GHbfx-u4e379OmP"
+	var req := $SubmitFeedback/SubmitReq
+	req.request(webhooklink, ["Content-type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"content" : "```" + $Feedback.text + "```"}))
+
+func _on_submit_req_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	if response_code == 200:
+		print(body.get_string_from_utf8())
+	else :
+		print("failed to submit feedback")
+
+func _on_item_limit_value_changed(value: float) -> void:
+	Settings.ItemLimit = value

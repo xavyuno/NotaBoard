@@ -1,14 +1,15 @@
 extends HBoxContainer
 
-@export var MainObject = get_parent()
+@export var Par = get_parent()
 @export var IncludeMove: = true
 @export var IncludeClose: = true
 @export var IncludeRatio: = true
 
 func _ready() -> void :
-	$Move.par = MainObject
-	$Close.par = MainObject
-	$Ratio.par = MainObject
+	User.TotalItems += 1
+	$Move.par = Par
+	$Close.par = Par
+	$Ratio.par = Par
 
 	$Move.visible = IncludeMove
 	$Close.visible = IncludeClose

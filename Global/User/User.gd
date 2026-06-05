@@ -38,3 +38,5 @@ var ProgressiveLoading: = true
 var LoadDur: = 0.1
 
 var PreviewingNotes := false
+
+var TotalItems := 0

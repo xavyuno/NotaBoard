@@ -16,9 +16,10 @@ func _ready() -> void :
 			return
 		Settingsfile.close()
 
-		Settings.BackgroundCol = ValidateValue(data, 0)
-		Settings.UpdatePath = ValidateValue(data, 1)
-		User.LoadDur = ValidateValue(data, 2)
+		Settings.BackgroundCol = ValidateValue(data, 0) if ValidateValue(data, 0) else Settings.BackgroundCol
+		Settings.UpdatePath = ValidateValue(data, 1) if ValidateValue(data, 1) else Settings.UpdatePath
+		User.LoadDur = ValidateValue(data, 2) if ValidateValue(data, 2) else User.LoadDur
+		Settings.ItemLimit = ValidateValue(data, 3) if ValidateValue(data, 3) else Settings.ItemLimit
 
 		Settings.emit_signal("SettingsChanged")
 
@@ -54,7 +55,7 @@ func _ready() -> void :
 	User.StillLoading = false
 
 func ValidateValue(array: Array, index):
-	if array.size() >= index:
+	if array.size() > index:
 		return array[index]
 	else:
 		return null
@@ -106,14 +107,12 @@ func initObj(data, emit = false):
 	System.AddObject(obj, false, data["ID"], data, emit)
 
 func ObjAdded(data):
-
 	if User.RemovedHistory.is_empty():
 		return
 	for i in User.RemovedHistory.size():
 		if User.RemovedHistory[i] == data:
 			User.RemovedHistory.remove_at(i)
 			history.remove_item(i)
-
 			break
 
 func ObjRemoved(data):
@@ -125,7 +124,6 @@ func ObjRemoved(data):
 	for i in User.StoredHistory.size():
 		if User.StoredHistory[i] == data:
 			User.StoredHistory.remove_at(i)
-
 			break
 
 func _on_history_item_activated(index: int) -> void :
@@ -146,6 +144,7 @@ func _exit_tree() -> void :
 	User.emit_signal("SaveObjectData")
 
 func _on_delete_pressed() -> void :
+	User.TotalItems = 0
 	history.clear()
 	User.StoredHistory.clear()
 	User.RemovedHistory.clear()

@@ -17,9 +17,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1")
 
-[node name="OptionsHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("2")]
+[node name="OptionsHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("2")]
 layout_mode = 2
-MainObject = NodePath("..")
+Par = NodePath("..")
 
 [node name="Open" type="Button" parent="."]
 custom_minimum_size = Vector2(192, 192)
@@ -94,10 +94,10 @@ access = 2
 show_hidden_files = true
 use_native_dialog = true
 
-[node name="ExpandHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("5")]
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("5")]
 layout_mode = 2
-MainObject = NodePath("..")
+Par = NodePath("..")
 
-[connection signal="pressed" from="Open" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="Open" to="." method="_on_open_pressed"]
 [connection signal="pressed" from="DirHolder/Dir" to="." method="_on_dir_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

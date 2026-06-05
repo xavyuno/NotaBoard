@@ -44,8 +44,6 @@ func InitObjectData(data):
 	var item = object.instantiate()
 	if !(object in [
 		preload("res://App/Assets/Scenes/Notes/Notes.tscn"), 
-
-
 		]):
 		if item.has_node("ExpandHolder"):
 			item.get_node("ExpandHolder").visible = false
@@ -83,11 +81,11 @@ func InitObject(object):
 		item.get_node("OptionsHolder").IncludeMove = false
 	$Items.add_child(item)
 	Data["Items"].append(item.Data)
+	User.TotalItems += 1
 
 func StoppedDragging():
 	if User.DraggingObject and MouseIndropBar:
 		User.DraggingObject = false
-
 		InitObject(User.DraggedObject)
 
 func _on_drop_bar_mouse_entered() -> void :

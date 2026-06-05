@@ -48,9 +48,9 @@ text = ">"
 
 [node name="GetLink" type="HTTPRequest" parent="."]
 
-[node name="ExpandHolder" parent="." node_paths=PackedStringArray("MainObject") instance=ExtResource("4")]
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("4")]
 layout_mode = 2
-MainObject = NodePath("..")
+Par = NodePath("..")
 
 [node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("5")]
 Par = NodePath("..")

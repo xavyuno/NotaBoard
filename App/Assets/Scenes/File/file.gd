@@ -23,9 +23,6 @@ func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 
-func _on_new_pressed() -> void :
-	OS.shell_open($DirHolder / FileName.text)
-
 func _on_file_dialog_file_selected(path: String) -> void :
 	$DirHolder / FileName.text = path
 	Data["Dir"] = path
@@ -55,3 +52,7 @@ func _on_dir_pressed() -> void :
 	var dirarray: Array = Data["Dir"].split("/")
 	$FileDialog.current_dir = Data["Dir"].trim_suffix(dirarray[dirarray.size() - 1])
 	$FileDialog.popup(Rect2(0, 0, 600, 600))
+
+
+func _on_open_pressed() -> void:
+	OS.shell_open($DirHolder / FileName.text)

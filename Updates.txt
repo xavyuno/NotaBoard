@@ -15,3 +15,5 @@ Things Changed since: v0.3-Alpha
 -added a setting to change the interval between loading items
 -Settings page uses rich text
 -fixed bug where previews would not show inside of a newly created board
+-added feedback box in settings
+-quickly access the home when inside of 2 boards

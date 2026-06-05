@@ -10,7 +10,7 @@ var Data: = {
 
 func _ready() -> void :
 	UpdateValues($Holder / Link, "Link", "text")
-	if Data["Link"] != "":
+	if Data["Link"].begins_with("Https") or Data["Link"].ends_with(".com"):
 		$GetLink.request(Data["Link"])
 
 func UpdateValues(NODE, value, parameter):
@@ -32,9 +32,6 @@ func _on_link_text_submitted(new_text: String) -> void :
 	$GetLink.request($Holder / Link.text)
 
 func _on_get_link_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
-
-
-
 	var img = Image.new()
 	var errJPG = img.load_jpg_from_buffer(body)
 	if errJPG != OK:

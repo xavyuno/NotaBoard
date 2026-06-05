@@ -19,3 +19,4 @@ func StoppedDragging():
 	if get_child_count() >= 1:
 		for i in get_children():
 			i.queue_free()
+			User.TotalItems -= 1
