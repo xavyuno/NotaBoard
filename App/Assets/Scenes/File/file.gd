@@ -5,11 +5,19 @@ var Data: = {
 	"Pos": Vector2.ZERO, 
 	"Size": Vector2.ZERO, 
 	"ID": "Home", 
-	"Dir": "", 
+	"Dir": "",
+	"DirVisible" : false
 }
+
+var Options := [
+	"Dir",
+	"Ratio",
+	"Open"
+]
 
 func _ready() -> void :
 	UpdateValues($DirHolder / FileName, "Dir", "text")
+	#UpdateValues($DirHolder, "DirVisible", "visible")
 	LoadFile()
 
 func UpdateValues(NODE, value, parameter):
@@ -22,6 +30,7 @@ func GetData():
 func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
+	Data["DirVisible"] = $DirHolder.visible
 
 func _on_file_dialog_file_selected(path: String) -> void :
 	$DirHolder / FileName.text = path
@@ -55,4 +64,8 @@ func _on_dir_pressed() -> void :
 
 
 func _on_open_pressed() -> void:
-	OS.shell_open($DirHolder / FileName.text)
+	#OS.shell_open(ProjectSettings.globalize_path($DirHolder/FileName.text))
+	pass
+
+func _on_directory_pressed() -> void:
+	$DirHolder.visible = !$DirHolder.visible

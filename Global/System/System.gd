@@ -1,13 +1,17 @@
 extends Node
 
 func SaveAll():
+	if User.TestingMode:
+		return
 	SaveStoreHistory()
 	SaveRemoveHistory()
 	SaveSettings()
 
-func SearchBoardByTitle(title : String):
-	#for i in User.Boards
-	pass
+func GetAPI(Index) -> String:
+	var file = FileAccess.open("res://API" ,FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	file.close()
+	return data[Index]
 
 func SaveStoreHistory():
 	var fileSave = FileAccess.open("user://Save.txt", FileAccess.WRITE)
@@ -28,6 +32,8 @@ func AddObject(item, atMouse = true, parent = null, extraData = {}, emit = true)
 	var obj
 	if item is PackedScene:
 		obj = item.instantiate()
+	elif item is Object:
+		obj = item
 	else:
 		obj = load(item).instantiate()
 	if extraData.has("Board"):

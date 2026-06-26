@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://ie48nmfke0nj"]
+
+[ext_resource type="Script" uid="uid://d1emtxbi2phkh" path="res://App/Components/Day/day.gd" id="1_3sypj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5pxq"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1.15514e-06, 0.957965, 0.426703, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Day" type="Button"]
+custom_minimum_size = Vector2(133.5, 85)
+script = ExtResource("1_3sypj")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 48.0
+offset_bottom = 28.0
+text = "1"
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 128.0
+offset_bottom = 80.0
+
+[node name="Holder" type="VBoxContainer" parent="Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q5pxq")

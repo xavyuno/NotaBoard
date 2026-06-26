@@ -15,6 +15,8 @@ var Data: = {
 	"Point2": Vector2(100, 0)
 }
 
+var Options := []
+
 func _ready() -> void :
 	UpdateValues(p_1, "Point1", "position")
 	UpdateValues(p_2, "Point2", "position")

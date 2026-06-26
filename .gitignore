@@ -2,6 +2,7 @@
 .godot/
 /android/
 .exe/
+.API
 
 *.exe
 *.dll

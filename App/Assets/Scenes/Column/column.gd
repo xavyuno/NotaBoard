@@ -11,6 +11,10 @@ var Data: = {
 	"ID": "Home"
 }
 
+var Options := [
+	"Ratio"
+]
+
 var MouseIndropBar = false
 
 func _process(delta: float) -> void :

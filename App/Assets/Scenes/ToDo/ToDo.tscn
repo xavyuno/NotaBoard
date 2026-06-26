@@ -1,40 +1,24 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyefgf4hdrthy"]
+[gd_scene load_steps=7 format=3 uid="uid://dyefgf4hdrthy"]
 
 [ext_resource type="Script" uid="uid://27tro0bnk12m" path="res://App/Assets/Scenes/ToDo/to_do.gd" id="1"]
-[ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://debqgvaqt7v50" path="res://App/Components/Ratio/ratio.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://cml6nsa2rwc0b" path="res://App/Components/Options/options_holder.tscn" id="2_11aqk"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
 [ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="7"]
 [ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="8"]
 
+[sub_resource type="Theme" id="Theme_s4aco"]
+VBoxContainer/constants/separation = 4
+
 [node name="ToDo" type="VBoxContainer"]
 offset_right = 256.0
 offset_bottom = 32.0
+theme = SubResource("Theme_s4aco")
 theme_override_constants/separation = 1
 script = ExtResource("1")
 
-[node name="OptionsHolder" type="HBoxContainer" parent="." node_paths=PackedStringArray("Par")]
+[node name="OptionsHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("2_11aqk")]
 layout_mode = 2
-alignment = 2
-script = ExtResource("2")
 Par = NodePath("..")
-
-[node name="TitleOn" type="Button" parent="OptionsHolder"]
-custom_minimum_size = Vector2(32, 0)
-layout_direction = 2
-layout_mode = 2
-text = "Title"
-
-[node name="Ratio" parent="OptionsHolder" instance=ExtResource("3")]
-layout_mode = 2
-
-[node name="Move" parent="OptionsHolder" instance=ExtResource("4")]
-layout_mode = 2
-
-[node name="Close" parent="OptionsHolder" instance=ExtResource("5")]
-layout_mode = 2
 
 [node name="Title" type="LineEdit" parent="."]
 layout_mode = 2
@@ -63,16 +47,15 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 text = "+"
 
-[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("7")]
-layout_mode = 2
-Par = NodePath("..")
-
 [node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("8")]
 Par = NodePath("..")
 
 [node name="CheckFocus" parent="." node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("../AddHolder/Input")
 
-[connection signal="pressed" from="OptionsHolder/TitleOn" to="." method="_on_title_on_pressed"]
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("7")]
+layout_mode = 2
+Par = NodePath("..")
+
 [connection signal="text_submitted" from="AddHolder/Input" to="." method="_on_input_text_submitted"]
 [connection signal="pressed" from="AddHolder/Add" to="." method="_on_add_pressed"]

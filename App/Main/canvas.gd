@@ -1,20 +1,36 @@
-extends Control
-
-func _physics_process(delta: float) -> void :
-	if get_global_mouse_position().x > get_parent().get_node("Nodes").position.x:
-		User.MouseInCanvas = true
-	else:
-		User.MouseInCanvas = false
+extends HFlowContainer
 
 func _on_close_pressed() -> void :
-	get_parent().get_node("Nodes").visible = !get_parent().get_node("Nodes").visible
+	$"../Nodes".visible = !$"../Nodes".visible
 
 func _on_settings_pressed() -> void :
 	if User.CurrentPage != "Settings":
-		User.emit_signal("ChangeBoard", "Settings", "Settings")
+		User.emit_signal("ChangeBoard", "Settings", "Settings", "")
 	else:
-		User.emit_signal("ChangeBoard", User.PreviousPage, User.PreviousTitle)
+		User.emit_signal("ChangeBoard", User.PreviousPage, User.PreviousTitle, "")
 
-func _on_preview_pressed() -> void:
-	User.PreviewingNotes = !User.PreviewingNotes
+func QuickOption(Index):
+	match Settings.QuickOptions[Index]:
+		"PreviewNotes":
+			User.PreviewingNotes = !User.PreviewingNotes
+		"OptionsBar":
+			Settings.OptionsEnabled = !Settings.OptionsEnabled
+		"ShowCenter":
+			Settings.ShowCenter = !Settings.ShowCenter
+		"ResetCam":
+			$"../../Camera".ResetCam()
+		"Calendar":
+			if User.CurrentPage != "Calendar":
+				User.emit_signal("ChangeBoard", "Calendar", "Calendar", "", User.CamPosCalendar)
+			else :
+				User.emit_signal("ChangeBoard", "Home", "Home", "", User.CamPosBoard)
+
 	User.emit_signal("PreviewNotes")
+	User.emit_signal("ChangedOptionsBar")
+	Settings.emit_signal("SettingsChanged")
+
+func _on_quick_option_1_pressed() -> void:
+	QuickOption(0)
+
+func _on_quick_option_2_pressed() -> void:
+	QuickOption(1)

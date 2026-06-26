@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://kpyh8ufdds6l"]
+[gd_scene load_steps=53 format=3 uid="uid://kpyh8ufdds6l"]
 
 [ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
@@ -6,15 +6,16 @@
 [ext_resource type="Script" uid="uid://x0i05wn17p02" path="res://App/Main/settings.gd" id="4"]
 [ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="5"]
 [ext_resource type="PackedScene" uid="uid://bmhbuhyhf2tom" path="res://App/Assets/Scenes/Notes/Notes.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="6_qt3dg"]
 [ext_resource type="Script" uid="uid://dxq28n2arnb3y" path="res://App/Main/nodes.gd" id="7"]
 [ext_resource type="Script" uid="uid://c53nfhq1b5kp7" path="res://App/Main/to_do.gd" id="7_dbp5u"]
-[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="7_q72c2"]
 [ext_resource type="Texture2D" uid="uid://b7mj7mva78t6k" path="res://App/Assets/Icons/Notes.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://m7lbemt2cow6" path="res://App/Components/DragNDrop/drag_n_drop.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="9_b8p06"]
+[ext_resource type="Script" uid="uid://dyyakvmdsws0k" path="res://App/Main/display_url.gd" id="9_eab0n"]
 [ext_resource type="Texture2D" uid="uid://d13qly4odg36w" path="res://App/Assets/Icons/ToDo.png" id="10"]
+[ext_resource type="Script" uid="uid://px51gy031645" path="res://App/Main/quick_options.gd" id="10_eab0n"]
 [ext_resource type="PackedScene" uid="uid://dyefgf4hdrthy" path="res://App/Assets/Scenes/ToDo/ToDo.tscn" id="11"]
+[ext_resource type="Script" uid="uid://cb7rcnbk71oi7" path="res://App/Main/calendar.gd" id="11_lkim6"]
 [ext_resource type="Texture2D" uid="uid://oxeffc2jl1xn" path="res://App/Assets/Icons/Link.png" id="12"]
 [ext_resource type="Texture2D" uid="uid://ctac6pe05r8ae" path="res://App/Assets/Icons/icons8-search-32.png" id="12_iuq4y"]
 [ext_resource type="PackedScene" uid="uid://b28gxoc2p2tpf" path="res://App/Assets/Scenes/Link/Link.tscn" id="13"]
@@ -29,13 +30,11 @@
 [ext_resource type="Script" uid="uid://b3qf3arcokllp" path="res://App/Main/canvas.gd" id="23"]
 [ext_resource type="Texture2D" uid="uid://dylix26uaoyu4" path="res://App/Assets/Icons/icons8-settings-32(1).png" id="24"]
 [ext_resource type="Script" uid="uid://dc5f3s7hw57t6" path="res://App/Main/board_display.gd" id="25"]
+[ext_resource type="Script" uid="uid://cl7x5scpiyb04" path="res://App/Main/options_holder.gd" id="27_eab0n"]
 [ext_resource type="Texture2D" uid="uid://b8qv3t34e0md5" path="res://App/Assets/Icons/icons8-hide-32.png" id="28_b8p06"]
-[ext_resource type="Texture2D" uid="uid://ck0uw7sxvisug" path="res://App/Assets/Icons/icons8-preview-32.png" id="30_eab0n"]
 [ext_resource type="Texture2D" uid="uid://ywymu6b41yok" path="res://App/Assets/Icons/icons8-home-32.png" id="31_iuq4y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yqhvp"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qt3dg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q72c2"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -80,6 +79,19 @@ font_size = 25
 [sub_resource type="LabelSettings" id="LabelSettings_eab0n"]
 font_size = 25
 
+[sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_1yho4"]
+font_size = 20
+
+[sub_resource type="Gradient" id="Gradient_1yho4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
+gradient = SubResource("Gradient_1yho4")
+
 [sub_resource type="SystemFont" id="SystemFont_0ucvp"]
 font_names = PackedStringArray("Arial")
 generate_mipmaps = true
@@ -108,7 +120,7 @@ offset_left = -12416.0
 offset_top = -5824.0
 offset_right = 19392.0
 offset_bottom = 10560.0
-color = Color(0.188106, 0.412068, 0.74376, 1)
+color = Color(0.425323, 0.41232, 0.415591, 1)
 
 [node name="Boards" type="TabContainer" parent="."]
 layout_mode = 0
@@ -137,29 +149,6 @@ layout_mode = 2
 script = ExtResource("4")
 metadata/_tab_index = 1
 
-[node name="Button" type="Button" parent="Boards/Settings"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -3944.0
-offset_top = -1880.0
-offset_right = 4224.0
-offset_bottom = 2456.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/focus = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_qt3dg")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_qt3dg")
-
 [node name="Title" type="Label" parent="Boards/Settings"]
 layout_mode = 0
 offset_left = 256.0
@@ -168,6 +157,24 @@ offset_right = 681.0
 offset_bottom = 146.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
 text = "Settings"
+label_settings = SubResource("LabelSettings_xv0o8")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Title2" type="Label" parent="Boards/Settings"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.5
+anchor_top = 0.306818
+anchor_right = 1.68047
+anchor_bottom = 0.306818
+offset_left = -1728.0
+offset_top = 712.0
+offset_right = -1303.0
+offset_bottom = 794.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
+text = "Temporary Settings"
 label_settings = SubResource("LabelSettings_xv0o8")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -248,22 +255,15 @@ ctrl + s: Resize item
 ctrl + g: Move item
 delete: deletes selected item
 ctrl + LMB: select multiple items at once
-I: Zoom in
-O: Zoom out
-ngl, idk if scrolling even works
+I [b]OR[/b] Scroll Up: Zoom in
+O [b]OR[/b] Scroll Down: Zoom out
+Note: Ctrl + Scrolling: Does not zoom in/out, this is to prevent scrolling in an item
 [/ul]
 [b]while editing a note:[/b][ul]
 ctrl + b: bold text
 [/ul]
 
 And More to come."
-
-[node name="ExpandHolder" parent="Boards/Settings/Note" instance=ExtResource("6_qt3dg")]
-visible = false
-layout_mode = 2
-
-[node name="SelectObject" parent="Boards/Settings/Note" node_paths=PackedStringArray("Par") instance=ExtResource("7_q72c2")]
-Par = NodePath("..")
 
 [node name="Note2" type="VBoxContainer" parent="Boards/Settings"]
 clip_children = 2
@@ -308,19 +308,13 @@ only the items dragged and dropped, history and background color is stored into 
 Files are not stored, only the directory leading to them and contents are turned into text and displayed within
 [/ul]
 [b]Third Party use:[/b][ul]
-Icons used: [url]https://icons8.com[/url]
-Font: [url]https://www.programmingfonts.org/#oxproto[/url]
+Icons used: [color=green][b][url]https://icons8.com[/url][/b][/color]
+Font: [color=green][b][url]https://www.programmingfonts.org/#oxproto[/url][/b][/color]
+Url preview API: [color=green][b][url]https://docs.linkpreview.net/[/url][/b][/color]
 😎No AI used (it's pretty obvious if you look at how badly written the code is)
 [/ul]
 [code]
 The github repository will always have the latest updates and fixes than the releases (this is easier than exporting and continously uploading the export)"
-
-[node name="ExpandHolder" parent="Boards/Settings/Note2" instance=ExtResource("6_qt3dg")]
-visible = false
-layout_mode = 2
-
-[node name="SelectObject" parent="Boards/Settings/Note2" node_paths=PackedStringArray("Par") instance=ExtResource("7_q72c2")]
-Par = NodePath("..")
 
 [node name="ProjectDir" type="Button" parent="Boards/Settings"]
 self_modulate = Color(0, 0.972549, 0.701961, 1)
@@ -429,16 +423,32 @@ offset_bottom = 348.0
 text = "Change duration between loading
 items"
 
+[node name="ChangeDurTitle2" type="Label" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 1016.0
+offset_right = 635.0
+offset_bottom = 1068.0
+text = "Changes made here are only toggles for the 
+session and are not meant to be saved."
+
 [node name="LoadDur" type="SpinBox" parent="Boards/Settings"]
 layout_mode = 0
-offset_left = 1224.0
+offset_left = 1288.0
 offset_top = 317.0
-offset_right = 1583.0
+offset_right = 1592.0
 offset_bottom = 345.0
 max_value = 1.0
 step = 0.001
 alignment = 1
 suffix = "second(s)"
+
+[node name="Proload" type="Button" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 1229.0
+offset_top = 317.0
+offset_right = 1285.0
+offset_bottom = 345.0
 
 [node name="FeedbackTitle" type="Label" parent="Boards/Settings"]
 layout_mode = 0
@@ -492,14 +502,302 @@ offset_left = 1248.0
 offset_top = 400.0
 offset_right = 1592.0
 offset_bottom = 440.0
-max_value = 1e+09
+allow_greater = true
 alignment = 1
 prefix = "Item Limit"
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 200.0
+offset_right = 1508.0
+offset_bottom = 240.0
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Font Size:"
 
-[node name="DragNDrop" parent="UI" instance=ExtResource("9")]
-Item = ExtResource("6")
+[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 248.0
+offset_right = 1508.0
+offset_bottom = 288.0
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Title Size:"
+
+[node name="Center" type="Button" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 232.0
+offset_right = 1160.0
+offset_bottom = 288.0
+text = "Display Center:"
+
+[node name="PreviewNotes" type="Button" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 1072.0
+offset_right = 512.0
+offset_bottom = 1112.0
+text = "Preview Notes:"
+
+[node name="ShowBar" type="Button" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 184.0
+offset_right = 1160.0
+offset_bottom = 224.0
+text = "Show options bar:"
+
+[node name="Calendar" type="Button" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 688.0
+offset_top = 104.0
+offset_right = 992.0
+offset_bottom = 144.0
+text = "Calendar"
+
+[node name="QuickOptions" type="Panel" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 928.0
+offset_right = 1272.0
+offset_bottom = 1248.0
+script = ExtResource("10_eab0n")
+
+[node name="Label" type="Label" parent="Boards/Settings/QuickOptions"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 8.0
+offset_right = 409.0
+offset_bottom = 72.0
+text = "Edit Quick Options"
+label_settings = SubResource("LabelSettings_lkim6")
+
+[node name="SelectedLabel" type="Label" parent="Boards/Settings/QuickOptions"]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 32.0
+offset_right = 408.0
+offset_bottom = 72.0
+text = "Edit Quick Options"
+label_settings = SubResource("LabelSettings_1yho4")
+vertical_alignment = 1
+
+[node name="Selected1" type="TextureRect" parent="Boards/Settings/QuickOptions"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 74.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="Selected2" type="TextureRect" parent="Boards/Settings/QuickOptions"]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 74.0
+offset_top = 6.0
+offset_right = 142.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/QuickOptions"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 72.0
+
+[node name="Q1" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "1"
+
+[node name="Q2" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "2"
+
+[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/QuickOptions"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 408.0
+offset_bottom = 312.0
+
+[node name="Options" type="VBoxContainer" parent="Boards/Settings/QuickOptions/ScrollHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DisplayURL" type="Panel" parent="Boards/Settings"]
+layout_mode = 0
+offset_left = 1512.0
+offset_top = 200.0
+offset_right = 2160.0
+offset_bottom = 304.0
+script = ExtResource("9_eab0n")
+
+[node name="Title" type="Label" parent="Boards/Settings/DisplayURL"]
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 24.0
+text = "Display link preview (Optional)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="RichTextLabel" parent="Boards/Settings/DisplayURL"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 640.0
+offset_bottom = 88.0
+bbcode_enabled = true
+text = "To preview thumbnails of images, you are required to retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
+fit_content = true
+
+[node name="Key" type="LineEdit" parent="Boards/Settings/DisplayURL"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 72.0
+offset_right = 568.0
+offset_bottom = 100.0
+placeholder_text = "API Key here"
+alignment = 1
+caret_blink = true
+secret = true
+
+[node name="Hide" type="Button" parent="Boards/Settings/DisplayURL"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 96.0
+icon = ExtResource("28_b8p06")
+expand_icon = true
+
+[node name="Calendar" type="Control" parent="Boards"]
+visible = false
+show_behind_parent = true
+light_mask = 0
+layout_mode = 2
+script = ExtResource("11_lkim6")
+metadata/_tab_index = 2
+
+[node name="Main" type="Panel" parent="Boards/Calendar"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 1216.0
+offset_bottom = 696.0
+
+[node name="Month" type="OptionButton" parent="Boards/Calendar/Main"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 232.0
+offset_bottom = 56.0
+
+[node name="Year" type="SpinBox" parent="Boards/Calendar/Main"]
+layout_mode = 0
+offset_left = 896.0
+offset_top = 8.0
+offset_right = 1016.0
+offset_bottom = 56.0
+max_value = 2026.0
+value = 2026.0
+rounded = true
+allow_greater = true
+
+[node name="Frame" type="Panel" parent="Boards/Calendar"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 112.0
+offset_right = 1192.0
+offset_bottom = 688.0
+
+[node name="Holder" type="HFlowContainer" parent="Boards/Calendar/Frame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 23.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sun" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 136.0
+offset_bottom = 24.0
+text = "Sunday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Mon" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 144.0
+offset_right = 272.0
+offset_bottom = 24.0
+text = "Monday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tue" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 288.0
+offset_right = 416.0
+offset_bottom = 24.0
+text = "Tuesday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Wed" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 424.0
+offset_right = 552.0
+offset_bottom = 24.0
+text = "Wednesday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Thu" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 560.0
+offset_right = 688.0
+offset_bottom = 24.0
+text = "Thursday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Fri" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 696.0
+offset_right = 824.0
+offset_bottom = 24.0
+text = "Friday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sat" type="Label" parent="Boards/Calendar/Frame"]
+layout_mode = 0
+offset_left = 832.0
+offset_right = 960.0
+offset_bottom = 24.0
+text = "Saturday"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
 
 [node name="Nodes" type="Control" parent="UI"]
 layout_mode = 3
@@ -551,7 +849,7 @@ text = "Notes"
 icon = ExtResource("8")
 expand_icon = true
 
-[node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" instance=ExtResource("9")]
 Item = ExtResource("6")
 
 [node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
@@ -610,6 +908,78 @@ expand_icon = true
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/File" instance=ExtResource("9")]
 Item = ExtResource("22")
 
+[node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+follow_focus = true
+draw_focus_border = true
+script = ExtResource("27_eab0n")
+
+[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/OptionsHolder"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Delete" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Delete"
+
+[node name="Ratio" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Ratio"
+
+[node name="Title" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Title"
+
+[node name="Note" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Note"
+
+[node name="Dir" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Directory"
+
+[node name="Open" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Open"
+
+[node name="Cover" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+text = "Cover
+"
+
+[node name="Board" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+rounded = true
+allow_greater = true
+alignment = 3
+update_on_text_changed = true
+prefix = "Board"
+
+[node name="FontSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+min_value = 8.0
+value = 15.0
+rounded = true
+alignment = 3
+update_on_text_changed = true
+prefix = "Font:"
+
+[node name="TitleSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+min_value = 8.0
+value = 15.0
+rounded = true
+alignment = 3
+update_on_text_changed = true
+prefix = "Title:"
+
+[node name="ID" type="Label" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+layout_mode = 2
+
 [node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder"]
 layout_mode = 2
 
@@ -642,34 +1012,53 @@ self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 2
 text = "Delete All"
 
-[node name="Canvas" type="HBoxContainer" parent="UI"]
+[node name="FileDialog" type="FileDialog" parent="UI/Nodes"]
+auto_translate_mode = 1
+title = "Open a File or Directory"
+popup_window = true
+extend_to_title = true
+ok_button_text = "Open"
+dialog_autowrap = true
+file_mode = 3
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="Canvas" type="HFlowContainer" parent="UI"]
 clip_children = 2
 light_mask = 0
-offset_left = 6.0
-offset_top = 7.0
-offset_right = 153.0
-offset_bottom = 39.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 152.0
+offset_bottom = 40.0
 size_flags_horizontal = 3
 script = ExtResource("23")
 
 [node name="Close" type="Button" parent="UI/Canvas"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 icon = ExtResource("28_b8p06")
 icon_alignment = 1
 expand_icon = true
 
 [node name="Settings" type="Button" parent="UI/Canvas"]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 icon = ExtResource("24")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Preview" type="Button" parent="UI/Canvas"]
-custom_minimum_size = Vector2(32, 0)
+[node name="QuickOption1" type="Button" parent="UI/Canvas"]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-icon = ExtResource("30_eab0n")
+text = "1"
+icon_alignment = 1
+expand_icon = true
+
+[node name="QuickOption2" type="Button" parent="UI/Canvas"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+text = "2"
 icon_alignment = 1
 expand_icon = true
 
@@ -739,15 +1128,35 @@ text = "Untiled Board"
 [connection signal="request_completed" from="Boards/Settings/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
 [connection signal="file_selected" from="Boards/Settings/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
 [connection signal="value_changed" from="Boards/Settings/LoadDur" to="Boards/Settings" method="_on_load_dur_value_changed"]
+[connection signal="pressed" from="Boards/Settings/Proload" to="Boards/Settings" method="_on_proload_pressed"]
 [connection signal="pressed" from="Boards/Settings/SubmitFeedback" to="Boards/Settings" method="_on_submit_feedback_pressed"]
 [connection signal="request_completed" from="Boards/Settings/SubmitFeedback/SubmitReq" to="Boards/Settings" method="_on_submit_req_request_completed"]
 [connection signal="value_changed" from="Boards/Settings/ItemLimit" to="Boards/Settings" method="_on_item_limit_value_changed"]
+[connection signal="value_changed" from="Boards/Settings/DefaultFontSize" to="Boards/Settings" method="_on_default_font_size_value_changed"]
+[connection signal="value_changed" from="Boards/Settings/DefaultTitle" to="Boards/Settings" method="_on_default_title_value_changed"]
+[connection signal="pressed" from="Boards/Settings/Center" to="Boards/Settings" method="_on_center_pressed"]
+[connection signal="pressed" from="Boards/Settings/PreviewNotes" to="Boards/Settings" method="_on_preview_notes_pressed"]
+[connection signal="pressed" from="Boards/Settings/ShowBar" to="Boards/Settings" method="_on_show_bar_pressed"]
+[connection signal="pressed" from="Boards/Settings/Calendar" to="Boards/Settings" method="_on_calendar_pressed"]
+[connection signal="pressed" from="Boards/Settings/QuickOptions/QuickHolder/Q1" to="Boards/Settings/QuickOptions" method="_on_q_1_pressed"]
+[connection signal="pressed" from="Boards/Settings/QuickOptions/QuickHolder/Q2" to="Boards/Settings/QuickOptions" method="_on_q_2_pressed"]
+[connection signal="text_changed" from="Boards/Settings/DisplayURL/Key" to="Boards/Settings/DisplayURL" method="_on_key_text_changed"]
+[connection signal="pressed" from="Boards/Settings/DisplayURL/Hide" to="Boards/Settings/DisplayURL" method="_on_hide_pressed"]
+[connection signal="item_selected" from="Boards/Calendar/Main/Month" to="Boards/Calendar" method="_on_month_item_selected"]
+[connection signal="value_changed" from="Boards/Calendar/Main/Year" to="Boards/Calendar" method="_on_year_value_changed"]
+[connection signal="text_changed" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_changed"]
 [connection signal="text_submitted" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_submitted"]
+[connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/Board" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_value_changed"]
+[connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/FontSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_font_size_value_changed"]
+[connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/TitleSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_title_size_value_changed"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
+[connection signal="item_clicked" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_clicked"]
 [connection signal="pressed" from="UI/Nodes/Holder/Delete" to="UI/Nodes" method="_on_delete_pressed"]
+[connection signal="file_selected" from="UI/Nodes/FileDialog" to="UI/Nodes/Holder/OptionsHolder" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="UI/Canvas/Close" to="UI/Canvas" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/Canvas/Settings" to="UI/Canvas" method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Canvas/Preview" to="UI/Canvas" method="_on_preview_pressed"]
+[connection signal="pressed" from="UI/Canvas/QuickOption1" to="UI/Canvas" method="_on_quick_option_1_pressed"]
+[connection signal="pressed" from="UI/Canvas/QuickOption2" to="UI/Canvas" method="_on_quick_option_2_pressed"]
 [connection signal="pressed" from="UI/BoardDisplay/Home" to="UI/BoardDisplay" method="_on_home_pressed"]
 [connection signal="pressed" from="UI/BoardDisplay/Previous" to="UI/BoardDisplay" method="_on_previous_pressed"]

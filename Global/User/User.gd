@@ -9,12 +9,18 @@ signal ChangeBoard
 signal StoppedSelecting
 signal Searched
 signal PreviewNotes
+signal ItemFocused
+signal ItemFocusLost
+signal ChangedOptionsBar
+
+var OptionsEnabled := true
 
 var RemovedHistory: = []
 var StoredHistory: = []
 var StillLoading: = true
 
-var MouseInCanvas: = true
+var MouseInCanvas: = false
+
 var MousePos: Vector2
 var CamPos: Vector2
 var CamZoom: Vector2
@@ -34,9 +40,12 @@ var MultiSelecting = false
 var AllSameSelectedObjects = false
 var CopiedObject = null
 
-var ProgressiveLoading: = true
-var LoadDur: = 0.1
-
+var LoadDur: = 0.05
 var PreviewingNotes := false
-
 var TotalItems := 0
+
+var TestingMode := false
+
+var CamPosBoard := Vector2(640, 352)
+var CamPosSettings := Vector2(640, 352)
+var CamPosCalendar := Vector2(640, 352)

@@ -12,6 +12,11 @@ var Data: = {
 	"Title": ""
 }
 
+var Options := [
+	"Ratio",
+	"Title",
+]
+
 func _ready() -> void :
 	for i in Data["List"].keys():
 		var Check = preload("res://App/Assets/Scenes/ToDo/check_list.tscn").instantiate()

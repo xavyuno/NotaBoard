@@ -1,19 +1,55 @@
+Things Changed since: v1.4-Beta
+- Added an option to hide the directory in the file item
+- RMB on a history item to remove it from history
+- Shift click on the close button to not add it to the history
+- hovering over a link tag on a notes item will preview the link (usefull for hyperlinks)
+- Item limit: change the amount of items added in TOTAL throughout all boards, Can be changed in settings
+- focusing on an item shows the list of options available for that item
+- Removed item options bar and scaling button
+- Added option to enable/disable option bar
+- Covers can be addedon boards
+- Indicator showing the center of the board & an option to toggle this
+- Previews now show within link items
+- Url thumbnail preview: Users can add their own api from https://my.linkpreview.net/ | found in settings
+- Paste images from clipboard (automatically creates a file item at mouse position and saves that image in the user directory)
+- Paste links from clipboard (automatically creates a link item at mouse position)
+- Thumbnails within link items save. This not only makes loading previews faster but uses less bandwidth
+- Added options for previewing notes and options bar in settings
+- Quick options can be configured in settings
+- Zooming works with mouse wheel now (better late than never)
+- Option to change font size of text and title
+- Change default font size of text and title within the settings
+- Fixed API keys being exposed, #oopsie
+- Todo item: checking the item can be done from the text instead of only the checkbox itself
+- Reseting cam resets it's position as well as zoom. Previously only position
+- Temporary settings section: Not all settings are meant to be saved, such as previewing notes. any short term based settings will be placed there
+- Realzied I messed up the github versioning.. Versions will now follow Vx.x format from now on
+- Camera positions between settings and Home board are saved temporarily during sessions and are reset to center upon log off
+- Camera positions within boards are saved even after log off
+- Added a Calendar board (can be accessed through quick options or settings)
+- Items with buttons can be dragged by holding down on them for 0.5 seconds
+- Removed directory showing within file items
+- Added option to change directory of file items to context menu
+- Added option to open file items to context menu
+- Fixed dragging and scaling with items: would previously scale or move multiple items that were previously selected even when not multi-selecting
+- 
+
 Things Changed since: v0.3-Alpha
--keybinds to mass resize and move items
--plugin that updates the todo/checklist in settings
--This file
--updated keybinds
--updated file preview from 100 lines to 10 (for performance)
--added search bar that searches for that query in any item that has: title, note, ID and should be able to search for everything, except positions, sizes amd points
--removed the notes item being used in settings
--more to do's
--notes now have formatting, e.g: [b]Bold[/b], [i]italic[/i], etc
--preview button to make hyperlinks within notes click-able
--fixed boards not updating their ID when placed in a column
--Items are more visible even if the background color is completely white
--boards can now be placed inside of other boards and will show their parent ID's
--added a setting to change the interval between loading items
--Settings page uses rich text
--fixed bug where previews would not show inside of a newly created board
--added feedback box in settings
--quickly access the home when inside of 2 boards
+- keybinds to mass resize and move items
+- plugin that updates the todo/checklist in settings
+- This file
+- updated keybinds
+- updated file preview from 100 lines to 10 (for performance)
+- added search bar that searches for that query in any item that has: title, note, ID and should be able to search for everything, except positions, sizes amd points
+- removed the notes item being used in settings
+- more to do's
+- notes now have formatting, e.g: [b]Bold[/b], [i]italic[/i], etc
+- preview button to make hyperlinks within notes click-able
+- fixed boards not updating their ID when placed in a column
+- Items are more visible even if the background color is completely white
+- boards can now be placed inside of other boards and will show their parent ID's
+- added a setting to change the interval between loading items
+- Settings page uses rich text
+- fixed bug where previews would not show inside of a newly created board
+- added feedback box in settings
+- quickly access the home when inside of 2 boards

@@ -11,13 +11,18 @@ func _ready() -> void :
 	for i in get_children():
 		i.visible = false
 
-func ChangedBoard(Board: String, Title: String):
-	if Board == "Settings":
+func ChangedBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
+	if Board in ["Settings", "Calendar"]:
 		home.visible = true
 		home.text = "Home"
 		previous.visible = false
 		return
 	if Board != "Home":
+		if !User.Boards.has(Board):
+			var board = preload("res://App/Assets/Scenes/NewBoard/NewBoard.tscn").instantiate()
+			board.name = Board
+			get_tree().current_scene.get_node("Boards").add_child(board)
+			User.Boards.merge({Board : {"Title" : Title, "ID" : ID}}, true)
 		if User.Boards[Board]["ID"] != "Home":
 			PrevTitle = User.Boards[User.Boards[Board]["ID"]]["Title"]
 			PrevID = User.Boards[Board]["ID"]
@@ -55,7 +60,7 @@ func ChangedBoard(Board: String, Title: String):
 	User.PreviousTitle = PrevTitle
 
 func _on_home_pressed() -> void:
-	User.emit_signal("ChangeBoard", "Home", "Home")
+	User.emit_signal("ChangeBoard", "Home", "Home", "", User.CamPosBoard)
 
 func _on_previous_pressed() -> void:
-	User.emit_signal("ChangeBoard", PrevID, PrevTitle)
+	User.emit_signal("ChangeBoard", PrevID, PrevTitle, "", User.Boards[PrevID]["CamPos"])

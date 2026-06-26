@@ -16,12 +16,20 @@ func _ready() -> void :
 			return
 		Settingsfile.close()
 
-		Settings.BackgroundCol = ValidateValue(data, 0) if ValidateValue(data, 0) else Settings.BackgroundCol
-		Settings.UpdatePath = ValidateValue(data, 1) if ValidateValue(data, 1) else Settings.UpdatePath
-		User.LoadDur = ValidateValue(data, 2) if ValidateValue(data, 2) else User.LoadDur
-		Settings.ItemLimit = ValidateValue(data, 3) if ValidateValue(data, 3) else Settings.ItemLimit
-
+		ValidateValue(data, 0, "BackgroundCol")
+		ValidateValue(data, 1, "UpdatePath")
+		ValidateValue(data, 2, "LoadDur")
+		ValidateValue(data, 3, "ItemLimit")
+		ValidateValue(data, 4, "OptionsEnabled")
+		ValidateValue(data, 5, "ShowCenter")
+		ValidateValue(data, 6, "QuickOptions")
+		ValidateValue(data, 7, "DefaultFontSize")
+		ValidateValue(data, 8, "DefaultTitleSize")
+		ValidateValue(data, 9, "UrlAPIKey")
+		ValidateValue(data, 10, "ProgressiveLoading")
+		
 		Settings.emit_signal("SettingsChanged")
+		User.emit_signal("ChangedOptionsBar")
 
 	var fileHistory = FileAccess.open("user://History.txt", FileAccess.READ)
 	if fileHistory:
@@ -32,7 +40,7 @@ func _ready() -> void :
 		User.RemovedHistory = data
 		fileHistory.close()
 		for i in User.RemovedHistory:
-			if User.ProgressiveLoading:
+			if Settings.ProgressiveLoading:
 				await get_tree().create_timer(User.LoadDur).timeout
 			var img = get_node("Holder/ItemHolder/Items/" + i["Type"]).icon
 			history.add_item("Removed: " + JSON.stringify(i, "\t", false, true), img)
@@ -46,25 +54,27 @@ func _ready() -> void :
 		User.StoredHistory = data
 		fileSave.close()
 		for i in User.StoredHistory:
-			if User.ProgressiveLoading:
+			if Settings.ProgressiveLoading:
 				await get_tree().create_timer(User.LoadDur).timeout
 			if i["Type"] == "Board":
-				User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"]}}, true)
+				User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"], "CamPos" : Vector2(640, 352)}}, true)
 			initObj(i, false)
 
 	User.StillLoading = false
 
-func ValidateValue(array: Array, index):
+func ValidateValue(array: Array, index, parameter) -> bool:
 	if array.size() > index:
-		return array[index]
-	else:
-		return null
+		Settings.set(parameter, array[index])
+		return true
+	else :
+		return false
 
 func _physics_process(delta: float) -> void :
-	if User.CurrentPage == "Settings":
-		$Holder / ItemHolder.visible = false
-	else:
-		$Holder / ItemHolder.visible = true
+	if get_global_mouse_position().x <= 160:
+		User.MouseInCanvas = true
+	else :
+		User.MouseInCanvas = false
+	
 	if Input.is_action_pressed("MultiSelect"):
 		User.MultiSelecting = true
 	if Input.is_action_just_released("MultiSelect"):
@@ -80,9 +90,29 @@ func _physics_process(delta: float) -> void :
 			var TempData = User.CopiedObject
 			TempData["Pos"] = User.MousePos
 			initObj(TempData, true)
-		if User.MultiSelectedObjects.size() >= 1:
+		elif User.MultiSelectedObjects.size() >= 1:
 			for i in User.MultiSelectedObjects:
 				initObj(get_node(i).Data, true)
+		else:
+			if DisplayServer.clipboard_has_image():
+				var obj = preload("res://App/Assets/Scenes/File/File.tscn").instantiate()
+				var saveImg := DisplayServer.clipboard_get_image()
+				var Dir = DirAccess.make_dir_absolute("user://PastedImages")
+				var files = DirAccess.get_files_at("user://PastedImages")
+				var filepath
+				if files.size() > 0:
+					filepath = "user://PastedImages/" + str( int(files.size()) + 1 ) + ".png"
+				else :
+					filepath = "user://PastedImages/1.png"
+				saveImg.save_png(filepath)
+				obj.Data["Dir"] = filepath
+				System.AddObject(obj)
+			else:
+				var cb := DisplayServer.clipboard_get()
+				if cb.begins_with("Https://") or cb.begins_with("https://") or cb.begins_with("www.") or cb.ends_with(".com") or cb.ends_with(".na"):
+					var obj = preload("res://App/Assets/Scenes/Link/Link.tscn").instantiate()
+					obj.Data["Link"] = cb
+					System.AddObject(obj)
 		User.emit_signal("StoppedSelecting")
 	if Input.is_action_just_pressed("Duplicate") and User.CopiedObject:
 		initObj(User.CopiedObject, true)
@@ -98,6 +128,7 @@ func _physics_process(delta: float) -> void :
 				get_node(i).queue_free()
 			User.emit_signal("StoppedSelecting")
 			User.MultiSelectedObjects = []
+		User.emit_signal("ItemFocusLost")
 
 func Undo(data):
 	initObj(data, true)
@@ -134,11 +165,13 @@ func _on_history_item_activated(index: int) -> void :
 	else:
 		if history.get_item_text(index).begins_with("Removed: "):
 			Undo(User.RemovedHistory[index])
-		else:
-			pass
 
-func ChangedBoard(Board: String, Title: String):
-	pass
+func ChangedBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
+	if User.CurrentPage in ["Settings", "Calendar"]:
+		$Holder/ItemHolder.visible = false
+	else:
+		$Holder/ItemHolder.visible = true
+	User.emit_signal("ItemFocusLost")
 
 func _exit_tree() -> void :
 	User.emit_signal("SaveObjectData")
@@ -153,7 +186,7 @@ func _on_delete_pressed() -> void :
 	System.SaveStoreHistory()
 	var boards = $"../../Boards"
 	for i in boards.get_children():
-		if !(i.name in ["Home", "Settings"]):
+		if !(i.name in ["Home", "Settings", "Calendar"]):
 			i.queue_free()
 	for i in boards.get_node("Home").get_children():
 		if !(i.name in ["Button", "Preview"]):
@@ -168,3 +201,14 @@ func _on_clear_pressed() -> void :
 
 func _on_search_text_submitted(new_text: String) -> void:
 	User.emit_signal("Searched", new_text)
+
+func _on_history_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	if mouse_button_index == 2:
+		$Holder/HistoryHolder/History.remove_item(index)
+		User.RemovedHistory.erase(User.RemovedHistory[index])
+		System.SaveRemoveHistory()
+
+
+func _on_search_text_changed(new_text: String) -> void:
+	if new_text == "":
+		User.emit_signal("Searched", "")

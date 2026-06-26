@@ -22,11 +22,18 @@ func _physics_process(delta: float) -> void :
 		$Update / Version.text = Version
 	$Update / Version.visible = Downloading
 	$TotalItems.text = "Total Items: " + str(User.TotalItems) + " / " + str(Settings.ItemLimit)
+	$PreviewNotes.text = "Previewing Notes: On" if User.PreviewingNotes else "Previewing Notes: Off"
 
 func SettingsChanged():
 	$BGPicker.color = Settings.BackgroundCol
-	$LoadDur.value = User.LoadDur
+	$LoadDur.value = Settings.LoadDur
 	$ItemLimit.value = Settings.ItemLimit
+	$Center.text = "Show Center: On" if Settings.ShowCenter else "Show Center: Off"
+	$Center.alignment = HORIZONTAL_ALIGNMENT_CENTER if Settings.ShowCenter else HORIZONTAL_ALIGNMENT_LEFT
+	$ShowBar.text = "Show options bar: On" if Settings.OptionsEnabled else "Show options bar: Off"
+	$Proload.text = "On" if Settings.ProgressiveLoading else "Off"
+	$DefaultFontSize.value = Settings.DefaultFontSize
+	$DefaultTitle.value = Settings.DefaultTtileSize
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -84,14 +91,13 @@ func _on_notes_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
 
 func _on_load_dur_value_changed(value: float) -> void:
-	User.LoadDur = value
+	Settings.LoadDur = value
 
 func _on_submit_feedback_pressed() -> void:
 	if $Feedback.text == "":
 		return
-	var webhooklink := "https://discord.com/api/webhooks/1512253681985388603/T4NZY1aM-R0eH5kZWNmq0G_6NcLtxjspaavpoKZm14H9BWVd-Iez-GHbfx-u4e379OmP"
 	var req := $SubmitFeedback/SubmitReq
-	req.request(webhooklink, ["Content-type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"content" : "```" + $Feedback.text + "```"}))
+	req.request(System.GetAPI(0), ["Content-type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"content" : "```\n" + $Feedback.text + "\n```"}))
 
 func _on_submit_req_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code == 200:
@@ -101,3 +107,30 @@ func _on_submit_req_request_completed(result: int, response_code: int, headers: 
 
 func _on_item_limit_value_changed(value: float) -> void:
 	Settings.ItemLimit = value
+
+func _on_center_pressed() -> void:
+	Settings.ShowCenter = !Settings.ShowCenter
+	Settings.emit_signal("SettingsChanged")
+
+func _on_preview_notes_pressed() -> void:
+	User.PreviewingNotes = !User.PreviewingNotes
+
+func _on_show_bar_pressed() -> void:
+	Settings.OptionsEnabled = !Settings.OptionsEnabled
+	Settings.emit_signal("SettingsChanged")
+
+func _on_default_font_size_value_changed(value: float) -> void:
+	Settings.DefaultFontSize = int(value)
+	Settings.emit_signal("SettingsChanged")
+
+func _on_default_title_value_changed(value: float) -> void:
+	Settings.DefaultTtileSize = int(value)
+	Settings.emit_signal("SettingsChanged")
+
+
+func _on_calendar_pressed() -> void:
+	User.emit_signal("ChangeBoard", "Calendar", "Calendar", "", User.CamPosCalendar)
+
+func _on_proload_pressed() -> void:
+	Settings.ProgressiveLoading
+	Settings.emit_signal("SettingsChanged")

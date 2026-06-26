@@ -7,5 +7,6 @@ func _ready() -> void :
 
 func Clicked():
 	User.TotalItems -= 1
-	User.emit_signal("ObjectRemoved", par.Data)
+	if !Input.is_action_pressed("Special"):
+		User.emit_signal("ObjectRemoved", par.Data)
 	par.queue_free()

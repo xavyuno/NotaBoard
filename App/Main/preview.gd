@@ -20,3 +20,6 @@ func StoppedDragging():
 		for i in get_children():
 			i.queue_free()
 			User.TotalItems -= 1
+
+func _on_clear_focus_pressed() -> void:
+	User.emit_signal("ItemFocusLost")

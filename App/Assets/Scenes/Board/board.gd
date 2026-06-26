@@ -7,20 +7,38 @@ var Data: = {
 	"Board": "Getting ID...", 
 	"Title": "", 
 	"ID": "Home", 
+	"Cover" : null,
+	"CamPos" : Vector2(640, 352)
 }
+
+var Options := ["Cover", "Board"]
 
 var Preview := false
 
 func _ready() -> void :
 	UpdateValues($BoardName, "Title", "text")
+	UpdateValues($New/Cover, "Cover", "texture")
 	if Data["Board"] == "Getting ID..." and !Preview:
 		Data["Board"] = str(User.Boards.size() + 1)
 		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
-	UpdateValues($New/ID, "Board", "text")
+	$New/ID.text = "ID: " + Data["Board"]
+	if Data.has("Cover"):
+		$New.text = "" if Data["Cover"] else "Board"
+		$New/ID.visible = false if Data["Cover"] else true
+
+func ChangeID(value):
+	Data["Board"] = str(value).trim_suffix(".0")
+	$New/ID.text = "ID: " + Data["Board"]
 
 func UpdateValues(NODE, value, parameter):
 	if Data.has(value):
 		NODE.call_deferred("set", parameter, Data[value])
+
+func ChangeCover(txt):
+	$New.text = "" if txt else "Board"
+	$New/ID.visible = false if txt else true
+	$New/Cover.texture = txt
+	Data["Cover"] = txt
 
 func GetData():
 	return Data
@@ -29,16 +47,21 @@ func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["Title"] = $BoardName.text
+	if User.CurrentPage == Data["Board"]:
+		Data["CamPos"] = User.CamPos
+		User.Boards[Data["Board"]]["CamPos"] = Data["CamPos"]
 
 func _on_new_pressed() -> void :
-	User.emit_signal("ChangeBoard", Data["Board"], Data["Title"])
+	if Data.has("CamPos"):
+		User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Data["CamPos"])
+	else :
+		Data.merge({"CamPos" : Vector2(640, 352)}, true)
+		User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Vector2(640, 352))
 
 func _on_board_name_text_changed(new_text: String) -> void :
-	for i in User.Boards.keys():
-		if i == Data["Board"]:
-			User.Boards[i]["Title"] = new_text
+	if User.Boards.has(User.Boards[Data["Board"]]):
+		User.Boards[User.Boards[Data["Board"]]]["Title"] = new_text
 	Data["Title"] = new_text
-	
 
 func _on_board_name_text_submitted(new_text: String) -> void :
 	release_focus()

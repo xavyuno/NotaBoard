@@ -3,7 +3,7 @@ extends TabContainer
 func _ready() -> void :
 	User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
 	User.connect("SaveObjectData", Callable(self, "saveItems"))
-	User.emit_signal("ChangeBoard", "Home", "Home")
+	User.emit_signal("ChangeBoard", "Home", "Home", "")
 
 func _exit_tree() -> void :
 	saveItems()
@@ -25,7 +25,7 @@ func saveItems():
 					User.StoredHistory.append(j.GetData())
 	System.SaveAll()
 
-func ChangeBoard(Board: String, Title: String):
+func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
 	var Found = false
 	for i in get_tab_count():
 		if get_tab_control(i).name == Board:

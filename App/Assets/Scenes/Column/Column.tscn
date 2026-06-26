@@ -14,7 +14,6 @@ script = ExtResource("1")
 
 [node name="OptionsHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("2")]
 layout_mode = 2
-size_flags_vertical = 0
 Par = NodePath("..")
 
 [node name="Title" type="LineEdit" parent="."]
@@ -44,12 +43,11 @@ text = "Drag and drop item here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("3")]
-layout_mode = 2
-size_flags_vertical = 8
+[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("4")]
 Par = NodePath("..")
 
-[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("4")]
+[node name="ExpandHolder" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("3")]
+layout_mode = 2
 Par = NodePath("..")
 
 [connection signal="mouse_entered" from="DropBar" to="." method="_on_drop_bar_mouse_entered"]

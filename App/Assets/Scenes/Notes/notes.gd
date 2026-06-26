@@ -12,19 +12,36 @@ var Data: = {
 	"ID": "Home", 
 	"Title": "", 
 	"TitleOn": true, 
-	"NoteOn": true
+	"NoteOn": true,
+	"FontSize" : Settings.DefaultFontSize,
+	"TitleSize": Settings.DefaultTtileSize
 }
+
+var Options := [
+	"Title",
+	"FontSize",
+	"TitleSize"
+]
 
 var Editing := false
 var ClickedOnce := false
 
 func _ready() -> void :
-	EditNotes()
+	EditNotes(false)
 	UpdateValues(NotesText, "Note", "text")
-	UpdateValues($Preview, "NoteOn", "visible")
+	#UpdateValues($Preview, "NoteOn", "visible")
 	UpdateValues($Title, "Title", "text")
 	UpdateValues($Title, "TitleOn", "visible")
 	UpdateValues(RichText, "Note", "text")
+	if Data.has("FontSize"):
+		ChangeFontSize(Data["FontSize"])
+	else :
+		ChangeFontSize(Settings.DefaultFontSize)
+	if Data.has("TitleSize"):
+		ChangeTitleSize(Data["TitleSize"])
+	else :
+		ChangeTitleSize(Settings.DefaultFontSize)
+
 	User.connect("PreviewNotes", Callable(self, "PreviewNotes"))
 
 func UpdateValues(NODE, value, parameter):
@@ -33,6 +50,18 @@ func UpdateValues(NODE, value, parameter):
 
 func GetData():
 	return Data
+
+func ChangeTitleSize(value : int):
+	$Title.add_theme_font_size_override("font_size", value)
+	Data["TitleSize"] = value
+
+func ChangeFontSize(value : int):
+	$Preview/Edit/Text.add_theme_font_size_override("bold_font_size", value)
+	$Preview/Edit/Text.add_theme_font_size_override("bold_italics_font_size", value)
+	$Preview/Edit/Text.add_theme_font_size_override("italics_font_size", value)
+	$Preview/Edit/Text.add_theme_font_size_override("mono_font_size", value)
+	$Preview/Edit/Text.add_theme_font_size_override("normal_font_size", value)
+	Data["FontSize"] = value
 
 func _process(delta: float) -> void :
 	Data["Pos"] = position
@@ -61,9 +90,13 @@ func _on_note_on_pressed() -> void :
 func _on_double_click_timeout() -> void:
 	ClickedOnce = false
 
-func EditNotes():
+func EditNotes(GrabFocus = true):
+	if User.PreviewingNotes:
+		return
 	$Preview.visible = !Editing
 	$ScrollContainer.visible = Editing
+	if GrabFocus:
+		NotesText.grab_focus()
 
 func _on_edit_pressed() -> void:
 	if ClickedOnce:
@@ -76,17 +109,17 @@ func _on_edit_pressed() -> void:
 
 func _on_notes_focus_exited() -> void:
 	Editing = false
-	EditNotes()
+	EditNotes(false)
 
 func _on_text_focus_entered() -> void:
 	Editing = true
-	EditNotes()
+	EditNotes(false)
 
 func PreviewNotes():
 	if User.PreviewingNotes:
-		RichText.mouse_filter = MOUSE_FILTER_STOP
+		RichText.mouse_filter = Control.MOUSE_FILTER_PASS
 	else :
-		RichText.mouse_filter = MOUSE_FILTER_IGNORE
+		RichText.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _on_text_meta_clicked(meta: Variant) -> void:
 	OS.shell_open(str(meta))
@@ -102,3 +135,9 @@ func RichTextUpdate(text, additonal = ""):
 
 func _on_bold_pressed() -> void:
 	RichTextUpdate("b")
+
+func _on_text_meta_hover_started(meta: Variant) -> void:
+	RichText.tooltip_text = str(meta)
+
+func _on_text_meta_hover_ended(meta: Variant) -> void:
+	RichText.tooltip_text = ""

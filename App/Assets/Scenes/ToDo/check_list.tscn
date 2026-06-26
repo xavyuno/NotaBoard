@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://m7tucph1p8p0"]
 
 [ext_resource type="Script" uid="uid://f85bimn24r0r" path="res://App/Assets/Scenes/ToDo/check_list.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="2"]
+[ext_resource type="Script" uid="uid://dmy5ehhmyoanc" path="res://App/Assets/Scenes/ToDo/close.gd" id="2_j8wkc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8wkc"]
 bg_color = Color(0, 0, 0, 0.392157)
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+expand_margin_left = 28.0
+expand_margin_right = 35.0
 
 [node name="CheckList" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 32)
@@ -19,15 +19,30 @@ script = ExtResource("1")
 [node name="Input" type="CheckBox" parent="."]
 layout_mode = 2
 
-[node name="Text" type="Label" parent="."]
+[node name="Text" type="Button" parent="."]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/focus = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_j8wkc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_j8wkc")
-autowrap_mode = 1
+text = "text goes here"
+autowrap_mode = 3
 
-[node name="Close" parent="." node_paths=PackedStringArray("par") instance=ExtResource("2")]
+[node name="Close" type="Button" parent="." node_paths=PackedStringArray("par")]
+custom_minimum_size = Vector2(31, 0)
 layout_mode = 2
+text = "X"
+script = ExtResource("2_j8wkc")
 par = NodePath("..")
 
 [connection signal="toggled" from="Input" to="." method="_on_input_toggled"]
+[connection signal="pressed" from="Text" to="." method="_on_text_pressed"]
