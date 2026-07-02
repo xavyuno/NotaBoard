@@ -9,13 +9,18 @@ var Data: = {
 	"List": {}, 
 	"ID": "Home", 
 	"TitleOn": true, 
-	"Title": ""
+	"Title": "",
+	"FontSize" : Settings.DefaultFontSize,
+	"TitleSize": Settings.DefaultTtileSize
 }
 
 var Options := [
 	"Ratio",
 	"Title",
+	"FontSize",
+	"TitleSize"
 ]
+var TempTitleSize := 0
 
 func _ready() -> void :
 	for i in Data["List"].keys():
@@ -23,8 +28,14 @@ func _ready() -> void :
 		Check.Text = i
 		Check.get_node("Input").set_pressed_no_signal(Data["List"][i])
 		$List.add_child(Check)
+		Check.get_node("Close").connect("pressed", TodoClosed.bind(Check.get_path()))
 	UpdateValues($Title, "TitleOn", "visible")
 	UpdateValues($Title, "Title", "text")
+	if Data.has("FontSize"):
+		$Title.add_theme_font_size_override("font_size", Data["TitleSize"])
+		if $List.get_children().size() >= 1:
+			for i in $List.get_children():
+				i.ChangeFontSize(Data["FontSize"])
 
 func UpdateValues(NODE, value, parameter):
 	if Data.has(value):
@@ -32,6 +43,24 @@ func UpdateValues(NODE, value, parameter):
 
 func GetData():
 	return Data
+
+func TodoClosed(path):
+	TempTitleSize = $Title.size.y
+	size.y -= get_node(path).size.y
+	get_node(path).queue_free()
+	$Title.size.y = TempTitleSize
+	Data["List"].erase(get_node(path).Text)
+
+func ChangeTitleSize(value : int):
+	$Title.add_theme_font_size_override("font_size", value)
+	Data["TitleSize"] = value
+
+func ChangeFontSize(value : int):
+	if Data.has("FontSize"):
+		if $List.get_children().size() >= 1:
+			for i in $List.get_children():
+				i.ChangeFontSize(Data["FontSize"])
+	Data["FontSize"] = value
 
 func _process(delta: float) -> void :
 	Data["Pos"] = position
@@ -45,8 +74,10 @@ func AddList():
 	var Check = preload("res://App/Assets/Scenes/ToDo/check_list.tscn").instantiate()
 	Check.Text = input.text
 	$List.add_child(Check)
+	Check.get_node("Close").connect("pressed", TodoClosed.bind(Check.get_path()))
 	Data["List"].merge({input.text: false}, true)
 	$AddHolder / Input.text = ""
+	$AddHolder/Input.grab_click_focus()
 
 func _on_add_pressed() -> void :
 	AddList()

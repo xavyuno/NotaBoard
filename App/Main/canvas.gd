@@ -1,5 +1,12 @@
 extends HFlowContainer
 
+func _ready() -> void:
+	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
+
+func SettingsChanged():
+	get_node("QuickOption1").tooltip_text = Settings.QuickOptions[0]
+	get_node("QuickOption2").tooltip_text = Settings.QuickOptions[1]
+
 func _on_close_pressed() -> void :
 	$"../Nodes".visible = !$"../Nodes".visible
 

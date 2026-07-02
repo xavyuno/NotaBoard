@@ -5,3 +5,7 @@ func _ready() -> void:
 
 func settingChanged():
 	$Center.visible = Settings.ShowCenter
+
+func _on_clean_timeout() -> void:
+	if name.contains("@"):
+		queue_free()

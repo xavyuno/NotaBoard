@@ -10,8 +10,8 @@
 VBoxContainer/constants/separation = 4
 
 [node name="ToDo" type="VBoxContainer"]
-offset_right = 256.0
-offset_bottom = 32.0
+offset_right = 276.0
+offset_bottom = 104.0
 theme = SubResource("Theme_s4aco")
 theme_override_constants/separation = 1
 script = ExtResource("1")
@@ -22,13 +22,18 @@ Par = NodePath("..")
 
 [node name="Title" type="LineEdit" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
 placeholder_text = "Title"
+caret_blink = true
 
 [node name="CheckFocus" parent="Title" node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
 [node name="List" type="VBoxContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.11
 
 [node name="AddHolder" type="HBoxContainer" parent="."]
 layout_mode = 2

@@ -12,7 +12,7 @@ func _ready() -> void :
 func ButtonUp():
 	Holding = false
 	User.emit_signal("StoppedDragging")
-	if !User.MouseInCanvas or !User.DraggingObject:
+	if !User.DraggingObject:
 		return
 	System.AddObject(Item, true, null, {}, true)
 	User.DraggingObject = false

@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://m7tucph1p8p0"]
+[gd_scene load_steps=3 format=3 uid="uid://m7tucph1p8p0"]
 
 [ext_resource type="Script" uid="uid://f85bimn24r0r" path="res://App/Assets/Scenes/ToDo/check_list.gd" id="1"]
-[ext_resource type="Script" uid="uid://dmy5ehhmyoanc" path="res://App/Assets/Scenes/ToDo/close.gd" id="2_j8wkc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8wkc"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -14,6 +13,8 @@ expand_margin_right = 35.0
 custom_minimum_size = Vector2(0, 32)
 offset_right = 256.0
 offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1")
 
 [node name="Input" type="CheckBox" parent="."]
@@ -37,12 +38,10 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_j8wkc")
 text = "text goes here"
 autowrap_mode = 3
 
-[node name="Close" type="Button" parent="." node_paths=PackedStringArray("par")]
+[node name="Close" type="Button" parent="."]
 custom_minimum_size = Vector2(31, 0)
 layout_mode = 2
 text = "X"
-script = ExtResource("2_j8wkc")
-par = NodePath("..")
 
 [connection signal="toggled" from="Input" to="." method="_on_input_toggled"]
 [connection signal="pressed" from="Text" to="." method="_on_text_pressed"]

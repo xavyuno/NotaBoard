@@ -1037,6 +1037,7 @@ script = ExtResource("23")
 [node name="Close" type="Button" parent="UI/Canvas"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "Hide"
 icon = ExtResource("28_b8p06")
 icon_alignment = 1
 expand_icon = true
@@ -1044,6 +1045,7 @@ expand_icon = true
 [node name="Settings" type="Button" parent="UI/Canvas"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+tooltip_text = "Settings"
 icon = ExtResource("24")
 icon_alignment = 1
 expand_icon = true
@@ -1082,6 +1084,7 @@ custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+tooltip_text = "Return Home"
 theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")

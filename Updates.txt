@@ -32,7 +32,9 @@ Things Changed since: v1.4-Beta
 - Added option to change directory of file items to context menu
 - Added option to open file items to context menu
 - Fixed dragging and scaling with items: would previously scale or move multiple items that were previously selected even when not multi-selecting
-- 
+- Font size of title and todo text can be changed within the option menu
+- Fixed items being added back when using the ctrl + z keybind while editing text
+- Some tooltips for buttons added: quick option 1 & 2, home, settings, hide bar
 
 Things Changed since: v0.3-Alpha
 - keybinds to mass resize and move items

@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 
 func EditOption(opt):
 	Settings.QuickOptions[selected] = opt.replace("_", "")
+	Settings.emit_signal("SettingsChanged")
 
 func _on_q_1_pressed() -> void:
 	selected = 0

@@ -80,7 +80,7 @@ func _physics_process(delta: float) -> void :
 	if Input.is_action_just_released("MultiSelect"):
 		User.MultiSelecting = false
 
-	if Input.is_action_just_pressed("Undo") and history.item_count >= 1:
+	if Input.is_action_just_pressed("Undo") and history.item_count >= 1 and !User.InFocus:
 		Undo(User.RemovedHistory[User.RemovedHistory.size() - 1])
 	if Input.is_action_just_pressed("Copy") and !User.InFocus:
 		if User.SelectedObject:

@@ -12,4 +12,3 @@ LineEdit
 RichTextLabel
 TextureRect
 HBoxContainer
-Polygon2D

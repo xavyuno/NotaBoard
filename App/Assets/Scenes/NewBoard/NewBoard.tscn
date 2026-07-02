@@ -38,4 +38,9 @@ scale = Vector2(1.5, 1.5)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, -8, -1, -1, -8, 0, -1, 1, 0, 8, 1, 1, 8, 0, 1, -1)
 
+[node name="Clean" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [connection signal="pressed" from="ClearFocus" to="Preview" method="_on_clear_focus_pressed"]
+[connection signal="timeout" from="Clean" to="." method="_on_clean_timeout"]
