@@ -6,21 +6,25 @@ var Data: = {
 	"Size": Vector2.ZERO, 
 	"Link": "", 
 	"ID": "Home",
-	"Thumbnail" : null
+	"Thumbnail" : null,
+	"ThumbnailPath" : ""
 }
 
-var Options := []
+var Options := [
+	"Thumbnail",
+	"GoTo",
+	"Link"
+]
 
 func _ready() -> void :
-	UpdateValues($Holder / Link, "Link", "text")
-	UpdateValues($Image, "Thumbnail", "texture")
+	UpdateValues($Access/Image, "Thumbnail", "texture")
 	if Data.has("Thumbnail"):
 		if Data["Thumbnail"] == null:
-			$GetLink.request(Data["Link"])
+			$GetPreview.request(Data["Link"])
 		else :
-			$Image.visible = true
+			$Access/Image.visible = true
 	else:
-		$GetLink.request(Data["Link"])
+		$GetPreview.request(Data["Link"])
 
 func UpdateValues(NODE, value, parameter):
 	if Data.has(value):
@@ -29,17 +33,33 @@ func UpdateValues(NODE, value, parameter):
 func GetData():
 	return Data
 
+func GetImage():
+	if !Data.has("ThumbnailPath"):
+		Data.merge({"ThumbnailPath" : ""}, true)
+		var Dir = DirAccess.make_dir_absolute("user://SavedLinkImages")
+		var files = DirAccess.get_files_at("user://SavedLinkImages")
+		var filepath
+		if files.size() > 0:
+			filepath = "user://SavedLinkImages/" + str( int(files.size()) + 1 ) + ".png"
+		else :
+			filepath = "user://SavedLinkImages/1.png"
+		$Access/Image.texture.get_image().save_png(filepath)
+		Data["ThumbnailPath"] = filepath
+		return filepath
+	else :
+		$Access/Image.texture.get_image().save_png(Data["ThumbnailPath"])
+		return Data["ThumbnailPath"]
+
 func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
-	Data["Link"] = $Holder / Link.text
 
 func _on_go_to_pressed() -> void :
 	OS.shell_open($Holder / Link.text)
 
-func _on_link_text_submitted(new_text: String) -> void :
-	$Image.visible = false
-	$GetLink.request($Holder / Link.text)
+func SetLink(text):
+	$GetPreview.request(text)
+	Data["Link"] = text
 
 func _on_get_link_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
 	var img = Image.new()
@@ -47,13 +67,14 @@ func _on_get_link_request_completed(result: int, response_code: int, headers: Pa
 	if errJPG != OK:
 		var errPNG = img.load_png_from_buffer(body)
 		if errPNG != OK:
-			$Image.visible = false
+			$Access/Image.visible = false
 			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.UrlAPIKey])
 			return
 	$GetPreview.cancel_request()
-	$Image.visible = true
+	$Access/Image.visible = true
 	var txtr = ImageTexture.create_from_image(img)
-	$Image.texture = txtr
+	$Access/Image.texture = txtr
+	GetImage()
 	Data["Thumbnail"] = txtr
 
 func _on_link_focus_exited() -> void :

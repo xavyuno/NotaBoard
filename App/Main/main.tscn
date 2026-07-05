@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://kpyh8ufdds6l"]
+[gd_scene format=3 uid="uid://kpyh8ufdds6l"]
 
 [ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
@@ -101,7 +101,7 @@ multichannel_signed_distance_field = true
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etqv4"]
 bg_color = Color(0, 0, 0, 0.392157)
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1421110962]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -111,45 +111,45 @@ offset_bottom = -704.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=893254865]
 position = Vector2(640, 352)
 script = ExtResource("1")
 
-[node name="ClearFocus" type="ColorRect" parent="Camera"]
+[node name="ClearFocus" type="ColorRect" parent="Camera" unique_id=1507019658]
 offset_left = -12416.0
 offset_top = -5824.0
 offset_right = 19392.0
 offset_bottom = 10560.0
 color = Color(0.425323, 0.41232, 0.415591, 1)
 
-[node name="Boards" type="TabContainer" parent="."]
+[node name="Boards" type="TabContainer" parent="." unique_id=1301096939]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 704.0
-theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_yqhvp")
-theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_yqhvp")
-theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_yqhvp")
-theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
-theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_unselected = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_yqhvp")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_yqhvp")
 current_tab = 1
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("2")
 
-[node name="Home" parent="Boards" instance=ExtResource("3")]
+[node name="Home" parent="Boards" unique_id=551998953 instance=ExtResource("3")]
 visible = false
 layout_mode = 2
 
-[node name="Settings" type="Control" parent="Boards"]
+[node name="Settings" type="Control" parent="Boards" unique_id=1384060845]
 show_behind_parent = true
 light_mask = 0
 layout_mode = 2
 script = ExtResource("4")
 metadata/_tab_index = 1
 
-[node name="Title" type="Label" parent="Boards/Settings"]
+[node name="Title" type="Label" parent="Boards/Settings" unique_id=684503044]
 layout_mode = 0
 offset_left = 256.0
 offset_top = 64.0
@@ -162,7 +162,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Title2" type="Label" parent="Boards/Settings"]
+[node name="Title2" type="Label" parent="Boards/Settings" unique_id=1239552384]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.5
@@ -180,7 +180,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Version" type="Label" parent="Boards/Settings"]
+[node name="Version" type="Label" parent="Boards/Settings" unique_id=432873272]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.207031
@@ -201,7 +201,7 @@ max_lines_visible = 1
 visible_characters_behavior = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="BGInfo" type="Label" parent="Boards/Settings"]
+[node name="BGInfo" type="Label" parent="Boards/Settings" unique_id=60180835]
 layout_mode = 0
 offset_left = 229.0
 offset_top = 158.0
@@ -209,7 +209,7 @@ offset_right = 458.0
 offset_bottom = 178.0
 text = "Change Background Color"
 
-[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings"]
+[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings" unique_id=336007133]
 layout_mode = 0
 offset_left = 205.0
 offset_top = 183.0
@@ -217,34 +217,32 @@ offset_right = 848.0
 offset_bottom = 225.0
 edit_alpha = false
 
-[node name="Note" type="VBoxContainer" parent="Boards/Settings"]
+[node name="Note" type="VBoxContainer" parent="Boards/Settings" unique_id=59052850]
 clip_children = 2
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 0
-offset_left = 191.0
+offset_left = 168.0
 offset_top = 232.0
 offset_right = 911.0
 offset_bottom = 438.0
 theme_override_constants/separation = 0
 
-[node name="Title" type="LineEdit" parent="Boards/Settings/Note"]
+[node name="Title" type="LineEdit" parent="Boards/Settings/Note" unique_id=409101842]
 layout_mode = 2
 text = "Keybinds"
 placeholder_text = "Title"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Note"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Note" unique_id=1213997820]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Note/ScrollContainer"]
+[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Note/ScrollContainer" unique_id=114802699]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/fill = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/background = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
 bbcode_enabled = true
 text = "[b]Item keybinds:[/b][ul]
 ctrl + z: Undo
@@ -265,7 +263,7 @@ ctrl + b: bold text
 
 And More to come."
 
-[node name="Note2" type="VBoxContainer" parent="Boards/Settings"]
+[node name="Note2" type="VBoxContainer" parent="Boards/Settings" unique_id=2029623199]
 clip_children = 2
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 0
@@ -275,24 +273,22 @@ offset_right = 1274.0
 offset_bottom = 904.0
 theme_override_constants/separation = 0
 
-[node name="Title" type="LineEdit" parent="Boards/Settings/Note2"]
+[node name="Title" type="LineEdit" parent="Boards/Settings/Note2" unique_id=565384005]
 layout_mode = 2
 text = "Additional Information"
 placeholder_text = "Title"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Note2"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Note2" unique_id=1236639363]
 layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Note2/ScrollContainer"]
+[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Note2/ScrollContainer" unique_id=848294390]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_styles/fill = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/background = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
 theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
 bbcode_enabled = true
 text = "[b]Items:[/b][ul]
 Link Item: When pasting the link of an image, it will try to display it
@@ -316,7 +312,36 @@ Url preview API: [color=green][b][url]https://docs.linkpreview.net/[/url][/b][/c
 [code]
 The github repository will always have the latest updates and fixes than the releases (this is easier than exporting and continously uploading the export)"
 
-[node name="ProjectDir" type="Button" parent="Boards/Settings"]
+[node name="Changelog" type="VBoxContainer" parent="Boards/Settings" unique_id=265821300]
+clip_children = 2
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 0
+offset_left = 1288.0
+offset_top = 904.0
+offset_right = 2176.0
+offset_bottom = 1536.0
+theme_override_constants/separation = 0
+
+[node name="Title" type="LineEdit" parent="Boards/Settings/Changelog" unique_id=501657954]
+layout_mode = 2
+text = "Changelog"
+placeholder_text = "Title"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Changelog" unique_id=1694979443]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Changelog/ScrollContainer" unique_id=77914939]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
+bbcode_enabled = true
+text = "Loading Changelog..."
+
+[node name="ProjectDir" type="Button" parent="Boards/Settings" unique_id=1983753351]
 self_modulate = Color(0, 0.972549, 0.701961, 1)
 layout_mode = 0
 offset_left = 920.0
@@ -325,7 +350,7 @@ offset_right = 1243.0
 offset_bottom = 440.0
 text = "Open Project Directory"
 
-[node name="ProjectLink" type="Button" parent="Boards/Settings"]
+[node name="ProjectLink" type="Button" parent="Boards/Settings" unique_id=1605278813]
 self_modulate = Color(0, 0.972549, 0.701961, 1)
 layout_mode = 0
 offset_left = 920.0
@@ -334,7 +359,7 @@ offset_right = 1200.0
 offset_bottom = 392.0
 text = "Open Github Project"
 
-[node name="Update" type="Button" parent="Boards/Settings"]
+[node name="Update" type="Button" parent="Boards/Settings" unique_id=1300856312]
 self_modulate = Color(0, 0.972549, 0.701961, 1)
 clip_children = 2
 layout_mode = 0
@@ -343,20 +368,20 @@ offset_top = 296.0
 offset_right = 1160.0
 offset_bottom = 344.0
 
-[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Update"]
+[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Update" unique_id=914272776]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-max_value = 1.08903e+08
+max_value = 108903000.0
 step = 0.001
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_dbp5u")
 texture_progress = SubResource("GradientTexture2D_qt3dg")
 
-[node name="Info" type="Label" parent="Boards/Settings/Update"]
+[node name="Info" type="Label" parent="Boards/Settings/Update" unique_id=582364837]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -367,7 +392,7 @@ text = "Download Update"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Version" type="Label" parent="Boards/Settings/Update"]
+[node name="Version" type="Label" parent="Boards/Settings/Update" unique_id=1203139576]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -381,19 +406,19 @@ label_settings = SubResource("LabelSettings_dbp5u")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Download" type="HTTPRequest" parent="Boards/Settings/Update"]
+[node name="Download" type="HTTPRequest" parent="Boards/Settings/Update" unique_id=66269744]
 use_threads = true
 max_redirects = 64
 
-[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Update"]
+[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Update" unique_id=1514645730]
 use_threads = true
 max_redirects = 64
 
-[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Update"]
+[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Update" unique_id=751337415]
 access = 2
 filters = PackedStringArray("*.exe")
 
-[node name="ToDo" type="VBoxContainer" parent="Boards/Settings"]
+[node name="ToDo" type="VBoxContainer" parent="Boards/Settings" unique_id=1970658981]
 layout_mode = 0
 offset_left = 1288.0
 offset_top = 456.0
@@ -402,7 +427,7 @@ offset_bottom = 560.0
 theme_override_constants/separation = 1
 script = ExtResource("7_dbp5u")
 
-[node name="Title" type="LineEdit" parent="Boards/Settings/ToDo"]
+[node name="Title" type="LineEdit" parent="Boards/Settings/ToDo" unique_id=1331270288]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
@@ -411,10 +436,10 @@ placeholder_text = "Title"
 editable = false
 expand_to_text_length = true
 
-[node name="List" type="VBoxContainer" parent="Boards/Settings/ToDo"]
+[node name="List" type="VBoxContainer" parent="Boards/Settings/ToDo" unique_id=747756254]
 layout_mode = 2
 
-[node name="ChangeDurTitle" type="Label" parent="Boards/Settings"]
+[node name="ChangeDurTitle" type="Label" parent="Boards/Settings" unique_id=815813069]
 layout_mode = 0
 offset_left = 1168.0
 offset_top = 296.0
@@ -423,7 +448,14 @@ offset_bottom = 348.0
 text = "Change duration between loading
 items"
 
-[node name="ChangeDurTitle2" type="Label" parent="Boards/Settings"]
+[node name="TotalBoards" type="Label" parent="Boards/Settings" unique_id=15957975]
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 176.0
+offset_right = 1496.0
+offset_bottom = 196.0
+
+[node name="ChangeDurTitle2" type="Label" parent="Boards/Settings" unique_id=1841606141]
 layout_mode = 0
 offset_left = 208.0
 offset_top = 1016.0
@@ -432,7 +464,7 @@ offset_bottom = 1068.0
 text = "Changes made here are only toggles for the 
 session and are not meant to be saved."
 
-[node name="LoadDur" type="SpinBox" parent="Boards/Settings"]
+[node name="LoadDur" type="SpinBox" parent="Boards/Settings" unique_id=576907677]
 layout_mode = 0
 offset_left = 1288.0
 offset_top = 317.0
@@ -443,14 +475,14 @@ step = 0.001
 alignment = 1
 suffix = "second(s)"
 
-[node name="Proload" type="Button" parent="Boards/Settings"]
+[node name="Proload" type="Button" parent="Boards/Settings" unique_id=1523091271]
 layout_mode = 0
 offset_left = 1229.0
 offset_top = 317.0
 offset_right = 1285.0
 offset_bottom = 345.0
 
-[node name="FeedbackTitle" type="Label" parent="Boards/Settings"]
+[node name="FeedbackTitle" type="Label" parent="Boards/Settings" unique_id=851884902]
 layout_mode = 0
 offset_left = 1616.0
 offset_top = 312.0
@@ -459,7 +491,7 @@ offset_bottom = 343.0
 text = "Feedback"
 label_settings = SubResource("LabelSettings_b8p06")
 
-[node name="Feedback" type="TextEdit" parent="Boards/Settings"]
+[node name="Feedback" type="TextEdit" parent="Boards/Settings" unique_id=616008297]
 layout_mode = 0
 offset_left = 1600.0
 offset_top = 344.0
@@ -470,10 +502,10 @@ wrap_mode = 1
 scroll_smooth = true
 caret_blink = true
 
-[node name="CheckFocus" parent="Boards/Settings/Feedback" node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
+[node name="CheckFocus" parent="Boards/Settings/Feedback" unique_id=1395884035 node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
 par = NodePath("..")
 
-[node name="SubmitFeedback" type="Button" parent="Boards/Settings"]
+[node name="SubmitFeedback" type="Button" parent="Boards/Settings" unique_id=918685635]
 layout_mode = 0
 offset_left = 2032.0
 offset_top = 312.0
@@ -481,9 +513,9 @@ offset_right = 2160.0
 offset_bottom = 340.0
 text = "Submit"
 
-[node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/SubmitFeedback"]
+[node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/SubmitFeedback" unique_id=1409536399]
 
-[node name="TotalItems" type="Label" parent="Boards/Settings"]
+[node name="TotalItems" type="Label" parent="Boards/Settings" unique_id=368247361]
 layout_mode = 0
 offset_left = 1208.0
 offset_top = 360.0
@@ -496,7 +528,7 @@ vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="ItemLimit" type="SpinBox" parent="Boards/Settings"]
+[node name="ItemLimit" type="SpinBox" parent="Boards/Settings" unique_id=16885844]
 layout_mode = 0
 offset_left = 1248.0
 offset_top = 400.0
@@ -506,7 +538,7 @@ allow_greater = true
 alignment = 1
 prefix = "Item Limit"
 
-[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings"]
+[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings" unique_id=953834483]
 layout_mode = 0
 offset_left = 1168.0
 offset_top = 200.0
@@ -518,7 +550,7 @@ alignment = 1
 update_on_text_changed = true
 prefix = "Default Font Size:"
 
-[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings"]
+[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings" unique_id=1692091208]
 layout_mode = 0
 offset_left = 1168.0
 offset_top = 248.0
@@ -530,7 +562,7 @@ alignment = 1
 update_on_text_changed = true
 prefix = "Default Title Size:"
 
-[node name="Center" type="Button" parent="Boards/Settings"]
+[node name="Center" type="Button" parent="Boards/Settings" unique_id=1555117319]
 layout_mode = 0
 offset_left = 920.0
 offset_top = 232.0
@@ -538,7 +570,7 @@ offset_right = 1160.0
 offset_bottom = 288.0
 text = "Display Center:"
 
-[node name="PreviewNotes" type="Button" parent="Boards/Settings"]
+[node name="PreviewNotes" type="Button" parent="Boards/Settings" unique_id=743380730]
 layout_mode = 0
 offset_left = 208.0
 offset_top = 1072.0
@@ -546,7 +578,7 @@ offset_right = 512.0
 offset_bottom = 1112.0
 text = "Preview Notes:"
 
-[node name="ShowBar" type="Button" parent="Boards/Settings"]
+[node name="ShowBar" type="Button" parent="Boards/Settings" unique_id=812464178]
 layout_mode = 0
 offset_left = 856.0
 offset_top = 184.0
@@ -554,7 +586,7 @@ offset_right = 1160.0
 offset_bottom = 224.0
 text = "Show options bar:"
 
-[node name="Calendar" type="Button" parent="Boards/Settings"]
+[node name="Calendar" type="Button" parent="Boards/Settings" unique_id=1252865191]
 layout_mode = 0
 offset_left = 688.0
 offset_top = 104.0
@@ -562,7 +594,7 @@ offset_right = 992.0
 offset_bottom = 144.0
 text = "Calendar"
 
-[node name="QuickOptions" type="Panel" parent="Boards/Settings"]
+[node name="QuickOptions" type="Panel" parent="Boards/Settings" unique_id=522152478]
 layout_mode = 0
 offset_left = 856.0
 offset_top = 928.0
@@ -570,7 +602,7 @@ offset_right = 1272.0
 offset_bottom = 1248.0
 script = ExtResource("10_eab0n")
 
-[node name="Label" type="Label" parent="Boards/Settings/QuickOptions"]
+[node name="Label" type="Label" parent="Boards/Settings/QuickOptions" unique_id=2109982329]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 8.0
@@ -579,7 +611,7 @@ offset_bottom = 72.0
 text = "Edit Quick Options"
 label_settings = SubResource("LabelSettings_lkim6")
 
-[node name="SelectedLabel" type="Label" parent="Boards/Settings/QuickOptions"]
+[node name="SelectedLabel" type="Label" parent="Boards/Settings/QuickOptions" unique_id=817895432]
 layout_mode = 0
 offset_left = 152.0
 offset_top = 32.0
@@ -589,7 +621,7 @@ text = "Edit Quick Options"
 label_settings = SubResource("LabelSettings_1yho4")
 vertical_alignment = 1
 
-[node name="Selected1" type="TextureRect" parent="Boards/Settings/QuickOptions"]
+[node name="Selected1" type="TextureRect" parent="Boards/Settings/QuickOptions" unique_id=2118104933]
 show_behind_parent = true
 layout_mode = 0
 offset_left = 6.0
@@ -598,7 +630,7 @@ offset_right = 74.0
 offset_bottom = 74.0
 texture = SubResource("GradientTexture2D_y8ose")
 
-[node name="Selected2" type="TextureRect" parent="Boards/Settings/QuickOptions"]
+[node name="Selected2" type="TextureRect" parent="Boards/Settings/QuickOptions" unique_id=1831403655]
 show_behind_parent = true
 layout_mode = 0
 offset_left = 74.0
@@ -607,36 +639,36 @@ offset_right = 142.0
 offset_bottom = 74.0
 texture = SubResource("GradientTexture2D_y8ose")
 
-[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/QuickOptions"]
+[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/QuickOptions" unique_id=58988435]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 144.0
 offset_bottom = 72.0
 
-[node name="Q1" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder"]
+[node name="Q1" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder" unique_id=1832456691]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 text = "1"
 
-[node name="Q2" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder"]
+[node name="Q2" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder" unique_id=1486760194]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 text = "2"
 
-[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/QuickOptions"]
+[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/QuickOptions" unique_id=80981086]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 80.0
 offset_right = 408.0
 offset_bottom = 312.0
 
-[node name="Options" type="VBoxContainer" parent="Boards/Settings/QuickOptions/ScrollHolder"]
+[node name="Options" type="VBoxContainer" parent="Boards/Settings/QuickOptions/ScrollHolder" unique_id=1854037483]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DisplayURL" type="Panel" parent="Boards/Settings"]
+[node name="DisplayURL" type="Panel" parent="Boards/Settings" unique_id=27617456]
 layout_mode = 0
 offset_left = 1512.0
 offset_top = 200.0
@@ -644,7 +676,7 @@ offset_right = 2160.0
 offset_bottom = 304.0
 script = ExtResource("9_eab0n")
 
-[node name="Title" type="Label" parent="Boards/Settings/DisplayURL"]
+[node name="Title" type="Label" parent="Boards/Settings/DisplayURL" unique_id=2059787646]
 layout_mode = 0
 offset_right = 648.0
 offset_bottom = 24.0
@@ -652,7 +684,7 @@ text = "Display link preview (Optional)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Info" type="RichTextLabel" parent="Boards/Settings/DisplayURL"]
+[node name="Info" type="RichTextLabel" parent="Boards/Settings/DisplayURL" unique_id=904950499]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 24.0
@@ -662,18 +694,18 @@ bbcode_enabled = true
 text = "To preview thumbnails of images, you are required to retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
 fit_content = true
 
-[node name="Key" type="LineEdit" parent="Boards/Settings/DisplayURL"]
+[node name="Key" type="LineEdit" parent="Boards/Settings/DisplayURL" unique_id=1566631016]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 72.0
-offset_right = 568.0
+offset_right = 640.0
 offset_bottom = 100.0
 placeholder_text = "API Key here"
 alignment = 1
 caret_blink = true
 secret = true
 
-[node name="Hide" type="Button" parent="Boards/Settings/DisplayURL"]
+[node name="Hide" type="Button" parent="Boards/Settings/DisplayURL" unique_id=1764950365]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 72.0
@@ -682,7 +714,7 @@ offset_bottom = 96.0
 icon = ExtResource("28_b8p06")
 expand_icon = true
 
-[node name="Calendar" type="Control" parent="Boards"]
+[node name="Calendar" type="Control" parent="Boards" unique_id=1532667453]
 visible = false
 show_behind_parent = true
 light_mask = 0
@@ -690,21 +722,21 @@ layout_mode = 2
 script = ExtResource("11_lkim6")
 metadata/_tab_index = 2
 
-[node name="Main" type="Panel" parent="Boards/Calendar"]
+[node name="Main" type="Panel" parent="Boards/Calendar" unique_id=1146651172]
 layout_mode = 0
 offset_left = 192.0
 offset_top = 48.0
 offset_right = 1216.0
 offset_bottom = 696.0
 
-[node name="Month" type="OptionButton" parent="Boards/Calendar/Main"]
+[node name="Month" type="OptionButton" parent="Boards/Calendar/Main" unique_id=556252729]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 8.0
 offset_right = 232.0
 offset_bottom = 56.0
 
-[node name="Year" type="SpinBox" parent="Boards/Calendar/Main"]
+[node name="Year" type="SpinBox" parent="Boards/Calendar/Main" unique_id=131327191]
 layout_mode = 0
 offset_left = 896.0
 offset_top = 8.0
@@ -715,14 +747,14 @@ value = 2026.0
 rounded = true
 allow_greater = true
 
-[node name="Frame" type="Panel" parent="Boards/Calendar"]
+[node name="Frame" type="Panel" parent="Boards/Calendar" unique_id=840291138]
 layout_mode = 0
 offset_left = 216.0
 offset_top = 112.0
 offset_right = 1192.0
 offset_bottom = 688.0
 
-[node name="Holder" type="HFlowContainer" parent="Boards/Calendar/Frame"]
+[node name="Holder" type="HFlowContainer" parent="Boards/Calendar/Frame" unique_id=1703569263]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -734,7 +766,7 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sun" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Sun" type="Label" parent="Boards/Calendar/Frame" unique_id=983035163]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 136.0
@@ -743,7 +775,7 @@ text = "Sunday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Mon" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Mon" type="Label" parent="Boards/Calendar/Frame" unique_id=497090140]
 layout_mode = 0
 offset_left = 144.0
 offset_right = 272.0
@@ -752,7 +784,7 @@ text = "Monday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Tue" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Tue" type="Label" parent="Boards/Calendar/Frame" unique_id=468618765]
 layout_mode = 0
 offset_left = 288.0
 offset_right = 416.0
@@ -761,7 +793,7 @@ text = "Tuesday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Wed" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Wed" type="Label" parent="Boards/Calendar/Frame" unique_id=680310230]
 layout_mode = 0
 offset_left = 424.0
 offset_right = 552.0
@@ -770,7 +802,7 @@ text = "Wednesday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Thu" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Thu" type="Label" parent="Boards/Calendar/Frame" unique_id=1475278512]
 layout_mode = 0
 offset_left = 560.0
 offset_right = 688.0
@@ -779,7 +811,7 @@ text = "Thursday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Fri" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Fri" type="Label" parent="Boards/Calendar/Frame" unique_id=86340945]
 layout_mode = 0
 offset_left = 696.0
 offset_right = 824.0
@@ -788,7 +820,7 @@ text = "Friday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Sat" type="Label" parent="Boards/Calendar/Frame"]
+[node name="Sat" type="Label" parent="Boards/Calendar/Frame" unique_id=746960379]
 layout_mode = 0
 offset_left = 832.0
 offset_right = 960.0
@@ -797,9 +829,9 @@ text = "Saturday"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." unique_id=182628938]
 
-[node name="Nodes" type="Control" parent="UI"]
+[node name="Nodes" type="Control" parent="UI" unique_id=49535082]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 160.0
@@ -808,7 +840,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
 script = ExtResource("7")
 
-[node name="BG" type="Panel" parent="UI/Nodes"]
+[node name="BG" type="Panel" parent="UI/Nodes" unique_id=1399317985]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -816,14 +848,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Holder" type="VBoxContainer" parent="UI/Nodes"]
+[node name="Holder" type="VBoxContainer" parent="UI/Nodes" unique_id=1999979547]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 48.0
 offset_right = 152.0
 offset_bottom = 696.0
 
-[node name="Search" type="LineEdit" parent="UI/Nodes/Holder"]
+[node name="Search" type="LineEdit" parent="UI/Nodes/Holder" unique_id=409646633]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 11
@@ -831,84 +863,84 @@ placeholder_text = "Search in Item"
 clear_button_enabled = true
 right_icon = ExtResource("12_iuq4y")
 
-[node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+[node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=1528949264]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
 follow_focus = true
 draw_focus_border = true
 
-[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/ItemHolder"]
+[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/ItemHolder" unique_id=1610352376]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Notes" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="Notes" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=921835727]
 layout_mode = 2
 text = "Notes"
 icon = ExtResource("8")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" unique_id=2068506533 instance=ExtResource("9")]
 Item = ExtResource("6")
 
-[node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1242307755]
 layout_mode = 2
 text = "ToDo
 "
 icon = ExtResource("10")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/ToDo" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/ToDo" unique_id=721317625 instance=ExtResource("9")]
 Item = ExtResource("11")
 
-[node name="Link" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="Link" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1088625353]
 layout_mode = 2
 text = "Link
 "
 icon = ExtResource("12")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Link" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Link" unique_id=1252345102 instance=ExtResource("9")]
 Item = ExtResource("13")
 
-[node name="Column" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="Column" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=88645888]
 layout_mode = 2
 text = "Column"
 icon = ExtResource("14")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Column" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Column" unique_id=1308022483 instance=ExtResource("9")]
 Item = ExtResource("15")
 
-[node name="Board" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="Board" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1279098587]
 layout_mode = 2
 text = "Board"
 icon = ExtResource("16")
 expand_icon = true
 
-[node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Board" instance=ExtResource("9")]
+[node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Board" unique_id=826384012 instance=ExtResource("9")]
 Item = ExtResource("18")
 
-[node name="Line" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="Line" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1711795254]
 layout_mode = 2
 text = "Draw Line"
 icon = ExtResource("19")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Line" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Line" unique_id=1589076198 instance=ExtResource("9")]
 Item = ExtResource("20")
 
-[node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items"]
+[node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1652395121]
 layout_mode = 2
 text = "File"
 icon = ExtResource("21")
 expand_icon = true
 
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/File" instance=ExtResource("9")]
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/File" unique_id=1828766300 instance=ExtResource("9")]
 Item = ExtResource("22")
 
-[node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+[node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=458539594]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -917,41 +949,49 @@ follow_focus = true
 draw_focus_border = true
 script = ExtResource("27_eab0n")
 
-[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/OptionsHolder"]
+[node name="Items" type="VBoxContainer" parent="UI/Nodes/Holder/OptionsHolder" unique_id=112815909]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Delete" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Delete" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=832589166]
 layout_mode = 2
 text = "Delete"
 
-[node name="Ratio" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Ratio" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1126104829]
 layout_mode = 2
 text = "Ratio"
 
-[node name="Title" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Title" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=151214445]
 layout_mode = 2
 text = "Title"
 
-[node name="Note" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Note" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=2075634396]
 layout_mode = 2
 text = "Note"
 
-[node name="Dir" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Dir" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1891740368]
 layout_mode = 2
 text = "Directory"
 
-[node name="Open" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Open" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=418850782]
 layout_mode = 2
 text = "Open"
 
-[node name="Cover" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Cover" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=148691087]
 layout_mode = 2
 text = "Cover
 "
 
-[node name="Board" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Thumbnail" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=691491335]
+layout_mode = 2
+text = "Thumbnail"
+
+[node name="GoTo" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1384420867]
+layout_mode = 2
+text = "Open Link"
+
+[node name="Board" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=403603766]
 layout_mode = 2
 rounded = true
 allow_greater = true
@@ -959,7 +999,7 @@ alignment = 3
 update_on_text_changed = true
 prefix = "Board"
 
-[node name="FontSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="FontSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=898430197]
 layout_mode = 2
 min_value = 8.0
 value = 15.0
@@ -968,7 +1008,7 @@ alignment = 3
 update_on_text_changed = true
 prefix = "Font:"
 
-[node name="TitleSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="TitleSize" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1060137962]
 layout_mode = 2
 min_value = 8.0
 value = 15.0
@@ -977,26 +1017,31 @@ alignment = 3
 update_on_text_changed = true
 prefix = "Title:"
 
-[node name="ID" type="Label" parent="UI/Nodes/Holder/OptionsHolder/Items"]
+[node name="Link" type="LineEdit" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=316196656]
+layout_mode = 2
+placeholder_text = "Https://link.com"
+caret_blink = true
+
+[node name="ID" type="Label" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=20887944]
 layout_mode = 2
 
-[node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder"]
+[node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder" unique_id=1187348715]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="UI/Nodes/Holder/HistoryTitle"]
+[node name="Title" type="Label" parent="UI/Nodes/Holder/HistoryTitle" unique_id=1194427213]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "History"
 
-[node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle"]
+[node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle" unique_id=1417363903]
 layout_mode = 2
 text = "Clear"
 
-[node name="HistoryHolder" type="ScrollContainer" parent="UI/Nodes/Holder"]
+[node name="HistoryHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=1043571050]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="History" type="ItemList" parent="UI/Nodes/Holder/HistoryHolder"]
+[node name="History" type="ItemList" parent="UI/Nodes/Holder/HistoryHolder" unique_id=483146235]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -1007,12 +1052,12 @@ allow_rmb_select = true
 auto_height = true
 text_overrun_behavior = 4
 
-[node name="Delete" type="Button" parent="UI/Nodes/Holder"]
+[node name="Delete" type="Button" parent="UI/Nodes/Holder" unique_id=1694297993]
 self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 2
 text = "Delete All"
 
-[node name="FileDialog" type="FileDialog" parent="UI/Nodes"]
+[node name="FileDialog" type="FileDialog" parent="UI/Nodes" unique_id=207246629]
 auto_translate_mode = 1
 title = "Open a File or Directory"
 popup_window = true
@@ -1024,7 +1069,7 @@ access = 2
 show_hidden_files = true
 use_native_dialog = true
 
-[node name="Canvas" type="HFlowContainer" parent="UI"]
+[node name="Canvas" type="HFlowContainer" parent="UI" unique_id=1349013959]
 clip_children = 2
 light_mask = 0
 offset_left = 8.0
@@ -1034,7 +1079,7 @@ offset_bottom = 40.0
 size_flags_horizontal = 3
 script = ExtResource("23")
 
-[node name="Close" type="Button" parent="UI/Canvas"]
+[node name="Close" type="Button" parent="UI/Canvas" unique_id=409667106]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Hide"
@@ -1042,7 +1087,7 @@ icon = ExtResource("28_b8p06")
 icon_alignment = 1
 expand_icon = true
 
-[node name="Settings" type="Button" parent="UI/Canvas"]
+[node name="Settings" type="Button" parent="UI/Canvas" unique_id=118031734]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Settings"
@@ -1050,21 +1095,21 @@ icon = ExtResource("24")
 icon_alignment = 1
 expand_icon = true
 
-[node name="QuickOption1" type="Button" parent="UI/Canvas"]
+[node name="QuickOption1" type="Button" parent="UI/Canvas" unique_id=216327916]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "1"
 icon_alignment = 1
 expand_icon = true
 
-[node name="QuickOption2" type="Button" parent="UI/Canvas"]
+[node name="QuickOption2" type="Button" parent="UI/Canvas" unique_id=1067762448]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 text = "2"
 icon_alignment = 1
 expand_icon = true
 
-[node name="BoardDisplay" type="HBoxContainer" parent="UI"]
+[node name="BoardDisplay" type="HBoxContainer" parent="UI" unique_id=1215576033]
 anchors_preset = -1
 anchor_left = 0.788531
 anchor_right = 0.999563
@@ -1079,44 +1124,44 @@ alignment = 2
 script = ExtResource("25")
 metadata/_edit_use_anchors_ = true
 
-[node name="Home" type="Button" parent="UI/BoardDisplay"]
+[node name="Home" type="Button" parent="UI/BoardDisplay" unique_id=1999460622]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 tooltip_text = "Return Home"
-theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
 text = "Home/"
 icon = ExtResource("31_iuq4y")
 
-[node name="Previous" type="Button" parent="UI/BoardDisplay"]
+[node name="Previous" type="Button" parent="UI/BoardDisplay" unique_id=724270379]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
 theme_override_styles/normal = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_etqv4")
+theme_override_styles/focus = SubResource("StyleBoxFlat_etqv4")
 text = "Home/"
 
-[node name="NewBoard" type="Label" parent="UI/BoardDisplay"]
+[node name="NewBoard" type="Label" parent="UI/BoardDisplay" unique_id=1434424625]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Untiled Board"
@@ -1124,6 +1169,7 @@ text = "Untiled Board"
 [connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
 [connection signal="meta_clicked" from="Boards/Settings/Note/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="meta_clicked" from="Boards/Settings/Note2/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
+[connection signal="meta_clicked" from="Boards/Settings/Changelog/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="pressed" from="Boards/Settings/ProjectDir" to="Boards/Settings" method="_on_project_dir_pressed"]
 [connection signal="pressed" from="Boards/Settings/ProjectLink" to="Boards/Settings" method="_on_project_link_pressed"]
 [connection signal="pressed" from="Boards/Settings/Update" to="Boards/Settings" method="_on_update_pressed"]
@@ -1152,6 +1198,8 @@ text = "Untiled Board"
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/Board" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/FontSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_font_size_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/TitleSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_title_size_value_changed"]
+[connection signal="focus_exited" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_focus_exited"]
+[connection signal="text_submitted" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_text_submitted"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
 [connection signal="item_clicked" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_clicked"]

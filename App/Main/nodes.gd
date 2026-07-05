@@ -27,6 +27,7 @@ func _ready() -> void :
 		ValidateValue(data, 8, "DefaultTitleSize")
 		ValidateValue(data, 9, "UrlAPIKey")
 		ValidateValue(data, 10, "ProgressiveLoading")
+		ValidateValue(data, 11, "TotalBoards")
 		
 		Settings.emit_signal("SettingsChanged")
 		User.emit_signal("ChangedOptionsBar")
@@ -61,6 +62,11 @@ func _ready() -> void :
 			initObj(i, false)
 
 	User.StillLoading = false
+	if Settings.TotalBoards <= 0:
+		await get_tree().create_timer(6).timeout
+		for i in $"../../Boards".get_children():
+			if int(i.name) > Settings.TotalBoards:
+				Settings.TotalBoards = int(i.name) + 1
 
 func ValidateValue(array: Array, index, parameter) -> bool:
 	if array.size() > index:

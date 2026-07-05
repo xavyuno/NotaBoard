@@ -1,5 +1,6 @@
-Timer
+LineEdit
 Button
+Timer
 FileDialog
 Panel
 OptionButton
@@ -8,7 +9,6 @@ Label
 VBoxContainer
 ScrollContainer
 HFlowContainer
-LineEdit
 RichTextLabel
 TextureRect
 HBoxContainer

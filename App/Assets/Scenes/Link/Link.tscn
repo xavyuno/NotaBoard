@@ -1,11 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b28gxoc2p2tpf"]
+[gd_scene format=3 uid="uid://b28gxoc2p2tpf"]
 
 [ext_resource type="Script" uid="uid://bq27q2b2llxpa" path="res://App/Assets/Scenes/Link/link_card.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
 
-[node name="LinkCard" type="VBoxContainer"]
+[node name="LinkCard" type="VBoxContainer" unique_id=511171908]
 offset_right = 256.0
 offset_bottom = 62.0
 size_flags_horizontal = 3
@@ -14,44 +12,26 @@ size_flags_stretch_ratio = 0.1
 theme_override_constants/separation = 0
 script = ExtResource("1")
 
-[node name="Image" type="TextureRect" parent="."]
-visible = false
+[node name="Access" type="Button" parent="." unique_id=1447422485]
 custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 size_flags_vertical = 3
-expand_mode = 2
 
-[node name="Holder" type="HBoxContainer" parent="."]
-layout_mode = 2
-size_flags_stretch_ratio = 0.1
-theme_override_constants/separation = 2
+[node name="Image" type="TextureRect" parent="Access" unique_id=1490202202]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
 
-[node name="Move" parent="Holder" node_paths=PackedStringArray("par") instance=ExtResource("2")]
-layout_mode = 2
-par = NodePath("../..")
+[node name="GetLink" type="HTTPRequest" parent="." unique_id=1571004607]
 
-[node name="Link" type="LineEdit" parent="Holder"]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Https://Example.com"
+[node name="GetPreview" type="HTTPRequest" parent="." unique_id=2052755874]
 
-[node name="GoTo" type="Button" parent="Holder"]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-layout_mode = 2
-text = ">"
-
-[node name="GetLink" type="HTTPRequest" parent="."]
-
-[node name="GetPreview" type="HTTPRequest" parent="."]
-
-[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("5")]
+[node name="SelectObject" parent="." unique_id=1712969755 node_paths=PackedStringArray("Par") instance=ExtResource("5")]
 Par = NodePath("..")
 
-[node name="CheckFocus" parent="." node_paths=PackedStringArray("par") instance=ExtResource("6")]
-par = NodePath("../Holder/Link")
-
-[connection signal="focus_exited" from="Holder/Link" to="." method="_on_link_focus_exited"]
-[connection signal="text_submitted" from="Holder/Link" to="." method="_on_link_text_submitted"]
-[connection signal="pressed" from="Holder/GoTo" to="." method="_on_go_to_pressed"]
 [connection signal="request_completed" from="GetLink" to="." method="_on_get_link_request_completed"]
 [connection signal="request_completed" from="GetPreview" to="." method="_on_get_preview_request_completed"]

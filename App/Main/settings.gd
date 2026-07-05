@@ -13,6 +13,9 @@ func _ready() -> void :
 	ver = ver.strip_edges(true, true)
 	ver = ver.strip_escapes()
 	$Version.text = "Version: " + ver.validate_filename()
+	var file = FileAccess.open("res://Updates.txt", FileAccess.READ)
+	$Changelog/ScrollContainer/Notes.text = file.get_as_text()
+	file.close()
 
 
 func _physics_process(delta: float) -> void :
@@ -34,6 +37,7 @@ func SettingsChanged():
 	$Proload.text = "On" if Settings.ProgressiveLoading else "Off"
 	$DefaultFontSize.value = Settings.DefaultFontSize
 	$DefaultTitle.value = Settings.DefaultTtileSize
+	$TotalBoards.text = "Total Boards: " + str(Settings.TotalBoards)
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -66,7 +70,7 @@ func _on_download_request_completed(result: int, response_code: int, headers: Pa
 func _on_get_version_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
 	if response_code == 200:
 		Version = body.get_string_from_utf8()
-		if Version == FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text(true):
+		if Version == FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text():
 			$Update / Info.text = "Already Up-to-date!"
 			await get_tree().create_timer(1).timeout
 			$Update / Info.text = "Download Update"

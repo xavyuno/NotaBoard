@@ -1,6 +1,7 @@
 extends Node
 
 @export var Par = get_parent()
+@export var CanDrag := true
 var Selected := false
 var Action := ""
 var Holding := false
@@ -39,6 +40,8 @@ func button_up():
 	$Timer.stop()
 
 func button_down():
+	if !CanDrag:
+		return
 	$Timer.start()
 
 func Searched(itemName):

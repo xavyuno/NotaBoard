@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://w5pbmrihdlp5"]
+[gd_scene format=3 uid="uid://w5pbmrihdlp5"]
 
 [ext_resource type="Script" uid="uid://sx0ugvaio3p6" path="res://App/Assets/Scenes/Line/line.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="4"]
 
-[node name="Line" type="Control"]
+[node name="Line" type="Control" unique_id=895595465]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="P1" type="Button" parent="."]
+[node name="P1" type="Button" parent="." unique_id=1594265430]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -27,12 +27,13 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(16, 16)
 
-[node name="P2" type="Button" parent="."]
+[node name="P2" type="Button" parent="." unique_id=1934180438]
 layout_mode = 0
 offset_left = 224.0
 offset_right = 240.0
 offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
 
-[node name="SelectObject" parent="." node_paths=PackedStringArray("Par") instance=ExtResource("4")]
+[node name="SelectObject" parent="." unique_id=1323786014 node_paths=PackedStringArray("Par") instance=ExtResource("4")]
 Par = NodePath("..")
+CanDrag = false

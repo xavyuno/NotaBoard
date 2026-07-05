@@ -25,7 +25,7 @@ func _ready() -> void :
 		i.connect("button_up", Callable(self, "ButtonUp"))
 
 func UpdateValues(NODE, value, parameter):
-	if User.ProgressiveLoading:
+	if Settings.ProgressiveLoading:
 		await get_tree().create_timer(User.LoadDur).timeout
 	if Data.has(value):
 		NODE.call_deferred("set", parameter, Data[value])

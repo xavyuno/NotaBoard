@@ -19,8 +19,9 @@ func _ready() -> void :
 	UpdateValues($BoardName, "Title", "text")
 	UpdateValues($New/Cover, "Cover", "texture")
 	if Data["Board"] == "Getting ID..." and !Preview:
-		Data["Board"] = str(User.Boards.size() + 1)
+		Data["Board"] = str(Settings.TotalBoards + 1)
 		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
+		Settings.TotalBoards += 1
 	$New/ID.text = "ID: " + Data["Board"]
 	if Data.has("Cover"):
 		$New.text = "" if Data["Cover"] else "Board"

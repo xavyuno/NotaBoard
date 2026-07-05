@@ -11,6 +11,13 @@ func _ready() -> void :
 	for i in get_children():
 		i.visible = false
 
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("PreviousBoard"):
+		if User.Boards.has(PrevID):
+			User.emit_signal("ChangeBoard", PrevID, PrevTitle, "", User.Boards[PrevID]["CamPos"])
+		else :
+			User.emit_signal("ChangeBoard", "Home", "Home", "", User.CamPosBoard)
+
 func ChangedBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
 	if Board in ["Settings", "Calendar"]:
 		home.visible = true

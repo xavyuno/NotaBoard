@@ -13,6 +13,7 @@ var DefaultFontSize := 15
 var DefaultTtileSize := 15
 var UrlAPIKey := ""
 var ProgressiveLoading := false
+var TotalBoards := 0
 
 func GetSettings():
 	return [
@@ -26,5 +27,6 @@ func GetSettings():
 		DefaultFontSize,
 		DefaultTtileSize,
 		UrlAPIKey,
-		ProgressiveLoading
+		ProgressiveLoading,
+		TotalBoards
 	]

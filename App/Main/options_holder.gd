@@ -86,6 +86,7 @@ func ItemFocused(path : NodePath):
 	ValidateValue($Items/Board, "Board", "value", GetValue("", "Board"))
 	ValidateValue($Items/FontSize, "FontSize", "value", GetValue("", "FontSize"))
 	ValidateValue($Items/TitleSize, "TitleSize", "value", GetValue("", "TitleSize"))
+	ValidateValue($Items/Link, "Link", "text", GetValue("", "Link"))
 
 func GetValue(before, parameter, after = ""):
 	if ItemNode.Data.has(parameter):
@@ -95,6 +96,12 @@ func GetValue(before, parameter, after = ""):
 			return before + ItemNode.Data[parameter] + after
 	else :
 		return ""
+
+func ThumbnailPressed():
+	OS.shell_open(ProjectSettings.globalize_path(ItemNode.GetImage()))
+
+func GoToPressed():
+	OS.shell_open(ItemNode.Data["Link"])
 
 func ValidateValue(Nodepath, value, parameter, change = ""):
 	change = str(change)
@@ -117,3 +124,9 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	ItemNode.get_node("DirHolder/FileName").text = path
 	ItemNode.Data["Dir"] = path
 	ItemNode.LoadFile()
+
+func _on_link_text_submitted(new_text: String) -> void:
+	ItemNode.SetLink(new_text)
+
+func _on_link_focus_exited() -> void:
+	ItemNode.SetLink($Items/Link.text)

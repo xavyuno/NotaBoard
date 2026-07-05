@@ -1,3 +1,14 @@
+Things Changed since: 1.5
+- Interacting with the to do buttons work now as selecting the entire todo item
+- Thumbnails from links are now saved and can be accessed through the option bar
+- Removed extra options from link item
+- Added options: open link, editing link & thumbnail to option bar
+- Link previews are only shown when using an API key for https://my.linkpreview.net/ (previously some thumnails would show that can be natively accessed by http request. This is done to reduce unnecessary requests)
+- Link items can be scaled vertically. This also solves invisble scaling issues
+- Changelog added to settings
+- Any mouse that has a side button allowing for backtracking will return to the previous board if clicked
+- Board IDs should now be loaded dynamicly (this tries to avoid duplicated board IDs upon board creation)
+
 Things Changed since: v1.4-Beta
 - Added an option to hide the directory in the file item
 - RMB on a history item to remove it from history
