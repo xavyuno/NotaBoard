@@ -20,6 +20,7 @@ var StoredHistory: = []
 var StillLoading: = true
 
 var MouseInCanvas: = false
+var CanvasHidden = false
 
 var MousePos: Vector2
 var CamPos: Vector2

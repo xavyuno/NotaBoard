@@ -8,6 +8,15 @@ Things Changed since: 1.5
 - Changelog added to settings
 - Any mouse that has a side button allowing for backtracking will return to the previous board if clicked
 - Board IDs should now be loaded dynamicly (this tries to avoid duplicated board IDs upon board creation)
+- Progress in percentage and color hue shown for todo item along with option to disable showing progress
+- Replaced text editing for notes for a code-like editor text field, allowing for auto brace completion such as, "", (), etc and auto indent
+- Hovering over quick option buttons shows text of what they are linked to
+- New Default Board: Calendar
+- Rename: from "task manager" to "NotaBoard" (to avoid confusion with the already existing task manager on windows)
+- Fixed Zooming while scrolling in canvas (Option bar / item bar)
+- Fixed line item able to be added to column item
+- Fixed zooming while searching
+- Fixed items being pasted while in settings or calendar
 
 Things Changed since: v1.4-Beta
 - Added an option to hide the directory in the file item

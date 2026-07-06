@@ -1,7 +1,7 @@
-extends VBoxContainer
+extends Item
 
 @onready var RichText: RichTextLabel = $Preview/Edit/Text
-@onready var NotesText: TextEdit = $ScrollContainer/Notes
+@onready var NotesText: CodeEdit = $ScrollContainer/Notes
 
 
 var Data: = {
@@ -27,9 +27,9 @@ var Editing := false
 var ClickedOnce := false
 
 func _ready() -> void :
+	initItem()
 	EditNotes(false)
 	UpdateValues(NotesText, "Note", "text")
-	#UpdateValues($Preview, "NoteOn", "visible")
 	UpdateValues($Title, "Title", "text")
 	UpdateValues($Title, "TitleOn", "visible")
 	UpdateValues(RichText, "Note", "text")
@@ -43,13 +43,6 @@ func _ready() -> void :
 		ChangeTitleSize(Settings.DefaultFontSize)
 
 	User.connect("PreviewNotes", Callable(self, "PreviewNotes"))
-
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
-func GetData():
-	return Data
 
 func ChangeTitleSize(value : int):
 	$Title.add_theme_font_size_override("font_size", value)
@@ -72,6 +65,7 @@ func _process(delta: float) -> void :
 	if !Editing:
 		Data["NoteOn"] = $Preview.visible
 		RichText.text = NotesText.text
+			
 	
 	if Input.is_action_just_pressed("Bold") and Editing:
 		RichTextUpdate("b")
@@ -141,3 +135,7 @@ func _on_text_meta_hover_started(meta: Variant) -> void:
 
 func _on_text_meta_hover_ended(meta: Variant) -> void:
 	RichText.tooltip_text = ""
+
+
+func _on_notes_code_completion_requested() -> void:
+	print("pass")

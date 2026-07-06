@@ -1,13 +1,7 @@
 [gd_scene format=3 uid="uid://bmhbuhyhf2tom"]
 
 [ext_resource type="Script" uid="uid://dd4v0ireotg4s" path="res://App/Assets/Scenes/Notes/notes.gd" id="1"]
-[ext_resource type="Script" uid="uid://bns1y41wm0y68" path="res://App/Components/Options/options_holder.gd" id="2"]
-[ext_resource type="PackedScene" uid="uid://debqgvaqt7v50" path="res://App/Components/Ratio/ratio.tscn" id="3"]
-[ext_resource type="PackedScene" uid="uid://dwtkpika4pt6q" path="res://App/Components/Move/move.tscn" id="4"]
-[ext_resource type="PackedScene" uid="uid://5wgk1khx8mar" path="res://App/Components/Close/close.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://chqtc4ro5f13w" path="res://App/Components/ExpandHolder/expand_holder.tscn" id="7"]
-[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pocco"]
 
@@ -23,35 +17,10 @@ clip_children = 2
 custom_minimum_size = Vector2(28, 28)
 offset_right = 251.0
 offset_bottom = 176.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 0
 script = ExtResource("1")
-
-[node name="OptionsHolder" type="HBoxContainer" parent="." unique_id=2072313982 node_paths=PackedStringArray("Par")]
-layout_mode = 2
-alignment = 2
-script = ExtResource("2")
-Par = NodePath("..")
-
-[node name="TitleOn" type="Button" parent="OptionsHolder" unique_id=598063314]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-layout_direction = 2
-text = "Title"
-
-[node name="NoteOn" type="Button" parent="OptionsHolder" unique_id=635501084]
-custom_minimum_size = Vector2(32, 0)
-layout_mode = 2
-layout_direction = 2
-text = "Note"
-
-[node name="Ratio" parent="OptionsHolder" unique_id=1799773102 instance=ExtResource("3")]
-layout_mode = 2
-
-[node name="Move" parent="OptionsHolder" unique_id=1252294929 instance=ExtResource("4")]
-layout_mode = 2
-
-[node name="Close" parent="OptionsHolder" unique_id=1235022696 instance=ExtResource("5")]
-layout_mode = 2
 
 [node name="TextOptions" type="HBoxContainer" parent="." unique_id=1275207869]
 visible = false
@@ -117,7 +86,7 @@ layout_mode = 2
 size_flags_vertical = 3
 follow_focus = true
 
-[node name="Notes" type="TextEdit" parent="ScrollContainer" unique_id=651335810]
+[node name="Notes" type="CodeEdit" parent="ScrollContainer" unique_id=175409859]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -129,19 +98,15 @@ scroll_past_end_of_file = true
 scroll_fit_content_height = true
 caret_blink = true
 highlight_all_occurrences = true
+delimiter_strings = Array[String](["\" \"", "' '"])
+code_completion_enabled = true
+indent_automatic = true
+auto_brace_completion_enabled = true
+auto_brace_completion_highlight_matching = true
 
 [node name="CheckFocus" parent="ScrollContainer/Notes" unique_id=356332501 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
-[node name="ExpandHolder" parent="." unique_id=1756358433 node_paths=PackedStringArray("Par") instance=ExtResource("7")]
-layout_mode = 2
-Par = NodePath("..")
-
-[node name="SelectObject" parent="." unique_id=1153610686 node_paths=PackedStringArray("Par") instance=ExtResource("8")]
-Par = NodePath("..")
-
-[connection signal="pressed" from="OptionsHolder/TitleOn" to="." method="_on_title_on_pressed"]
-[connection signal="pressed" from="OptionsHolder/NoteOn" to="." method="_on_note_on_pressed"]
 [connection signal="pressed" from="TextOptions/Bold" to="." method="_on_bold_pressed"]
 [connection signal="pressed" from="Preview/Edit" to="." method="_on_edit_pressed"]
 [connection signal="timeout" from="Preview/Edit/DoubleClick" to="." method="_on_double_click_timeout"]
@@ -149,4 +114,5 @@ Par = NodePath("..")
 [connection signal="meta_clicked" from="Preview/Edit/Text" to="." method="_on_text_meta_clicked"]
 [connection signal="meta_hover_ended" from="Preview/Edit/Text" to="." method="_on_text_meta_hover_ended"]
 [connection signal="meta_hover_started" from="Preview/Edit/Text" to="." method="_on_text_meta_hover_started"]
+[connection signal="code_completion_requested" from="ScrollContainer/Notes" to="." method="_on_notes_code_completion_requested"]
 [connection signal="focus_exited" from="ScrollContainer/Notes" to="." method="_on_notes_focus_exited"]

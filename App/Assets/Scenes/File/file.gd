@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Item
 
 var Data: = {
 	"Type": "File", 
@@ -16,16 +16,10 @@ var Options := [
 ]
 
 func _ready() -> void :
+	initItem()
 	UpdateValues($DirHolder / FileName, "Dir", "text")
 	#UpdateValues($DirHolder, "DirVisible", "visible")
 	LoadFile()
-
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
-func GetData():
-	return Data
 
 func _process(delta: float) -> void :
 	Data["Pos"] = position

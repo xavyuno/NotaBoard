@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Item
 
 var Data: = {
 	"Type": "Link", 
@@ -17,21 +17,15 @@ var Options := [
 ]
 
 func _ready() -> void :
+	initItem()
 	UpdateValues($Access/Image, "Thumbnail", "texture")
 	if Data.has("Thumbnail"):
 		if Data["Thumbnail"] == null:
-			$GetPreview.request(Data["Link"])
+			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.UrlAPIKey])
 		else :
 			$Access/Image.visible = true
 	else:
-		$GetPreview.request(Data["Link"])
-
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
-func GetData():
-	return Data
+		$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.UrlAPIKey])
 
 func GetImage():
 	if !Data.has("ThumbnailPath"):
@@ -58,7 +52,7 @@ func _on_go_to_pressed() -> void :
 	OS.shell_open($Holder / Link.text)
 
 func SetLink(text):
-	$GetPreview.request(text)
+	$GetLink.request(text)
 	Data["Link"] = text
 
 func _on_get_link_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
@@ -67,22 +61,18 @@ func _on_get_link_request_completed(result: int, response_code: int, headers: Pa
 	if errJPG != OK:
 		var errPNG = img.load_png_from_buffer(body)
 		if errPNG != OK:
-			$Access/Image.visible = false
 			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.UrlAPIKey])
+			print("failed to get thumbnail")
 			return
-	$GetPreview.cancel_request()
 	$Access/Image.visible = true
 	var txtr = ImageTexture.create_from_image(img)
 	$Access/Image.texture = txtr
 	GetImage()
 	Data["Thumbnail"] = txtr
 
-func _on_link_focus_exited() -> void :
-	$GetLink.request($Holder / Link.text)
-
 func _on_get_preview_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
 	var link = JSON.parse_string(body.get_string_from_utf8())
 	if link:
 		$GetLink.request(link["image"])
 	else :
-		print("failed to get thumbnail")
+		print("failed to get LINK")

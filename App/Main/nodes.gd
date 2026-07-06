@@ -20,7 +20,7 @@ func _ready() -> void :
 		ValidateValue(data, 1, "UpdatePath")
 		ValidateValue(data, 2, "LoadDur")
 		ValidateValue(data, 3, "ItemLimit")
-		ValidateValue(data, 4, "OptionsEnabled")
+		# ValidateValue(data, 4, "OptionsEnabled")
 		ValidateValue(data, 5, "ShowCenter")
 		ValidateValue(data, 6, "QuickOptions")
 		ValidateValue(data, 7, "DefaultFontSize")
@@ -41,10 +41,11 @@ func _ready() -> void :
 		User.RemovedHistory = data
 		fileHistory.close()
 		for i in User.RemovedHistory:
-			if Settings.ProgressiveLoading:
-				await get_tree().create_timer(User.LoadDur).timeout
-			var img = get_node("Holder/ItemHolder/Items/" + i["Type"]).icon
-			history.add_item("Removed: " + JSON.stringify(i, "\t", false, true), img)
+			if i["Type"] != "Line":
+				if Settings.ProgressiveLoading:
+					await get_tree().create_timer(User.LoadDur).timeout
+				var img = get_node("Holder/ItemHolder/Items/" + i["Type"]).icon
+				history.add_item("Removed: " + JSON.stringify(i, "\t", false, true), img)
 
 	var fileSave = FileAccess.open("user://Save.txt", FileAccess.READ)
 	if fileSave:
@@ -55,11 +56,12 @@ func _ready() -> void :
 		User.StoredHistory = data
 		fileSave.close()
 		for i in User.StoredHistory:
-			if Settings.ProgressiveLoading:
-				await get_tree().create_timer(User.LoadDur).timeout
-			if i["Type"] == "Board":
-				User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"], "CamPos" : Vector2(640, 352)}}, true)
-			initObj(i, false)
+			if i["Type"] != "Line":
+				if Settings.ProgressiveLoading:
+					await get_tree().create_timer(User.LoadDur).timeout
+				if i["Type"] == "Board":
+					User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"], "CamPos" : Vector2(640, 352)}}, true)
+				initObj(i, false)
 
 	User.StillLoading = false
 	if Settings.TotalBoards <= 0:
@@ -91,7 +93,7 @@ func _physics_process(delta: float) -> void :
 	if Input.is_action_just_pressed("Copy") and !User.InFocus:
 		if User.SelectedObject:
 			User.CopiedObject = get_node(User.SelectedObject).Data
-	if Input.is_action_just_pressed("Paste") and !User.InFocus:
+	if Input.is_action_just_pressed("Paste") and !User.InFocus and !User.CurrentPage in ["Settings", "Calendar"]:
 		if User.CopiedObject:
 			var TempData = User.CopiedObject
 			TempData["Pos"] = User.MousePos
@@ -205,8 +207,6 @@ func _on_clear_pressed() -> void :
 	User.RemovedHistory.clear()
 	System.SaveRemoveHistory()
 
-func _on_search_text_submitted(new_text: String) -> void:
-	User.emit_signal("Searched", new_text)
 
 func _on_history_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	if mouse_button_index == 2:
@@ -218,3 +218,5 @@ func _on_history_item_clicked(index: int, at_position: Vector2, mouse_button_ind
 func _on_search_text_changed(new_text: String) -> void:
 	if new_text == "":
 		User.emit_signal("Searched", "")
+	else:
+		User.emit_signal("Searched", new_text)

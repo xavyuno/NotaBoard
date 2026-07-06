@@ -14,7 +14,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 [application]
 
-config/name="Task Manager"
+config/name="NotaBoard"
 config/version="1.6"
 config/tags=PackedStringArray("app")
 run/main_scene="uid://kpyh8ufdds6l"

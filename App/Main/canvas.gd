@@ -9,6 +9,7 @@ func SettingsChanged():
 
 func _on_close_pressed() -> void :
 	$"../Nodes".visible = !$"../Nodes".visible
+	User.CanvasHidden = !$"../Nodes".visible
 
 func _on_settings_pressed() -> void :
 	if User.CurrentPage != "Settings":
@@ -21,7 +22,7 @@ func QuickOption(Index):
 		"PreviewNotes":
 			User.PreviewingNotes = !User.PreviewingNotes
 		"OptionsBar":
-			Settings.OptionsEnabled = !Settings.OptionsEnabled
+			Settings.QuickOptions[Index] = "PreviewNotes"
 		"ShowCenter":
 			Settings.ShowCenter = !Settings.ShowCenter
 		"ResetCam":

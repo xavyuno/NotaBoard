@@ -45,19 +45,25 @@ func _physics_process(delta: float) -> void :
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	User.MousePos = get_local_mouse_position() + position
 
-	if Input.is_action_pressed("ZoomIn") and zoom.x <= 10 and !User.InFocus:
+	if Input.is_action_pressed("ZoomIn") and zoom.x <= 10 and CamConditions():
 		zoom += ZoomScale
-	if Input.is_action_pressed("ZoomOut") and zoom.x >= 0.1 and !User.InFocus:
+	if Input.is_action_pressed("ZoomOut") and zoom.x >= 0.1 and CamConditions():
 		zoom -= ZoomScale
+
+func CamConditions():
+	if !User.InFocus and (!User.MouseInCanvas or User.CanvasHidden):
+		return true
+	else :
+		return false
 
 func _process(delta: float) -> void :
 	$ClearFocus.global_position = User.CamPos - Vector2(10000, 10000)
 
 func _input(event: InputEvent) -> void :
 	if event is InputEventMouseButton and !Input.is_action_pressed("MultiSelect"):
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom.x <= 10 and !User.InFocus:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and zoom.x <= 10 and CamConditions():
 			zoom += ZoomScale
-		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom.x >= 0.1 and !User.InFocus:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and zoom.x >= 0.1 and CamConditions():
 			zoom -= ZoomScale
 	if event is InputEventMouseMotion:
 		if Dragging:

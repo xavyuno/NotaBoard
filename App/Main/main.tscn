@@ -23,8 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://dltgkc7h0py83" path="res://App/Assets/Scenes/Column/Column.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://b4c6vq7qdoyny" path="res://App/Assets/Icons/Board.png" id="16"]
 [ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/board.tscn" id="18"]
-[ext_resource type="Texture2D" uid="uid://cf6qp5npp6ljd" path="res://App/Assets/Icons/Line.png" id="19"]
-[ext_resource type="PackedScene" uid="uid://w5pbmrihdlp5" path="res://App/Assets/Scenes/Line/line.tscn" id="20"]
 [ext_resource type="Texture2D" uid="uid://130ufwwb2d1w" path="res://App/Assets/Icons/File.png" id="21"]
 [ext_resource type="PackedScene" uid="uid://ditwmlmi3ffb2" path="res://App/Assets/Scenes/File/File.tscn" id="22"]
 [ext_resource type="Script" uid="uid://b3qf3arcokllp" path="res://App/Main/canvas.gd" id="23"]
@@ -407,6 +405,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Download" type="HTTPRequest" parent="Boards/Settings/Update" unique_id=66269744]
+download_chunk_size = 16777216
 use_threads = true
 max_redirects = 64
 
@@ -514,6 +513,7 @@ offset_bottom = 340.0
 text = "Submit"
 
 [node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/SubmitFeedback" unique_id=1409536399]
+use_threads = true
 
 [node name="TotalItems" type="Label" parent="Boards/Settings" unique_id=368247361]
 layout_mode = 0
@@ -863,6 +863,9 @@ placeholder_text = "Search in Item"
 clear_button_enabled = true
 right_icon = ExtResource("12_iuq4y")
 
+[node name="CheckFocus" parent="UI/Nodes/Holder/Search" unique_id=1658876850 node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
+par = NodePath("..")
+
 [node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=1528949264]
 layout_mode = 2
 size_flags_vertical = 3
@@ -921,15 +924,6 @@ expand_icon = true
 
 [node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Board" unique_id=826384012 instance=ExtResource("9")]
 Item = ExtResource("18")
-
-[node name="Line" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1711795254]
-layout_mode = 2
-text = "Draw Line"
-icon = ExtResource("19")
-expand_icon = true
-
-[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Line" unique_id=1589076198 instance=ExtResource("9")]
-Item = ExtResource("20")
 
 [node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1652395121]
 layout_mode = 2
@@ -990,6 +984,10 @@ text = "Thumbnail"
 [node name="GoTo" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1384420867]
 layout_mode = 2
 text = "Open Link"
+
+[node name="ShowProgress" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1794949090]
+layout_mode = 2
+text = "Show Progress"
 
 [node name="Board" type="SpinBox" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=403603766]
 layout_mode = 2
@@ -1194,12 +1192,10 @@ text = "Untiled Board"
 [connection signal="item_selected" from="Boards/Calendar/Main/Month" to="Boards/Calendar" method="_on_month_item_selected"]
 [connection signal="value_changed" from="Boards/Calendar/Main/Year" to="Boards/Calendar" method="_on_year_value_changed"]
 [connection signal="text_changed" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_changed"]
-[connection signal="text_submitted" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_submitted"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/Board" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/FontSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_font_size_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/TitleSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_title_size_value_changed"]
 [connection signal="focus_exited" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_focus_exited"]
-[connection signal="text_submitted" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_text_submitted"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
 [connection signal="item_clicked" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_clicked"]

@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b28gxoc2p2tpf"]
 
 [ext_resource type="Script" uid="uid://bq27q2b2llxpa" path="res://App/Assets/Scenes/Link/link_card.gd" id="1"]
-[ext_resource type="PackedScene" uid="uid://1q1dx2dht2rr" path="res://App/Components/SelectObject/select_object.tscn" id="5"]
 
 [node name="LinkCard" type="VBoxContainer" unique_id=511171908]
 offset_right = 256.0
@@ -25,13 +24,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+expand_mode = 1
 
 [node name="GetLink" type="HTTPRequest" parent="." unique_id=1571004607]
+download_chunk_size = 16777216
+use_threads = true
 
 [node name="GetPreview" type="HTTPRequest" parent="." unique_id=2052755874]
-
-[node name="SelectObject" parent="." unique_id=1712969755 node_paths=PackedStringArray("Par") instance=ExtResource("5")]
-Par = NodePath("..")
+download_chunk_size = 16777216
+use_threads = true
 
 [connection signal="request_completed" from="GetLink" to="." method="_on_get_link_request_completed"]
 [connection signal="request_completed" from="GetPreview" to="." method="_on_get_preview_request_completed"]

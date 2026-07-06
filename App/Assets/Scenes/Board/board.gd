@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Item
 
 var Data: = {
 	"Type": "Board", 
@@ -16,6 +16,7 @@ var Options := ["Cover", "Board"]
 var Preview := false
 
 func _ready() -> void :
+	initItem()
 	UpdateValues($BoardName, "Title", "text")
 	UpdateValues($New/Cover, "Cover", "texture")
 	if Data["Board"] == "Getting ID..." and !Preview:
@@ -31,18 +32,11 @@ func ChangeID(value):
 	Data["Board"] = str(value).trim_suffix(".0")
 	$New/ID.text = "ID: " + Data["Board"]
 
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
 func ChangeCover(txt):
 	$New.text = "" if txt else "Board"
 	$New/ID.visible = false if txt else true
 	$New/Cover.texture = txt
 	Data["Cover"] = txt
-
-func GetData():
-	return Data
 
 func _process(delta: float) -> void :
 	Data["Pos"] = position

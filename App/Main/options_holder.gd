@@ -26,7 +26,10 @@ func RatioPressed():
 	ItemNode.size = Vector2(Lowest, Lowest)
 
 func TitlePressed():
-	ItemNode.get_node("Title").visible = !ItemNode.get_node("Title").visible
+	if ItemNode.has_node("Title"):
+		ItemNode.get_node("Title").visible = !ItemNode.get_node("Title").visible
+	else :
+		ItemNode.get_node("Top/Title").visible = !ItemNode.get_node("Top/Title").visible
 
 func NotePressed():
 	ItemNode.get_node("Preview").visible = !ItemNode.get_node("Preview").visible
@@ -103,11 +106,14 @@ func ThumbnailPressed():
 func GoToPressed():
 	OS.shell_open(ItemNode.Data["Link"])
 
+func ShowProgressPressed():
+	ItemNode.get_node("Top/Progress").visible = !ItemNode.get_node("Top/Progress").visible
+
 func ValidateValue(Nodepath, value, parameter, change = ""):
 	change = str(change)
 	if ItemNode.Data.has(value):
 		if change == "":
-			Nodepath.set(parameter, ItemNode[value])
+			Nodepath.set(parameter, ItemNode.Data[value])
 		else :
 			Nodepath.set(parameter, change)
 
@@ -124,9 +130,6 @@ func _on_file_dialog_file_selected(path: String) -> void:
 	ItemNode.get_node("DirHolder/FileName").text = path
 	ItemNode.Data["Dir"] = path
 	ItemNode.LoadFile()
-
-func _on_link_text_submitted(new_text: String) -> void:
-	ItemNode.SetLink(new_text)
 
 func _on_link_focus_exited() -> void:
 	ItemNode.SetLink($Items/Link.text)

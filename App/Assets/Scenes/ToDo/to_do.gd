@@ -1,6 +1,7 @@
-extends VBoxContainer
+extends Item
 
 @onready var input: LineEdit = $AddHolder / Input
+@onready var progress: Label = $Top/Progress
 
 var Data: = {
 	"Type": "ToDo", 
@@ -11,48 +12,47 @@ var Data: = {
 	"TitleOn": true, 
 	"Title": "",
 	"FontSize" : Settings.DefaultFontSize,
-	"TitleSize": Settings.DefaultTtileSize
+	"TitleSize": Settings.DefaultTtileSize,
+	"ShowProgress" : true
 }
 
 var Options := [
 	"Ratio",
 	"Title",
 	"FontSize",
-	"TitleSize"
+	"TitleSize",
+	"ShowProgress"
 ]
 var TempTitleSize := 0
 
 func _ready() -> void :
+	initItem()
 	for i in Data["List"].keys():
 		var Check = preload("res://App/Assets/Scenes/ToDo/check_list.tscn").instantiate()
 		Check.Text = i
 		Check.get_node("Input").set_pressed_no_signal(Data["List"][i])
 		$List.add_child(Check)
 		Check.get_node("Close").connect("pressed", TodoClosed.bind(Check.get_path()))
-	UpdateValues($Title, "TitleOn", "visible")
-	UpdateValues($Title, "Title", "text")
+	UpdateValues($Top/Title, "TitleOn", "visible")
+	UpdateValues($Top/Title, "Title", "text")
+	UpdateValues(progress, "ShowProgress", "visible")
 	if Data.has("FontSize"):
-		$Title.add_theme_font_size_override("font_size", Data["TitleSize"])
+		$Top/Title.add_theme_font_size_override("font_size", Data["TitleSize"])
 		if $List.get_children().size() >= 1:
 			for i in $List.get_children():
 				i.ChangeFontSize(Data["FontSize"])
-
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
-func GetData():
-	return Data
+	CalculateProgress()
 
 func TodoClosed(path):
-	TempTitleSize = $Title.size.y
+	TempTitleSize = $Top/Title.size.y
 	size.y -= get_node(path).size.y
 	get_node(path).queue_free()
-	$Title.size.y = TempTitleSize
+	$Top/Title.size.y = TempTitleSize
 	Data["List"].erase(get_node(path).Text)
+	CalculateProgress()
 
 func ChangeTitleSize(value : int):
-	$Title.add_theme_font_size_override("font_size", value)
+	$Top/Title.add_theme_font_size_override("font_size", value)
 	Data["TitleSize"] = value
 
 func ChangeFontSize(value : int):
@@ -62,11 +62,32 @@ func ChangeFontSize(value : int):
 				i.ChangeFontSize(Data["FontSize"])
 	Data["FontSize"] = value
 
+func CalculateProgress():
+	if !Data.has("ShowProgress"):
+		return
+	var Total = Data["List"].size()
+	if Total <= 0:
+		progress.text = "0%"
+		var stylebox := progress.get_theme_stylebox("normal").duplicate(true)
+		stylebox.bg_color = Color.RED
+		progress.add_theme_stylebox_override("normal",stylebox)
+	else :
+		var Completed := 0
+		for i in Data["List"].size():
+			if Data["List"][Data["List"].keys()[i]]:
+				Completed += 1
+		var progressValue = int(float(Completed) / float(Total) * 100)
+		progress.text = str(progressValue) + "%"
+		var stylebox := progress.get_theme_stylebox("normal").duplicate(true)
+		stylebox.bg_color = Color(1.0 - (float(progressValue) / 100 * 1) ,(float(progressValue) / 100 * 1) ,0.0, 1.0)
+		progress.add_theme_stylebox_override("normal",stylebox)
+
 func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
-	Data["TitleOn"] = $Title.visible
-	Data["Title"] = $Title.text
+	Data["TitleOn"] = $Top/Title.visible
+	Data["Title"] = $Top/Title.text
+	Data["ShowProgress"] = progress.visible
 
 func AddList():
 	if $AddHolder / Input.text.is_empty():
@@ -78,6 +99,7 @@ func AddList():
 	Data["List"].merge({input.text: false}, true)
 	$AddHolder / Input.text = ""
 	$AddHolder/Input.grab_click_focus()
+	CalculateProgress()
 
 func _on_add_pressed() -> void :
 	AddList()
@@ -86,4 +108,4 @@ func _on_input_text_submitted(new_text: String) -> void :
 	AddList()
 
 func _on_title_on_pressed() -> void :
-	$Title.visible = !$Title.visible
+	$Top/Title.visible = !$Top/Title.visible

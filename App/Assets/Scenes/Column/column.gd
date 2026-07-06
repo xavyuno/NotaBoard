@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends Item
 
 @onready var items: VBoxContainer = $Items
 
@@ -21,74 +21,53 @@ func _process(delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["Title"] = $Title.text
-	$DropBar.visible = User.DraggingObject
+	if User.DraggingObject:
+		if User.DraggedObject.instantiate().name != "Line":
+			$DropBar.visible = true
+		else :
+			$DropBar.visible = false
+	else :
+		$DropBar.visible = false
 
 func _ready() -> void :
+	initItem()
 	User.connect("StoppedDragging", Callable(self, "StoppedDragging"))
 	UpdateValues($Title, "Title", "text")
 	for i in Data["Items"]:
-		if User.ProgressiveLoading:
+		if Settings.ProgressiveLoading:
 			await get_tree().create_timer(User.LoadDur).timeout
 		InitObjectData(i)
 
-func UpdateValues(NODE, value, parameter):
-	if Data.has(value):
-		NODE.call_deferred("set", parameter, Data[value])
-
-func GetData():
+func UpdateList():
 	var tempData = []
 	for i in items.get_children(true):
 		if i.has_method("GetData"):
 			tempData.append(i.GetData())
 	Data["Items"] = tempData
+
+func GetData():
+	UpdateList()
 	return Data
 
 func InitObjectData(data):
 	var object = load("res://App/Assets/Scenes/" + data["Type"] + "/" + data["Type"] + ".tscn")
-	var item = object.instantiate()
-	if !(object in [
-		preload("res://App/Assets/Scenes/Notes/Notes.tscn"), 
-		]):
-		if item.has_node("ExpandHolder"):
-			item.get_node("ExpandHolder").visible = false
-		if item.has_node("OptionsHolder/Expand"):
-			item.get_node("OptionsHolder/Expand").visible = false
-	else:
-		if item.has_node("ExpandHolder/Expand"):
-			item.get_node("ExpandHolder/Expand").DragMinOnly = true
-			item.get_node("ExpandHolder/Expand").DragYAxisOnly = false
-		elif item.has_node("OptionsHolder/Expand"):
-			item.get_node("OptionsHolder/Expand").DragMinOnly = true
-			item.get_node("OptionsHolder/Expand").DragYAxisOnly = true
-	if item.has_node("OptionsHolder"):
-		item.get_node("OptionsHolder").IncludeMove = false
+	var item : Item = object.instantiate()
 	item.Data = data
+	item.InColumn = true
 	$Items.add_child(item)
+	
+	item.custom_minimum_size = Vector2(96, 96)
 
 func InitObject(object):
-	var item = object.instantiate()
-	if !(object in [
-		preload("res://App/Assets/Scenes/Notes/Notes.tscn"), 
-		]):
-		if item.has_node("ExpandHolder"):
-			item.get_node("ExpandHolder").visible = false
-		if item.has_node("OptionsHolder/Expand"):
-			item.get_node("OptionsHolder/Expand").visible = false
-	else:
-		if item.has_node("ExpandHolder/Expand"):
-			item.get_node("ExpandHolder/Expand").DragMinOnly = true
-			item.get_node("ExpandHolder/Expand").DragYAxisOnly = false
-		elif item.has_node("OptionsHolder/Expand"):
-			item.get_node("OptionsHolder/Expand").DragMinOnly = true
-			item.get_node("OptionsHolder/Expand").DragYAxisOnly = true
-	if item.has_node("OptionsHolder"):
-		item.get_node("OptionsHolder").IncludeMove = false
+	var item : Item = object.instantiate()
 	$Items.add_child(item)
+	item.InColumn = true
 	Data["Items"].append(item.Data)
 	User.TotalItems += 1
+	item.custom_minimum_size = Vector2(96, 96)
 
 func StoppedDragging():
-	if User.DraggingObject and MouseIndropBar:
+	if User.DraggingObject and MouseIndropBar and User.DraggedObject.instantiate().name != "Line":
 		User.DraggingObject = false
 		InitObject(User.DraggedObject)
 
