@@ -8,7 +8,7 @@ func SaveAll():
 	SaveSettings()
 
 func GetAPI(Index) -> String:
-	var file = FileAccess.open("res://API" ,FileAccess.READ)
+	var file = FileAccess.open("res://.API" ,FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 	file.close()
 	return data[Index]
