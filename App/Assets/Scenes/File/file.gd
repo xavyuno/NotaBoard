@@ -46,9 +46,11 @@ func LoadFile():
 		$Open / Title.text = "Open"
 		$Open / Holder.visible = true
 		var file = FileAccess.open(ProjectSettings.globalize_path(Data["Dir"]), FileAccess.READ)
-		var txt = file.get_as_text()
-		file.close()
-		$Open / Holder / Preview.text = "Preview:\n" + txt
+		var txt
+		if file:
+			txt = file.get_as_text()
+			$Open / Holder / Preview.text = "Preview:\n" + txt
+			file.close()
 	size = Data["Size"]
 
 func _on_dir_pressed() -> void :

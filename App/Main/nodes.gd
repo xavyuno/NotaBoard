@@ -6,7 +6,6 @@ func _ready() -> void :
 	User.connect("ObjectAdded", Callable(self, "ObjAdded"))
 	User.connect("ObjectRemoved", Callable(self, "ObjRemoved"))
 	User.connect("ChangeBoard", Callable(self, "ChangedBoard"))
-	Settings.emit_signal("SettingsChanged")
 
 	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
 	if Settingsfile:
@@ -14,8 +13,8 @@ func _ready() -> void :
 		Settingsfile.close()
 		if !(data is Array):
 			print("Error loading settings File!")
+			User.TestingMode = true
 		else:
-
 			ValidateValue(data, 0, "BackgroundCol")
 			ValidateValue(data, 1, "UpdatePath")
 			ValidateValue(data, 2, "LoadDur")
@@ -32,39 +31,41 @@ func _ready() -> void :
 			ValidateValue(data, 13, "CanSelectCol")
 			
 			
-		Settings.emit_signal("SettingsChanged")
-		User.emit_signal("ChangedOptionsBar")
+	Settings.emit_signal("SettingsChanged")
+	User.emit_signal("ChangedOptionsBar")
 
 	var fileHistory = FileAccess.open("user://History.txt", FileAccess.READ)
 	if fileHistory:
 		var data = fileHistory.get_var(true)
 		if !(data is Array):
 			print("Error loading History File!")
-			return
-		User.RemovedHistory = data
-		fileHistory.close()
-		for i in User.RemovedHistory:
-			if i["Type"] != "Line":
-				if Settings.ProgressiveLoading:
-					await get_tree().create_timer(User.LoadDur).timeout
-				var img = get_node("Holder/ItemHolder/Items/" + i["Type"]).icon
-				history.add_item("Removed: " + JSON.stringify(i, "\t", false, true), img)
+			User.TestingMode = true
+		else:
+			User.RemovedHistory = data
+			fileHistory.close()
+			for i in User.RemovedHistory:
+				if i["Type"] != "Line":
+					if Settings.ProgressiveLoading:
+						await get_tree().create_timer(User.LoadDur).timeout
+					var img = get_node("Holder/ItemHolder/Items/" + i["Type"]).icon
+					history.add_item("Removed: " + JSON.stringify(i, "\t", false, true), img)
 
 	var fileSave = FileAccess.open("user://Save.txt", FileAccess.READ)
 	if fileSave:
 		var data = fileSave.get_var(true)
 		if !(data is Array):
 			print("Error loading Save File!")
-			return
-		User.StoredHistory = data
-		fileSave.close()
-		for i in User.StoredHistory:
-			if i["Type"] != "Line":
-				if Settings.ProgressiveLoading:
-					await get_tree().create_timer(User.LoadDur).timeout
-				if i["Type"] == "Board":
-					User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"], "CamPos" : Vector2(640, 352)}}, true)
-				initObj(i, false)
+			User.TestingMode = true
+		else :
+			User.StoredHistory = data
+			fileSave.close()
+			for i in User.StoredHistory:
+				if i["Type"] != "Line":
+					if Settings.ProgressiveLoading:
+						await get_tree().create_timer(User.LoadDur).timeout
+					if i["Type"] == "Board":
+						User.Boards.merge({i["Board"] : {"Title" : i["Title"], "ID" : i["ID"], "CamPos" : Vector2(640, 352)}}, true)
+					initObj(i, false)
 
 	User.StillLoading = false
 	if Settings.TotalBoards <= 0:

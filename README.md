@@ -1,4 +1,4 @@
-# Task-Manager
+# NotaBoard
 A Milanote-like task manager
 
 Keybinds:

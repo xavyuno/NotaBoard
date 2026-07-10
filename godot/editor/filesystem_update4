@@ -15,3 +15,5 @@ res://App/Assets/Scenes/ToDo/ToDo.tscn
 res://App/Main/camera.gd
 res://Global/System/System.gd
 res://LatestVersion.txt
+res://App/Assets/Scenes/File/file.gd
+res://README.md
