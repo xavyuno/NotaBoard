@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dg88hl5vikyec"]
+[gd_scene format=3 uid="uid://dg88hl5vikyec"]
 
 [ext_resource type="Script" uid="uid://bbjydfndujlj1" path="res://addons/DevTasks/dock.gd" id="1_285fa"]
 
-[node name="Todo" type="Control"]
+[node name="Todo" type="Control" unique_id=1789455578]
 layout_mode = 3
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -10,31 +10,27 @@ offset_right = 177.0
 grow_vertical = 2
 script = ExtResource("1_285fa")
 
-[node name="Holder" type="VBoxContainer" parent="."]
+[node name="Holder" type="VBoxContainer" parent="." unique_id=120810674]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 4
 
-[node name="Input" type="LineEdit" parent="Holder"]
+[node name="Input" type="LineEdit" parent="Holder" unique_id=1377639336]
 layout_mode = 2
-placeholder_text = "Task here"
+theme_override_font_sizes/font_size = 13
+placeholder_text = "Type Task"
+keep_editing_on_text_submit = true
 
-[node name="ReloadTasks" type="Button" parent="Holder"]
-layout_mode = 2
-text = "Reload Tasks"
-
-[node name="AddTask" type="Button" parent="Holder"]
-layout_mode = 2
-text = "Add Task"
-
-[node name="Tasks" type="ScrollContainer" parent="Holder"]
+[node name="Tasks" type="ScrollContainer" parent="Holder" unique_id=360644688]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Holder" type="VBoxContainer" parent="Holder/Tasks"]
+[node name="Holder" type="VBoxContainer" parent="Holder/Tasks" unique_id=2070575161]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 2

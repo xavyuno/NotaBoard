@@ -3,6 +3,7 @@ extends Control
 @onready var history: ItemList = $Holder / HistoryHolder / History
 
 func _ready() -> void :
+	get_parent().visible = true
 	User.connect("ObjectAdded", Callable(self, "ObjAdded"))
 	User.connect("ObjectRemoved", Callable(self, "ObjRemoved"))
 	User.connect("ChangeBoard", Callable(self, "ChangedBoard"))
@@ -26,7 +27,7 @@ func _ready() -> void :
 			ValidateValue(data, 8, "DefaultTitleSize")
 			ValidateValue(data, 9, "UrlAPIKey")
 			ValidateValue(data, 10, "ProgressiveLoading")
-			ValidateValue(data, 11, "TotalBoards")
+			#ValidateValue(data, 11, "TotalBoards")
 			ValidateValue(data, 12, "SelectCol")
 			ValidateValue(data, 13, "CanSelectCol")
 			
@@ -68,6 +69,7 @@ func _ready() -> void :
 					initObj(i, false)
 
 	User.StillLoading = false
+	System.BackupAll()
 	if Settings.TotalBoards <= 0:
 		await get_tree().create_timer(6).timeout
 		for i in $"../../Boards".get_children():
@@ -152,6 +154,7 @@ func _physics_process(delta: float) -> void :
 		initObj(User.CopiedObject, true)
 
 	if Input.is_action_just_pressed("Delete"):
+		User.TotalItems -= 1
 		if User.SelectedObject:
 			User.emit_signal("ObjectRemoved", get_node(User.SelectedObject).Data)
 			get_node(User.SelectedObject).queue_free()

@@ -1,3 +1,14 @@
+Changelog for: v1.7
+- Ctrl + A to select all the items im the current board
+- Items can be de-selected when multi-selecting
+- Made the settings decently kind of organized
+- Fixed drag selecting while in canvas/placing an item
+- Fixed selection outline not showing up while select and dragging
+- Fixed selection outline showing after changing boards
+- Fixed some parts of item selecting not being as smooth or responding
+- Fixed item count not being well... counted
+
+
 Changelog for: v1.6
 - Interacting with the to do buttons work now as selecting the entire todo item
 - Thumbnails from links are now saved and can be accessed through the option bar

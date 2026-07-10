@@ -12,6 +12,7 @@ signal PreviewNotes
 signal ItemFocused
 signal ItemFocusLost
 signal ChangedOptionsBar
+signal AllFocusLost
 
 var OptionsEnabled := true
 

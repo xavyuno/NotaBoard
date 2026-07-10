@@ -34,7 +34,7 @@ func _draw() -> void:
 		draw_polyline(
 				System.CreateRectangle(DragSelectPos, get_local_mouse_position()),
 			Settings.DragCol,
-			5
+			2.5
 		)
 
 func _physics_process(delta: float) -> void :
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void :
 	
 	if Input.is_action_pressed("Click") and User.DragSelecting:
 		drag.get_node("CollisionPolygon2D").polygon = System.CreateRectangle(DragSelectPos, get_local_mouse_position())
-	if Input.is_action_just_pressed("Click"):
+	if Input.is_action_just_pressed("Click") and !User.MouseInCanvas:
 		DragSelectPos = get_local_mouse_position()
 		DragSelecting = true
 		$Timer.start()
@@ -96,7 +96,6 @@ func _input(event: InputEvent) -> void :
 
 func _on_drag_body_entered(body: Node2D) -> void:
 	if User.DragSelecting:
-		print("select entered")
 		body.get_parent().call_deferred("FocusItem")
 
 func _on_drag_body_exited(body: Node2D) -> void:

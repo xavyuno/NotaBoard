@@ -7,7 +7,7 @@ func _ready() -> void:
 	if !Engine.is_editor_hint():
 		var file = FileAccess.open("res://addons/DevTasks/tasks.txt", FileAccess.READ)
 		if file:
-			tasks = file.get_var()
+			tasks = JSON.parse_string(file.get_pascal_string())
 			file.close()
 			for i in tasks.keys():
 				var task = preload("res://App/Components/DevTask/dev_task.tscn").instantiate()
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func LoadInEditor():
 	var file = FileAccess.open("res://addons/DevTasks/tasks.txt", FileAccess.READ)
-	tasks = file.get_var()
+	tasks = JSON.parse_string(file.get_pascal_string())
 	for i in $List.get_children():
 		i.queue_free()
 	for i in tasks.keys():

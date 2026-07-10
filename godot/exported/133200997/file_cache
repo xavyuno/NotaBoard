@@ -1,7 +1,6 @@
 res://addons/DevTasks/task.tscn::e857da44119751cfbafcfc502a61a0ec::1780625873::res://godot/exported/133200997/export-d9cbb5d0cf4904af26afeead1cc8afd7-task.scn
 res://addons/DevTasks/Todo.tscn::65f8bfe0fc72324d7ce0ced23cc8174b::1780625873::res://godot/exported/133200997/export-332c5b20708546aad6c26cf672c15068-Todo.scn
 res://App/Assets/Fonts/Dynamic/Proto/Proto.tres::dbbb7469d93247de5648806c88efe141::1780625873::res://godot/exported/133200997/export-4dcd5e06319a71ed49715497604d4567-Proto.res
-res://App/Assets/Scenes/Board/board.tscn::b4f246b72345aef8d93f2564e3ec2fd7::1783634419::res://godot/exported/133200997/export-868c81bd272620e5aec40ea1060f3e09-board.scn
 res://App/Assets/Scenes/Column/Column.tscn::e6a667e3633107ff0eec7c346ccc2ff1::1783366039::res://godot/exported/133200997/export-cc66f02a61835dbc430b82e5763faf40-Column.scn
 res://App/Assets/Scenes/File/File.tscn::cf1a235f297d87a7dcc9a82e240878d3::1783351976::res://godot/exported/133200997/export-61bdb48756f12d64a9d01a77866bcdff-File.scn
 res://App/Assets/Scenes/Link/Link.tscn::069a5816e637caa34667fd9f082dbf7d::1783364740::res://godot/exported/133200997/export-f8f5e2a4c9a96d07367cdc50ba6beff6-Link.scn
@@ -20,5 +19,6 @@ res://App/Components/ObjectData/data.tscn::f2d043b8a9db8a15901b80b48bd10d14::178
 res://App/Components/Options/options_holder.tscn::a53ccf55063c88d558d348bef00ac0f5::1783199656::res://godot/exported/133200997/export-c7c5dcfdf9225ea7e668f347a312cb70-options_holder.scn
 res://App/Components/Ratio/ratio.tscn::68ca75be39c810b7b787e867bed9073f::1780625873::res://godot/exported/133200997/export-67227196c8a6d9d8f43d7725b5302dbc-ratio.scn
 res://App/Components/SelectObject/select_object.tscn::181e9b0034b9e78d1cbf2fb13a15c757::1783199656::res://godot/exported/133200997/export-2e43c5b1f00dc82eba3b3b285c9c1f99-select_object.scn
-res://App/Main/main.tscn::7ba0bb8004d0dcfc7b22d8f5f3cf4d81::1783647759::res://godot/exported/133200997/export-265fa046f62905255ea566668c2b252f-main.scn
+res://App/Main/main.tscn::da69af507892eeb4a52b755715f01529::1783700102::res://godot/exported/133200997/export-265fa046f62905255ea566668c2b252f-main.scn
 res://App/Components/Day/day.tscn::ff8ac1fae6ee8b4f1b0c85a629d78827::1783199656::res://godot/exported/133200997/export-c0ee44e865f72888f8523bf49fe9bc2d-day.scn
+res://App/Assets/Scenes/Board/Board.tscn::b4f246b72345aef8d93f2564e3ec2fd7::1783634419::res://godot/exported/133200997/export-e5f500c0c690f13d60e8aa180132ceda-Board.scn

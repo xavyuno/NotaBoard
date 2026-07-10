@@ -19,6 +19,7 @@ func UpdateValues(NODE, value, parameter):
 
 @export var CanDrag := true
 var Selected := false
+var MultiSelected := false
 var Action := ""
 var Holding := false
 var StillHolding := false
@@ -31,6 +32,7 @@ var Col : CollisionPolygon2D = null
 var Body : StaticBody2D = null
 
 func initItem():
+	User.TotalItems += 1
 	TimerNode = Timer.new()
 	TimerNode.one_shot = true
 	TimerNode.wait_time = 0.5
@@ -45,7 +47,8 @@ func initItem():
 	Col.polygon = System.CreateRectangle(Vector2.ZERO, size)
 	User.connect("StoppedSelecting", Callable(self, "StoppedSelecting"))
 	User.connect("Searched", Callable(self, "Searched"))
-	#User.connect("ItemFocusLost", Callable(self, "ItemFocusLost"))
+	User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
+	User.connect("AllFocusLost", Callable(self, "AllFocusLost"))
 	for i in self.get_children(true):
 		if i.get_child_count() >= 1:
 			for j in i.get_children(true):
@@ -67,13 +70,22 @@ func initItem():
 			i.connect("button_up", Callable(self, "button_up"))
 			buttons.append(i)
 
+func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
+	FocusExited()
+
 func button_up():
 	if !StillHolding:
 		Holding = false
 	TimerNode.stop()
 
 func button_down():
-	FocusEntered()
+	if User.MultiSelecting:
+		MultiSelected = true
+		if !(get_path() in User.MultiSelectedObjects):
+			User.MultiSelectedObjects.append(get_path())
+		else :
+			User.MultiSelectedObjects.erase(get_path())
+			ext(true)
 	if !CanDrag:
 		return
 	TimerNode.start()
@@ -120,7 +132,6 @@ func ValidateSearch(itemName : String, Type : String):
 func StoppedSelecting():
 	Selected = false
 	Action = ""
-	queue_redraw()
 
 func _draw() -> void:
 	if Selected and Settings.CanSelectCol:
@@ -133,6 +144,8 @@ func _draw() -> void:
 		)
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("SelectAll") and self.Data["ID"] == User.CurrentPage:
+		FocusEntered()
 	if User.CurrentPage == self.Data["ID"]:
 		if Col != null:
 			Col.disabled = false
@@ -156,14 +169,12 @@ func _physics_process(delta: float) -> void:
 			Selected = true
 			User.emit_signal("ItemFocused", get_path())
 		User.emit_signal("SaveObjectData")
-		queue_redraw()
 	if Input.is_action_just_pressed("Click"):
 		if DragSelected:
 			ItemFocusLost()
 		if (Action == "Moving" or Action == "Resizing"):
 			Action = ""
 			Selected = false
-			queue_redraw()
 	if Input.is_action_just_pressed("Move") and Selected:
 		if Action != "Moving":
 			Action = "Moving"
@@ -174,6 +185,7 @@ func _physics_process(delta: float) -> void:
 			Action = "Resizing"
 		else :
 			Action = ""
+	queue_redraw()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -190,49 +202,53 @@ func _input(event: InputEvent) -> void:
 
 func FocusItem():
 	FocusEntered(true)
-	DragSelected = true
+
+func AllFocusLost():
+	ext(true)
 
 func ItemFocusLost():
 	if DragSelected:
 		DragSelected = false
-		FocusExited()
+		ext(true)
 
 func FocusEntered(MultiSelect = false):
-	if User.MultiSelecting or MultiSelect:
-		if !(get_path() in User.MultiSelectedObjects):
-			User.MultiSelectedObjects.append(get_path())
-			Selected = true
-		User.SelectedObject = null
-	else:
+	if !(User.MultiSelecting or MultiSelect):
 		DragSelected = false
+		MultiSelected = false
 		User.MultiSelectedObjects = []
 		User.MultiSelectedObjects.append(get_path())
-		User.SelectedObject = get_path()
-		Selected = true
-		User.emit_signal("ItemFocused", get_path())
-	print("entered")
+	if MultiSelect:
+		DragSelected = true
+		MultiSelected = true
+		if !(get_path() in User.MultiSelectedObjects):
+			User.MultiSelectedObjects.append(get_path())
+		else :
+			User.MultiSelectedObjects.erase(get_path())
+			ext(true)
+			return
+	User.SelectedObject = get_path()
+	Selected = true
+	User.emit_signal("ItemFocused", get_path())
 	User.emit_signal("SaveObjectData")
-	queue_redraw()
 
-func ext():
+func ext(force = false):
 	TechnicallyInFocus = false
-	User.emit_signal("ItemFocusLost")
 	User.emit_signal("SaveObjectData")
-	if !User.MultiSelecting and !DragSelected:
+	if (!User.MultiSelecting and !DragSelected) or force:
 		Selected = false
+		MultiSelected = false
 		Action = ""
+	else :
+		User.emit_signal("ItemFocusLost")
 
 func FocusExited():
 	if (!User.MouseInCanvas or TechnicallyInFocus):
 		ext()
-		print("exit")
 	else :
 		TechnicallyInFocus = true
-	queue_redraw()
 
 func Timeout() -> void:
 	Holding = true
 	StillHolding = true
 	for i in buttons:
 		i.release_focus()
-	queue_redraw()

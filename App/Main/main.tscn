@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://veo48dyjhje3" path="res://App/Assets/Icons/Column.png" id="14"]
 [ext_resource type="PackedScene" uid="uid://dltgkc7h0py83" path="res://App/Assets/Scenes/Column/Column.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://b4c6vq7qdoyny" path="res://App/Assets/Icons/Board.png" id="16"]
-[ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/board.tscn" id="18"]
+[ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/Board.tscn" id="18"]
 [ext_resource type="Texture2D" uid="uid://130ufwwb2d1w" path="res://App/Assets/Icons/File.png" id="21"]
 [ext_resource type="PackedScene" uid="uid://ditwmlmi3ffb2" path="res://App/Assets/Scenes/File/File.tscn" id="22"]
 [ext_resource type="Script" uid="uid://b3qf3arcokllp" path="res://App/Main/canvas.gd" id="23"]
@@ -33,6 +33,41 @@
 [ext_resource type="Texture2D" uid="uid://ywymu6b41yok" path="res://App/Assets/Icons/icons8-home-32.png" id="31_iuq4y"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yqhvp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eab0n"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
+font_size = 23
+
+[sub_resource type="LabelSettings" id="LabelSettings_1yho4"]
+font_size = 20
+
+[sub_resource type="Gradient" id="Gradient_1yho4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
+gradient = SubResource("Gradient_1yho4")
+
+[sub_resource type="LabelSettings" id="LabelSettings_b8p06"]
+font_size = 25
+
+[sub_resource type="Gradient" id="Gradient_nqkbx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dbp5u"]
+gradient = SubResource("Gradient_nqkbx")
+
+[sub_resource type="Gradient" id="Gradient_d1pkp"]
+colors = PackedColorArray(0.0780884, 0.640844, 0.558948, 1, 9.62615e-08, 0.681619, 0.344828, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3dg"]
+gradient = SubResource("Gradient_d1pkp")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbp5u"]
+font_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q72c2"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -55,45 +90,11 @@ content_margin_right = 5.0
 content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 0.392157)
 
-[sub_resource type="Gradient" id="Gradient_nqkbx"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dbp5u"]
-gradient = SubResource("Gradient_nqkbx")
-
-[sub_resource type="Gradient" id="Gradient_d1pkp"]
-colors = PackedColorArray(0.0780884, 0.640844, 0.558948, 1, 9.62615e-08, 0.681619, 0.344828, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3dg"]
-gradient = SubResource("Gradient_d1pkp")
-
-[sub_resource type="LabelSettings" id="LabelSettings_dbp5u"]
-font_size = 10
-
-[sub_resource type="LabelSettings" id="LabelSettings_b8p06"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_eab0n"]
-font_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
-font_size = 23
-
-[sub_resource type="LabelSettings" id="LabelSettings_1yho4"]
-font_size = 20
-
-[sub_resource type="Gradient" id="Gradient_1yho4"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
-gradient = SubResource("Gradient_1yho4")
-
 [sub_resource type="SystemFont" id="SystemFont_0ucvp"]
 font_names = PackedStringArray("Arial")
 generate_mipmaps = true
 force_autohinter = true
+subpixel_positioning = 0
 multichannel_signed_distance_field = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etqv4"]
@@ -117,10 +118,10 @@ script = ExtResource("1")
 [node name="ClearFocus" type="ColorRect" parent="Camera" unique_id=1507019658]
 show_behind_parent = true
 z_index = -1
-offset_left = -12416.0
-offset_top = -5824.0
-offset_right = 19392.0
-offset_bottom = 10560.0
+offset_left = -12424.0
+offset_top = -6104.0
+offset_right = 19384.0
+offset_bottom = 10280.0
 color = Color(0.425323, 0.41232, 0.415591, 1)
 
 [node name="Drag" type="Area2D" parent="Camera" unique_id=1854866221]
@@ -159,6 +160,414 @@ layout_mode = 2
 script = ExtResource("4")
 metadata/_tab_index = 1
 
+[node name="Holder" type="TabContainer" parent="Boards/Settings" unique_id=1596159666]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 152.0
+offset_right = 1592.0
+offset_bottom = 840.0
+current_tab = 1
+
+[node name="Items" type="Control" parent="Boards/Settings/Holder" unique_id=1746245611]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=953834483]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 348.0
+offset_bottom = 52.0
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Font Size:"
+
+[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=1692091208]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 60.0
+offset_right = 348.0
+offset_bottom = 100.0
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Title Size:"
+
+[node name="LoadDur" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=576907677]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 124.0
+offset_right = 432.0
+offset_bottom = 152.0
+max_value = 1.0
+step = 0.001
+alignment = 1
+suffix = "second(s)"
+metadata/_edit_group_ = true
+
+[node name="ChangeDurTitle" type="Label" parent="Boards/Settings/Holder/Items/LoadDur" unique_id=815813069]
+layout_mode = 0
+offset_left = -120.0
+offset_top = -21.0
+offset_right = 208.0
+offset_bottom = 31.0
+text = "Change duration between loading
+items"
+
+[node name="Proload" type="Button" parent="Boards/Settings/Holder/Items/LoadDur" unique_id=1523091271]
+layout_mode = 0
+offset_left = -59.0
+offset_right = -3.0
+offset_bottom = 28.0
+
+[node name="ItemLimit" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=16885844]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 204.0
+offset_right = 360.0
+offset_bottom = 244.0
+allow_greater = true
+alignment = 1
+prefix = "Item Limit"
+metadata/_edit_group_ = true
+
+[node name="TotalItems" type="Label" parent="Boards/Settings/Holder/Items/ItemLimit" unique_id=368247361]
+layout_mode = 0
+offset_top = -40.0
+offset_right = 408.0
+offset_bottom = -4.0
+text = "Total Items: 0 / INF"
+label_settings = SubResource("LabelSettings_eab0n")
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="PreviewNotes" type="Button" parent="Boards/Settings/Holder/Items" unique_id=743380730]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 252.0
+offset_right = 344.0
+offset_bottom = 292.0
+text = "Preview Notes:"
+
+[node name="User" type="Control" parent="Boards/Settings/Holder" unique_id=800630115]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="QuickOptions" type="Panel" parent="Boards/Settings/Holder/User" unique_id=522152478]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 424.0
+offset_bottom = 332.0
+script = ExtResource("10_eab0n")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=2109982329]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 8.0
+offset_right = 409.0
+offset_bottom = 72.0
+text = "Edit Quick Options"
+label_settings = SubResource("LabelSettings_lkim6")
+
+[node name="SelectedLabel" type="Label" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=817895432]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 32.0
+offset_right = 408.0
+offset_bottom = 72.0
+text = "Edit Quick Options"
+label_settings = SubResource("LabelSettings_1yho4")
+vertical_alignment = 1
+
+[node name="Selected1" type="TextureRect" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=2118104933]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 74.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="Selected2" type="TextureRect" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=1831403655]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 74.0
+offset_top = 6.0
+offset_right = 142.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=58988435]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 72.0
+
+[node name="Q1" type="Button" parent="Boards/Settings/Holder/User/QuickOptions/QuickHolder" unique_id=1832456691]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "1"
+
+[node name="Q2" type="Button" parent="Boards/Settings/Holder/User/QuickOptions/QuickHolder" unique_id=1486760194]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "2"
+
+[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=80981086]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 408.0
+offset_bottom = 312.0
+
+[node name="Options" type="VBoxContainer" parent="Boards/Settings/Holder/User/QuickOptions/ScrollHolder" unique_id=1854037483]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Feedback" type="TextEdit" parent="Boards/Settings/Holder/User" unique_id=616008297]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 44.0
+offset_right = 1000.0
+offset_bottom = 180.0
+placeholder_text = "Any bugs, suggestions are appreciated"
+wrap_mode = 1
+scroll_smooth = true
+caret_blink = true
+metadata/_edit_group_ = true
+
+[node name="CheckFocus" parent="Boards/Settings/Holder/User/Feedback" unique_id=1395884035 node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
+par = NodePath("..")
+
+[node name="FeedbackTitle" type="Label" parent="Boards/Settings/Holder/User/Feedback" unique_id=851884902]
+layout_mode = 0
+offset_left = 16.0
+offset_top = -32.0
+offset_right = 140.0
+offset_bottom = -1.0
+text = "Feedback"
+label_settings = SubResource("LabelSettings_b8p06")
+
+[node name="SubmitFeedback" type="Button" parent="Boards/Settings/Holder/User/Feedback" unique_id=918685635]
+layout_mode = 0
+offset_left = 440.0
+offset_top = -32.0
+offset_right = 568.0
+offset_bottom = -4.0
+text = "Submit"
+
+[node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/Holder/User/Feedback/SubmitFeedback" unique_id=1409536399]
+use_threads = true
+
+[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=336007133]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 204.0
+offset_right = 667.0
+offset_bottom = 246.0
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="BGInfo" type="Label" parent="Boards/Settings/Holder/User/BGPicker" unique_id=60180835]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -23.0
+offset_right = 232.0
+offset_bottom = -3.0
+text = "Change Background color"
+
+[node name="DragColor" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=76321843]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 348.0
+offset_right = 667.0
+offset_bottom = 390.0
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="BGInfo" type="Label" parent="Boards/Settings/Holder/User/DragColor" unique_id=840485089]
+layout_mode = 0
+offset_left = 3.0
+offset_top = -23.0
+offset_right = 232.0
+offset_bottom = -3.0
+text = "Change Select drag color"
+
+[node name="SelectColor" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=1004771434]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 276.0
+offset_right = 611.0
+offset_bottom = 318.0
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="On" type="Button" parent="Boards/Settings/Holder/User/SelectColor" unique_id=521786014]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 1.0
+offset_right = 283.0
+offset_bottom = 41.0
+text = "On"
+
+[node name="BGInfo2" type="Label" parent="Boards/Settings/Holder/User/SelectColor" unique_id=1571313540]
+layout_mode = 0
+offset_left = 24.0
+offset_top = -25.0
+offset_right = 253.0
+offset_bottom = -5.0
+text = "Change Select item color"
+
+[node name="ProjectDir" type="Button" parent="Boards/Settings/Holder/User" unique_id=1983753351]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 388.0
+offset_right = 424.0
+offset_bottom = 428.0
+text = "Open Project Directory"
+
+[node name="ProjectLink" type="Button" parent="Boards/Settings/Holder/User" unique_id=1605278813]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 340.0
+offset_right = 424.0
+offset_bottom = 380.0
+text = "Open Github Project"
+
+[node name="DisplayURL" type="Panel" parent="Boards/Settings/Holder/User" unique_id=27617456]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 436.0
+offset_right = 656.0
+offset_bottom = 540.0
+script = ExtResource("9_eab0n")
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=2059787646]
+layout_mode = 0
+offset_right = 648.0
+offset_bottom = 24.0
+text = "Display link preview (Optional)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="RichTextLabel" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=904950499]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 640.0
+offset_bottom = 88.0
+bbcode_enabled = true
+text = "To preview thumbnails of images, you are required to retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
+fit_content = true
+
+[node name="Key" type="LineEdit" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=1566631016]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 72.0
+offset_right = 640.0
+offset_bottom = 100.0
+placeholder_text = "API Key here"
+alignment = 1
+caret_blink = true
+secret = true
+
+[node name="Hide" type="Button" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=1764950365]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 72.0
+offset_right = 240.0
+offset_bottom = 96.0
+icon = ExtResource("28_b8p06")
+expand_icon = true
+
+[node name="Center" type="Button" parent="Boards/Settings/Holder/User" unique_id=1555117319]
+layout_mode = 0
+offset_left = 1008.0
+offset_top = 84.0
+offset_right = 1360.0
+offset_bottom = 124.0
+text = "Display Center:"
+
+[node name="Update" type="Button" parent="Boards/Settings/Holder/User" unique_id=1300856312]
+self_modulate = Color(0, 0.972549, 0.701961, 1)
+clip_children = 2
+layout_mode = 0
+offset_left = 1008.0
+offset_top = 132.0
+offset_right = 1360.0
+offset_bottom = 180.0
+metadata/_edit_group_ = true
+
+[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Holder/User/Update" unique_id=914272776]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 108903000.0
+step = 0.001
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_dbp5u")
+texture_progress = SubResource("GradientTexture2D_qt3dg")
+
+[node name="Info" type="Label" parent="Boards/Settings/Holder/User/Update" unique_id=582364837]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Download Update"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Version" type="Label" parent="Boards/Settings/Holder/User/Update" unique_id=1203139576]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "v0.1-Alpha"
+label_settings = SubResource("LabelSettings_dbp5u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Download" type="HTTPRequest" parent="Boards/Settings/Holder/User/Update" unique_id=66269744]
+download_chunk_size = 16777216
+use_threads = true
+max_redirects = 64
+
+[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Holder/User/Update" unique_id=1514645730]
+use_threads = true
+max_redirects = 64
+
+[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Holder/User/Update" unique_id=751337415]
+access = 2
+filters = PackedStringArray("*.exe")
+
+[node name="TotalBoards" type="Label" parent="Boards/Settings/Holder/User" unique_id=15957975]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 548.0
+offset_right = 656.0
+offset_bottom = 568.0
+
 [node name="Title" type="Label" parent="Boards/Settings" unique_id=684503044]
 layout_mode = 0
 offset_left = 256.0
@@ -167,24 +576,6 @@ offset_right = 681.0
 offset_bottom = 146.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
 text = "Settings"
-label_settings = SubResource("LabelSettings_xv0o8")
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Title2" type="Label" parent="Boards/Settings" unique_id=1239552384]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.5
-anchor_top = 0.306818
-anchor_right = 1.68047
-anchor_bottom = 0.306818
-offset_left = -1728.0
-offset_top = 712.0
-offset_right = -1303.0
-offset_bottom = 794.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
-text = "Temporary Settings"
 label_settings = SubResource("LabelSettings_xv0o8")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -211,55 +602,16 @@ max_lines_visible = 1
 visible_characters_behavior = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="BGInfo" type="Label" parent="Boards/Settings" unique_id=60180835]
-layout_mode = 0
-offset_left = 229.0
-offset_top = 158.0
-offset_right = 458.0
-offset_bottom = 178.0
-text = "Change Background Color"
-
-[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings" unique_id=336007133]
-layout_mode = 0
-offset_left = 205.0
-offset_top = 183.0
-offset_right = 544.0
-offset_bottom = 225.0
-edit_alpha = false
-
-[node name="BGInfo2" type="Label" parent="Boards/Settings" unique_id=1571313540]
-layout_mode = 0
-offset_left = 589.0
-offset_top = 158.0
-offset_right = 818.0
-offset_bottom = 178.0
-text = "Change Select Color"
-
-[node name="SelectColor" type="ColorPickerButton" parent="Boards/Settings" unique_id=1004771434]
-layout_mode = 0
-offset_left = 565.0
-offset_top = 183.0
-offset_right = 744.0
-offset_bottom = 225.0
-edit_alpha = false
-
-[node name="On" type="Button" parent="Boards/Settings/SelectColor" unique_id=521786014]
-layout_mode = 0
-offset_left = 179.0
-offset_top = 1.0
-offset_right = 283.0
-offset_bottom = 41.0
-text = "On"
-
 [node name="Note" type="VBoxContainer" parent="Boards/Settings" unique_id=59052850]
 clip_children = 2
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 0
-offset_left = 168.0
-offset_top = 232.0
-offset_right = 911.0
-offset_bottom = 438.0
+offset_left = 488.0
+offset_top = 840.0
+offset_right = 1592.0
+offset_bottom = 1160.0
 theme_override_constants/separation = 0
+metadata/_edit_group_ = true
 
 [node name="Title" type="LineEdit" parent="Boards/Settings/Note" unique_id=409101842]
 layout_mode = 2
@@ -302,11 +654,12 @@ And More to come."
 clip_children = 2
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 0
-offset_left = 169.0
-offset_top = 447.0
-offset_right = 1274.0
-offset_bottom = 904.0
+offset_left = -1032.0
+offset_top = 184.0
+offset_right = 73.0
+offset_bottom = 840.0
 theme_override_constants/separation = 0
+metadata/_edit_group_ = true
 
 [node name="Title" type="LineEdit" parent="Boards/Settings/Note2" unique_id=565384005]
 layout_mode = 2
@@ -351,11 +704,12 @@ The github repository will always have the latest updates and fixes than the rel
 clip_children = 2
 custom_minimum_size = Vector2(0, 140)
 layout_mode = 0
-offset_left = 1288.0
-offset_top = 904.0
-offset_right = 2176.0
-offset_bottom = 1536.0
+offset_left = -1032.0
+offset_top = 840.0
+offset_right = 488.0
+offset_bottom = 1160.0
 theme_override_constants/separation = 0
+metadata/_edit_group_ = true
 
 [node name="Title" type="LineEdit" parent="Boards/Settings/Changelog" unique_id=501657954]
 layout_mode = 2
@@ -376,92 +730,16 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
 bbcode_enabled = true
 text = "Loading Changelog..."
 
-[node name="ProjectDir" type="Button" parent="Boards/Settings" unique_id=1983753351]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-layout_mode = 0
-offset_left = 920.0
-offset_top = 400.0
-offset_right = 1243.0
-offset_bottom = 440.0
-text = "Open Project Directory"
-
-[node name="ProjectLink" type="Button" parent="Boards/Settings" unique_id=1605278813]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-layout_mode = 0
-offset_left = 920.0
-offset_top = 352.0
-offset_right = 1200.0
-offset_bottom = 392.0
-text = "Open Github Project"
-
-[node name="Update" type="Button" parent="Boards/Settings" unique_id=1300856312]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-clip_children = 2
-layout_mode = 0
-offset_left = 920.0
-offset_top = 296.0
-offset_right = 1160.0
-offset_bottom = 344.0
-
-[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Update" unique_id=914272776]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 108903000.0
-step = 0.001
-nine_patch_stretch = true
-texture_under = SubResource("GradientTexture2D_dbp5u")
-texture_progress = SubResource("GradientTexture2D_qt3dg")
-
-[node name="Info" type="Label" parent="Boards/Settings/Update" unique_id=582364837]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Download Update"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Version" type="Label" parent="Boards/Settings/Update" unique_id=1203139576]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "v0.1-Alpha"
-label_settings = SubResource("LabelSettings_dbp5u")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Download" type="HTTPRequest" parent="Boards/Settings/Update" unique_id=66269744]
-download_chunk_size = 16777216
-use_threads = true
-max_redirects = 64
-
-[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Update" unique_id=1514645730]
-use_threads = true
-max_redirects = 64
-
-[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Update" unique_id=751337415]
-access = 2
-filters = PackedStringArray("*.exe")
-
 [node name="ToDo" type="VBoxContainer" parent="Boards/Settings" unique_id=1970658981]
 layout_mode = 0
-offset_left = 1288.0
-offset_top = 456.0
-offset_right = 1564.0
-offset_bottom = 560.0
+offset_left = 1600.0
+offset_top = 176.0
+offset_right = 2345.0
+offset_bottom = 424.0
 theme_override_constants/separation = 1
+alignment = 2
 script = ExtResource("7_dbp5u")
+metadata/_edit_group_ = true
 
 [node name="Title" type="LineEdit" parent="Boards/Settings/ToDo" unique_id=1331270288]
 layout_mode = 2
@@ -475,154 +753,6 @@ expand_to_text_length = true
 [node name="List" type="VBoxContainer" parent="Boards/Settings/ToDo" unique_id=747756254]
 layout_mode = 2
 
-[node name="ChangeDurTitle" type="Label" parent="Boards/Settings" unique_id=815813069]
-layout_mode = 0
-offset_left = 1168.0
-offset_top = 296.0
-offset_right = 1496.0
-offset_bottom = 348.0
-text = "Change duration between loading
-items"
-
-[node name="TotalBoards" type="Label" parent="Boards/Settings" unique_id=15957975]
-layout_mode = 0
-offset_left = 1168.0
-offset_top = 176.0
-offset_right = 1496.0
-offset_bottom = 196.0
-
-[node name="ChangeDurTitle2" type="Label" parent="Boards/Settings" unique_id=1841606141]
-layout_mode = 0
-offset_left = 208.0
-offset_top = 1016.0
-offset_right = 635.0
-offset_bottom = 1068.0
-text = "Changes made here are only toggles for the 
-session and are not meant to be saved."
-
-[node name="LoadDur" type="SpinBox" parent="Boards/Settings" unique_id=576907677]
-layout_mode = 0
-offset_left = 1288.0
-offset_top = 317.0
-offset_right = 1592.0
-offset_bottom = 345.0
-max_value = 1.0
-step = 0.001
-alignment = 1
-suffix = "second(s)"
-
-[node name="Proload" type="Button" parent="Boards/Settings" unique_id=1523091271]
-layout_mode = 0
-offset_left = 1229.0
-offset_top = 317.0
-offset_right = 1285.0
-offset_bottom = 345.0
-
-[node name="FeedbackTitle" type="Label" parent="Boards/Settings" unique_id=851884902]
-layout_mode = 0
-offset_left = 1616.0
-offset_top = 312.0
-offset_right = 1740.0
-offset_bottom = 343.0
-text = "Feedback"
-label_settings = SubResource("LabelSettings_b8p06")
-
-[node name="Feedback" type="TextEdit" parent="Boards/Settings" unique_id=616008297]
-layout_mode = 0
-offset_left = 1600.0
-offset_top = 344.0
-offset_right = 2168.0
-offset_bottom = 480.0
-placeholder_text = "Any bugs, suggestions are appreciated"
-wrap_mode = 1
-scroll_smooth = true
-caret_blink = true
-
-[node name="CheckFocus" parent="Boards/Settings/Feedback" unique_id=1395884035 node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
-par = NodePath("..")
-
-[node name="SubmitFeedback" type="Button" parent="Boards/Settings" unique_id=918685635]
-layout_mode = 0
-offset_left = 2032.0
-offset_top = 312.0
-offset_right = 2160.0
-offset_bottom = 340.0
-text = "Submit"
-
-[node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/SubmitFeedback" unique_id=1409536399]
-use_threads = true
-
-[node name="TotalItems" type="Label" parent="Boards/Settings" unique_id=368247361]
-layout_mode = 0
-offset_left = 1208.0
-offset_top = 360.0
-offset_right = 1576.0
-offset_bottom = 396.0
-text = "Total Items: 0 / INF"
-label_settings = SubResource("LabelSettings_eab0n")
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="ItemLimit" type="SpinBox" parent="Boards/Settings" unique_id=16885844]
-layout_mode = 0
-offset_left = 1248.0
-offset_top = 400.0
-offset_right = 1592.0
-offset_bottom = 440.0
-allow_greater = true
-alignment = 1
-prefix = "Item Limit"
-
-[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings" unique_id=953834483]
-layout_mode = 0
-offset_left = 1168.0
-offset_top = 200.0
-offset_right = 1508.0
-offset_bottom = 240.0
-min_value = 8.0
-value = 15.0
-alignment = 1
-update_on_text_changed = true
-prefix = "Default Font Size:"
-
-[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings" unique_id=1692091208]
-layout_mode = 0
-offset_left = 1168.0
-offset_top = 248.0
-offset_right = 1508.0
-offset_bottom = 288.0
-min_value = 8.0
-value = 15.0
-alignment = 1
-update_on_text_changed = true
-prefix = "Default Title Size:"
-
-[node name="Center" type="Button" parent="Boards/Settings" unique_id=1555117319]
-layout_mode = 0
-offset_left = 920.0
-offset_top = 232.0
-offset_right = 1160.0
-offset_bottom = 288.0
-text = "Display Center:"
-
-[node name="PreviewNotes" type="Button" parent="Boards/Settings" unique_id=743380730]
-layout_mode = 0
-offset_left = 208.0
-offset_top = 1072.0
-offset_right = 512.0
-offset_bottom = 1112.0
-text = "Preview Notes:"
-
-[node name="ShowBar" type="Button" parent="Boards/Settings" unique_id=812464178]
-layout_mode = 0
-offset_left = 856.0
-offset_top = 184.0
-offset_right = 1160.0
-offset_bottom = 224.0
-text = "Show options bar:"
-
 [node name="Calendar" type="Button" parent="Boards/Settings" unique_id=1252865191]
 layout_mode = 0
 offset_left = 688.0
@@ -630,126 +760,6 @@ offset_top = 104.0
 offset_right = 992.0
 offset_bottom = 144.0
 text = "Calendar"
-
-[node name="QuickOptions" type="Panel" parent="Boards/Settings" unique_id=522152478]
-layout_mode = 0
-offset_left = 856.0
-offset_top = 928.0
-offset_right = 1272.0
-offset_bottom = 1248.0
-script = ExtResource("10_eab0n")
-
-[node name="Label" type="Label" parent="Boards/Settings/QuickOptions" unique_id=2109982329]
-layout_mode = 0
-offset_left = 152.0
-offset_top = 8.0
-offset_right = 409.0
-offset_bottom = 72.0
-text = "Edit Quick Options"
-label_settings = SubResource("LabelSettings_lkim6")
-
-[node name="SelectedLabel" type="Label" parent="Boards/Settings/QuickOptions" unique_id=817895432]
-layout_mode = 0
-offset_left = 152.0
-offset_top = 32.0
-offset_right = 408.0
-offset_bottom = 72.0
-text = "Edit Quick Options"
-label_settings = SubResource("LabelSettings_1yho4")
-vertical_alignment = 1
-
-[node name="Selected1" type="TextureRect" parent="Boards/Settings/QuickOptions" unique_id=2118104933]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 74.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="Selected2" type="TextureRect" parent="Boards/Settings/QuickOptions" unique_id=1831403655]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 74.0
-offset_top = 6.0
-offset_right = 142.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/QuickOptions" unique_id=58988435]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 144.0
-offset_bottom = 72.0
-
-[node name="Q1" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder" unique_id=1832456691]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "1"
-
-[node name="Q2" type="Button" parent="Boards/Settings/QuickOptions/QuickHolder" unique_id=1486760194]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "2"
-
-[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/QuickOptions" unique_id=80981086]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 80.0
-offset_right = 408.0
-offset_bottom = 312.0
-
-[node name="Options" type="VBoxContainer" parent="Boards/Settings/QuickOptions/ScrollHolder" unique_id=1854037483]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="DisplayURL" type="Panel" parent="Boards/Settings" unique_id=27617456]
-layout_mode = 0
-offset_left = 1512.0
-offset_top = 200.0
-offset_right = 2160.0
-offset_bottom = 304.0
-script = ExtResource("9_eab0n")
-
-[node name="Title" type="Label" parent="Boards/Settings/DisplayURL" unique_id=2059787646]
-layout_mode = 0
-offset_right = 648.0
-offset_bottom = 24.0
-text = "Display link preview (Optional)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Info" type="RichTextLabel" parent="Boards/Settings/DisplayURL" unique_id=904950499]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 24.0
-offset_right = 640.0
-offset_bottom = 88.0
-bbcode_enabled = true
-text = "To preview thumbnails of images, you are required to retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
-fit_content = true
-
-[node name="Key" type="LineEdit" parent="Boards/Settings/DisplayURL" unique_id=1566631016]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 72.0
-offset_right = 640.0
-offset_bottom = 100.0
-placeholder_text = "API Key here"
-alignment = 1
-caret_blink = true
-secret = true
-
-[node name="Hide" type="Button" parent="Boards/Settings/DisplayURL" unique_id=1764950365]
-layout_mode = 0
-offset_left = 216.0
-offset_top = 72.0
-offset_right = 240.0
-offset_bottom = 96.0
-icon = ExtResource("28_b8p06")
-expand_icon = true
 
 [node name="Calendar" type="Control" parent="Boards" unique_id=1532667453 groups=["Protect"]]
 visible = false
@@ -1233,33 +1243,33 @@ text = "Untiled Board"
 [connection signal="body_entered" from="Camera/Drag" to="Camera" method="_on_drag_body_entered"]
 [connection signal="body_exited" from="Camera/Drag" to="Camera" method="_on_drag_body_exited"]
 [connection signal="timeout" from="Camera/Timer" to="Camera" method="_on_timer_timeout"]
-[connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
-[connection signal="color_changed" from="Boards/Settings/SelectColor" to="Boards/Settings" method="_on_bg_picker_2_color_changed"]
-[connection signal="pressed" from="Boards/Settings/SelectColor/On" to="Boards/Settings" method="_on_on_pressed"]
+[connection signal="value_changed" from="Boards/Settings/Holder/Items/DefaultFontSize" to="Boards/Settings" method="_on_default_font_size_value_changed"]
+[connection signal="value_changed" from="Boards/Settings/Holder/Items/DefaultTitle" to="Boards/Settings" method="_on_default_title_value_changed"]
+[connection signal="value_changed" from="Boards/Settings/Holder/Items/LoadDur" to="Boards/Settings" method="_on_load_dur_value_changed"]
+[connection signal="pressed" from="Boards/Settings/Holder/Items/LoadDur/Proload" to="Boards/Settings" method="_on_proload_pressed"]
+[connection signal="value_changed" from="Boards/Settings/Holder/Items/ItemLimit" to="Boards/Settings" method="_on_item_limit_value_changed"]
+[connection signal="pressed" from="Boards/Settings/Holder/Items/PreviewNotes" to="Boards/Settings" method="_on_preview_notes_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/QuickOptions/QuickHolder/Q1" to="Boards/Settings/Holder/User/QuickOptions" method="_on_q_1_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/QuickOptions/QuickHolder/Q2" to="Boards/Settings/Holder/User/QuickOptions" method="_on_q_2_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/Feedback/SubmitFeedback" to="Boards/Settings" method="_on_submit_feedback_pressed"]
+[connection signal="request_completed" from="Boards/Settings/Holder/User/Feedback/SubmitFeedback/SubmitReq" to="Boards/Settings" method="_on_submit_req_request_completed"]
+[connection signal="color_changed" from="Boards/Settings/Holder/User/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
+[connection signal="color_changed" from="Boards/Settings/Holder/User/DragColor" to="Boards/Settings" method="_on_drag_color_color_changed"]
+[connection signal="color_changed" from="Boards/Settings/Holder/User/SelectColor" to="Boards/Settings" method="_on_bg_picker_2_color_changed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/SelectColor/On" to="Boards/Settings" method="_on_on_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/ProjectDir" to="Boards/Settings" method="_on_project_dir_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/ProjectLink" to="Boards/Settings" method="_on_project_link_pressed"]
+[connection signal="text_changed" from="Boards/Settings/Holder/User/DisplayURL/Key" to="Boards/Settings/Holder/User/DisplayURL" method="_on_key_text_changed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/DisplayURL/Hide" to="Boards/Settings/Holder/User/DisplayURL" method="_on_hide_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/Center" to="Boards/Settings" method="_on_center_pressed"]
+[connection signal="pressed" from="Boards/Settings/Holder/User/Update" to="Boards/Settings" method="_on_update_pressed"]
+[connection signal="request_completed" from="Boards/Settings/Holder/User/Update/Download" to="Boards/Settings" method="_on_download_request_completed"]
+[connection signal="request_completed" from="Boards/Settings/Holder/User/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
+[connection signal="file_selected" from="Boards/Settings/Holder/User/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
 [connection signal="meta_clicked" from="Boards/Settings/Note/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="meta_clicked" from="Boards/Settings/Note2/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="meta_clicked" from="Boards/Settings/Changelog/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
-[connection signal="pressed" from="Boards/Settings/ProjectDir" to="Boards/Settings" method="_on_project_dir_pressed"]
-[connection signal="pressed" from="Boards/Settings/ProjectLink" to="Boards/Settings" method="_on_project_link_pressed"]
-[connection signal="pressed" from="Boards/Settings/Update" to="Boards/Settings" method="_on_update_pressed"]
-[connection signal="request_completed" from="Boards/Settings/Update/Download" to="Boards/Settings" method="_on_download_request_completed"]
-[connection signal="request_completed" from="Boards/Settings/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
-[connection signal="file_selected" from="Boards/Settings/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
-[connection signal="value_changed" from="Boards/Settings/LoadDur" to="Boards/Settings" method="_on_load_dur_value_changed"]
-[connection signal="pressed" from="Boards/Settings/Proload" to="Boards/Settings" method="_on_proload_pressed"]
-[connection signal="pressed" from="Boards/Settings/SubmitFeedback" to="Boards/Settings" method="_on_submit_feedback_pressed"]
-[connection signal="request_completed" from="Boards/Settings/SubmitFeedback/SubmitReq" to="Boards/Settings" method="_on_submit_req_request_completed"]
-[connection signal="value_changed" from="Boards/Settings/ItemLimit" to="Boards/Settings" method="_on_item_limit_value_changed"]
-[connection signal="value_changed" from="Boards/Settings/DefaultFontSize" to="Boards/Settings" method="_on_default_font_size_value_changed"]
-[connection signal="value_changed" from="Boards/Settings/DefaultTitle" to="Boards/Settings" method="_on_default_title_value_changed"]
-[connection signal="pressed" from="Boards/Settings/Center" to="Boards/Settings" method="_on_center_pressed"]
-[connection signal="pressed" from="Boards/Settings/PreviewNotes" to="Boards/Settings" method="_on_preview_notes_pressed"]
-[connection signal="pressed" from="Boards/Settings/ShowBar" to="Boards/Settings" method="_on_show_bar_pressed"]
 [connection signal="pressed" from="Boards/Settings/Calendar" to="Boards/Settings" method="_on_calendar_pressed"]
-[connection signal="pressed" from="Boards/Settings/QuickOptions/QuickHolder/Q1" to="Boards/Settings/QuickOptions" method="_on_q_1_pressed"]
-[connection signal="pressed" from="Boards/Settings/QuickOptions/QuickHolder/Q2" to="Boards/Settings/QuickOptions" method="_on_q_2_pressed"]
-[connection signal="text_changed" from="Boards/Settings/DisplayURL/Key" to="Boards/Settings/DisplayURL" method="_on_key_text_changed"]
-[connection signal="pressed" from="Boards/Settings/DisplayURL/Hide" to="Boards/Settings/DisplayURL" method="_on_hide_pressed"]
 [connection signal="item_selected" from="Boards/Calendar/Main/Month" to="Boards/Calendar" method="_on_month_item_selected"]
 [connection signal="value_changed" from="Boards/Calendar/Main/Year" to="Boards/Calendar" method="_on_year_value_changed"]
 [connection signal="text_changed" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_changed"]

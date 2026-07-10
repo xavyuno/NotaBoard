@@ -1,8 +1,8 @@
 extends Control
 
-@onready var progress: TextureProgressBar = $Update / Progress
-@onready var info: Label = $Update / Info
-@onready var download: HTTPRequest = $Update / Download
+@onready var progress: TextureProgressBar = $Holder/User/Update/Progress
+@onready var info: Label = $Holder/User/Update/Info
+@onready var download: HTTPRequest = $Holder/User/Update/Download
 
 var Downloading: = false
 var Version = ""
@@ -20,29 +20,29 @@ func _ready() -> void :
 
 func _physics_process(delta: float) -> void :
 	if Downloading:
-		$Update / Progress.value = download.get_downloaded_bytes()
-		$Update / Info.text = "Downloading Update..."
-		$Update / Version.text = str(Version)
+		$Holder/User/Update / Progress.value = download.get_downloaded_bytes()
+		$Holder/User/Update / Info.text = "Downloading Update..."
+		$Holder/User/Update / Version.text = str(Version)
 		get_window().set_taskbar_progress_value(
-			$Update / Progress.value / $Update / Progress.max_value
+			$Holder/User/Update / Progress.value / $Holder/User/Update / Progress.max_value
 		)
-	$Update / Version.visible = Downloading
-	$TotalItems.text = "Total Items: " + str(User.TotalItems) + " / " + str(Settings.ItemLimit)
-	$PreviewNotes.text = "Previewing Notes: On" if User.PreviewingNotes else "Previewing Notes: Off"
+	$Holder/User/Update / Version.visible = Downloading
+	$Holder/Items/ItemLimit/TotalItems.text = "Total Items: " + str(User.TotalItems) + " / " + str(Settings.ItemLimit)
+	$Holder/Items/PreviewNotes.text = "Previewing Notes: On" if User.PreviewingNotes else "Previewing Notes: Off"
 
 func SettingsChanged():
-	$BGPicker.color = Settings.BackgroundCol
-	$LoadDur.value = Settings.LoadDur
-	$ItemLimit.value = Settings.ItemLimit
-	$Center.text = "Show Center: On" if Settings.ShowCenter else "Show Center: Off"
-	$Center.alignment = HORIZONTAL_ALIGNMENT_CENTER if Settings.ShowCenter else HORIZONTAL_ALIGNMENT_LEFT
-	$ShowBar.text = "Show options bar: On" if Settings.OptionsEnabled else "Show options bar: Off"
-	$Proload.text = "On" if Settings.ProgressiveLoading else "Off"
-	$DefaultFontSize.value = Settings.DefaultFontSize
-	$DefaultTitle.value = Settings.DefaultTtileSize
-	$TotalBoards.text = "Total Boards: " + str(Settings.TotalBoards)
-	$SelectColor.color = Settings.SelectCol
-	$SelectColor/On.text = "On" if Settings.CanSelectCol else "Off"
+	$Holder/User/BGPicker.color = Settings.BackgroundCol
+	$Holder/Items/LoadDur.value = Settings.LoadDur
+	$Holder/Items/ItemLimit.value = Settings.ItemLimit
+	$Holder/User/Center.text = "Show center of board: On" if Settings.ShowCenter else "Show center of board: Off"
+	$Holder/User/Center.alignment = HORIZONTAL_ALIGNMENT_CENTER if Settings.ShowCenter else HORIZONTAL_ALIGNMENT_LEFT
+	$Holder/Items/LoadDur/Proload.text = "On" if Settings.ProgressiveLoading else "Off"
+	$Holder/Items/DefaultFontSize.value = Settings.DefaultFontSize
+	$Holder/Items/DefaultTitle.value = Settings.DefaultTtileSize
+	$Holder/User/TotalBoards.text = "Total Boards: " + str(Settings.TotalBoards)
+	$Holder/User/SelectColor.color = Settings.SelectCol
+	$Holder/User/SelectColor/On.text = "On" if Settings.CanSelectCol else "Off"
+	$Holder/User/DragColor.color = Settings.DragCol
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -55,12 +55,12 @@ func _on_project_link_pressed() -> void :
 	OS.shell_open("https://github.com/xavyuno/Task-Manager")
 
 func _on_update_pressed() -> void :
-	$Update / FileDialog.current_path = Settings.UpdatePath
-	$Update / FileDialog.popup(Rect2i(600, 600, 600, 600))
+	$Holder/User/Update / FileDialog.current_path = Settings.UpdatePath
+	$Holder/User/Update / FileDialog.popup(Rect2i(600, 600, 600, 600))
 
 func _on_download_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
 	Downloading = false
-	$Update / Info.text = "Update Finished!"
+	$Holder/User/Update / Info.text = "Update Finished!"
 	print("Retrieved Data")
 	if response_code == 200:
 		var file = FileAccess.open(Settings.UpdatePath, FileAccess.WRITE)
@@ -70,19 +70,19 @@ func _on_download_request_completed(result: int, response_code: int, headers: Pa
 	else:
 		print("Failed to get update")
 	await get_tree().create_timer(1).timeout
-	$Update / Info.text = "Download Update"
+	$Holder/User/Update / Info.text = "Download Update"
 
 func _on_get_version_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
 	if response_code == 200:
 		Version = body.get_string_from_utf8().trim_prefix("v").to_float()
 		var OwnedVer = FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text().trim_prefix("v").to_float()
 		if Version <= OwnedVer:
-			$Update / Info.text = "Already Up-to-date!"
+			$Holder/User/Update / Info.text = "Already Up-to-date!"
 			await get_tree().create_timer(1).timeout
-			$Update / Info.text = "Download Update"
+			$Holder/User/Update / Info.text = "Download Update"
 			return
 		else :
-			$Update / Info.text = "Recieved Latest Version!"
+			$Holder/User/Update / Info.text = "Recieved Latest Version!"
 			print("Retrieved version: ", Version)
 			var url = "https://github.com/xavyuno/NotaBoard/releases/download/v%s/NotaBoard.exe" % str(Version)
 			print("url: " + url)
@@ -92,9 +92,9 @@ func _on_get_version_request_completed(result: int, response_code: int, headers:
 		print("Failed to get version")
 
 func _on_file_dialog_file_selected(path: String) -> void :
-	$Update / Info.text = "Getting Latest Version"
+	$Holder/User/Update / Info.text = "Getting Latest Version"
 	Settings.UpdatePath = path
-	$Update / GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
+	$Holder/User/Update / GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
 
 
 func _on_notes_meta_clicked(meta: Variant) -> void:
@@ -104,9 +104,9 @@ func _on_load_dur_value_changed(value: float) -> void:
 	Settings.LoadDur = value
 
 func _on_submit_feedback_pressed() -> void:
-	if $Feedback.text == "":
+	if $Holder/User/Feedback.text == "":
 		return
-	var req := $SubmitFeedback/SubmitReq
+	var req := $Holder/User/Feedback/SubmitFeedback/SubmitReq
 	req.request(System.GetAPI(0), ["Content-type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"content" : "```\n" + $Feedback.text + "\n```"}))
 
 func _on_submit_req_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
@@ -154,3 +154,7 @@ func _on_bg_picker_2_color_changed(color: Color) -> void:
 func _on_on_pressed() -> void:
 	Settings.CanSelectCol = !Settings.CanSelectCol
 	Settings.emit_signal("SettingsChanged")
+
+
+func _on_drag_color_color_changed(color: Color) -> void:
+	Settings.DragCol = color

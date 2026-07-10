@@ -1,5 +1,13 @@
 extends Node
 
+const APIfILE = "res://.API"
+const MAINDIR = "user://"
+const  SAVEFILE = "Save"
+const SETTINGSFILE = "Settings"
+const HISTORYFILE = "History"
+const EXTENSION = ".txt"
+const AUTOSAVELOC = "AutoSave/"
+
 func SaveAll():
 	if User.TestingMode:
 		return
@@ -7,21 +15,35 @@ func SaveAll():
 	SaveRemoveHistory()
 	SaveSettings()
 
+func BackupAll():
+	DirAccess.make_dir_absolute(MAINDIR + AUTOSAVELOC)
+	SaveSettings(AUTOSAVELOC, "AUTO")
+	SaveRemoveHistory(AUTOSAVELOC, "AUTO")
+	SaveStoreHistory(AUTOSAVELOC, "AUTO")
+
 func GetAPI(Index) -> String:
-	var file = FileAccess.open("res://.API" ,FileAccess.READ)
+	var file = FileAccess.open(APIfILE,FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 	file.close()
 	return data[Index]
 
-func SaveStoreHistory():
-	var fileSave = FileAccess.open("user://Save.txt", FileAccess.WRITE)
-	fileSave.store_var(User.StoredHistory, true)
-	fileSave.close()
+func SaveStoreHistory(start = "", end = ""):
+	var fileSave = FileAccess.open(MAINDIR + start + SAVEFILE + end + EXTENSION, FileAccess.WRITE)
+	if fileSave:
+		fileSave.store_var(User.StoredHistory, true)
+		fileSave.close()
 
-func SaveSettings():
-	var fileSave = FileAccess.open("user://Settings.txt", FileAccess.WRITE)
-	fileSave.store_var(Settings.GetSettings(), true)
-	fileSave.close()
+func SaveSettings(start = "", end = ""):
+	var fileSave = FileAccess.open(MAINDIR + start + SETTINGSFILE + end + EXTENSION, FileAccess.WRITE)
+	if fileSave:
+		fileSave.store_var(Settings.GetSettings(), true)
+		fileSave.close()
+
+func SaveRemoveHistory(start = "", end = ""):
+	var file = FileAccess.open(MAINDIR + start + HISTORYFILE + end + EXTENSION , FileAccess.WRITE)
+	if file:
+		file.store_var(User.RemovedHistory, true)
+		file.close()
 
 func CreateRectangle(p1: Vector2, p2: Vector2):
 	var TopRight = Vector2(p2.x, p1.y)
@@ -33,11 +55,6 @@ func CreateRectangle(p1: Vector2, p2: Vector2):
 	Vertices.append(BottomLeft) 
 	Vertices.append(p1)
 	return Vertices
-
-func SaveRemoveHistory():
-	var file = FileAccess.open("user://History.txt", FileAccess.WRITE)
-	file.store_var(User.RemovedHistory, true)
-	file.close()
 
 func AddObject(item, atMouse = true, parent = null, extraData = {}, emit = true):
 	var obj
