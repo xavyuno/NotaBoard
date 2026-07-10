@@ -60,6 +60,11 @@ expand_to_text_length = true
 [node name="CheckFocus" parent="." unique_id=1506210347 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("../BoardName")
 
+[node name="Timer" type="Timer" parent="." unique_id=525114150]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="pressed" from="New" to="." method="_on_new_pressed"]
 [connection signal="text_changed" from="BoardName" to="." method="_on_board_name_text_changed"]
 [connection signal="text_submitted" from="BoardName" to="." method="_on_board_name_text_submitted"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

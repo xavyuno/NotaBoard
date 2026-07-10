@@ -23,6 +23,17 @@ func SaveSettings():
 	fileSave.store_var(Settings.GetSettings(), true)
 	fileSave.close()
 
+func CreateRectangle(p1: Vector2, p2: Vector2):
+	var TopRight = Vector2(p2.x, p1.y)
+	var BottomLeft = Vector2(p1.x, p2.y)
+	var Vertices = PackedVector2Array()
+	Vertices.append(p1)
+	Vertices.append(TopRight)
+	Vertices.append(p2)
+	Vertices.append(BottomLeft) 
+	Vertices.append(p1)
+	return Vertices
+
 func SaveRemoveHistory():
 	var file = FileAccess.open("user://History.txt", FileAccess.WRITE)
 	file.store_var(User.RemovedHistory, true)

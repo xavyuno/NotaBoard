@@ -1,6 +1,10 @@
 extends Camera2D
 
+@onready var drag: Area2D = $Drag
+
 var Dragging = false
+var DragSelecting := false
+var DragSelectPos := Vector2.ZERO
 var ZoomScale = Vector2(0.01, 0.01)
 
 func _ready() -> void :
@@ -24,6 +28,14 @@ func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 35
 			position = User.CamPosCalendar
 		else :
 			position = CamPos
+
+func _draw() -> void:
+	if User.DragSelecting:
+		draw_polyline(
+				System.CreateRectangle(DragSelectPos, get_local_mouse_position()),
+			Settings.DragCol,
+			5
+		)
 
 func _physics_process(delta: float) -> void :
 	User.CamZoom = zoom
@@ -49,6 +61,17 @@ func _physics_process(delta: float) -> void :
 		zoom += ZoomScale
 	if Input.is_action_pressed("ZoomOut") and zoom.x >= 0.1 and CamConditions():
 		zoom -= ZoomScale
+	
+	if Input.is_action_pressed("Click") and User.DragSelecting:
+		drag.get_node("CollisionPolygon2D").polygon = System.CreateRectangle(DragSelectPos, get_local_mouse_position())
+	if Input.is_action_just_pressed("Click"):
+		DragSelectPos = get_local_mouse_position()
+		DragSelecting = true
+		$Timer.start()
+	if Input.is_action_just_released("Click"):
+		User.DragSelecting = false
+		DragSelecting = false
+	drag.get_node("CollisionPolygon2D").disabled = !User.DragSelecting
 
 func CamConditions():
 	if !User.InFocus and (!User.MouseInCanvas or User.CanvasHidden):
@@ -58,6 +81,7 @@ func CamConditions():
 
 func _process(delta: float) -> void :
 	$ClearFocus.global_position = User.CamPos - Vector2(10000, 10000)
+	queue_redraw()
 
 func _input(event: InputEvent) -> void :
 	if event is InputEventMouseButton and !Input.is_action_pressed("MultiSelect"):
@@ -68,3 +92,21 @@ func _input(event: InputEvent) -> void :
 	if event is InputEventMouseMotion:
 		if Dragging:
 			position += - event.relative / User.CamZoom.clamp(Vector2(0, 0), Vector2(10, 10))
+
+
+func _on_drag_body_entered(body: Node2D) -> void:
+	if User.DragSelecting:
+		print("select entered")
+		body.get_parent().call_deferred("FocusItem")
+
+func _on_drag_body_exited(body: Node2D) -> void:
+	if User.DragSelecting:
+		body.get_parent().call_deferred("ItemFocusLost")
+
+
+func _on_timer_timeout() -> void:
+	if DragSelecting:
+		User.DragSelecting = true
+	else :
+		User.DragSelecting = false
+	DragSelecting = false

@@ -26,6 +26,7 @@ var MousePos: Vector2
 var CamPos: Vector2
 var CamZoom: Vector2
 var InFocus: = false
+var DragSelecting := false
 var DraggingObject: = false
 var DraggedObject: PackedScene
 
@@ -37,6 +38,7 @@ var Boards: = {}
 
 var SelectedObject = null
 var MultiSelectedObjects = []
+var MultiCopiedObjects := []
 var MultiSelecting = false
 var AllSameSelectedObjects = false
 var CopiedObject = null

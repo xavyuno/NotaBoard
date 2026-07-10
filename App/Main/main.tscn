@@ -110,15 +110,27 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Camera" type="Camera2D" parent="." unique_id=893254865]
+z_index = 1
 position = Vector2(640, 352)
 script = ExtResource("1")
 
 [node name="ClearFocus" type="ColorRect" parent="Camera" unique_id=1507019658]
+show_behind_parent = true
+z_index = -1
 offset_left = -12416.0
 offset_top = -5824.0
 offset_right = 19392.0
 offset_bottom = 10560.0
 color = Color(0.425323, 0.41232, 0.415591, 1)
+
+[node name="Drag" type="Area2D" parent="Camera" unique_id=1854866221]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Camera/Drag" unique_id=388869367]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="Timer" type="Timer" parent="Camera" unique_id=1162451109]
+wait_time = 0.25
+one_shot = true
 
 [node name="Boards" type="TabContainer" parent="." unique_id=1301096939]
 layout_mode = 0
@@ -136,11 +148,11 @@ clip_tabs = false
 tabs_visible = false
 script = ExtResource("2")
 
-[node name="Home" parent="Boards" unique_id=551998953 instance=ExtResource("3")]
+[node name="Home" parent="Boards" unique_id=551998953 groups=["Protect"] instance=ExtResource("3")]
 visible = false
 layout_mode = 2
 
-[node name="Settings" type="Control" parent="Boards" unique_id=1384060845]
+[node name="Settings" type="Control" parent="Boards" unique_id=1384060845 groups=["Protect"]]
 show_behind_parent = true
 light_mask = 0
 layout_mode = 2
@@ -211,9 +223,33 @@ text = "Change Background Color"
 layout_mode = 0
 offset_left = 205.0
 offset_top = 183.0
-offset_right = 848.0
+offset_right = 544.0
 offset_bottom = 225.0
 edit_alpha = false
+
+[node name="BGInfo2" type="Label" parent="Boards/Settings" unique_id=1571313540]
+layout_mode = 0
+offset_left = 589.0
+offset_top = 158.0
+offset_right = 818.0
+offset_bottom = 178.0
+text = "Change Select Color"
+
+[node name="SelectColor" type="ColorPickerButton" parent="Boards/Settings" unique_id=1004771434]
+layout_mode = 0
+offset_left = 565.0
+offset_top = 183.0
+offset_right = 744.0
+offset_bottom = 225.0
+edit_alpha = false
+
+[node name="On" type="Button" parent="Boards/Settings/SelectColor" unique_id=521786014]
+layout_mode = 0
+offset_left = 179.0
+offset_top = 1.0
+offset_right = 283.0
+offset_bottom = 41.0
+text = "On"
 
 [node name="Note" type="VBoxContainer" parent="Boards/Settings" unique_id=59052850]
 clip_children = 2
@@ -245,6 +281,7 @@ bbcode_enabled = true
 text = "[b]Item keybinds:[/b][ul]
 ctrl + z: Undo
 ctrl + c: Copy (Pastes item at mouse position)
+ctrl + x: Cut
 ctrl + d: Duplicate (Pastes item in same position)
 ctrl + r: Resets camera position
 ctrl + s: Resize item
@@ -714,7 +751,7 @@ offset_bottom = 96.0
 icon = ExtResource("28_b8p06")
 expand_icon = true
 
-[node name="Calendar" type="Control" parent="Boards" unique_id=1532667453]
+[node name="Calendar" type="Control" parent="Boards" unique_id=1532667453 groups=["Protect"]]
 visible = false
 show_behind_parent = true
 light_mask = 0
@@ -834,7 +871,7 @@ vertical_alignment = 1
 [node name="Nodes" type="Control" parent="UI" unique_id=49535082]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 160.0
+offset_right = 168.0
 offset_bottom = 704.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
@@ -852,7 +889,7 @@ grow_vertical = 2
 layout_mode = 0
 offset_left = 8.0
 offset_top = 48.0
-offset_right = 152.0
+offset_right = 160.0
 offset_bottom = 696.0
 
 [node name="Search" type="LineEdit" parent="UI/Nodes/Holder" unique_id=409646633]
@@ -1030,6 +1067,8 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "History"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle" unique_id=1417363903]
 layout_mode = 2
@@ -1053,7 +1092,32 @@ text_overrun_behavior = 4
 [node name="Delete" type="Button" parent="UI/Nodes/Holder" unique_id=1694297993]
 self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 2
-text = "Delete All"
+text = "ERASE ALL"
+
+[node name="DeleteAll" type="VBoxContainer" parent="UI/Nodes/Holder" unique_id=305241576]
+visible = false
+layout_mode = 2
+
+[node name="Warning" type="Label" parent="UI/Nodes/Holder/DeleteAll" unique_id=1040294257]
+layout_mode = 2
+text = "ARE YOU SURE?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeleteAll" type="HBoxContainer" parent="UI/Nodes/Holder/DeleteAll" unique_id=1533681573]
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="UI/Nodes/Holder/DeleteAll/DeleteAll" unique_id=1263101057]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="UI/Nodes/Holder/DeleteAll/DeleteAll" unique_id=575549293]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
 
 [node name="FileDialog" type="FileDialog" parent="UI/Nodes" unique_id=207246629]
 auto_translate_mode = 1
@@ -1072,9 +1136,11 @@ clip_children = 2
 light_mask = 0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 152.0
+offset_right = 160.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
+alignment = 1
+last_wrap_alignment = 2
 script = ExtResource("23")
 
 [node name="Close" type="Button" parent="UI/Canvas" unique_id=409667106]
@@ -1164,7 +1230,12 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Untiled Board"
 
+[connection signal="body_entered" from="Camera/Drag" to="Camera" method="_on_drag_body_entered"]
+[connection signal="body_exited" from="Camera/Drag" to="Camera" method="_on_drag_body_exited"]
+[connection signal="timeout" from="Camera/Timer" to="Camera" method="_on_timer_timeout"]
 [connection signal="color_changed" from="Boards/Settings/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
+[connection signal="color_changed" from="Boards/Settings/SelectColor" to="Boards/Settings" method="_on_bg_picker_2_color_changed"]
+[connection signal="pressed" from="Boards/Settings/SelectColor/On" to="Boards/Settings" method="_on_on_pressed"]
 [connection signal="meta_clicked" from="Boards/Settings/Note/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="meta_clicked" from="Boards/Settings/Note2/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
 [connection signal="meta_clicked" from="Boards/Settings/Changelog/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
@@ -1192,6 +1263,7 @@ text = "Untiled Board"
 [connection signal="item_selected" from="Boards/Calendar/Main/Month" to="Boards/Calendar" method="_on_month_item_selected"]
 [connection signal="value_changed" from="Boards/Calendar/Main/Year" to="Boards/Calendar" method="_on_year_value_changed"]
 [connection signal="text_changed" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_changed"]
+[connection signal="text_submitted" from="UI/Nodes/Holder/Search" to="UI/Nodes" method="_on_search_text_submitted"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/Board" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/FontSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_font_size_value_changed"]
 [connection signal="value_changed" from="UI/Nodes/Holder/OptionsHolder/Items/TitleSize" to="UI/Nodes/Holder/OptionsHolder" method="_on_title_size_value_changed"]
@@ -1200,6 +1272,8 @@ text = "Untiled Board"
 [connection signal="item_activated" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
 [connection signal="item_clicked" from="UI/Nodes/Holder/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_clicked"]
 [connection signal="pressed" from="UI/Nodes/Holder/Delete" to="UI/Nodes" method="_on_delete_pressed"]
+[connection signal="pressed" from="UI/Nodes/Holder/DeleteAll/DeleteAll/Yes" to="UI/Nodes" method="_on_yes_pressed"]
+[connection signal="pressed" from="UI/Nodes/Holder/DeleteAll/DeleteAll/No" to="UI/Nodes" method="_on_no_pressed"]
 [connection signal="file_selected" from="UI/Nodes/FileDialog" to="UI/Nodes/Holder/OptionsHolder" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="UI/Canvas/Close" to="UI/Canvas" method="_on_close_pressed"]
 [connection signal="pressed" from="UI/Canvas/Settings" to="UI/Canvas" method="_on_settings_pressed"]

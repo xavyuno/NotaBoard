@@ -14,6 +14,9 @@ var DefaultTtileSize := 15
 var UrlAPIKey := ""
 var ProgressiveLoading := false
 var TotalBoards := 0
+var SelectCol := Color.GREEN
+var CanSelectCol := true
+var DragCol := Color.AQUAMARINE
 
 func GetSettings():
 	return [
@@ -28,5 +31,7 @@ func GetSettings():
 		DefaultTtileSize,
 		UrlAPIKey,
 		ProgressiveLoading,
-		TotalBoards
+		TotalBoards,
+		SelectCol,
+		CanSelectCol
 	]

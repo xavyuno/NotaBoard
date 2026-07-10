@@ -13,10 +13,19 @@ Things Changed since: 1.5
 - Hovering over quick option buttons shows text of what they are linked to
 - New Default Board: Calendar
 - Rename: from "task manager" to "NotaBoard" (to avoid confusion with the already existing task manager on windows)
+- Items pasted will paste in the board you are currently in
+- Items can be cut using ctrl + x
+- Drag selecting is FINALLY possible, no more crtl to multi-select or move items in mass slowly (0.1 second hold delay to drag and select)
+- Board item now has to be double clicked to be opened/go to that board
+- Added confirmation prompt to erasing EVERYTHING button (might just move it to settings board in next update)
+- Selecting an item will outline it with a green color to show it has been selected (also works with multi-select, can be changed in settings)
+- Selecting an item and then multi-selecting will also count the already selected item (previously would only count items during multi-select)
 - Fixed Zooming while scrolling in canvas (Option bar / item bar)
 - Fixed line item able to be added to column item
 - Fixed zooming while searching
 - Fixed items being pasted while in settings or calendar
+- Fixed updating error (turns out i should wait until I finished the update before indexing the version file, especially when pushing to git, oopsie daisies)
+- Added more bugs in the process of adding new features
 
 Things Changed since: v1.4-Beta
 - Added an option to hide the directory in the file item

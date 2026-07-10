@@ -14,6 +14,7 @@ var Data: = {
 var Options := ["Cover", "Board"]
 
 var Preview := false
+var ClickedOnce := false
 
 func _ready() -> void :
 	initItem()
@@ -47,11 +48,14 @@ func _process(delta: float) -> void :
 		User.Boards[Data["Board"]]["CamPos"] = Data["CamPos"]
 
 func _on_new_pressed() -> void :
-	if Data.has("CamPos"):
-		User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Data["CamPos"])
-	else :
-		Data.merge({"CamPos" : Vector2(640, 352)}, true)
-		User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Vector2(640, 352))
+	if ClickedOnce:
+		if Data.has("CamPos"):
+			User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Data["CamPos"])
+		else :
+			Data.merge({"CamPos" : Vector2(640, 352)}, true)
+			User.emit_signal("ChangeBoard", Data["Board"], Data["Title"], Data["ID"], Vector2(640, 352))
+	ClickedOnce = true
+	$Timer.start()
 
 func _on_board_name_text_changed(new_text: String) -> void :
 	if User.Boards.has(User.Boards[Data["Board"]]):
@@ -60,3 +64,6 @@ func _on_board_name_text_changed(new_text: String) -> void :
 
 func _on_board_name_text_submitted(new_text: String) -> void :
 	release_focus()
+
+func _on_timer_timeout() -> void:
+	ClickedOnce = false

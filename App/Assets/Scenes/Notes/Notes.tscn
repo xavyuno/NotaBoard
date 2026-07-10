@@ -13,7 +13,6 @@ content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="Note" type="VBoxContainer" unique_id=544251930]
-clip_children = 2
 custom_minimum_size = Vector2(28, 28)
 offset_right = 251.0
 offset_bottom = 176.0
@@ -98,7 +97,6 @@ scroll_past_end_of_file = true
 scroll_fit_content_height = true
 caret_blink = true
 highlight_all_occurrences = true
-delimiter_strings = Array[String](["\" \"", "' '"])
 code_completion_enabled = true
 indent_automatic = true
 auto_brace_completion_enabled = true

@@ -32,6 +32,10 @@ func _ready() -> void :
 		Check.Text = i
 		Check.get_node("Input").set_pressed_no_signal(Data["List"][i])
 		$List.add_child(Check)
+		for c in Check.get_children(true):
+			if c.has_signal("focus_entered"):
+				c.connect("focus_entered", Callable(self, "FocusEntered"))
+				c.connect("focus_exited", Callable(self, "FocusExited"))
 		Check.get_node("Close").connect("pressed", TodoClosed.bind(Check.get_path()))
 	UpdateValues($Top/Title, "TitleOn", "visible")
 	UpdateValues($Top/Title, "Title", "text")
@@ -95,6 +99,10 @@ func AddList():
 	var Check = preload("res://App/Assets/Scenes/ToDo/check_list.tscn").instantiate()
 	Check.Text = input.text
 	$List.add_child(Check)
+	for c in Check.get_children(true):
+		if c.has_signal("focus_entered"):
+			c.connect("focus_entered", Callable(self, "FocusEntered"))
+			c.connect("focus_exited", Callable(self, "FocusExited"))
 	Check.get_node("Close").connect("pressed", TodoClosed.bind(Check.get_path()))
 	Data["List"].merge({input.text: false}, true)
 	$AddHolder / Input.text = ""

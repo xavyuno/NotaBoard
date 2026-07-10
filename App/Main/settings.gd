@@ -5,7 +5,7 @@ extends Control
 @onready var download: HTTPRequest = $Update / Download
 
 var Downloading: = false
-var Version: = ""
+var Version = ""
 
 func _ready() -> void :
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
@@ -22,7 +22,10 @@ func _physics_process(delta: float) -> void :
 	if Downloading:
 		$Update / Progress.value = download.get_downloaded_bytes()
 		$Update / Info.text = "Downloading Update..."
-		$Update / Version.text = Version
+		$Update / Version.text = str(Version)
+		get_window().set_taskbar_progress_value(
+			$Update / Progress.value / $Update / Progress.max_value
+		)
 	$Update / Version.visible = Downloading
 	$TotalItems.text = "Total Items: " + str(User.TotalItems) + " / " + str(Settings.ItemLimit)
 	$PreviewNotes.text = "Previewing Notes: On" if User.PreviewingNotes else "Previewing Notes: Off"
@@ -38,6 +41,8 @@ func SettingsChanged():
 	$DefaultFontSize.value = Settings.DefaultFontSize
 	$DefaultTitle.value = Settings.DefaultTtileSize
 	$TotalBoards.text = "Total Boards: " + str(Settings.TotalBoards)
+	$SelectColor.color = Settings.SelectCol
+	$SelectColor/On.text = "On" if Settings.CanSelectCol else "Off"
 
 func _on_color_picker_button_color_changed(color: Color) -> void :
 	Settings.BackgroundCol = color
@@ -69,16 +74,17 @@ func _on_download_request_completed(result: int, response_code: int, headers: Pa
 
 func _on_get_version_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
 	if response_code == 200:
-		Version = body.get_string_from_utf8()
-		if Version == FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text():
+		Version = body.get_string_from_utf8().trim_prefix("v").to_float()
+		var OwnedVer = FileAccess.open("res://LatestVersion.txt", FileAccess.READ).get_as_text().trim_prefix("v").to_float()
+		if Version <= OwnedVer:
 			$Update / Info.text = "Already Up-to-date!"
 			await get_tree().create_timer(1).timeout
 			$Update / Info.text = "Download Update"
 			return
-		if !Version.is_empty():
+		else :
 			$Update / Info.text = "Recieved Latest Version!"
-			print("Retrieved version: " + Version)
-			var url = "https://github.com/xavyuno/Task-Manager/releases/download/%s/TaskManager.exe" % Version.strip_escapes()
+			print("Retrieved version: ", Version)
+			var url = "https://github.com/xavyuno/Task-Manager/releases/download/%s/TaskManager.exe" % str(Version)
 			print("url: " + url)
 			download.request(url)
 			Downloading = true
@@ -137,4 +143,14 @@ func _on_calendar_pressed() -> void:
 
 func _on_proload_pressed() -> void:
 	Settings.ProgressiveLoading
+	Settings.emit_signal("SettingsChanged")
+
+
+func _on_bg_picker_2_color_changed(color: Color) -> void:
+	Settings.SelectCol = color
+	Settings.emit_signal("SettingsChanged")
+
+
+func _on_on_pressed() -> void:
+	Settings.CanSelectCol = !Settings.CanSelectCol
 	Settings.emit_signal("SettingsChanged")

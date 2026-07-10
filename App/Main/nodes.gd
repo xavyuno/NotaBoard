@@ -11,24 +11,27 @@ func _ready() -> void :
 	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
 	if Settingsfile:
 		var data = Settingsfile.get_var(true)
+		Settingsfile.close()
 		if !(data is Array):
 			print("Error loading settings File!")
-			return
-		Settingsfile.close()
+		else:
 
-		ValidateValue(data, 0, "BackgroundCol")
-		ValidateValue(data, 1, "UpdatePath")
-		ValidateValue(data, 2, "LoadDur")
-		ValidateValue(data, 3, "ItemLimit")
-		# ValidateValue(data, 4, "OptionsEnabled")
-		ValidateValue(data, 5, "ShowCenter")
-		ValidateValue(data, 6, "QuickOptions")
-		ValidateValue(data, 7, "DefaultFontSize")
-		ValidateValue(data, 8, "DefaultTitleSize")
-		ValidateValue(data, 9, "UrlAPIKey")
-		ValidateValue(data, 10, "ProgressiveLoading")
-		ValidateValue(data, 11, "TotalBoards")
-		
+			ValidateValue(data, 0, "BackgroundCol")
+			ValidateValue(data, 1, "UpdatePath")
+			ValidateValue(data, 2, "LoadDur")
+			ValidateValue(data, 3, "ItemLimit")
+			# ValidateValue(data, 4, "OptionsEnabled")
+			ValidateValue(data, 5, "ShowCenter")
+			ValidateValue(data, 6, "QuickOptions")
+			ValidateValue(data, 7, "DefaultFontSize")
+			ValidateValue(data, 8, "DefaultTitleSize")
+			ValidateValue(data, 9, "UrlAPIKey")
+			ValidateValue(data, 10, "ProgressiveLoading")
+			ValidateValue(data, 11, "TotalBoards")
+			ValidateValue(data, 12, "SelectCol")
+			ValidateValue(data, 13, "CanSelectCol")
+			
+			
 		Settings.emit_signal("SettingsChanged")
 		User.emit_signal("ChangedOptionsBar")
 
@@ -78,6 +81,7 @@ func ValidateValue(array: Array, index, parameter) -> bool:
 		return false
 
 func _physics_process(delta: float) -> void :
+	$Holder/Delete.visible = !$Holder/DeleteAll.visible
 	if get_global_mouse_position().x <= 160:
 		User.MouseInCanvas = true
 	else :
@@ -93,14 +97,35 @@ func _physics_process(delta: float) -> void :
 	if Input.is_action_just_pressed("Copy") and !User.InFocus:
 		if User.SelectedObject:
 			User.CopiedObject = get_node(User.SelectedObject).Data
+		if User.MultiSelectedObjects.size() >= 1:
+			User.MultiCopiedObjects = []
+			for i in User.MultiSelectedObjects:
+				User.MultiCopiedObjects.append(get_node(i).Data)
+			User.MultiSelectedObjects = []
+	if Input.is_action_just_pressed("Cut") and !User.InFocus:
+		if User.SelectedObject:
+			User.CopiedObject = get_node(User.SelectedObject).Data
+			get_node(User.SelectedObject).queue_free()
+		if User.MultiSelectedObjects.size() >= 1:
+			User.MultiCopiedObjects = []
+			for i in User.MultiSelectedObjects:
+				User.MultiCopiedObjects.append(get_node(i).Data)
+			for i in User.MultiSelectedObjects:
+				get_node(i).queue_free()
+			User.MultiSelectedObjects = []
+		User.emit_signal("ItemFocusLost")
 	if Input.is_action_just_pressed("Paste") and !User.InFocus and !User.CurrentPage in ["Settings", "Calendar"]:
 		if User.CopiedObject:
 			var TempData = User.CopiedObject
 			TempData["Pos"] = User.MousePos
+			TempData["ID"] = User.CurrentPage
 			initObj(TempData, true)
 		elif User.MultiSelectedObjects.size() >= 1:
 			for i in User.MultiSelectedObjects:
 				initObj(get_node(i).Data, true)
+		elif User.MultiCopiedObjects.size() >= 1:
+			for i in User.MultiCopiedObjects:
+				initObj(i, true)
 		else:
 			if DisplayServer.clipboard_has_image():
 				var obj = preload("res://App/Assets/Scenes/File/File.tscn").instantiate()
@@ -185,21 +210,7 @@ func _exit_tree() -> void :
 	User.emit_signal("SaveObjectData")
 
 func _on_delete_pressed() -> void :
-	User.TotalItems = 0
-	history.clear()
-	User.StoredHistory.clear()
-	User.RemovedHistory.clear()
-	User.Boards = {}
-	System.SaveRemoveHistory()
-	System.SaveStoreHistory()
-	var boards = $"../../Boards"
-	for i in boards.get_children():
-		if !(i.name in ["Home", "Settings", "Calendar"]):
-			i.queue_free()
-	for i in boards.get_node("Home").get_children():
-		if !(i.name in ["Button", "Preview"]):
-			i.queue_free()
-	User.emit_signal("ChangeBoard", "Home")
+	$Holder/DeleteAll.visible = true
 
 
 func _on_clear_pressed() -> void :
@@ -218,5 +229,27 @@ func _on_history_item_clicked(index: int, at_position: Vector2, mouse_button_ind
 func _on_search_text_changed(new_text: String) -> void:
 	if new_text == "":
 		User.emit_signal("Searched", "")
-	else:
-		User.emit_signal("Searched", new_text)
+
+func _on_yes_pressed() -> void:
+	User.TotalItems = 0
+	history.clear()
+	User.StoredHistory.clear()
+	User.RemovedHistory.clear()
+	User.Boards = {}
+	System.SaveRemoveHistory()
+	System.SaveStoreHistory()
+	var boards = $"../../Boards"
+	for i in boards.get_children():
+		if !i.is_in_group("Protect"):
+			i.queue_free()
+	for i in boards.get_node("Home").get_children():
+		if !i.is_in_group("Protect"):
+			i.queue_free()
+	User.emit_signal("ChangeBoard", "Home")
+	$Holder/DeleteAll.visible = false
+
+func _on_no_pressed() -> void:
+	$Holder/DeleteAll.visible = false
+
+func _on_search_text_submitted(new_text: String) -> void:
+	User.emit_signal("Searched", new_text)

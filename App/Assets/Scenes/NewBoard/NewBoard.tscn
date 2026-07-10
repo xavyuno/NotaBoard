@@ -11,7 +11,7 @@ anchors_preset = 0
 script = ExtResource("1_601sx")
 metadata/_tab_index = 0
 
-[node name="Preview" type="Control" parent="." unique_id=763396595]
+[node name="Preview" type="Control" parent="." unique_id=763396595 groups=["Protect"]]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,15 +20,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="ClearFocus" type="Button" parent="." unique_id=966029472]
+[node name="ClearFocus" type="Button" parent="." unique_id=966029472 groups=["Protect"]]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 704.0
 scale = Vector2(1000000, 1000000)
 pivot_offset = Vector2(640, 360)
+action_mode = 0
 
-[node name="Center" type="Polygon2D" parent="." unique_id=2115424471]
+[node name="Center" type="Polygon2D" parent="." unique_id=2115424471 groups=["Protect"]]
 position = Vector2(640, 352)
 polygon = PackedVector2Array(0, -8, -1, -1, -8, 0, -1, 1, 0, 8, 1, 1, 8, 0, 1, -1)
 
@@ -38,7 +39,7 @@ scale = Vector2(1.5, 1.5)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, -8, -1, -1, -8, 0, -1, 1, 0, 8, 1, 1, 8, 0, 1, -1)
 
-[node name="Clean" type="Timer" parent="." unique_id=753963822]
+[node name="Clean" type="Timer" parent="." unique_id=753963822 groups=["Protect"]]
 wait_time = 5.0
 autostart = true
 

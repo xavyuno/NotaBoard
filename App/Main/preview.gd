@@ -23,3 +23,5 @@ func StoppedDragging():
 
 func _on_clear_focus_pressed() -> void:
 	User.emit_signal("ItemFocusLost")
+	User.MultiSelectedObjects = []
+	User.MultiCopiedObjects = []
