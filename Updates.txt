@@ -1,4 +1,4 @@
-Things Changed since: 1.5
+Changelog for: v1.6
 - Interacting with the to do buttons work now as selecting the entire todo item
 - Thumbnails from links are now saved and can be accessed through the option bar
 - Removed extra options from link item

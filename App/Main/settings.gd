@@ -84,7 +84,7 @@ func _on_get_version_request_completed(result: int, response_code: int, headers:
 		else :
 			$Update / Info.text = "Recieved Latest Version!"
 			print("Retrieved version: ", Version)
-			var url = "https://github.com/xavyuno/Task-Manager/releases/download/%s/TaskManager.exe" % str(Version)
+			var url = "https://github.com/xavyuno/NotaBoard/releases/download/v%s/NotaBoard.exe" % str(Version)
 			print("url: " + url)
 			download.request(url)
 			Downloading = true
