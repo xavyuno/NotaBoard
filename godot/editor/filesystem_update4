@@ -1,12 +1,2 @@
-res://App/Assets/Scenes/Notes/Notes.tscn
-res://App/Resources/Init/Item.gd
-res://Updates.txt
 res://App/Main/main.tscn
-res://App/Assets/Scenes/NewBoard/NewBoard.tscn
-res://App/Main/preview.gd
-res://Global/User/User.gd
-res://App/Main/settings.gd
-res://App/Main/nodes.gd
-res://Global/System/Settings.gd
-res://App/Main/camera.gd
-res://Global/System/System.gd
+res://README.md

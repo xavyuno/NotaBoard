@@ -36,7 +36,9 @@ func LoadFile():
 		return
 	var img = Image.load_from_file(ProjectSettings.globalize_path(Data["Dir"]))
 	var imgTxt = ImageTexture.new()
-	var texture = imgTxt.create_from_image(img)
+	var texture
+	if img:
+		texture = imgTxt.create_from_image(img)
 	if texture is Texture:
 		$Open / Image.texture = texture
 		$Open / Holder.visible = false

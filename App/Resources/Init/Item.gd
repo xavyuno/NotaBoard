@@ -47,19 +47,16 @@ func initItem():
 	Col.polygon = System.CreateRectangle(Vector2.ZERO, size)
 	User.connect("StoppedSelecting", Callable(self, "StoppedSelecting"))
 	User.connect("Searched", Callable(self, "Searched"))
-	User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
 	User.connect("AllFocusLost", Callable(self, "AllFocusLost"))
 	for i in self.get_children(true):
-		if i.get_child_count() >= 1:
-			for j in i.get_children(true):
-				if j.has_signal("focus_entered"):
-					j.connect("focus_entered", Callable(self, "FocusEntered"))
-					j.connect("focus_exited", Callable(self, "FocusExited"))
-					
-				if j.has_signal("button_down"):
-					j.connect("button_down", Callable(self, "button_down"))
-					buttons.append(j)
-					j.connect("button_up", Callable(self, "button_up"))
+		for j in i.get_children(true):
+			if j.has_signal("focus_entered"):
+				j.connect("focus_entered", Callable(self, "FocusEntered"))
+				j.connect("focus_exited", Callable(self, "FocusExited"))
+			if j.has_signal("button_down"):
+				j.connect("button_down", Callable(self, "button_down"))
+				j.connect("button_up", Callable(self, "button_up"))
+				buttons.append(j)
 
 		if i.has_signal("focus_entered"):
 			i.connect("focus_entered", Callable(self, "FocusEntered"))
@@ -69,9 +66,6 @@ func initItem():
 			i.connect("button_down", Callable(self, "button_down"))
 			i.connect("button_up", Callable(self, "button_up"))
 			buttons.append(i)
-
-func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
-	FocusExited()
 
 func button_up():
 	if !StillHolding:
@@ -144,7 +138,7 @@ func _draw() -> void:
 		)
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("SelectAll") and self.Data["ID"] == User.CurrentPage:
+	if Input.is_action_just_pressed("SelectAll") and self.Data["ID"] == User.CurrentPage and !User.InFocus:
 		FocusEntered()
 	if User.CurrentPage == self.Data["ID"]:
 		if Col != null:
@@ -175,16 +169,27 @@ func _physics_process(delta: float) -> void:
 		if (Action == "Moving" or Action == "Resizing"):
 			Action = ""
 			Selected = false
-	if Input.is_action_just_pressed("Move") and Selected:
+	if Input.is_action_just_pressed("Move") and Input.is_action_pressed("Command") and Selected:
 		if Action != "Moving":
 			Action = "Moving"
 		else :
 			Action = ""
-	if Input.is_action_just_pressed("Resize") and Selected:
+	if Input.is_action_just_pressed("Resize") and Input.is_action_pressed("Command") and Selected:
 		if Action != "Resizing":
 			Action = "Resizing"
 		else :
 			Action = ""
+	if Input.is_action_just_pressed("Delete"):
+		User.emit_signal("ItemFocusLost")
+		if Selected or DragSelected or MultiSelected:
+			if self.Data["Type"] == "Board":
+				Settings.TotalBoards -= 1
+			User.TotalItems -= 1
+			User.emit_signal("ObjectRemoved", self.Data)
+			User.emit_signal("StoppedSelecting")
+			User.SelectedObject = null
+			User.MultiSelectedObjects = []
+			queue_free()
 	queue_redraw()
 
 func _input(event: InputEvent) -> void:
@@ -207,9 +212,10 @@ func AllFocusLost():
 	ext(true)
 
 func ItemFocusLost():
-	if DragSelected:
-		DragSelected = false
-		ext(true)
+	pass
+	#if DragSelected:
+		#DragSelected = false
+		#ext(true)
 
 func FocusEntered(MultiSelect = false):
 	if !(User.MultiSelecting or MultiSelect):
@@ -225,7 +231,6 @@ func FocusEntered(MultiSelect = false):
 		else :
 			User.MultiSelectedObjects.erase(get_path())
 			ext(true)
-			return
 	User.SelectedObject = get_path()
 	Selected = true
 	User.emit_signal("ItemFocused", get_path())

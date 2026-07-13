@@ -17,6 +17,20 @@ var TotalBoards := 0
 var SelectCol := Color.BLACK
 var CanSelectCol := true
 var DragCol := Color.WHITE
+var SavedKeybinds := {
+	"Bold" : [],
+	"Move" : [],
+	"Resize" : [],
+	"Cut" : [],
+	"SelectAll" : [],
+	"Paste" : [],
+	"Duplicate" : [],
+	"Copy" : [],
+	"Undo" : [],
+	"ResetCam" : [],
+	
+
+}
 
 func GetSettings():
 	return [
@@ -33,5 +47,8 @@ func GetSettings():
 		ProgressiveLoading,
 		TotalBoards,
 		SelectCol,
-		CanSelectCol
+		CanSelectCol,
+		SavedKeybinds,
+		User.SavedEvents
+
 	]

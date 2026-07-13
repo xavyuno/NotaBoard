@@ -67,7 +67,7 @@ func _process(delta: float) -> void :
 		RichText.text = NotesText.text
 			
 	
-	if Input.is_action_just_pressed("Bold") and Editing:
+	if Input.is_action_just_pressed("Bold") and Input.is_action_pressed("Command") and Editing:
 		RichTextUpdate("b")
 
 
@@ -126,9 +126,6 @@ func RichTextUpdate(text, additonal = ""):
 	else :
 		NotesText.insert_text("[" + text + "]", NotesText.get_caret_line(), NotesText.get_caret_column(), true, true)
 		NotesText.insert_text("[/" + text + "]", NotesText.get_caret_line(), NotesText.get_caret_column(), false, false)
-
-func _on_bold_pressed() -> void:
-	RichTextUpdate("b")
 
 func _on_text_meta_hover_started(meta: Variant) -> void:
 	RichText.tooltip_text = str(meta)

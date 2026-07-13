@@ -19,6 +19,7 @@ func _physics_process(delta: float) -> void:
 			User.emit_signal("ChangeBoard", "Home", "Home", "", User.CamPosBoard)
 
 func ChangedBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352)):
+	User.emit_signal("AllFocusLost")
 	if Board in ["Settings", "Calendar"]:
 		home.visible = true
 		home.text = "Home"

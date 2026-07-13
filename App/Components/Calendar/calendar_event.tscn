@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://b8hkg3myvy1eo"]
+
+[ext_resource type="Script" uid="uid://bmc4f043w6uwj" path="res://App/Components/Calendar/calendar_event.gd" id="1_t6te5"]
+
+[node name="CalendarEvent" type="HBoxContainer" unique_id=1555745284]
+custom_minimum_size = Vector2(0, 90)
+size_flags_vertical = 3
+script = ExtResource("1_t6te5")
+
+[node name="Input" type="TextEdit" parent="." unique_id=1458493252]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Eneter event here..."
+wrap_mode = 1
+
+[node name="Remove" type="Button" parent="." unique_id=241967118]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Remove"
+
+[connection signal="text_changed" from="Input" to="." method="_on_input_text_changed"]
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]

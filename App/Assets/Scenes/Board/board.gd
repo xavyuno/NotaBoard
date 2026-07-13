@@ -17,13 +17,13 @@ var Preview := false
 var ClickedOnce := false
 
 func _ready() -> void :
+	Settings.TotalBoards += 1
 	initItem()
 	UpdateValues($BoardName, "Title", "text")
 	UpdateValues($New/Cover, "Cover", "texture")
 	if Data["Board"] == "Getting ID..." and !Preview:
-		Data["Board"] = str(Settings.TotalBoards + 1)
+		Data["Board"] = str(Settings.TotalBoards)
 		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
-		Settings.TotalBoards += 1
 	$New/ID.text = "ID: " + Data["Board"]
 	if Data.has("Cover"):
 		$New.text = "" if Data["Cover"] else "Board"
@@ -58,8 +58,11 @@ func _on_new_pressed() -> void :
 	$Timer.start()
 
 func _on_board_name_text_changed(new_text: String) -> void :
-	if User.Boards.has(User.Boards[Data["Board"]]):
-		User.Boards[User.Boards[Data["Board"]]]["Title"] = new_text
+	if User.Boards.size() >= 1:
+		if User.Boards.has(User.Boards[Data["Board"]]):
+			User.Boards[User.Boards[Data["Board"]]]["Title"] = new_text
+	else :
+		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
 	Data["Title"] = new_text
 
 func _on_board_name_text_submitted(new_text: String) -> void :

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dltgkc7h0py83"]
 
 [ext_resource type="Script" uid="uid://deib8yod0iwgh" path="res://App/Assets/Scenes/Column/column.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="2_fj0vo"]
 
 [node name="Column" type="VBoxContainer" unique_id=1965213481]
 custom_minimum_size = Vector2(248, 0)
@@ -16,6 +17,9 @@ layout_mode = 2
 size_flags_vertical = 0
 placeholder_text = "Title"
 alignment = 1
+
+[node name="CheckFocus" parent="Title" unique_id=51831964 node_paths=PackedStringArray("par") instance=ExtResource("2_fj0vo")]
+par = NodePath("..")
 
 [node name="Items" type="VBoxContainer" parent="." unique_id=1084529531]
 layout_mode = 2

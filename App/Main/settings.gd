@@ -158,3 +158,20 @@ func _on_on_pressed() -> void:
 
 func _on_drag_color_color_changed(color: Color) -> void:
 	Settings.DragCol = color
+
+
+func _on_loadbackup_pressed() -> void:
+	System.LoadBackups()
+
+var ChangingKeybind = false
+
+func _on_keybind_change_pressed() -> void:
+	await get_tree().create_timer(0.5).timeout
+	print(InputMap.action_get_events("Bold"))
+	ChangingKeybind = true
+
+func _input(event: InputEvent) -> void:
+	if ChangingKeybind and event is InputEventKey:
+		ChangingKeybind = false
+		InputMap.action_add_event("Bold", event)
+		print(InputMap.action_get_events("Bold"))

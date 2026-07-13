@@ -3,6 +3,9 @@ extends Control
 @onready var history: ItemList = $Holder / HistoryHolder / History
 
 func _ready() -> void :
+	Init()
+
+func Init():
 	get_parent().visible = true
 	User.connect("ObjectAdded", Callable(self, "ObjAdded"))
 	User.connect("ObjectRemoved", Callable(self, "ObjRemoved"))
@@ -10,7 +13,7 @@ func _ready() -> void :
 
 	var Settingsfile = FileAccess.open("user://Settings.txt", FileAccess.READ)
 	if Settingsfile:
-		var data = Settingsfile.get_var(true)
+		var data :Array = Settingsfile.get_var(true)
 		Settingsfile.close()
 		if !(data is Array):
 			print("Error loading settings File!")
@@ -31,6 +34,13 @@ func _ready() -> void :
 			ValidateValue(data, 12, "SelectCol")
 			ValidateValue(data, 13, "CanSelectCol")
 			
+			var TempBinds = Settings.SavedKeybinds
+			ValidateValue(data, 14, "SavedKeybinds")
+			for j in TempBinds.keys():
+				if !Settings.SavedKeybinds.has(j):
+					Settings.SavedKeybinds.merge({j : []}, true)
+			if data.size() > 15:
+				User.SavedEvents = data[15]
 			
 	Settings.emit_signal("SettingsChanged")
 	User.emit_signal("ChangedOptionsBar")
@@ -69,7 +79,6 @@ func _ready() -> void :
 					initObj(i, false)
 
 	User.StillLoading = false
-	System.BackupAll()
 	if Settings.TotalBoards <= 0:
 		await get_tree().create_timer(6).timeout
 		for i in $"../../Boards".get_children():
@@ -152,20 +161,6 @@ func _physics_process(delta: float) -> void :
 		User.emit_signal("StoppedSelecting")
 	if Input.is_action_just_pressed("Duplicate") and User.CopiedObject:
 		initObj(User.CopiedObject, true)
-
-	if Input.is_action_just_pressed("Delete"):
-		User.TotalItems -= 1
-		if User.SelectedObject:
-			User.emit_signal("ObjectRemoved", get_node(User.SelectedObject).Data)
-			get_node(User.SelectedObject).queue_free()
-			User.SelectedObject = null
-		if User.MultiSelectedObjects.size() >= 1:
-			for i in User.MultiSelectedObjects:
-				User.emit_signal("ObjectRemoved", get_node(i).Data)
-				get_node(i).queue_free()
-			User.emit_signal("StoppedSelecting")
-			User.MultiSelectedObjects = []
-		User.emit_signal("ItemFocusLost")
 
 func Undo(data):
 	initObj(data, true)

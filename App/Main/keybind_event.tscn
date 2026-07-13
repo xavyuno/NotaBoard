@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://w7ep1afd7on2"]
+
+[ext_resource type="Script" uid="uid://uee75d3t8eh2" path="res://App/Main/keybind_event.gd" id="1_1jiuv"]
+
+[node name="KeybindEvent" type="HBoxContainer" unique_id=714310801]
+script = ExtResource("1_1jiuv")
+
+[node name="Title" type="Label" parent="." unique_id=1374768931]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Bold"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Add" type="Button" parent="." unique_id=30237592]
+propagate_maximum_size = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Add"
+
+[node name="Holder" type="VBoxContainer" parent="." unique_id=200640361]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[connection signal="pressed" from="Add" to="." method="_on_add_pressed"]

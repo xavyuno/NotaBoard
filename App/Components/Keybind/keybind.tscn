@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dwb81sji3puj2"]
+
+[ext_resource type="Script" uid="uid://k8s863w5dv7n" path="res://App/Components/Keybind/keybind.gd" id="1_5iuel"]
+
+[node name="Keybind" type="HBoxContainer" unique_id=1966506785]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+script = ExtResource("1_5iuel")
+
+[node name="Title" type="Label" parent="." unique_id=246621959]
+layout_mode = 2
+text = "Ctrl + S"
+
+[node name="Remove" type="Button" parent="." unique_id=1753143169]
+layout_mode = 2
+text = "Remove"
+
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]

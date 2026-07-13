@@ -13,21 +13,13 @@ content_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 0.392157)
 
 [node name="Note" type="VBoxContainer" unique_id=544251930]
-custom_minimum_size = Vector2(28, 28)
+custom_minimum_size = Vector2(28, 27)
 offset_right = 251.0
 offset_bottom = 176.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 script = ExtResource("1")
-
-[node name="TextOptions" type="HBoxContainer" parent="." unique_id=1275207869]
-visible = false
-layout_mode = 2
-
-[node name="Bold" type="Button" parent="TextOptions" unique_id=985406672]
-layout_mode = 2
-text = "B"
 
 [node name="Title" type="LineEdit" parent="." unique_id=43175164]
 layout_mode = 2
@@ -105,7 +97,6 @@ auto_brace_completion_highlight_matching = true
 [node name="CheckFocus" parent="ScrollContainer/Notes" unique_id=356332501 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
-[connection signal="pressed" from="TextOptions/Bold" to="." method="_on_bold_pressed"]
 [connection signal="pressed" from="Preview/Edit" to="." method="_on_edit_pressed"]
 [connection signal="timeout" from="Preview/Edit/DoubleClick" to="." method="_on_double_click_timeout"]
 [connection signal="focus_entered" from="Preview/Edit/Text" to="." method="_on_text_focus_entered"]

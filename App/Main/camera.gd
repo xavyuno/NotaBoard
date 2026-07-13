@@ -30,7 +30,7 @@ func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 35
 			position = CamPos
 
 func _draw() -> void:
-	if User.DragSelecting:
+	if User.DragSelecting and !(User.CurrentPage in ["Settings", "Calendar"]):
 		draw_polyline(
 				System.CreateRectangle(DragSelectPos, get_local_mouse_position()),
 			Settings.DragCol,
@@ -100,7 +100,7 @@ func _on_drag_body_entered(body: Node2D) -> void:
 
 func _on_drag_body_exited(body: Node2D) -> void:
 	if User.DragSelecting:
-		body.get_parent().call_deferred("ItemFocusLost")
+		body.get_parent().call_deferred("ext", true)
 
 
 func _on_timer_timeout() -> void:

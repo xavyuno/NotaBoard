@@ -59,6 +59,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Todo: Make banana bread"
+keep_editing_on_text_submit = true
 expand_to_text_length = true
 clear_button_enabled = true
 caret_blink = true

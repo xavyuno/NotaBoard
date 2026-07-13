@@ -53,3 +53,6 @@ var TestingMode := false
 var CamPosBoard := Vector2(640, 352)
 var CamPosSettings := Vector2(640, 352)
 var CamPosCalendar := Vector2(640, 352)
+
+var SelectedDate := [0, 0, 0]
+var SavedEvents := {}
