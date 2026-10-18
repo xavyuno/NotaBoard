@@ -1,0 +1,1121 @@
+[gd_scene format=3 uid="uid://dt2cby06g73my"]
+
+[ext_resource type="Script" uid="uid://x0i05wn17p02" path="res://App/Main/Settings/settings.gd" id="1_fa7pb"]
+[ext_resource type="Texture2D" uid="uid://c7hb00htarxgn" path="res://App/Assets/Icons/Settings/icons8-update-32.png" id="2_rb2qu"]
+[ext_resource type="Texture2D" uid="uid://bxnti8t1ihsav" path="res://App/Assets/Icons/Settings/icons8-folder-32.png" id="3_00cms"]
+[ext_resource type="Script" uid="uid://4gxh4eyqfeys" path="res://App/Components/Settings/update.gd" id="3_rb2qu"]
+[ext_resource type="Texture2D" uid="uid://cb35hi6ko6w4n" path="res://App/Assets/Icons/Settings/icons8-github-32.png" id="4_24wxk"]
+[ext_resource type="Script" uid="uid://tjxthmxl2vin" path="res://App/Main/Settings/items.gd" id="5_hy4rc"]
+[ext_resource type="Texture2D" uid="uid://b7mj7mva78t6k" path="res://App/Assets/Icons/Notes.png" id="6_r8mbw"]
+[ext_resource type="Script" uid="uid://cb3vbeqg6kq5g" path="res://App/Components/Settings/apply_style.gd" id="10_fa7pb"]
+[ext_resource type="Texture2D" uid="uid://dv7k1k1cyfpbm" path="res://App/Assets/Icons/Folder.png" id="10_rb2qu"]
+[ext_resource type="Script" uid="uid://c3dxv8u5symor" path="res://App/Main/general.gd" id="13_f7hbk"]
+[ext_resource type="Script" uid="uid://bdfi42atrssq4" path="res://App/Main/edit_style.gd" id="14_1knyj"]
+[ext_resource type="Script" uid="uid://cp50vlb6oxuwx" path="res://App/Main/note.gd" id="15_5k4gj"]
+[ext_resource type="Script" uid="uid://px51gy031645" path="res://App/Main/quick_options.gd" id="16_hok7q"]
+[ext_resource type="Script" uid="uid://bs6c861x1l6yf" path="res://App/Components/Settings/interface.gd" id="17_00cms"]
+[ext_resource type="Script" uid="uid://bsllfs6h6h0p8" path="res://App/Main/user_account.gd" id="17_f6bhb"]
+[ext_resource type="Script" uid="uid://b3wt5o1rakl5g" path="res://App/Components/Settings/acount.gd" id="17_npyni"]
+[ext_resource type="Script" uid="uid://dyyakvmdsws0k" path="res://App/Main/display_url.gd" id="18_tmo7f"]
+[ext_resource type="Script" uid="uid://dx0gn7rlwwj5v" path="res://App/Components/Settings/delete_all.gd" id="19_le1jd"]
+[ext_resource type="Script" uid="uid://cd54r321exxcm" path="res://App/Components/Settings/feedback.gd" id="19_lqx4h"]
+[ext_resource type="Texture2D" uid="uid://b8qv3t34e0md5" path="res://App/Assets/Icons/Hide.png" id="19_qpo1n"]
+[ext_resource type="Script" uid="uid://cwqicnnaygokw" path="res://App/Main/load_backup.gd" id="20_1si8b"]
+[ext_resource type="Script" uid="uid://dwmt7i0bm28qf" path="res://App/Main/keybinds.gd" id="21_bexr3"]
+[ext_resource type="Script" uid="uid://nfwgx2y3fsek" path="res://App/Main/Settings/changelog.gd" id="22_g5788"]
+[ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="23_b02v3"]
+[ext_resource type="Script" uid="uid://c53nfhq1b5kp7" path="res://App/Main/to_do.gd" id="24_p8odj"]
+[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="25_81vni"]
+
+[sub_resource type="Gradient" id="Gradient_nqkbx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dbp5u"]
+gradient = SubResource("Gradient_nqkbx")
+
+[sub_resource type="Gradient" id="Gradient_d1pkp"]
+colors = PackedColorArray(0.0780884, 0.640844, 0.558948, 1, 9.62615e-08, 0.681619, 0.344828, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3dg"]
+gradient = SubResource("Gradient_d1pkp")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dbp5u"]
+font_size = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
+font_size = 23
+
+[sub_resource type="Gradient" id="Gradient_1yho4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
+gradient = SubResource("Gradient_1yho4")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt3dg"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_b8p06"]
+font_size = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q72c2"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xv0o8"]
+font = ExtResource("25_81vni")
+font_size = 55
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwav7"]
+bg_color = Color(0, 0, 0, 0.392157)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqkbx"]
+font = ExtResource("25_81vni")
+font_size = 25
+
+[node name="Settings" type="Control" unique_id=1383018309 groups=["NoCanvas", "Protect"]]
+show_behind_parent = true
+light_mask = 0
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fa7pb")
+metadata/_tab_index = 1
+
+[node name="Update" type="Button" parent="." unique_id=178640964]
+layout_mode = 0
+offset_left = 576.0
+offset_top = 104.0
+offset_right = 800.0
+offset_bottom = 152.0
+text = "Update Available:"
+icon = ExtResource("2_rb2qu")
+expand_icon = true
+script = ExtResource("3_rb2qu")
+metadata/_edit_group_ = true
+
+[node name="Progress" type="TextureProgressBar" parent="Update" unique_id=822210907]
+modulate = Color(1, 1, 1, 0.5)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 108903000.0
+step = 0.001
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_dbp5u")
+texture_progress = SubResource("GradientTexture2D_qt3dg")
+
+[node name="Version" type="Label" parent="Update" unique_id=724325141]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.0
+offset_top = -16.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "v0.1-Alpha"
+label_settings = SubResource("LabelSettings_dbp5u")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Download" type="HTTPRequest" parent="Update" unique_id=93901858]
+download_chunk_size = 16777216
+use_threads = true
+max_redirects = 64
+
+[node name="GetVersion" type="HTTPRequest" parent="Update" unique_id=1966709978]
+use_threads = true
+max_redirects = 64
+
+[node name="FileDialog" type="FileDialog" parent="Update" unique_id=1316974436]
+access = 2
+filters = PackedStringArray("*.exe")
+
+[node name="ProjectDir" type="Button" parent="." unique_id=1396030708]
+layout_mode = 0
+offset_left = 518.0
+offset_top = 104.0
+offset_right = 566.0
+offset_bottom = 152.0
+tooltip_text = "Open the directory for the app"
+icon = ExtResource("3_00cms")
+expand_icon = true
+
+[node name="ProjectLink" type="Button" parent="." unique_id=1370919566]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 104.0
+offset_right = 511.0
+offset_bottom = 152.0
+tooltip_text = "Open the github project directory"
+icon = ExtResource("4_24wxk")
+expand_icon = true
+
+[node name="Holder" type="TabContainer" parent="." unique_id=1802702135]
+layout_mode = 0
+offset_top = 168.0
+offset_right = 1728.0
+offset_bottom = 1024.0
+theme_override_constants/tab_separation = 4
+current_tab = 0
+
+[node name="Items" type="Control" parent="Holder" unique_id=1927063949]
+layout_mode = 2
+script = ExtResource("5_hy4rc")
+metadata/_tab_index = 0
+
+[node name="ItemSettings" type="TabContainer" parent="Holder/Items" unique_id=1212881684]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 1696.0
+offset_bottom = 796.0
+current_tab = 0
+use_hidden_tabs_for_min_size = true
+tab_1/icon = ExtResource("6_r8mbw")
+
+[node name="General" type="Control" parent="Holder/Items/ItemSettings" unique_id=1139539367]
+layout_mode = 2
+script = ExtResource("13_f7hbk")
+metadata/_tab_index = 0
+
+[node name="EditStyle" type="Panel" parent="Holder/Items/ItemSettings/General" unique_id=1232375855]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 24.0
+offset_right = 1632.0
+offset_bottom = 440.0
+script = ExtResource("14_1knyj")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=404717348]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 32.0
+offset_right = 832.0
+offset_bottom = 384.0
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer" unique_id=1176393636]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Border" type="FoldableContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=853306164]
+layout_mode = 2
+folded = true
+title = "Border"
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border" unique_id=1914250689]
+visible = false
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="BorderColor" type="ColorPickerButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder" unique_id=2123642499]
+layout_mode = 2
+text = "d"
+
+[node name="BorderBlend" type="CheckButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder" unique_id=1310676001]
+layout_mode = 2
+text = "Blend"
+
+[node name="BorderWidth" type="FoldableContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder" unique_id=505417938]
+clip_contents = true
+layout_mode = 2
+folded = true
+title = "Border Width"
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder/BorderWidth" unique_id=1820956498]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="ExpandMargins" type="FoldableContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=276141930]
+layout_mode = 2
+folded = true
+title = "Expand Margins"
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/ExpandMargins" unique_id=1138986285]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="ContentMargins" type="FoldableContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=2119586197]
+layout_mode = 2
+folded = true
+title = "Content Margins"
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/ContentMargins" unique_id=598781465]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="CornerRadius" type="FoldableContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=269991677]
+layout_mode = 2
+folded = true
+title = "Corner Radius"
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/CornerRadius" unique_id=992917804]
+visible = false
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+
+[node name="CornerDetail" type="SpinBox" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=509944911]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+prefix = "Corner Detail"
+
+[node name="BgColor" type="ColorPickerButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=628941871]
+layout_mode = 2
+text = "d"
+
+[node name="Font" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=828138148]
+layout_mode = 2
+
+[node name="FontPath" type="LineEdit" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font" unique_id=490190946]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Font Path"
+secret = true
+
+[node name="OpenFolder" type="Button" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font" unique_id=1448318029]
+layout_mode = 2
+icon = ExtResource("10_rb2qu")
+
+[node name="FileDialog" type="FileDialog" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font" unique_id=553425221]
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.ttf", "*.otf", "*.ttc", "*.otc", "*.woff", "*.woff2", "*.pfb", "*.pfm", "*.fnt", "*.font")
+use_native_dialog = true
+
+[node name="Hide" type="Button" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font" unique_id=721373054]
+layout_mode = 2
+icon = ExtResource("19_qpo1n")
+
+[node name="New" type="Button" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1276804532]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 416.0
+offset_bottom = 64.0
+text = "Create new Theme"
+
+[node name="PreviewButton" type="Button" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1170636899]
+layout_mode = 0
+offset_left = 960.0
+offset_top = -64.0
+offset_right = 1152.0
+offset_bottom = 160.0
+size_flags_vertical = 3
+text = "This is a button"
+
+[node name="PreviewText" type="TextEdit" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1401904383]
+layout_mode = 0
+offset_left = 960.0
+offset_top = 192.0
+offset_right = 1152.0
+offset_bottom = 416.0
+size_flags_vertical = 3
+text = "This is a text that can be edited"
+placeholder_text = "Enter text you want to be displayed or previewed with the style"
+wrap_mode = 1
+
+[node name="StyleScroll" type="ScrollContainer" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=2057160606]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 96.0
+offset_right = 448.0
+offset_bottom = 384.0
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/StyleScroll" unique_id=1539852681]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="StyleName" type="LineEdit" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1279734881]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 64.0
+offset_right = 448.0
+offset_bottom = 96.0
+placeholder_text = "Theme Name"
+
+[node name="Info" type="Label" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=2124175499]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 448.0
+offset_bottom = 32.0
+
+[node name="DefaultValues" type="VBoxContainer" parent="Holder/Items/ItemSettings/General" unique_id=2050204594]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 704.0
+offset_bottom = 600.0
+
+[node name="ItemLimit" type="SpinBox" parent="Holder/Items/ItemSettings/General/DefaultValues" unique_id=794677313]
+layout_mode = 2
+allow_greater = true
+alignment = 1
+prefix = "Item Limit"
+metadata/_edit_group_ = true
+
+[node name="DefaultFontSize" type="SpinBox" parent="Holder/Items/ItemSettings/General/DefaultValues" unique_id=636779979]
+layout_mode = 2
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Font Size:"
+
+[node name="DefaultTitle" type="SpinBox" parent="Holder/Items/ItemSettings/General/DefaultValues" unique_id=1079663190]
+layout_mode = 2
+min_value = 8.0
+value = 15.0
+alignment = 1
+update_on_text_changed = true
+prefix = "Default Title Size:"
+
+[node name="UpdateID" type="Button" parent="Holder/Items/ItemSettings/General/DefaultValues" unique_id=1211268808]
+layout_mode = 2
+text = "Force update all item ID's"
+
+[node name="ProgressiveLoading" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/DefaultValues" unique_id=1308123867]
+layout_mode = 2
+
+[node name="Proload" type="Button" parent="Holder/Items/ItemSettings/General/DefaultValues/ProgressiveLoading" unique_id=1858499390]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+
+[node name="LoadDur" type="SpinBox" parent="Holder/Items/ItemSettings/General/DefaultValues/ProgressiveLoading" unique_id=1257335833]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.001
+alignment = 1
+prefix = "Change duration between loadingitems"
+suffix = "second(s)"
+metadata/_edit_group_ = true
+
+[node name="ApplyStyle" type="Panel" parent="Holder/Items/ItemSettings/General" unique_id=516390006]
+layout_mode = 0
+offset_left = 768.0
+offset_top = 472.0
+offset_right = 1632.0
+offset_bottom = 696.0
+script = ExtResource("10_fa7pb")
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/ApplyStyle" unique_id=727404251]
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 32.0
+text = "Apply Theme"
+vertical_alignment = 1
+
+[node name="Select" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/ApplyStyle" unique_id=1312800704]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 480.0
+offset_bottom = 64.0
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/ApplyStyle/Select" unique_id=1154064830]
+layout_mode = 2
+text = "Select Item"
+
+[node name="Item" type="OptionButton" parent="Holder/Items/ItemSettings/General/ApplyStyle/Select" unique_id=1026026292]
+layout_mode = 2
+size_flags_horizontal = 3
+search_bar_enabled = true
+
+[node name="ApplyStyle" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/ApplyStyle" unique_id=992567589]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 480.0
+offset_bottom = 96.0
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/ApplyStyle/ApplyStyle" unique_id=497217772]
+layout_mode = 2
+text = "Select Theme"
+
+[node name="Style" type="OptionButton" parent="Holder/Items/ItemSettings/General/ApplyStyle/ApplyStyle" unique_id=708193671]
+layout_mode = 2
+size_flags_horizontal = 3
+search_bar_enabled = true
+
+[node name="Apply" type="Button" parent="Holder/Items/ItemSettings/General/ApplyStyle" unique_id=1725842594]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 480.0
+offset_bottom = 128.0
+text = "Apply"
+
+[node name="Note" type="Control" parent="Holder/Items/ItemSettings" unique_id=653145188]
+visible = false
+layout_mode = 2
+script = ExtResource("15_5k4gj")
+metadata/_tab_index = 1
+
+[node name="Commands" type="VBoxContainer" parent="Holder/Items/ItemSettings/Note" unique_id=1077702796]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 24.0
+offset_right = 480.0
+offset_bottom = 344.0
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1660831087]
+layout_mode = 2
+text = "Text Override / Commands"
+
+[node name="AddCommand" type="HBoxContainer" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1782637031]
+layout_mode = 2
+
+[node name="Keyword" type="LineEdit" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=299696291]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+placeholder_text = "Keyword"
+expand_to_text_length = true
+
+[node name="Command" type="LineEdit" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=1978186260]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Command"
+
+[node name="AddCommand" type="Button" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=1762417034]
+layout_mode = 2
+text = "add"
+
+[node name="ScrollCommands" type="ScrollContainer" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1278627977]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/Note/Commands/ScrollCommands" unique_id=1082507869]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Interface" type="Control" parent="Holder" unique_id=1086175287]
+visible = false
+layout_mode = 2
+script = ExtResource("17_00cms")
+metadata/_tab_index = 1
+
+[node name="QuickOptions" type="Panel" parent="Holder/Interface" unique_id=1406343111]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 448.0
+offset_bottom = 348.0
+script = ExtResource("16_hok7q")
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Holder/Interface/QuickOptions" unique_id=1849835010]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 8.0
+offset_right = 409.0
+offset_bottom = 67.0
+text = "Edit Quick Options"
+label_settings = SubResource("LabelSettings_lkim6")
+autowrap_mode = 2
+
+[node name="Selected1" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=1598570354]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 74.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="Selected2" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=10876377]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 74.0
+offset_top = 6.0
+offset_right = 142.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="Selected3" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=256802939]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 142.0
+offset_top = 6.0
+offset_right = 210.0
+offset_bottom = 74.0
+texture = SubResource("GradientTexture2D_y8ose")
+
+[node name="QuickHolder" type="HBoxContainer" parent="Holder/Interface/QuickOptions" unique_id=1767613724]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 144.0
+offset_bottom = 72.0
+
+[node name="1" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=1505091873]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "1"
+
+[node name="2" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=924654038]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "2"
+
+[node name="3" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=632947970]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+text = "3"
+
+[node name="ScrollHolder" type="ScrollContainer" parent="Holder/Interface/QuickOptions" unique_id=735832969]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 80.0
+offset_right = 408.0
+offset_bottom = 312.0
+
+[node name="Options" type="VBoxContainer" parent="Holder/Interface/QuickOptions/ScrollHolder" unique_id=235854203]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Interface" unique_id=927684764]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 28.0
+offset_right = 864.0
+offset_bottom = 348.0
+
+[node name="Center" type="Button" parent="Holder/Interface/Holder" unique_id=1279389433]
+layout_mode = 2
+text = "Display Center:"
+
+[node name="GridScale" type="SpinBox" parent="Holder/Interface/Holder" unique_id=207070851]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+update_on_text_changed = true
+prefix = "Grid Scale"
+
+[node name="SelectColor" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=347848503]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Interface/Holder/SelectColor" unique_id=278826374]
+layout_mode = 2
+text = "Change Select item color"
+
+[node name="Holder" type="HBoxContainer" parent="Holder/Interface/Holder/SelectColor" unique_id=885441128]
+layout_mode = 2
+
+[node name="On" type="Button" parent="Holder/Interface/Holder/SelectColor/Holder" unique_id=50027170]
+layout_mode = 2
+text = "On"
+
+[node name="SelectColor" type="ColorPickerButton" parent="Holder/Interface/Holder/SelectColor/Holder" unique_id=2058915036]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="GridCol" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=988312351]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Interface/Holder/GridCol" unique_id=544183104]
+layout_mode = 2
+text = "Change Grid color"
+
+[node name="GridCol" type="ColorPickerButton" parent="Holder/Interface/Holder/GridCol" unique_id=247615278]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="BackgroundCol" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=888449935]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Interface/Holder/BackgroundCol" unique_id=141213326]
+layout_mode = 2
+text = "Change Background color"
+
+[node name="BGPicker" type="ColorPickerButton" parent="Holder/Interface/Holder/BackgroundCol" unique_id=1275492851]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="DragCol" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=147597385]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Interface/Holder/DragCol" unique_id=1412155090]
+layout_mode = 2
+text = "Change Select drag color"
+
+[node name="DragColor" type="ColorPickerButton" parent="Holder/Interface/Holder/DragCol" unique_id=2112920102]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+edit_alpha = false
+metadata/_edit_group_ = true
+
+[node name="Account & Data" type="Control" parent="Holder" unique_id=2042403600]
+visible = false
+layout_mode = 2
+script = ExtResource("17_f6bhb")
+metadata/_tab_index = 2
+
+[node name="DisplayURL" type="Panel" parent="Holder/Account & Data" unique_id=1862792357]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 28.0
+offset_right = 1696.0
+offset_bottom = 156.0
+script = ExtResource("18_tmo7f")
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Holder/Account & Data/DisplayURL" unique_id=10848240]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 24.0
+text = "Display link preview"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Info" type="RichTextLabel" parent="Holder/Account & Data/DisplayURL" unique_id=729908066]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 928.0
+offset_bottom = 96.0
+bbcode_enabled = true
+text = "To preview thumbnails of links, retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
+fit_content = true
+autowrap_mode = 2
+
+[node name="Key" type="LineEdit" parent="Holder/Account & Data/DisplayURL" unique_id=663994843]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 78.0
+offset_right = 928.0
+offset_bottom = 110.0
+placeholder_text = "API Key here"
+alignment = 1
+caret_blink = true
+secret = true
+
+[node name="Hide" type="Button" parent="Holder/Account & Data/DisplayURL" unique_id=720616748]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 78.0
+offset_right = 64.0
+offset_bottom = 110.0
+icon = ExtResource("19_qpo1n")
+expand_icon = true
+
+[node name="LoadBackup" type="Control" parent="Holder/Account & Data" unique_id=1214822513]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 348.0
+offset_right = 704.0
+offset_bottom = 796.0
+script = ExtResource("20_1si8b")
+metadata/_edit_group_ = true
+
+[node name="Panel" type="Panel" parent="Holder/Account & Data/LoadBackup" unique_id=1314934644]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Holder/Account & Data/LoadBackup" unique_id=961907846]
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 32.0
+text = "Load Backups"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scroll" type="ScrollContainer" parent="Holder/Account & Data/LoadBackup" unique_id=881708305]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/LoadBackup/Scroll" unique_id=1242264451]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Refresh" type="Button" parent="Holder/Account & Data/LoadBackup" unique_id=1438644249]
+layout_mode = 0
+offset_left = 640.0
+offset_right = 672.0
+offset_bottom = 32.0
+text = "R"
+
+[node name="Acount" type="Panel" parent="Holder/Account & Data" unique_id=1545828426]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 448.0
+offset_bottom = 316.0
+script = ExtResource("17_npyni")
+metadata/_edit_group_ = true
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/Acount" unique_id=268680459]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="Label" parent="Holder/Account & Data/Acount/Holder" unique_id=265176255]
+layout_mode = 2
+text = "Account"
+
+[node name="Email" type="LineEdit" parent="Holder/Account & Data/Acount/Holder" unique_id=1802436548]
+layout_mode = 2
+placeholder_text = "Email"
+max_length = 25
+
+[node name="Password" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=1835502360]
+layout_mode = 2
+
+[node name="Password" type="LineEdit" parent="Holder/Account & Data/Acount/Holder/Password" unique_id=552089750]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Password"
+max_length = 20
+secret = true
+
+[node name="HidePassword" type="Button" parent="Holder/Account & Data/Acount/Holder/Password" unique_id=1980881178]
+layout_mode = 2
+text = "Show/Hide"
+
+[node name="SaveLoad" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=450124824]
+layout_mode = 2
+
+[node name="Save" type="Button" parent="Holder/Account & Data/Acount/Holder/SaveLoad" unique_id=577836394]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="Load" type="Button" parent="Holder/Account & Data/Acount/Holder/SaveLoad" unique_id=737425425]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load"
+
+[node name="Options" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=122435738]
+layout_mode = 2
+
+[node name="Login" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=1500175522]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "login"
+
+[node name="Signup" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=457479970]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sign up"
+
+[node name="Logout" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=15350256]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Log out"
+
+[node name="Keybinds" type="Panel" parent="Holder/Account & Data" unique_id=1131625774]
+layout_mode = 0
+offset_left = 736.0
+offset_top = 188.0
+offset_right = 1696.0
+offset_bottom = 796.0
+size_flags_horizontal = 3
+script = ExtResource("21_bexr3")
+metadata/_edit_group_ = true
+
+[node name="Title" type="Label" parent="Holder/Account & Data/Keybinds" unique_id=1241134998]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 20.0
+grow_horizontal = 2
+text = "Change Keybinds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollHolder" type="ScrollContainer" parent="Holder/Account & Data/Keybinds" unique_id=617412226]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 24.0
+offset_right = -16.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/Keybinds/ScrollHolder" unique_id=159700858]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DeleteAll" type="Panel" parent="Holder/Account & Data" unique_id=101609940]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 28.0
+offset_right = 704.0
+offset_bottom = 316.0
+script = ExtResource("19_le1jd")
+
+[node name="Delete" type="Button" parent="Holder/Account & Data/DeleteAll" unique_id=1699379591]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 199.0
+offset_bottom = 64.0
+text = "Delete ALL Local
+Data"
+
+[node name="DeleteAll" type="VBoxContainer" parent="Holder/Account & Data/DeleteAll" unique_id=322398236]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 192.0
+offset_bottom = 277.0
+
+[node name="Warning" type="Label" parent="Holder/Account & Data/DeleteAll/DeleteAll" unique_id=68717717]
+layout_mode = 2
+text = "ARE YOU SURE?
+This permanently deletes all items, history and settings. Can not be Undone."
+autowrap_mode = 2
+
+[node name="DeleteAll" type="HBoxContainer" parent="Holder/Account & Data/DeleteAll/DeleteAll" unique_id=919377309]
+layout_mode = 2
+
+[node name="Yes" type="Button" parent="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll" unique_id=1448228456]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YES"
+
+[node name="No" type="Button" parent="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll" unique_id=1139486046]
+self_modulate = Color(0.937034, 0.0859377, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "NO"
+
+[node name="About" type="Control" parent="Holder" unique_id=1392465121]
+visible = false
+layout_mode = 2
+script = ExtResource("22_g5788")
+metadata/_tab_index = 3
+
+[node name="Changelog" type="VBoxContainer" parent="Holder/About" unique_id=808376151]
+clip_children = 2
+custom_minimum_size = Vector2(0, 140)
+layout_mode = 0
+offset_left = 32.0
+offset_top = 220.0
+offset_right = 1184.0
+offset_bottom = 796.0
+theme_override_constants/separation = 0
+metadata/_edit_group_ = true
+
+[node name="Title" type="LineEdit" parent="Holder/About/Changelog" unique_id=50344618]
+layout_mode = 2
+text = "Changelog"
+placeholder_text = "Title"
+editable = false
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Holder/About/Changelog" unique_id=1948204862]
+layout_mode = 2
+size_flags_vertical = 3
+follow_focus = true
+
+[node name="Notes" type="RichTextLabel" parent="Holder/About/Changelog/ScrollContainer" unique_id=29258583]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
+theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
+bbcode_enabled = true
+text = "Failed to load changelog..."
+
+[node name="ToDo" type="VBoxContainer" parent="Holder/About" unique_id=1464441882]
+layout_mode = 0
+offset_left = 1216.0
+offset_top = 28.0
+offset_right = 1696.0
+offset_bottom = 609.0
+theme_override_constants/separation = 1
+script = ExtResource("24_p8odj")
+metadata/_edit_group_ = true
+
+[node name="Title" type="LineEdit" parent="Holder/About/ToDo" unique_id=1137578085]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
+text = "Possible Future Updates"
+placeholder_text = "Title"
+editable = false
+expand_to_text_length = true
+
+[node name="List" type="VBoxContainer" parent="Holder/About/ToDo" unique_id=1764413983]
+layout_mode = 2
+
+[node name="Feedback" type="VBoxContainer" parent="Holder/About" unique_id=411389041]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 28.0
+offset_right = 1184.0
+offset_bottom = 188.0
+theme_override_constants/separation = 0
+
+[node name="Top" type="HBoxContainer" parent="Holder/About/Feedback" unique_id=1758865251]
+layout_mode = 2
+
+[node name="FeedbackTitle" type="Label" parent="Holder/About/Feedback/Top" unique_id=134327264]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Feedback"
+label_settings = SubResource("LabelSettings_b8p06")
+
+[node name="SubmitFeedback" type="Button" parent="Holder/About/Feedback/Top" unique_id=335013398]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 2
+text = "Submit"
+
+[node name="SubmitReq" type="HTTPRequest" parent="Holder/About/Feedback/Top/SubmitFeedback" unique_id=1877773599]
+use_threads = true
+
+[node name="Feedback" type="TextEdit" parent="Holder/About/Feedback" unique_id=144748578]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Any bugs, suggestions are appreciated"
+wrap_mode = 1
+scroll_smooth = true
+caret_blink = true
+script = ExtResource("19_lqx4h")
+metadata/_edit_group_ = true
+
+[node name="CheckFocus" parent="Holder/About/Feedback/Feedback" unique_id=151596280 node_paths=PackedStringArray("par") instance=ExtResource("23_b02v3")]
+par = NodePath("..")
+
+[node name="Title" type="Label" parent="." unique_id=1046391194]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.175
+anchor_right = -0.175
+anchor_bottom = 0.0085227275
+offset_left = 256.0
+offset_top = 64.0
+offset_right = 681.0
+offset_bottom = 146.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
+text = "Settings"
+label_settings = SubResource("LabelSettings_xv0o8")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Version" type="Label" parent="." unique_id=2116752773]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.3125
+anchor_top = -0.27272728
+anchor_right = -0.29453126
+anchor_bottom = -0.2556818
+offset_left = 464.0
+offset_top = 160.0
+offset_right = 889.0
+offset_bottom = 227.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_iwav7")
+text = "Version: v0.3-Alpha"
+label_settings = SubResource("LabelSettings_nqkbx")
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 235
+max_lines_visible = 1
+visible_characters_behavior = 3
+metadata/_edit_use_anchors_ = true
+
+[connection signal="visibility_changed" from="." to="Update" method="_on_settings_visibility_changed"]
+[connection signal="pressed" from="Update" to="Update" method="_on_pressed"]
+[connection signal="file_selected" from="Update/FileDialog" to="Update" method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="ProjectDir" to="." method="_on_project_dir_pressed"]
+[connection signal="pressed" from="ProjectLink" to="." method="_on_project_link_pressed"]
+[connection signal="tab_changed" from="Holder" to="." method="_on_holder_tab_changed"]
+[connection signal="color_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder/BorderColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_border_color_color_changed"]
+[connection signal="popup_closed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder/BorderColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_border_color_popup_closed"]
+[connection signal="toggled" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder/BorderBlend" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_border_blend_toggled"]
+[connection signal="focus_exited" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/CornerDetail" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_corner_detail_focus_exited"]
+[connection signal="value_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/CornerDetail" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_corner_detail_value_changed"]
+[connection signal="color_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_color_changed"]
+[connection signal="popup_closed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_popup_closed"]
+[connection signal="text_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/FontPath" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_font_path_text_changed"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/OpenFolder" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_open_folder_pressed"]
+[connection signal="file_selected" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/FileDialog" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/Hide" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_hide_pressed"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/EditStyle/New" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_new_pressed"]
+[connection signal="value_changed" from="Holder/Items/ItemSettings/General/DefaultValues/ItemLimit" to="Holder/Items/ItemSettings/General" method="_on_item_limit_value_changed"]
+[connection signal="value_changed" from="Holder/Items/ItemSettings/General/DefaultValues/DefaultFontSize" to="Holder/Items/ItemSettings/General" method="_on_default_font_size_value_changed"]
+[connection signal="value_changed" from="Holder/Items/ItemSettings/General/DefaultValues/DefaultTitle" to="Holder/Items/ItemSettings/General" method="_on_default_title_value_changed"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/DefaultValues/UpdateID" to="Holder/Items/ItemSettings/General" method="_on_update_id_pressed"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/DefaultValues/ProgressiveLoading/Proload" to="Holder/Items/ItemSettings/General" method="_on_proload_pressed"]
+[connection signal="value_changed" from="Holder/Items/ItemSettings/General/DefaultValues/ProgressiveLoading/LoadDur" to="Holder/Items/ItemSettings/General" method="_on_load_dur_value_changed"]
+[connection signal="item_selected" from="Holder/Items/ItemSettings/General/ApplyStyle/Select/Item" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_item_item_selected"]
+[connection signal="item_selected" from="Holder/Items/ItemSettings/General/ApplyStyle/ApplyStyle/Style" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_style_item_selected"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/ApplyStyle/Apply" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_apply_pressed"]
+[connection signal="text_submitted" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/Keyword" to="Holder/Items/ItemSettings/Note" method="_on_keyword_text_submitted"]
+[connection signal="text_submitted" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/Command" to="Holder/Items/ItemSettings/Note" method="_on_command_text_submitted"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/AddCommand" to="Holder/Items/ItemSettings/Note" method="_on_add_command_pressed"]
+[connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/1" to="Holder/Interface/QuickOptions" method="_on_q_1_pressed"]
+[connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/2" to="Holder/Interface/QuickOptions" method="_on_q_2_pressed"]
+[connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/3" to="Holder/Interface/QuickOptions" method="_on_q_2_pressed"]
+[connection signal="pressed" from="Holder/Interface/Holder/Center" to="Holder/Interface" method="_on_center_pressed"]
+[connection signal="value_changed" from="Holder/Interface/Holder/GridScale" to="Holder/Interface" method="_on_grid_scale_value_changed"]
+[connection signal="color_changed" from="Holder/Interface/Holder/SelectColor/Holder/SelectColor" to="Holder/Interface" method="_on_select_color_color_changed"]
+[connection signal="color_changed" from="Holder/Interface/Holder/GridCol/GridCol" to="Holder/Interface" method="_on_grid_col_color_changed"]
+[connection signal="color_changed" from="Holder/Interface/Holder/BackgroundCol/BGPicker" to="Holder/Interface" method="_on_bg_picker_color_changed"]
+[connection signal="color_changed" from="Holder/Interface/Holder/DragCol/DragColor" to="Holder/Interface" method="_on_drag_color_color_changed"]
+[connection signal="meta_clicked" from="Holder/Account & Data/DisplayURL/Info" to="Holder/Account & Data/DisplayURL" method="_on_info_meta_clicked"]
+[connection signal="text_changed" from="Holder/Account & Data/DisplayURL/Key" to="Holder/Account & Data/DisplayURL" method="_on_key_text_changed"]
+[connection signal="pressed" from="Holder/Account & Data/DisplayURL/Hide" to="Holder/Account & Data/DisplayURL" method="_on_hide_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/LoadBackup/Refresh" to="Holder/Account & Data/LoadBackup" method="_on_refresh_pressed"]
+[connection signal="text_changed" from="Holder/Account & Data/Acount/Holder/Email" to="Holder/Account & Data/Acount" method="_on_email_text_changed"]
+[connection signal="text_changed" from="Holder/Account & Data/Acount/Holder/Password/Password" to="Holder/Account & Data/Acount" method="_on_password_text_changed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Password/HidePassword" to="Holder/Account & Data/Acount" method="_on_hide_password_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/SaveLoad/Save" to="Holder/Account & Data/Acount" method="_on_save_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/SaveLoad/Load" to="Holder/Account & Data/Acount" method="_on_load_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Login" to="Holder/Account & Data/Acount" method="_on_login_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Signup" to="Holder/Account & Data/Acount" method="_on_signup_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Logout" to="Holder/Account & Data/Acount" method="_on_logout_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/DeleteAll/Delete" to="Holder/Account & Data/DeleteAll" method="_on_delete_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll/Yes" to="Holder/Account & Data/DeleteAll" method="_on_yes_pressed"]
+[connection signal="pressed" from="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll/No" to="Holder/Account & Data/DeleteAll" method="_on_no_pressed"]
+[connection signal="meta_clicked" from="Holder/About/Changelog/ScrollContainer/Notes" to="Holder/About" method="_on_notes_meta_clicked"]
+[connection signal="pressed" from="Holder/About/Feedback/Top/SubmitFeedback" to="Holder/About/Feedback/Feedback" method="_on_submit_feedback_pressed"]
+[connection signal="request_completed" from="Holder/About/Feedback/Top/SubmitFeedback/SubmitReq" to="Holder/About/Feedback/Feedback" method="_on_submit_req_request_completed"]

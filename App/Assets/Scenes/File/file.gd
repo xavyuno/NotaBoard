@@ -8,7 +8,8 @@ var Data: = {
 	"Dir": "",
 	"CachedImage" : null,
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Styles" : ""
 }
 
 var Options := [
@@ -19,19 +20,21 @@ var Options := [
 
 func _ready() -> void :
 	initItem()
+	ApplyData()
+
+func ApplyData():
 	LoadFile()
 
-func _process(delta: float) -> void :
+func _process(_delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["CachedImage"] = $Open/Image.texture
 
 func LoadFile():
 	var img = Image.load_from_file(ProjectSettings.globalize_path(Data["Dir"]))
-	var imgTxt = ImageTexture.new()
 	var texture
 	if img:
-		texture = imgTxt.create_from_image(img)
+		texture = ImageTexture.create_from_image(img)
 	else:
 		texture = Has("CachedImage")
 	if texture:
@@ -40,7 +43,7 @@ func LoadFile():
 		$Open / Title.text = ""
 	else:
 		$Open / Image.texture = null
-		$Open / Title.text = "Preview:"
+		$Open / Title.text = "Click to view options"
 		$Open / Holder.visible = true
 		var file = FileAccess.open(ProjectSettings.globalize_path(Data["Dir"]), FileAccess.READ)
 		var txt

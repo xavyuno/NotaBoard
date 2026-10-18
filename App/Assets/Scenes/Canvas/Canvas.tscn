@@ -44,11 +44,13 @@ layout_mode = 2
 
 [node name="Edit" type="Button" parent="Holder" unique_id=1729543455]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
-offset_top = -255.0
-offset_bottom = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_oot76")
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="Holder" unique_id=508969924]
 wait_time = 0.5

@@ -3,46 +3,38 @@
 [ext_resource type="Script" uid="uid://d2flxns2qujxs" path="res://App/Main/camera.gd" id="1"]
 [ext_resource type="Script" uid="uid://b1cb6q20pt0rk" path="res://App/Main/boards.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cv2wf8fgvgh4a" path="res://App/Assets/Scenes/NewBoard/NewBoard.tscn" id="3"]
-[ext_resource type="Script" uid="uid://x0i05wn17p02" path="res://App/Main/Settings/settings.gd" id="4"]
-[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="5"]
-[ext_resource type="Script" uid="uid://tjxthmxl2vin" path="res://App/Main/Settings/items.gd" id="5_tuclg"]
+[ext_resource type="PackedScene" uid="uid://dt2cby06g73my" path="res://App/Components/Settings/settings.tscn" id="4_iuq4y"]
 [ext_resource type="PackedScene" uid="uid://bmhbuhyhf2tom" path="res://App/Assets/Scenes/Notes/Notes.tscn" id="6"]
-[ext_resource type="Script" uid="uid://dqbg5h4caso7p" path="res://App/Main/Settings/user.gd" id="6_yryda"]
 [ext_resource type="Script" uid="uid://dxq28n2arnb3y" path="res://App/Main/nodes.gd" id="7"]
-[ext_resource type="Script" uid="uid://c53nfhq1b5kp7" path="res://App/Main/to_do.gd" id="7_dbp5u"]
 [ext_resource type="Texture2D" uid="uid://b7mj7mva78t6k" path="res://App/Assets/Icons/Notes.png" id="8"]
 [ext_resource type="PackedScene" uid="uid://m7lbemt2cow6" path="res://App/Components/DragNDrop/drag_n_drop.tscn" id="9"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="9_b8p06"]
-[ext_resource type="Script" uid="uid://dyyakvmdsws0k" path="res://App/Main/display_url.gd" id="9_eab0n"]
-[ext_resource type="Script" uid="uid://dwmt7i0bm28qf" path="res://App/Main/keybinds.gd" id="9_lkim6"]
 [ext_resource type="Texture2D" uid="uid://d13qly4odg36w" path="res://App/Assets/Icons/ToDo.png" id="10"]
-[ext_resource type="Script" uid="uid://px51gy031645" path="res://App/Main/quick_options.gd" id="10_eab0n"]
 [ext_resource type="PackedScene" uid="uid://dyefgf4hdrthy" path="res://App/Assets/Scenes/ToDo/ToDo.tscn" id="11"]
 [ext_resource type="Script" uid="uid://cb7rcnbk71oi7" path="res://App/Main/calendar.gd" id="11_lkim6"]
 [ext_resource type="Texture2D" uid="uid://oxeffc2jl1xn" path="res://App/Assets/Icons/Link.png" id="12"]
-[ext_resource type="Script" uid="uid://bsllfs6h6h0p8" path="res://App/Main/user_account.gd" id="12_b6yyx"]
 [ext_resource type="Texture2D" uid="uid://ctac6pe05r8ae" path="res://App/Assets/Icons/icons8-search-32.png" id="12_iuq4y"]
-[ext_resource type="Script" uid="uid://c2lm1ppeyxeor" path="res://App/Main/Settings/keybinds.gd" id="12_r2fds"]
-[ext_resource type="Texture2D" uid="uid://dps5pgy8rc21f" path="res://App/Assets/Icons/Canvas.png" id="12_yryda"]
 [ext_resource type="PackedScene" uid="uid://b28gxoc2p2tpf" path="res://App/Assets/Scenes/Link/Link.tscn" id="13"]
-[ext_resource type="Script" uid="uid://nfwgx2y3fsek" path="res://App/Main/Settings/changelog.gd" id="13_5kfif"]
 [ext_resource type="Texture2D" uid="uid://veo48dyjhje3" path="res://App/Assets/Icons/Column.png" id="14"]
-[ext_resource type="Script" uid="uid://donxdmtia8vlt" path="res://App/Main/Settings/extra.gd" id="14_vcjic"]
 [ext_resource type="PackedScene" uid="uid://dltgkc7h0py83" path="res://App/Assets/Scenes/Column/Column.tscn" id="15"]
 [ext_resource type="Texture2D" uid="uid://b4c6vq7qdoyny" path="res://App/Assets/Icons/Board.png" id="16"]
 [ext_resource type="PackedScene" uid="uid://byig8v87yy8yo" path="res://App/Assets/Scenes/Board/Board.tscn" id="18"]
 [ext_resource type="Texture2D" uid="uid://130ufwwb2d1w" path="res://App/Assets/Icons/File.png" id="21"]
 [ext_resource type="PackedScene" uid="uid://ditwmlmi3ffb2" path="res://App/Assets/Scenes/File/File.tscn" id="22"]
+[ext_resource type="Texture2D" uid="uid://b86watq8wccm7" path="res://App/Assets/Icons/Foldable.png" id="22_1yho4"]
 [ext_resource type="Script" uid="uid://b3qf3arcokllp" path="res://App/Main/QuickOptions.gd" id="23"]
+[ext_resource type="PackedScene" uid="uid://brwahukao4u0x" path="res://App/Assets/Scenes/Foldable/Foldable.tscn" id="23_y8ose"]
 [ext_resource type="Texture2D" uid="uid://dylix26uaoyu4" path="res://App/Assets/Icons/icons8-settings-32(1).png" id="24"]
+[ext_resource type="Texture2D" uid="uid://br06rtt4ojcwd" path="res://App/Assets/Icons/Settings/icons8-history-32.png" id="24_eab0n"]
 [ext_resource type="Script" uid="uid://dc5f3s7hw57t6" path="res://App/Main/board_display.gd" id="25"]
+[ext_resource type="Texture2D" uid="uid://cyg4bn043wsqc" path="res://App/Assets/Icons/Settings/icons8-clear-32.png" id="25_lkim6"]
 [ext_resource type="Script" uid="uid://cl7x5scpiyb04" path="res://App/Main/options_holder.gd" id="27_eab0n"]
-[ext_resource type="Texture2D" uid="uid://b8qv3t34e0md5" path="res://App/Assets/Icons/Hide.png" id="28_b8p06"]
 [ext_resource type="PackedScene" uid="uid://bis3nmllfkujl" path="res://App/Assets/Scenes/Canvas/Canvas.tscn" id="29_58u0p"]
 [ext_resource type="Script" uid="uid://d05krwe7f5uof" path="res://App/Main/search.gd" id="30_eab0n"]
 [ext_resource type="Texture2D" uid="uid://ywymu6b41yok" path="res://App/Assets/Icons/icons8-home-32.png" id="31_iuq4y"]
 [ext_resource type="Script" uid="uid://b3p0clfnsy132" path="res://App/Main/canvas_draw.gd" id="32_lkim6"]
 [ext_resource type="Texture2D" uid="uid://5ms0ith3l5gw" path="res://App/Assets/Icons/Canvas/icons8-create-32.png" id="38_jk7hp"]
+[ext_resource type="Script" uid="uid://cguflyjvtxsw8" path="res://App/Main/notifications.gd" id="47_wd2gd"]
 
 [sub_resource type="Gradient" id="Gradient_y8ose"]
 interpolation_mode = 2
@@ -54,61 +46,6 @@ gradient = SubResource("Gradient_y8ose")
 fill_to = Vector2(1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yqhvp"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_eab0n"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_oot76"]
-font_size = 50
-
-[sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
-font_size = 23
-
-[sub_resource type="Gradient" id="Gradient_1yho4"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
-gradient = SubResource("Gradient_1yho4")
-
-[sub_resource type="LabelSettings" id="LabelSettings_b8p06"]
-font_size = 25
-
-[sub_resource type="Gradient" id="Gradient_nqkbx"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dbp5u"]
-gradient = SubResource("Gradient_nqkbx")
-
-[sub_resource type="Gradient" id="Gradient_d1pkp"]
-colors = PackedColorArray(0.0780884, 0.640844, 0.558948, 1, 9.62615e-08, 0.681619, 0.344828, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3dg"]
-gradient = SubResource("Gradient_d1pkp")
-
-[sub_resource type="LabelSettings" id="LabelSettings_dbp5u"]
-font_size = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt3dg"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0, 0, 0, 0.392157)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q72c2"]
-bg_color = Color(0, 0, 0, 0.392157)
-
-[sub_resource type="LabelSettings" id="LabelSettings_xv0o8"]
-font = ExtResource("5")
-font_size = 55
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwav7"]
-bg_color = Color(0, 0, 0, 0.392157)
-
-[sub_resource type="LabelSettings" id="LabelSettings_nqkbx"]
-font = ExtResource("5")
-font_size = 25
 
 [sub_resource type="SystemFont" id="SystemFont_0ucvp"]
 font_names = PackedStringArray("Arial")
@@ -154,7 +91,7 @@ texture = SubResource("GradientTexture2D_dx7or")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Camera/Drag" unique_id=388869367]
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
-[node name="Timer" type="Timer" parent="Camera" unique_id=1162451109]
+[node name="DragTimer" type="Timer" parent="Camera" unique_id=1162451109]
 wait_time = 0.25
 one_shot = true
 
@@ -178,852 +115,8 @@ script = ExtResource("2")
 visible = false
 layout_mode = 2
 
-[node name="Settings" type="Control" parent="Boards" unique_id=1384060845 groups=["NoCanvas", "Protect"]]
-show_behind_parent = true
-light_mask = 0
+[node name="Settings" parent="Boards" unique_id=1383018309 instance=ExtResource("4_iuq4y")]
 layout_mode = 2
-script = ExtResource("4")
-metadata/_tab_index = 1
-
-[node name="Holder" type="TabContainer" parent="Boards/Settings" unique_id=1596159666]
-layout_mode = 0
-offset_top = 168.0
-offset_right = 1728.0
-offset_bottom = 1024.0
-theme_override_constants/tab_separation = 4
-current_tab = 0
-
-[node name="Items" type="Control" parent="Boards/Settings/Holder" unique_id=1746245611]
-layout_mode = 2
-script = ExtResource("5_tuclg")
-metadata/_tab_index = 0
-
-[node name="DefaultFontSize" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=953834483]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 92.0
-offset_right = 352.0
-offset_bottom = 156.0
-min_value = 8.0
-value = 15.0
-alignment = 1
-update_on_text_changed = true
-prefix = "Default Font Size:"
-
-[node name="DefaultTitle" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=1692091208]
-layout_mode = 0
-offset_left = 384.0
-offset_top = 92.0
-offset_right = 704.0
-offset_bottom = 156.0
-min_value = 8.0
-value = 15.0
-alignment = 1
-update_on_text_changed = true
-prefix = "Default Title Size:"
-
-[node name="LoadDur" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=576907677]
-layout_mode = 0
-offset_left = 1088.0
-offset_top = 92.0
-offset_right = 1696.0
-offset_bottom = 156.0
-max_value = 1.0
-step = 0.001
-alignment = 1
-prefix = "Change duration between loadingitems"
-suffix = "second(s)"
-metadata/_edit_group_ = true
-
-[node name="Proload" type="Button" parent="Boards/Settings/Holder/Items/LoadDur" unique_id=1523091271]
-layout_mode = 0
-offset_left = -64.0
-offset_bottom = 64.0
-
-[node name="ItemLimit" type="SpinBox" parent="Boards/Settings/Holder/Items" unique_id=16885844]
-layout_mode = 0
-offset_left = 736.0
-offset_top = 92.0
-offset_right = 992.0
-offset_bottom = 156.0
-allow_greater = true
-alignment = 1
-prefix = "Item Limit"
-metadata/_edit_group_ = true
-
-[node name="TotalItems" type="Label" parent="Boards/Settings/Holder/Items/ItemLimit" unique_id=368247361]
-layout_mode = 0
-offset_top = -64.0
-offset_right = 224.0
-text = "Total Items:
-0 / INF"
-label_settings = SubResource("LabelSettings_eab0n")
-vertical_alignment = 1
-autowrap_mode = 2
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="ItemSettings" type="TabContainer" parent="Boards/Settings/Holder/Items" unique_id=465393654]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 252.0
-offset_right = 1696.0
-offset_bottom = 796.0
-current_tab = 0
-tab_0/icon = ExtResource("8")
-tab_1/icon = ExtResource("10")
-tab_2/icon = ExtResource("12")
-tab_3/icon = ExtResource("14")
-tab_4/icon = ExtResource("16")
-tab_5/icon = ExtResource("21")
-tab_6/icon = ExtResource("12_yryda")
-
-[node name="Note" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=1842013228]
-layout_mode = 2
-metadata/_tab_index = 0
-
-[node name="Todo" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=1422949892]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 1
-
-[node name="Link" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=34735224]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="Column" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=708215048]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="Board" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=995644278]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 4
-
-[node name="File" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=153858234]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 5
-
-[node name="Canvas" type="Control" parent="Boards/Settings/Holder/Items/ItemSettings" unique_id=798017557]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 6
-
-[node name="Label" type="Label" parent="Boards/Settings/Holder/Items" unique_id=669963839]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 28.0
-offset_right = 528.0
-offset_bottom = 89.0
-text = "General Settings"
-label_settings = SubResource("LabelSettings_oot76")
-
-[node name="Label2" type="Label" parent="Boards/Settings/Holder/Items" unique_id=2115703132]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 188.0
-offset_right = 528.0
-offset_bottom = 249.0
-text = "Item Settings"
-label_settings = SubResource("LabelSettings_oot76")
-
-[node name="User" type="Control" parent="Boards/Settings/Holder" unique_id=800630115]
-visible = false
-layout_mode = 2
-script = ExtResource("6_yryda")
-metadata/_tab_index = 1
-
-[node name="QuickOptions" type="Panel" parent="Boards/Settings/Holder/User" unique_id=522152478]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 12.0
-offset_right = 424.0
-offset_bottom = 332.0
-script = ExtResource("10_eab0n")
-metadata/_edit_group_ = true
-
-[node name="Title" type="Label" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=2109982329]
-layout_mode = 0
-offset_left = 216.0
-offset_top = 8.0
-offset_right = 409.0
-offset_bottom = 67.0
-text = "Edit Quick Options"
-label_settings = SubResource("LabelSettings_lkim6")
-autowrap_mode = 2
-
-[node name="Selected1" type="TextureRect" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=2118104933]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 74.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="Selected2" type="TextureRect" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=1831403655]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 74.0
-offset_top = 6.0
-offset_right = 142.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="Selected3" type="TextureRect" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=1826083921]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 142.0
-offset_top = 6.0
-offset_right = 210.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="QuickHolder" type="HBoxContainer" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=58988435]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 144.0
-offset_bottom = 72.0
-
-[node name="1" type="Button" parent="Boards/Settings/Holder/User/QuickOptions/QuickHolder" unique_id=1832456691]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "1"
-
-[node name="2" type="Button" parent="Boards/Settings/Holder/User/QuickOptions/QuickHolder" unique_id=1486760194]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "2"
-
-[node name="3" type="Button" parent="Boards/Settings/Holder/User/QuickOptions/QuickHolder" unique_id=1003706160]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-text = "3"
-
-[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/Holder/User/QuickOptions" unique_id=80981086]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 80.0
-offset_right = 408.0
-offset_bottom = 312.0
-
-[node name="Options" type="VBoxContainer" parent="Boards/Settings/Holder/User/QuickOptions/ScrollHolder" unique_id=1854037483]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Feedback" type="TextEdit" parent="Boards/Settings/Holder/User" unique_id=616008297]
-layout_mode = 0
-offset_left = 432.0
-offset_top = 44.0
-offset_right = 1000.0
-offset_bottom = 180.0
-placeholder_text = "Any bugs, suggestions are appreciated"
-wrap_mode = 1
-scroll_smooth = true
-caret_blink = true
-metadata/_edit_group_ = true
-
-[node name="CheckFocus" parent="Boards/Settings/Holder/User/Feedback" unique_id=1395884035 node_paths=PackedStringArray("par") instance=ExtResource("9_b8p06")]
-par = NodePath("..")
-
-[node name="FeedbackTitle" type="Label" parent="Boards/Settings/Holder/User/Feedback" unique_id=851884902]
-layout_mode = 0
-offset_left = 16.0
-offset_top = -32.0
-offset_right = 140.0
-offset_bottom = -1.0
-text = "Feedback"
-label_settings = SubResource("LabelSettings_b8p06")
-
-[node name="SubmitFeedback" type="Button" parent="Boards/Settings/Holder/User/Feedback" unique_id=918685635]
-layout_mode = 0
-offset_left = 440.0
-offset_top = -32.0
-offset_right = 568.0
-offset_bottom = -4.0
-text = "Submit"
-
-[node name="SubmitReq" type="HTTPRequest" parent="Boards/Settings/Holder/User/Feedback/SubmitFeedback" unique_id=1409536399]
-use_threads = true
-
-[node name="BGPicker" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=336007133]
-layout_mode = 0
-offset_left = 432.0
-offset_top = 204.0
-offset_right = 720.0
-offset_bottom = 246.0
-edit_alpha = false
-metadata/_edit_group_ = true
-
-[node name="BGInfo" type="Label" parent="Boards/Settings/Holder/User/BGPicker" unique_id=60180835]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -23.0
-offset_right = 232.0
-offset_bottom = -3.0
-text = "Change Background color"
-
-[node name="DragColor" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=76321843]
-layout_mode = 0
-offset_left = 432.0
-offset_top = 348.0
-offset_right = 720.0
-offset_bottom = 390.0
-edit_alpha = false
-metadata/_edit_group_ = true
-
-[node name="BGInfo" type="Label" parent="Boards/Settings/Holder/User/DragColor" unique_id=840485089]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -23.0
-offset_right = 232.0
-offset_bottom = -3.0
-text = "Change Select drag color"
-
-[node name="GridCol" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=842368602]
-layout_mode = 0
-offset_left = 728.0
-offset_top = 204.0
-offset_right = 1000.0
-offset_bottom = 246.0
-edit_alpha = false
-metadata/_edit_group_ = true
-
-[node name="BGInfo" type="Label" parent="Boards/Settings/Holder/User/GridCol" unique_id=1127503632]
-layout_mode = 0
-offset_left = 3.0
-offset_top = -23.0
-offset_right = 232.0
-offset_bottom = -3.0
-text = "Change Grid color"
-
-[node name="SelectColor" type="ColorPickerButton" parent="Boards/Settings/Holder/User" unique_id=1004771434]
-layout_mode = 0
-offset_left = 432.0
-offset_top = 276.0
-offset_right = 611.0
-offset_bottom = 318.0
-edit_alpha = false
-metadata/_edit_group_ = true
-
-[node name="On" type="Button" parent="Boards/Settings/Holder/User/SelectColor" unique_id=521786014]
-layout_mode = 0
-offset_left = 179.0
-offset_top = 1.0
-offset_right = 288.0
-offset_bottom = 41.0
-text = "On"
-
-[node name="BGInfo2" type="Label" parent="Boards/Settings/Holder/User/SelectColor" unique_id=1571313540]
-layout_mode = 0
-offset_left = 24.0
-offset_top = -25.0
-offset_right = 253.0
-offset_bottom = -5.0
-text = "Change Select item color"
-
-[node name="ProjectDir" type="Button" parent="Boards/Settings/Holder/User" unique_id=1983753351]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 388.0
-offset_right = 424.0
-offset_bottom = 428.0
-text = "Open Project Directory"
-
-[node name="ProjectLink" type="Button" parent="Boards/Settings/Holder/User" unique_id=1605278813]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 340.0
-offset_right = 424.0
-offset_bottom = 380.0
-text = "Open Github Project"
-
-[node name="DisplayURL" type="Panel" parent="Boards/Settings/Holder/User" unique_id=27617456]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 436.0
-offset_right = 656.0
-offset_bottom = 540.0
-script = ExtResource("9_eab0n")
-metadata/_edit_group_ = true
-
-[node name="Title" type="Label" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=2059787646]
-layout_mode = 0
-offset_right = 648.0
-offset_bottom = 24.0
-text = "Display link preview (Optional)"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Info" type="RichTextLabel" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=904950499]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 24.0
-offset_right = 640.0
-offset_bottom = 88.0
-bbcode_enabled = true
-text = "To preview thumbnails of images, you are required to retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
-fit_content = true
-
-[node name="Key" type="LineEdit" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=1566631016]
-layout_mode = 0
-offset_left = 240.0
-offset_top = 72.0
-offset_right = 640.0
-offset_bottom = 100.0
-placeholder_text = "API Key here"
-alignment = 1
-caret_blink = true
-secret = true
-
-[node name="Hide" type="Button" parent="Boards/Settings/Holder/User/DisplayURL" unique_id=1764950365]
-layout_mode = 0
-offset_left = 216.0
-offset_top = 72.0
-offset_right = 240.0
-offset_bottom = 96.0
-icon = ExtResource("28_b8p06")
-expand_icon = true
-
-[node name="Center" type="Button" parent="Boards/Settings/Holder/User" unique_id=1555117319]
-layout_mode = 0
-offset_left = 1008.0
-offset_top = 92.0
-offset_right = 1360.0
-offset_bottom = 124.0
-text = "Display Center:"
-
-[node name="GridScale" type="SpinBox" parent="Boards/Settings/Holder/User" unique_id=953949466]
-layout_mode = 0
-offset_left = 1008.0
-offset_top = 52.0
-offset_right = 1360.0
-offset_bottom = 84.0
-min_value = 1.0
-value = 1.0
-update_on_text_changed = true
-prefix = "Grid Scale"
-
-[node name="Update" type="Button" parent="Boards/Settings/Holder/User" unique_id=1300856312]
-self_modulate = Color(0, 0.972549, 0.701961, 1)
-clip_children = 2
-layout_mode = 0
-offset_left = 1008.0
-offset_top = 132.0
-offset_right = 1360.0
-offset_bottom = 180.0
-metadata/_edit_group_ = true
-
-[node name="Progress" type="TextureProgressBar" parent="Boards/Settings/Holder/User/Update" unique_id=914272776]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-max_value = 108903000.0
-step = 0.001
-nine_patch_stretch = true
-texture_under = SubResource("GradientTexture2D_dbp5u")
-texture_progress = SubResource("GradientTexture2D_qt3dg")
-
-[node name="Info" type="Label" parent="Boards/Settings/Holder/User/Update" unique_id=582364837]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Download Update"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Version" type="Label" parent="Boards/Settings/Holder/User/Update" unique_id=1203139576]
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -16.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "v0.1-Alpha"
-label_settings = SubResource("LabelSettings_dbp5u")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Download" type="HTTPRequest" parent="Boards/Settings/Holder/User/Update" unique_id=66269744]
-download_chunk_size = 16777216
-use_threads = true
-max_redirects = 64
-
-[node name="GetVersion" type="HTTPRequest" parent="Boards/Settings/Holder/User/Update" unique_id=1514645730]
-use_threads = true
-max_redirects = 64
-
-[node name="FileDialog" type="FileDialog" parent="Boards/Settings/Holder/User/Update" unique_id=751337415]
-access = 2
-filters = PackedStringArray("*.exe")
-
-[node name="TotalBoards" type="Label" parent="Boards/Settings/Holder/User" unique_id=15957975]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 548.0
-offset_right = 416.0
-offset_bottom = 568.0
-
-[node name="Loadbackup" type="Button" parent="Boards/Settings/Holder/User" unique_id=1290225355]
-visible = false
-layout_mode = 0
-offset_left = 1008.0
-offset_top = 52.0
-offset_right = 1360.0
-offset_bottom = 84.0
-text = "Load Backup file"
-
-[node name="Keybinds" type="Panel" parent="Boards/Settings/Holder/User" unique_id=515262485]
-layout_mode = 0
-offset_left = 1008.0
-offset_top = 188.0
-offset_right = 1512.0
-offset_bottom = 452.0
-script = ExtResource("9_lkim6")
-
-[node name="Title" type="Label" parent="Boards/Settings/Holder/User/Keybinds" unique_id=231042663]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 20.0
-grow_horizontal = 2
-text = "Change Keybinds"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ScrollHolder" type="ScrollContainer" parent="Boards/Settings/Holder/User/Keybinds" unique_id=1820867299]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 24.0
-offset_right = -16.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Holder" type="VBoxContainer" parent="Boards/Settings/Holder/User/Keybinds/ScrollHolder" unique_id=224232983]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Keybinds" type="Control" parent="Boards/Settings/Holder" unique_id=1772675287]
-visible = false
-layout_mode = 2
-script = ExtResource("12_r2fds")
-metadata/_tab_index = 2
-
-[node name="Note" type="VBoxContainer" parent="Boards/Settings/Holder/Keybinds" unique_id=59052850]
-clip_children = 2
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 12.0
-offset_right = 1720.0
-offset_bottom = 820.0
-theme_override_constants/separation = 0
-metadata/_edit_group_ = true
-
-[node name="Title" type="LineEdit" parent="Boards/Settings/Holder/Keybinds/Note" unique_id=409101842]
-layout_mode = 2
-text = "Keybinds"
-placeholder_text = "Title"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Holder/Keybinds/Note" unique_id=1213997820]
-layout_mode = 2
-size_flags_vertical = 3
-follow_focus = true
-
-[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Holder/Keybinds/Note/ScrollContainer" unique_id=114802699]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
-bbcode_enabled = true
-text = "[b]Item keybinds:[/b][ul]
-ctrl + z: Undo
-ctrl + c: Copy (Pastes item at mouse position)
-ctrl + x: Cut
-ctrl + d: Duplicate (Pastes item in same position)
-ctrl + r: Resets camera position
-ctrl + s: Resize item
-ctrl + g: Move item
-delete: deletes selected item
-ctrl + LMB: select multiple items at once
-Note: Ctrl + Scrolling: Does not zoom in/out, this is to prevent scrolling in an item
-[/ul]
-[b]while editing a note:[/b][ul]
-ctrl + b: bold text
-[/ul]
-
-And More to come."
-
-[node name="Changelog" type="Control" parent="Boards/Settings/Holder" unique_id=1750327097]
-visible = false
-layout_mode = 2
-script = ExtResource("13_5kfif")
-metadata/_tab_index = 3
-
-[node name="Changelog" type="VBoxContainer" parent="Boards/Settings/Holder/Changelog" unique_id=265821300]
-clip_children = 2
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 1720.0
-offset_bottom = 820.0
-theme_override_constants/separation = 0
-metadata/_edit_group_ = true
-
-[node name="Title" type="LineEdit" parent="Boards/Settings/Holder/Changelog/Changelog" unique_id=501657954]
-layout_mode = 2
-text = "Changelog"
-placeholder_text = "Title"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Holder/Changelog/Changelog" unique_id=1694979443]
-layout_mode = 2
-size_flags_vertical = 3
-follow_focus = true
-
-[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Holder/Changelog/Changelog/ScrollContainer" unique_id=77914939]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
-bbcode_enabled = true
-text = "Failed to load changelog..."
-
-[node name="Extra" type="Control" parent="Boards/Settings/Holder" unique_id=1686964688]
-visible = false
-layout_mode = 2
-script = ExtResource("14_vcjic")
-metadata/_tab_index = 4
-
-[node name="Note2" type="VBoxContainer" parent="Boards/Settings/Holder/Extra" unique_id=2029623199]
-clip_children = 2
-custom_minimum_size = Vector2(0, 140)
-layout_mode = 0
-offset_left = 8.0
-offset_top = 4.0
-offset_right = 1113.0
-offset_bottom = 820.0
-theme_override_constants/separation = 0
-metadata/_edit_group_ = true
-
-[node name="Title" type="LineEdit" parent="Boards/Settings/Holder/Extra/Note2" unique_id=565384005]
-layout_mode = 2
-text = "Additional Information"
-placeholder_text = "Title"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Holder/Extra/Note2" unique_id=1236639363]
-layout_mode = 2
-size_flags_vertical = 3
-follow_focus = true
-
-[node name="Notes" type="RichTextLabel" parent="Boards/Settings/Holder/Extra/Note2/ScrollContainer" unique_id=848294390]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_styles/normal = SubResource("StyleBoxFlat_qt3dg")
-theme_override_styles/focus = SubResource("StyleBoxFlat_qt3dg")
-bbcode_enabled = true
-text = "[b]Items:[/b][ul]
-Link Item: When pasting the link of an image, it will try to display it
-Board: Every board can have the same name but different ID, Each item placed inside of the board will be linked to the board's ID
-Upload File: when selecting a file, it will try to display it's contents within the preview window, at a maximum of 100 lines. If the selected file is an image, it will try and display that image
-[/ul]
-[b]Misc:[/b][ul]
-Holding RMB (Right mouse button) allows you to pan through the space, also works with middle mouse button and it captures your mouse in the process so moving isn't limited to your window (pretty lit if you ask me)
-The settings page uses the same Board system, all it does it change an already existing board within the program, Literally recycle, reuse, reduce or whatever
-[/ul]
-[b]Information Collected/Stored:[/b][ul]
-only the items dragged and dropped, history and background color is stored into Save, removeHistory and settings files, respectively, basically anything you can physically see within the program
-Files are not stored, only the directory leading to them and contents are turned into text and displayed within
-[/ul]
-[b]Third Party use:[/b][ul]
-Icons used: [color=green][b][url]https://icons8.com[/url][/b][/color]
-Font: [color=green][b][url]https://www.programmingfonts.org/#oxproto[/url][/b][/color]
-Url preview API: [color=green][b][url]https://docs.linkpreview.net/[/url][/b][/color]
-😎No AI used (it's pretty obvious if you look at how badly written the code is)
-[/ul]
-[code]
-The github repository will always have the latest updates and fixes than the releases (this is easier than exporting and continously uploading the export)"
-
-[node name="ToDo" type="VBoxContainer" parent="Boards/Settings/Holder/Extra" unique_id=1970658981]
-layout_mode = 0
-offset_left = 1128.0
-offset_top = 4.0
-offset_right = 1720.0
-offset_bottom = 413.0
-theme_override_constants/separation = 1
-script = ExtResource("7_dbp5u")
-metadata/_edit_group_ = true
-
-[node name="Title" type="LineEdit" parent="Boards/Settings/Holder/Extra/ToDo" unique_id=1331270288]
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_colors/font_uneditable_color = Color(1, 1, 1, 1)
-text = "Possible Future Updates / bugs"
-placeholder_text = "Title"
-editable = false
-expand_to_text_length = true
-
-[node name="List" type="VBoxContainer" parent="Boards/Settings/Holder/Extra/ToDo" unique_id=747756254]
-layout_mode = 2
-
-[node name="Account" type="Control" parent="Boards/Settings/Holder" unique_id=652907846]
-visible = false
-layout_mode = 2
-script = ExtResource("12_b6yyx")
-metadata/_tab_index = 5
-
-[node name="Email" type="LineEdit" parent="Boards/Settings/Holder/Account" unique_id=1502814973]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 84.0
-offset_right = 368.0
-offset_bottom = 112.0
-placeholder_text = "Email"
-max_length = 25
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Boards/Settings/Holder/Account" unique_id=1302033512]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 116.0
-offset_right = 368.0
-offset_bottom = 148.0
-
-[node name="Password" type="LineEdit" parent="Boards/Settings/Holder/Account/HBoxContainer" unique_id=769721228]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Password"
-max_length = 20
-secret = true
-
-[node name="Button" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer" unique_id=1154379425]
-layout_mode = 2
-text = "Show/Hide"
-
-[node name="Label" type="Label" parent="Boards/Settings/Holder/Account" unique_id=928087197]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 12.0
-offset_right = 368.0
-offset_bottom = 84.0
-text = "Beta: Account Auth and
-Saving data Online
-only works manually for now"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Boards/Settings/Holder/Account" unique_id=10955278]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 196.0
-offset_right = 360.0
-offset_bottom = 228.0
-
-[node name="Data2" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer2" unique_id=484900517]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Save"
-
-[node name="Data3" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer2" unique_id=202025207]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Load"
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Boards/Settings/Holder/Account" unique_id=2082802134]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 228.0
-offset_right = 360.0
-offset_bottom = 308.0
-follow_focus = true
-
-[node name="Output" type="Label" parent="Boards/Settings/Holder/Account/ScrollContainer" unique_id=240598428]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "Output:
-"
-autowrap_mode = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="Boards/Settings/Holder/Account" unique_id=1066302035]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 156.0
-offset_right = 360.0
-offset_bottom = 188.0
-
-[node name="Login" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer3" unique_id=147321790]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "login"
-
-[node name="Signup" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer3" unique_id=1280510145]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Sign up"
-
-[node name="Logout" type="Button" parent="Boards/Settings/Holder/Account/HBoxContainer3" unique_id=1208280879]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Log out"
-
-[node name="Title" type="Label" parent="Boards/Settings" unique_id=684503044]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.175
-anchor_right = -0.175
-anchor_bottom = 0.0085227275
-offset_left = 256.0
-offset_top = 64.0
-offset_right = 681.0
-offset_bottom = 146.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
-text = "Settings"
-label_settings = SubResource("LabelSettings_xv0o8")
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Version" type="Label" parent="Boards/Settings" unique_id=432873272]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.3125
-anchor_top = -0.27272728
-anchor_right = -0.29453126
-anchor_bottom = -0.2556818
-offset_left = 464.0
-offset_top = 160.0
-offset_right = 889.0
-offset_bottom = 227.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_iwav7")
-text = "Version: v0.3-Alpha"
-label_settings = SubResource("LabelSettings_nqkbx")
-horizontal_alignment = 1
-vertical_alignment = 1
-justification_flags = 235
-max_lines_visible = 1
-visible_characters_behavior = 3
-metadata/_edit_use_anchors_ = true
 
 [node name="Calendar" type="Control" parent="Boards" unique_id=1532667453 groups=["NoCanvas", "Protect"]]
 visible = false
@@ -1190,7 +283,6 @@ layout_mode = 2
 text = "Add"
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=182628938]
-visible = false
 
 [node name="Nodes" type="Control" parent="UI" unique_id=49535082]
 layout_mode = 3
@@ -1217,7 +309,6 @@ offset_left = 8.0
 offset_top = 56.0
 offset_right = 168.0
 offset_bottom = 696.0
-theme_override_constants/separation = 0
 
 [node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=1528949264]
 layout_mode = 2
@@ -1236,7 +327,7 @@ icon = ExtResource("8")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Notes" unique_id=2068506533 instance=ExtResource("9")]
-Item = ExtResource("6")
+SceneItem = ExtResource("6")
 
 [node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1242307755]
 layout_mode = 2
@@ -1245,7 +336,7 @@ icon = ExtResource("10")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/ToDo" unique_id=721317625 instance=ExtResource("9")]
-Item = ExtResource("11")
+SceneItem = ExtResource("11")
 
 [node name="Link" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1088625353]
 layout_mode = 2
@@ -1255,7 +346,7 @@ icon = ExtResource("12")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Link" unique_id=1252345102 instance=ExtResource("9")]
-Item = ExtResource("13")
+SceneItem = ExtResource("13")
 
 [node name="Column" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=88645888]
 layout_mode = 2
@@ -1264,7 +355,7 @@ icon = ExtResource("14")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Column" unique_id=1308022483 instance=ExtResource("9")]
-Item = ExtResource("15")
+SceneItem = ExtResource("15")
 
 [node name="Board" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1279098587]
 layout_mode = 2
@@ -1273,7 +364,7 @@ icon = ExtResource("16")
 expand_icon = true
 
 [node name="DragNDrop2" parent="UI/Nodes/Holder/ItemHolder/Items/Board" unique_id=826384012 instance=ExtResource("9")]
-Item = ExtResource("18")
+SceneItem = ExtResource("18")
 
 [node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1652395121]
 layout_mode = 2
@@ -1282,7 +373,7 @@ icon = ExtResource("21")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/File" unique_id=1828766300 instance=ExtResource("9")]
-Item = ExtResource("22")
+SceneItem = ExtResource("22")
 
 [node name="Canvas" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1048350965]
 layout_mode = 2
@@ -1291,9 +382,20 @@ icon = ExtResource("38_jk7hp")
 expand_icon = true
 
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Canvas" unique_id=831187993 instance=ExtResource("9")]
-Item = ExtResource("29_58u0p")
+SceneItem = ExtResource("29_58u0p")
+
+[node name="Foldable" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=15919019]
+visible = false
+layout_mode = 2
+text = "Foldable"
+icon = ExtResource("22_1yho4")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Foldable" unique_id=1405003645 instance=ExtResource("9")]
+SceneItem = ExtResource("23_y8ose")
 
 [node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=458539594]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
@@ -1386,23 +488,25 @@ text = "Add"
 [node name="Holder" type="VBoxContainer" parent="UI/Nodes/Holder/OptionsHolder/Items/Tags" unique_id=1517765101]
 layout_mode = 2
 
+[node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder" unique_id=1187348715]
+layout_mode = 2
+
+[node name="Title" type="Button" parent="UI/Nodes/Holder/HistoryTitle" unique_id=684350480]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Expand/Colapse History"
+text = "History"
+icon = ExtResource("24_eab0n")
+expand_icon = true
+
+[node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle" unique_id=1417363903]
+layout_mode = 2
+tooltip_text = "Clear History"
+icon = ExtResource("25_lkim6")
+
 [node name="History" type="VBoxContainer" parent="UI/Nodes/Holder" unique_id=1764659306]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder/History" unique_id=1187348715]
-layout_mode = 2
-
-[node name="Title" type="Label" parent="UI/Nodes/Holder/History/HistoryTitle" unique_id=1194427213]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "History"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Clear" type="Button" parent="UI/Nodes/Holder/History/HistoryTitle" unique_id=1417363903]
-layout_mode = 2
-text = "Clear"
 
 [node name="HistoryHolder" type="ScrollContainer" parent="UI/Nodes/Holder/History" unique_id=1043571050]
 layout_mode = 2
@@ -1418,36 +522,6 @@ allow_reselect = true
 allow_rmb_select = true
 auto_height = true
 text_overrun_behavior = 4
-
-[node name="Delete" type="Button" parent="UI/Nodes/Holder/History" unique_id=1694297993]
-self_modulate = Color(0.937034, 0.0859377, 0, 1)
-layout_mode = 2
-text = "ERASE ALL"
-
-[node name="DeleteAll" type="VBoxContainer" parent="UI/Nodes/Holder/History" unique_id=305241576]
-visible = false
-layout_mode = 2
-
-[node name="Warning" type="Label" parent="UI/Nodes/Holder/History/DeleteAll" unique_id=1040294257]
-layout_mode = 2
-text = "ARE YOU SURE?
-This permanently deletes all items, history and settings. Can not be Undone."
-autowrap_mode = 2
-
-[node name="DeleteAll" type="HBoxContainer" parent="UI/Nodes/Holder/History/DeleteAll" unique_id=1533681573]
-layout_mode = 2
-
-[node name="Yes" type="Button" parent="UI/Nodes/Holder/History/DeleteAll/DeleteAll" unique_id=1263101057]
-self_modulate = Color(0.937034, 0.0859377, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "YES"
-
-[node name="No" type="Button" parent="UI/Nodes/Holder/History/DeleteAll/DeleteAll" unique_id=575549293]
-self_modulate = Color(0.937034, 0.0859377, 0, 1)
-layout_mode = 2
-size_flags_horizontal = 3
-text = "NO"
 
 [node name="FileDialog" type="FileDialog" parent="UI/Nodes" unique_id=207246629]
 auto_translate_mode = 1
@@ -1625,46 +699,25 @@ allow_greater = true
 alignment = 1
 prefix = "Pixel Size"
 
+[node name="NotifSCroll" type="ScrollContainer" parent="UI" unique_id=1757336733]
+offset_left = 768.0
+offset_top = 512.0
+offset_right = 1280.0
+offset_bottom = 704.0
+mouse_filter = 2
+follow_focus = true
+
+[node name="Notifications" type="VBoxContainer" parent="UI/NotifSCroll" unique_id=927725289]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 2
+script = ExtResource("47_wd2gd")
+
 [connection signal="body_entered" from="Camera/Drag" to="Camera" method="_on_drag_body_entered"]
 [connection signal="body_exited" from="Camera/Drag" to="Camera" method="_on_drag_body_exited"]
-[connection signal="timeout" from="Camera/Timer" to="Camera" method="_on_timer_timeout"]
-[connection signal="value_changed" from="Boards/Settings/Holder/Items/DefaultFontSize" to="Boards/Settings" method="_on_default_font_size_value_changed"]
-[connection signal="value_changed" from="Boards/Settings/Holder/Items/DefaultTitle" to="Boards/Settings" method="_on_default_title_value_changed"]
-[connection signal="value_changed" from="Boards/Settings/Holder/Items/LoadDur" to="Boards/Settings" method="_on_load_dur_value_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Items/LoadDur/Proload" to="Boards/Settings" method="_on_proload_pressed"]
-[connection signal="value_changed" from="Boards/Settings/Holder/Items/ItemLimit" to="Boards/Settings" method="_on_item_limit_value_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/QuickOptions/QuickHolder/1" to="Boards/Settings/Holder/User/QuickOptions" method="_on_q_1_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/QuickOptions/QuickHolder/2" to="Boards/Settings/Holder/User/QuickOptions" method="_on_q_2_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/QuickOptions/QuickHolder/3" to="Boards/Settings/Holder/User/QuickOptions" method="_on_q_2_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/Feedback/SubmitFeedback" to="Boards/Settings" method="_on_submit_feedback_pressed"]
-[connection signal="request_completed" from="Boards/Settings/Holder/User/Feedback/SubmitFeedback/SubmitReq" to="Boards/Settings" method="_on_submit_req_request_completed"]
-[connection signal="color_changed" from="Boards/Settings/Holder/User/BGPicker" to="Boards/Settings" method="_on_color_picker_button_color_changed"]
-[connection signal="color_changed" from="Boards/Settings/Holder/User/DragColor" to="Boards/Settings" method="_on_drag_color_color_changed"]
-[connection signal="color_changed" from="Boards/Settings/Holder/User/GridCol" to="Boards/Settings" method="_on_drag_color_2_color_changed"]
-[connection signal="color_changed" from="Boards/Settings/Holder/User/SelectColor" to="Boards/Settings" method="_on_bg_picker_2_color_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/SelectColor/On" to="Boards/Settings" method="_on_on_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/ProjectDir" to="Boards/Settings" method="_on_project_dir_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/ProjectLink" to="Boards/Settings" method="_on_project_link_pressed"]
-[connection signal="text_changed" from="Boards/Settings/Holder/User/DisplayURL/Key" to="Boards/Settings/Holder/User/DisplayURL" method="_on_key_text_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/DisplayURL/Hide" to="Boards/Settings/Holder/User/DisplayURL" method="_on_hide_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/Center" to="Boards/Settings" method="_on_center_pressed"]
-[connection signal="value_changed" from="Boards/Settings/Holder/User/GridScale" to="Boards/Settings" method="_on_grid_scale_value_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/Update" to="Boards/Settings" method="_on_update_pressed"]
-[connection signal="request_completed" from="Boards/Settings/Holder/User/Update/Download" to="Boards/Settings" method="_on_download_request_completed"]
-[connection signal="request_completed" from="Boards/Settings/Holder/User/Update/GetVersion" to="Boards/Settings" method="_on_get_version_request_completed"]
-[connection signal="file_selected" from="Boards/Settings/Holder/User/Update/FileDialog" to="Boards/Settings" method="_on_file_dialog_file_selected"]
-[connection signal="pressed" from="Boards/Settings/Holder/User/Loadbackup" to="Boards/Settings" method="_on_loadbackup_pressed"]
-[connection signal="meta_clicked" from="Boards/Settings/Holder/Keybinds/Note/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
-[connection signal="meta_clicked" from="Boards/Settings/Holder/Changelog/Changelog/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
-[connection signal="meta_clicked" from="Boards/Settings/Holder/Extra/Note2/ScrollContainer/Notes" to="Boards/Settings" method="_on_notes_meta_clicked"]
-[connection signal="text_changed" from="Boards/Settings/Holder/Account/Email" to="Boards/Settings/Holder/Account" method="_on_email_text_changed"]
-[connection signal="text_changed" from="Boards/Settings/Holder/Account/HBoxContainer/Password" to="Boards/Settings/Holder/Account" method="_on_password_text_changed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer/Button" to="Boards/Settings/Holder/Account" method="_on_button_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer2/Data2" to="Boards/Settings/Holder/Account" method="_on_data_2_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer2/Data3" to="Boards/Settings/Holder/Account" method="_on_data_3_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer3/Login" to="Boards/Settings/Holder/Account" method="_on_login_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer3/Signup" to="Boards/Settings/Holder/Account" method="_on_signup_pressed"]
-[connection signal="pressed" from="Boards/Settings/Holder/Account/HBoxContainer3/Logout" to="Boards/Settings/Holder/Account" method="_on_logout_pressed"]
+[connection signal="timeout" from="Camera/DragTimer" to="Camera" method="_on_timer_timeout"]
 [connection signal="item_selected" from="Boards/Calendar/Main/Month" to="Boards/Calendar" method="_on_month_item_selected"]
 [connection signal="value_changed" from="Boards/Calendar/Main/Year" to="Boards/Calendar" method="_on_year_value_changed"]
 [connection signal="pressed" from="Boards/Calendar/Config/InputHolder/Add" to="Boards/Calendar" method="_on_add_pressed"]
@@ -1674,12 +727,10 @@ prefix = "Pixel Size"
 [connection signal="focus_exited" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_focus_exited"]
 [connection signal="text_changed" from="UI/Nodes/Holder/OptionsHolder/Items/BoardName" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_name_text_changed"]
 [connection signal="pressed" from="UI/Nodes/Holder/OptionsHolder/Items/Tags/Options/Add" to="UI/Nodes/Holder/OptionsHolder" method="_on_add_pressed"]
-[connection signal="pressed" from="UI/Nodes/Holder/History/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
+[connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Title" to="UI/Nodes" method="_on_title_pressed"]
+[connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/History/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]
 [connection signal="item_clicked" from="UI/Nodes/Holder/History/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_clicked"]
-[connection signal="pressed" from="UI/Nodes/Holder/History/Delete" to="UI/Nodes" method="_on_delete_pressed"]
-[connection signal="pressed" from="UI/Nodes/Holder/History/DeleteAll/DeleteAll/Yes" to="UI/Nodes" method="_on_yes_pressed"]
-[connection signal="pressed" from="UI/Nodes/Holder/History/DeleteAll/DeleteAll/No" to="UI/Nodes" method="_on_no_pressed"]
 [connection signal="file_selected" from="UI/Nodes/FileDialog" to="UI/Nodes/Holder/OptionsHolder" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="UI/QuickOptions/Settings" to="UI/QuickOptions" method="_on_settings_pressed"]
 [connection signal="pressed" from="UI/QuickOptions/QuickOption1" to="UI/QuickOptions" method="_on_quick_option_1_pressed"]

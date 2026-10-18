@@ -30,6 +30,11 @@ var TimerNode : Timer = null
 var Col : CollisionPolygon2D = null
 var Body : StaticBody2D = null
 
+var MouseClose := false
+var Hovering = false
+
+var PrevData := {}
+
 func Has(ITEM : String, CustomValue = null):
 	if self.Data.has(ITEM):
 		if CustomValue:
@@ -40,12 +45,13 @@ func Has(ITEM : String, CustomValue = null):
 		return self.Data[ITEM]
 
 func initItem():
+	add_to_group("Item")
+	if str(Has("ItemID", "")) == "" or !(typeof(Has("ItemID", "")) == TYPE_STRING) or int(Has("ItemID", "")) <= -1:
+		Settings.Data["TotalItems"] += 1
+		self.Data["ItemID"] = str(Settings.Data["TotalItems"])
 	if self.Data["Size"] != Vector2.ZERO:
 		size = self.Data["Size"]
 		position = self.Data["Pos"]
-	User.TotalItems += 1
-	if str(Has("ItemID", "")) == "" or !(typeof(Has("ItemID", "")) == TYPE_STRING) or int(Has("ItemID", "")) <= -1:
-		self.Data["ItemID"] = str(User.TotalItems)
 	TimerNode = Timer.new()
 	TimerNode.one_shot = true
 	TimerNode.wait_time = 0.5
@@ -63,15 +69,79 @@ func initItem():
 	User.connect("AllFocusLost", Callable(self, "AllFocusLost"))
 	User.connect("SearchByQuery", Callable(self, "SearchByQuery"))
 	User.connect("DeleteAllItemsByBoard", Callable(self, "DeleteAllItemsByBoard"))
+	User.connect("ApplyItemChange", Callable(self, "ApplyItemChange"))
+	Customization.connect("ApplyCustomization", CreateStyle)
 	
-	Connect(self.get_children(true), ["focus_entered", "focus_exited", "button_down", "button_up"])
+	LoadConnections()
+	CreateStyle()
+
+func _draw() -> void:
+	if Selected and Settings.Data["CanSelectCol"]:
+		var Style : StyleBox = Customization.Themes[
+					Customization.Config[self.Data["Type"]]
+					]["Style"].duplicate(true)
+		if Has("Style", "") != "":
+			Style = Customization.Themes[self.Data["Style"]].duplicate(true)
+		if Style is StyleBoxEmpty:
+			Style = StyleBoxFlat.new()
+		Style.set("bg_color", Color(0.0, 0.0, 0.0, 0.0))
+		Style.call("set_border_width_all", (4 / User.CamZoom.x))
+		Style.border_color = Settings.Data["SelectCol"]
+		draw_style_box(Style, Rect2(0, 0, size.x, size.y))
+
+func CreateStyle():
+	ApplyStyle(get_children(true))
+
+func ApplyStyle(Nodes : Array):
+	for i:Node in Nodes:
+		if i.has_method("add_theme_font_override") and (i is Button or i is LineEdit or i is RichTextLabel or i is CodeEdit):
+			for j in System.GetFontOptions(i):
+				i.add_theme_font_override(j, 
+				System.LoadFont(Customization.Themes[Customization.Config[self.Data["Type"]]]["Font"]))
+		if i.has_method("add_theme_stylebox_override") and (i is Button or i is LineEdit or i is RichTextLabel or i is CodeEdit):
+			var Style : StyleBox = Customization.Themes[
+					Customization.Config[self.Data["Type"]]
+					]["Style"].duplicate(true)
+			if Has("Style", "") != "":
+				Style = Customization.Themes[self.Data["Style"]]["Style"].duplicate(true)
+			for j in System.GetStyleOptions(i):
+				if Style is StyleBoxFlat:
+					if i.is_in_group("Top"):
+						Style.set_corner_radius(CORNER_BOTTOM_LEFT, 0)
+						Style.set_corner_radius(CORNER_BOTTOM_RIGHT, 0)
+					if i.is_in_group("Bottom") and $Title.visible:
+						Style.set_corner_radius(CORNER_TOP_LEFT, 0)
+						Style.set_corner_radius(CORNER_TOP_RIGHT, 0)
+				i.add_theme_stylebox_override(j, Style)
+		if i.get_child_count() >= 1:
+			ApplyStyle(i.get_children(true))
+
+func ApplyItemChange(data):
+	if data["ItemID"] == self.Data["ItemID"]:
+		self.Data = data
+		position = data["Pos"]
+		size = data["Size"]
+		call("ApplyData")
+
+func LoadConnections():
+	Connect(self.get_children(true), 
+	["focus_entered", "focus_exited", "button_down", "button_up"])
+
+
+func ApplyToAll(NODES : Array, FUNCTIONS : Array):
+	for i in NODES:
+		for j in FUNCTIONS:
+			call(j, i)
+		if i.get_children(true).size() >= 1:
+			Connect(i.get_children(true), FUNCTIONS)
 
 func Connect(NODES : Array, SIGNALS : Array):
 	#This ladies and gentlemen is called "Recurrsion" (probably)
 	for i in NODES:
 		for j in SIGNALS:
-			if i.has_signal(j) and !is_connected(j, Callable(self, j)):
-				i.connect(j, Callable(self, j))
+			if i.has_signal(j):
+				if !i.is_connected(j, Callable(self, j)):
+					i.connect(j, Callable(self, j))
 		if i.get_children(true).size() >= 1:
 			Connect(i.get_children(true), SIGNALS)
 
@@ -96,11 +166,9 @@ func Delete():
 	User.emit_signal("ItemFocusLost")
 	if self.Data["Type"] == "Board":
 		Settings.Data["TotalBoards"] -= 1
-	User.TotalItems -= 1
 	User.emit_signal("StoppedSelecting")
 	User.SelectedObject = null
 	User.MultiSelectedObjects = []
-	User.TotalItems -= 1
 	if !Input.is_action_pressed("Special"):
 		User.emit_signal("ObjectRemoved", self.Data)
 	User.emit_signal("ItemFocusLost")
@@ -201,22 +269,20 @@ func StoppedSelecting():
 	Selected = false
 	Action = ""
 
-func _draw() -> void:
-	if Selected and Settings.Data["CanSelectCol"]:
-		draw_rect(
-			Rect2(0, 0, size.x, size.y),
-			Settings.Data["SelectCol"],
-			false,
-			4 / User.CamZoom.x,
-			true
-		)
+
 
 var InitialMousePos := Vector2.ZERO
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("SelectAll") and self.Data["ID"] == Settings.Data["CurrentPage"] and !User.InFocus:
 		focus_entered()
 	if Settings.Data["CurrentPage"] == self.Data["ID"]:
+		var FullSize = global_position + size
+		#print(FullSize, " | ", get_global_mouse_position())
+		if (get_global_mouse_position().y >= global_position.y and get_global_mouse_position().y <= FullSize.y) and (get_global_mouse_position().x >= global_position.x and get_global_mouse_position().x <= FullSize.x):
+			Hovering = true
+		else:
+			Hovering = false
 		if Col != null:
 			Col.disabled = false
 	else:
@@ -225,20 +291,21 @@ func _physics_process(delta: float) -> void:
 
 	if TechnicallyInFocus and !User.MouseInCanvas:
 		ext()
-	if Holding and Input.is_action_just_released("Click"):
-		StillHolding = false
-		Holding = false
-		if User.MultiSelecting:
-			if !(get_path() in User.MultiSelectedObjects):
-				User.MultiSelectedObjects.append(get_path())
+	if Input.is_action_just_released("Click"):
+		if Holding:
+			StillHolding = false
+			Holding = false
+			if User.MultiSelecting:
+				if !(get_path() in User.MultiSelectedObjects):
+					User.MultiSelectedObjects.append(get_path())
+					Selected = true
+				User.SelectedObject = null
+			else:
+				User.MultiSelectedObjects = []
+				User.SelectedObject = get_path()
 				Selected = true
-			User.SelectedObject = null
-		else:
-			User.MultiSelectedObjects = []
-			User.SelectedObject = get_path()
-			Selected = true
-			User.emit_signal("ItemFocused", get_path())
-		User.emit_signal("SaveObjectData")
+				User.emit_signal("ItemFocused", get_path())
+			User.emit_signal("SaveObjectData")
 	if Input.is_action_just_pressed("Click"):
 		if DragSelected:
 			ItemFocusLost()
@@ -274,6 +341,8 @@ func _input(event: InputEvent) -> void:
 				custom_minimum_size.y = MouseMove(event, size)
 
 func MouseMove(event : InputEventMouseMotion, vec):
+	if !CanDrag:
+		return vec
 	Col.polygon = System.CreateRectangle(Vector2.ZERO, size)
 	var current_mouse = get_global_mouse_position()
 	var offset = current_mouse - vec
@@ -299,6 +368,8 @@ func ItemFocusLost():
 		#ext(true)
 
 func focus_entered(MultiSelect = false):
+	if !Selected:
+		PrevData = self.Data.duplicate(true)
 	if !(User.MultiSelecting or MultiSelect):
 		DragSelected = false
 		MultiSelected = false
@@ -326,6 +397,12 @@ func ext(force = false):
 		Selected = false
 		MultiSelected = false
 		Action = ""
+		if PrevData != self.Data:
+			if self.Data["Type"] == "Notes":
+				if !self.Editing:
+					User.emit_signal("ItemChanged", PrevData)
+			else:
+				User.emit_signal("ItemChanged", PrevData)
 	else :
 		User.emit_signal("ItemFocusLost")
 

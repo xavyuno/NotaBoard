@@ -12,3 +12,7 @@ func _on_hide_pressed() -> void:
 
 func _on_key_text_changed(new_text: String) -> void:
 	Settings.Data["UrlAPIKey"] = new_text
+
+
+func _on_info_meta_clicked(meta: Variant) -> void:
+	OS.shell_open(str(meta))

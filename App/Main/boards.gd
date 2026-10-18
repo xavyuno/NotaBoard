@@ -3,6 +3,21 @@ extends TabContainer
 func _ready() -> void :
 	User.connect("ChangeBoard", Callable(self, "ChangeBoard"))
 	User.connect("SaveObjectData", Callable(self, "saveItems"))
+	User.connect("ForceUpdateID", Callable(self, "ForceUpdateID"))
+	var userArg = OS.get_cmdline_user_args()
+	for i in userArg:
+		var filteredCMD = i.to_lower().replace("-", "")
+		if filteredCMD == "test":
+			User.TestingMode = true
+
+func ForceUpdateID():
+	Settings.Data["TotalItems"] = 0
+	for i in get_children():
+		if !i.is_in_group("NoCanvas"):
+			for j in i.get_children():
+				if j.is_in_group("Item"):
+					Settings.Data["TotalItems"] += 1
+					j.Data["ItemID"] = Settings.Data["TotalItems"]
 
 func _exit_tree() -> void :
 	saveItems()
@@ -23,7 +38,7 @@ func saveItems():
 
 					User.StoredHistory.append(j.GetData())
 
-func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352), CamZoom = 1):
+func ChangeBoard(Board: String, Title: String, _ID = "", _CamPos = Vector2(640, 352), _CamZoom = 1):
 	var Found = false
 	for i in get_tab_count():
 		if get_tab_control(i).name == Board:

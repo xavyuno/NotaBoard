@@ -3,7 +3,7 @@ extends Control
 func _ready() -> void:
 	Settings.connect("SettingsChanged", Callable(self, "settingChanged"))
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Grid.visible = Settings.Data["GridSnap"]
 	$Grid.scale = Vector2(Settings.Data["GridSize"] / 16, Settings.Data["GridSize"] / 16)
 	$Grid.position = (get_global_mouse_position() - size * $Grid.scale).snapped(Vector2(Settings.Data["GridSize"], Settings.Data["GridSize"]))

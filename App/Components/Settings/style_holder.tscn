@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://bm8vt164q21us"]
+
+[ext_resource type="Script" uid="uid://b53uovoe76e8a" path="res://App/Components/Settings/style_holder.gd" id="1_32wsx"]
+[ext_resource type="Texture2D" uid="uid://c2o1b6eo7a6f0" path="res://App/Assets/Icons/Settings/icons8-check-32.png" id="1_p31n2"]
+[ext_resource type="Texture2D" uid="uid://cyg4bn043wsqc" path="res://App/Assets/Icons/Settings/icons8-clear-32.png" id="2_32wsx"]
+
+[node name="StyleHolder" type="HBoxContainer" unique_id=86506594]
+offset_right = 512.0
+offset_bottom = 40.0
+script = ExtResource("1_32wsx")
+
+[node name="Select" type="Button" parent="." unique_id=1885866869]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Default" type="TextureRect" parent="Select" unique_id=868106315]
+modulate = Color(0.26779765, 0.7301741, 0.49287653, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.094000004
+anchor_bottom = 1.0
+offset_right = 0.14399719
+tooltip_text = "This style is the set default for all items"
+texture = ExtResource("1_p31n2")
+metadata/_edit_use_anchors_ = true
+
+[node name="Set" type="Button" parent="." unique_id=1076133838]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("1_p31n2")
+
+[node name="Delete" type="Button" parent="." unique_id=154749567]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("2_32wsx")
+
+[connection signal="pressed" from="Set" to="." method="_on_set_pressed"]
+[connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

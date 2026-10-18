@@ -21,7 +21,7 @@ func _notification(what: int) -> void:
 	NOTIFICATION_WM_WINDOW_FOCUS_OUT,
 	NOTIFICATION_APPLICATION_FOCUS_IN
 	]:
-		SaveAll(false)
+		SaveAll()
 		BackupAll()
 
 
@@ -31,7 +31,7 @@ func GoTo(Info : Dictionary):
 	else:
 		User.emit_signal("ChangeBoard", "Home", "Home", "", Info["Pos"]+(Info["Size"]/2), Settings.Data["CamZoomHome"])
 
-func SaveAll(test):
+func SaveAll():
 	if User.TestingMode or Saving:
 		Saving = false
 		return
@@ -48,7 +48,7 @@ func BackupAll():
 	file.store_var({
 		"Settings" : Settings.Data,
 		"Items" : User.StoredHistory,
-		"History" : User.RemovedHistory
+		"History" : User.History
 	})
 	file.close()
 
@@ -103,12 +103,15 @@ func SwitchBoard(Page, Title = ""):
 	if User.Boards.has(Page):
 		User.emit_signal("ChangeBoard", Page, Title, "", User.Boards[Page]["CamPos"], User.Boards[Page]["CamZoom"])
 	else :
-		User.emit_signal("ChangeBoard", Page, Title, "", Settings.Data["CamPos" + Page], Settings.Data["CamZoom" + Page])
+		if Settings.Data.has("CamPos" + Page):
+			User.emit_signal("ChangeBoard", Page, Title, "", Settings.Data["CamPos" + Page], Settings.Data["CamZoom" + Page])
+		else:
+			System.SwitchBoard("Home")
 
 func SaveRemoveHistory(start = "", end = ""):
 	var file = FileAccess.open(MAINDIR + start + HISTORYFILE + end + EXTENSION , FileAccess.WRITE)
 	if file:
-		file.store_var(User.RemovedHistory, true)
+		file.store_var(User.History, true)
 		file.close()
 
 func DateToString(date : Array):
@@ -135,7 +138,7 @@ func CreateWarning(Info):
 	get_tree().current_scene.get_node("UI").add_child(WarningUI)
 	return WarningUI
 
-func AddObject(item, atMouse = true, parent = null, extraData = {}, emit = true):
+func AddObject(item, _atMouse = true, parent = null, extraData = {}, updateHistory = true):
 	var obj
 	if item is PackedScene:
 		obj = item.instantiate()
@@ -165,7 +168,8 @@ func AddObject(item, atMouse = true, parent = null, extraData = {}, emit = true)
 	if !extraData.is_empty() and (extraData["Pos"] != Vector2.ZERO and extraData["Size"] != Vector2.ZERO):
 		obj.position = extraData["Pos"]
 		obj.size = extraData["Size"]
-	User.emit_signal("ObjectAdded", obj.Data)
+	
+	User.emit_signal("ObjectAdded", obj.Data, updateHistory)
 
 func GetOrNull(Data : Dictionary, Comparison, Default, Type = null):
 	if Data.has(Comparison):
@@ -179,10 +183,10 @@ func GetOrNull(Data : Dictionary, Comparison, Default, Type = null):
 	else:
 		return Default
 
-func GetSpecificType(Item, TypeArray: Array):
+func GetSpecificType(_Item, TypeArray: Array):
 	var result = false
 	for i in TypeArray:
-		if typeof(Item) == typeof(i):
+		if typeof(_Item) == typeof(i):
 			result = true
 	return result
 
@@ -201,8 +205,10 @@ func SaveOnline():
 		{
 			"StoredItems" : encode(User.StoredHistory),
 			"Settings" : encode(Settings.Data),
-			"History" : encode(User.RemovedHistory)
+			"History" : encode(User.History)
 		})
+	else:
+		CreateNotif("Failed to save to database")
 
 func LoadOnline():
 	if Db_ref != null and DatabaseLoaded:
@@ -217,3 +223,41 @@ func LoadOnline():
 				fileSave.store_var(FileData[i], true)
 				fileSave.close()
 		User.emit_signal("ApplySaveFile")
+	else:
+		CreateNotif("Failed to load from database")
+
+func CreateNotif(Text : String, Warning = false):
+	User.emit_signal("CreateNotif", Text, Warning)
+
+func GetStyleOptions(node):
+	var Output = []
+	if node is Button:
+		Output = ["normal", "pressed", "hover", "hover_pressed", "focus"]
+	elif node is LineEdit or node is RichTextLabel or node is CodeEdit:
+		Output = ["normal", "focus"]
+	else:
+		Output = ["normal", "pressed", "hover", "hover_pressed", "focus", "normal", "focus"]
+	return Output
+
+func GetFontOptions(node):
+	var Output = []
+	if node is Button or node is CodeEdit or node is LineEdit:
+		Output = ["font"]
+	elif node is RichTextLabel:
+		Output = ["normal_font", "bold_font", "bold_italics_font", "italics_font", "mono_font"]
+	else:
+		Output = ["font", "normal_font", "bold_font", "bold_italics_font", "italics_font", "mono_font"]
+	return Output
+
+func LoadFont(path):
+	if path is String:
+		var font : Font = FontFile.new()
+		font.load_dynamic_font(ProjectSettings.globalize_path(path))
+		if font:
+			return font.duplicate(true)
+		else:
+			return preload("uid://bnkyxirvuyr1j").duplicate(true)
+	elif path is Font:
+		return path
+	else:
+		return preload("uid://bnkyxirvuyr1j").duplicate(true)

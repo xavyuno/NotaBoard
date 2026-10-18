@@ -21,7 +21,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		LoadInEditor()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_key_pressed(KEY_R) and Engine.is_editor_hint():
 		LoadInEditor()
 

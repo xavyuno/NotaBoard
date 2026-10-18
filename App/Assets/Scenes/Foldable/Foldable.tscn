@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://brwahukao4u0x"]
+
+[ext_resource type="Script" uid="uid://blh3ams083ele" path="res://App/Assets/Scenes/Foldable/expandable.gd" id="1_h6ceu"]
+
+[node name="Foldable" type="VBoxContainer" unique_id=358973631]
+offset_right = 224.0
+offset_bottom = 32.0
+script = ExtResource("1_h6ceu")
+
+[node name="Container" type="FoldableContainer" parent="." unique_id=1315738214]
+layout_mode = 2
+folded = true
+
+[node name="Holder" type="VBoxContainer" parent="Container" unique_id=948795798]
+visible = false
+layout_mode = 2

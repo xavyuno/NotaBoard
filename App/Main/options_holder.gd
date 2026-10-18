@@ -23,6 +23,7 @@ func TitlePressed():
 		ItemNode.get_node("Title").visible = !ItemNode.get_node("Title").visible
 	else :
 		ItemNode.get_node("Top/Title").visible = !ItemNode.get_node("Top/Title").visible
+	Customization.emit_signal("ApplyCustomization")
 
 func NotePressed():
 	ItemNode.get_node("Preview").visible = !ItemNode.get_node("Preview").visible
@@ -33,23 +34,22 @@ func DirectoryPressed():
 	$"../../FileDialog".popup(Rect2(0, 0, 600, 600))
 
 func CoverPressed():
-	var popup := FileDialog.new()
-	popup.connect("file_selected", Callable(self, "popup"))
-	popup.file_mode = FileDialog.FILE_MODE_OPEN_FILE
-	popup.access = FileDialog.ACCESS_FILESYSTEM
+	var Filedia := FileDialog.new()
+	Filedia.connect("file_selected", Callable(self, "popup"))
+	Filedia.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	Filedia.access = FileDialog.ACCESS_FILESYSTEM
 	for i in ["png", "jpeg"]:
-		popup.add_filter("*." + i)
-	get_tree().root.add_child(popup)
-	popup.popup(Rect2i(500, 500, 600, 600))
-	popupConst = popup
+		Filedia.add_filter("*." + i)
+	get_tree().root.add_child(Filedia)
+	Filedia.popup(Rect2i(500, 500, 600, 600))
+	popupConst = Filedia
 
 func OpenPressed():
 	OS.shell_open(ProjectSettings.globalize_path(ItemNode.Data["Dir"]))
 
 func popup(path):
 	var img = Image.load_from_file(ProjectSettings.globalize_path(path))
-	var texture = ImageTexture.new()
-	var imgtxt = texture.create_from_image(img)
+	var imgtxt = ImageTexture.create_from_image(img)
 	ItemNode.ChangeCover(imgtxt)
 	popupConst.queue_free()
 
@@ -77,7 +77,7 @@ func ItemFocused(path : NodePath):
 		if !i.name in ["ItemID", "ID", "Tags"]: 
 			i.visible = false
 	for i in Options.size():
-		if !$Items.get_node(Options[i]):
+		if !$Items.get_node_or_null(Options[i]):
 			var but = Button.new()
 			but.name = Options[i]
 			but.text = Options[i]
@@ -168,3 +168,6 @@ func _on_board_name_text_changed(new_text: String) -> void:
 func _on_add_pressed() -> void:
 	ItemNode.AddTag($Items/Tags/Options/Input.text)
 	ReloadTags()
+
+func AutoExpandPressed():
+	ItemNode.get_node("Text").fit_content = !ItemNode.get_node("Text").fit_content

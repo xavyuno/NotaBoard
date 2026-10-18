@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://27tro0bnk12m" path="res://App/Assets/Scenes/ToDo/to_do.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="6"]
 
-[sub_resource type="Theme" id="Theme_s4aco"]
-VBoxContainer/constants/separation = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8wkc"]
 content_margin_left = 5.0
 content_margin_top = 2.0
@@ -24,13 +21,13 @@ offset_right = 276.0
 offset_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource("Theme_s4aco")
 theme_override_constants/separation = 1
 script = ExtResource("1")
+CanDrag = false
 
 [node name="Top" type="HBoxContainer" parent="." unique_id=551586570]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="Title" type="LineEdit" parent="Top" unique_id=1342100435]
 propagate_maximum_size = true
@@ -51,27 +48,29 @@ text = "0%"
 [node name="List" type="VBoxContainer" parent="." unique_id=622988544]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 
 [node name="AddHolder" type="HBoxContainer" parent="." unique_id=785894043]
 layout_mode = 2
+theme_override_constants/separation = 1
 
 [node name="Input" type="LineEdit" parent="AddHolder" unique_id=1969251404]
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Todo: Make banana bread"
+placeholder_text = "Todo text goes here"
 keep_editing_on_text_submit = true
 expand_to_text_length = true
 clear_button_enabled = true
 caret_blink = true
+
+[node name="CheckFocus" parent="AddHolder/Input" unique_id=679378990 node_paths=PackedStringArray("par") instance=ExtResource("6")]
+par = NodePath("..")
 
 [node name="Add" type="Button" parent="AddHolder" unique_id=297714706]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.15
 text = "+"
-
-[node name="CheckFocus" parent="." unique_id=679378990 node_paths=PackedStringArray("par") instance=ExtResource("6")]
-par = NodePath("../AddHolder/Input")
 
 [connection signal="text_submitted" from="AddHolder/Input" to="." method="_on_input_text_submitted"]
 [connection signal="pressed" from="AddHolder/Add" to="." method="_on_add_pressed"]

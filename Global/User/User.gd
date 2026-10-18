@@ -15,8 +15,18 @@ signal ChangedOptionsBar
 signal AllFocusLost
 signal SearchResultSend
 signal SearchByQuery
+signal ApplySearch
 signal DeleteAllItemsByBoard
 signal ApplySaveFile
+signal MovedTodo
+signal MovedTodoSuccess
+signal DeleteItem
+signal UpdateItem
+signal ItemChanged
+signal ApplyItemChange
+signal ForceUpdateID
+signal CreateNotif
+signal DeleteAll
 
 var SearchQueries := ["Note:", "Title:", "ID:", "Board:", "Type:", "Dir:", "ItemID:", "Tags:"]
 var SearchResults := []
@@ -24,13 +34,14 @@ var SearchSen := 0.5
 
 var OptionsEnabled := true
 
-var RemovedHistory: = []
+var History: = []
 var StoredHistory: = []
 var StillLoading: = true
 
 var MouseInCanvas: = false
 var CanvasHidden = false
 var MouseInOpen := true
+var DrawingInCanvas := false
 
 var MousePos: Vector2
 var CamPos: Vector2
@@ -53,7 +64,6 @@ var AllSameSelectedObjects = false
 var CopiedObject = null
 
 var LoadDur: = 0.05
-var TotalItems := 0
 
 var TestingMode := false
 
@@ -63,3 +73,11 @@ var CopiedData = {
 	"Data" : null,
 	"Size" : Vector2.ZERO
 }
+
+var MovingTodo: bool = false
+var TodoData: Dictionary = {}
+var TodoIndex: int = -1
+var MoveIndex: int = -1
+var TargetTodo: Node = null
+var ParentTodo: Node = null
+var HoveringMoveBar: bool = false

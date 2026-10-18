@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://ddbm311lon0nj"]
+
+[ext_resource type="Script" uid="uid://bdogbl116pgjs" path="res://App/Components/SuggestionPrompt/suggestion_prompt.gd" id="1_xpmag"]
+
+[node name="SuggestionPrompt" type="Control" unique_id=2017942109]
+z_index = 2
+layout_mode = 3
+anchor_right = 0.22500001
+anchor_bottom = 0.22700001
+offset_bottom = 0.19198608
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xpmag")
+metadata/_edit_use_anchors_ = true
+
+[node name="BG" type="Panel" parent="." unique_id=363415781]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Scroll" type="ScrollContainer" parent="." unique_id=1661095613]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Holder" type="VBoxContainer" parent="Scroll" unique_id=1427118425]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

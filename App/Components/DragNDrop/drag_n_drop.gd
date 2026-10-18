@@ -1,6 +1,6 @@
 extends Node
 
-@export var Item: PackedScene
+@export var SceneItem: PackedScene
 @onready var par = get_parent()
 var Holding: = false
 
@@ -14,11 +14,11 @@ func ButtonUp():
 	User.emit_signal("StoppedDragging")
 	if !User.DraggingObject:
 		return
-	System.AddObject(Item, true, null, {}, true)
+	System.AddObject(SceneItem, true, null, {}, true)
 	User.DraggingObject = false
 
 func ButtonDown():
-	User.DraggedObject = Item
+	User.DraggedObject = SceneItem
 	User.DraggingObject = true
 	Holding = true
 	User.emit_signal("StartedDragging")

@@ -12,6 +12,7 @@ var Dates :=[
 	"July",
 	"August",
 	"September",
+	"October",
 	"November",
 	"December"
 ]
@@ -40,7 +41,7 @@ func SettingsChanged():
 		CalendarEvent.ID = j
 		$Config/ScrollHolder/Holder.add_child(CalendarEvent)
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Config/Title.text = str(User.SelectedDate[0]) + " " + Dates[User.SelectedDate[1]-1] + " " + str(User.SelectedDate[2])
 
 func CreateCalendar(specificMonth, year):

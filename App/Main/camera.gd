@@ -29,12 +29,11 @@ func ResetCam():
 	position = Vector2(640, 352)
 	zoom = Vector2(1, 1)
 
-func ChangeBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352), CamZoom = Vector2(1, 1)):
+func ChangeBoard(_Board: String, _Title: String, _ID = "", CamPos = Vector2(640, 352), CamZoom = Vector2(1, 1)):
 	User.PreviousPos = position
 	ToPos = CamPos
 	ToZoom = CamZoom if typeof(CamZoom) == TYPE_VECTOR2 else Vector2(1,1)
 	Travelled = false
-	
 
 func _draw() -> void:
 	if User.DragSelecting and !get_node("../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
@@ -44,30 +43,14 @@ func _draw() -> void:
 			2 / User.CamZoom.x
 		)
 
-func _physics_process(delta: float) -> void :
+func _physics_process(_delta: float) -> void :
+	$ClearFocus.scale = Vector2(1, 1) / User.CamZoom * 10
 	if !Travelled:
 		if (position.distance_to(ToPos) > 1) or (zoom.distance_to(ToZoom) > 1):
 			position = lerp(position, ToPos, 0.21)
 			zoom = lerp(zoom, ToZoom, 0.21)
 		else:
 			Travelled = true
-
-	match Canvas.Action:
-		"Create":
-			if Input.is_action_just_pressed("Click"):
-				Canvas.Canvases += 1
-				StartPos = get_global_mouse_position()
-				TempObj = preload("res://App/Assets/Scenes/Canvas/Canvas.tscn").instantiate()
-				get_node("../Boards/" + Settings.Data["CurrentPage"]).add_child(TempObj)
-				TempObj.Data["ID"] = Canvas.Canvases
-				TempObj.Data["ParentID"] = Settings.Data["CurrentPage"]
-			if Input.is_action_pressed("Click") and TempObj:
-				TempObj.position = StartPos
-				TempObj.size = get_global_mouse_position() - StartPos
-			if Input.is_action_just_released("Click") and TempObj:
-				Canvas.Action = "draw"
-				TempObj.Initialized = true
-				TempObj = null
 	
 	User.CamZoom = zoom
 	User.CamPos = position
@@ -76,10 +59,13 @@ func _physics_process(delta: float) -> void :
 		Settings.Data["CamZoom" + Settings.Data["CurrentPage"]] = zoom
 
 	if Input.is_action_just_pressed("Special") and CamConditions():
-		Settings.Data["GridSnap"] = !Settings.Data["GridSnap"]
+		Settings.Data["GridSnap"] = true
+	if Input.is_action_just_released("Special"):
+		Settings.Data["GridSnap"] = false
 	if Input.is_action_just_pressed("ResetCam"):
 		ResetCam()
 	if Input.is_action_pressed("Drag") and CamConditions():
+		Travelled = true
 		Dragging = true
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Input.is_action_just_released("Drag"):
@@ -97,21 +83,20 @@ func _physics_process(delta: float) -> void :
 	if Input.is_action_just_pressed("Click") and !User.MouseInCanvas and !User.InFocus:
 		DragSelectPos = get_local_mouse_position()
 		DragSelecting = true
-		$Timer.start()
+		$DragTimer.start()
 	if Input.is_action_just_released("Click"):
 		User.DragSelecting = false
 		DragSelecting = false
 	drag.get_node("CollisionPolygon2D").disabled = !User.DragSelecting
 
 func CamConditions():
-	if (!User.InFocus or Input.is_action_pressed("MultiSelect")) and (!User.MouseInCanvas or User.CanvasHidden or User.RemovedHistory.size() <= 9):
+	if (!User.InFocus and !Input.is_action_pressed("MultiSelect")) and (!User.MouseInCanvas or User.CanvasHidden or User.History.size() <= 9) and !User.DrawingInCanvas:
 		return true
 	else :
 		return false
 
-func _process(delta: float) -> void :
-	$ClearFocus.scale = Vector2(1, 1) / User.CamZoom
-	$ClearFocus.position = Vector2(-640, -352) / User.CamZoom
+func _process(_delta: float) -> void :
+	$ClearFocus.position = Vector2(-640, -352) / User.CamZoom * 10
 	queue_redraw()
 
 func _input(event: InputEvent) -> void :

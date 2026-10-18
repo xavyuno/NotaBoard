@@ -1,10 +1,15 @@
 extends Node
 
 var ScanOverried := "John"
+var CommandSuggestions := {
+	"b" : "Make the message bold",
+	"i" : "Make the message italic",
+	"url=" : "Use links for your message"
+}
 
-func CheckCommand(cmd : Array[String]):
+func CheckCommand(cmd : Array[String], returnOnly = false):
 	var Output = [true, ""]
-	if ValidateCommand(cmd, ["goto"]):
+	if ValidateCommand(cmd, ["goto"]) and !returnOnly:
 		User.emit_signal("SearchByQuery", cmd[1])
 	
 	else:

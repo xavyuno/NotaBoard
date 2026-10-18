@@ -1,1 +1,2 @@
-Command
+StyleBoxEmpty
+StyleBoxFlat

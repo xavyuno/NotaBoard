@@ -11,7 +11,8 @@ var Data: = {
 	"CamPos" : Vector2(640, 352),
 	"CamZoom" : Vector2(1, 1),
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Style" : ""
 }
 
 var Options := ["Cover", "BoardName", "Board"]
@@ -22,6 +23,9 @@ var ClickedOnce := false
 func _ready() -> void :
 	Settings.Data["TotalBoards"] += 1
 	initItem()
+	ApplyData()
+
+func ApplyData():
 	UpdateValues($New, "Title", "text")
 	UpdateValues($New/Cover, "Cover", "texture")
 	if Data["Board"] == "Getting ID..." and !Preview:
@@ -39,17 +43,20 @@ func ChangeCover(txt):
 	$New/Cover.texture = txt
 	Data["Cover"] = txt
 
-func _process(delta: float) -> void :
-	Data["Pos"] = position
-	Data["Size"] = size
-	Data["Title"] = $New.text
-	if Settings.Data["CurrentPage"]== Data["Board"]:
-		Data["CamPos"] = User.CamPos
-		Data["CamZoom"] = User.CamZoom
-		User.Boards[Data["Board"]]["CamPos"] = Data["CamPos"]
-		User.Boards[Data["Board"]]["CamZoom"] = Data["CamZoom"]
+func _process(_delta: float) -> void :
+	if !Preview:
+		Data["Pos"] = position
+		Data["Size"] = size
+		Data["Title"] = $New.text
+		if Settings.Data["CurrentPage"] == Data["Board"]:
+			Data["CamPos"] = User.CamPos
+			Data["CamZoom"] = User.CamZoom
+			User.Boards[Data["Board"]]["CamPos"] = Data["CamPos"]
+			User.Boards[Data["Board"]]["CamZoom"] = Data["CamZoom"]
 
 func _on_new_pressed() -> void :
+	if Preview:
+		return
 	if ClickedOnce:
 		System.SwitchBoard(Data["Board"], Data["Title"])
 	ClickedOnce = true
@@ -63,7 +70,7 @@ func _on_board_name_text_changed(new_text: String) -> void :
 		User.Boards.merge({Data["Board"] : {"Title" : Data["Title"], "ID" : Data["ID"]}}, true)
 	Data["Title"] = new_text
 
-func _on_board_name_text_submitted(new_text: String) -> void :
+func _on_board_name_text_submitted(_new_text: String) -> void :
 	release_focus()
 
 func _on_timer_timeout() -> void:

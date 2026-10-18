@@ -13,7 +13,8 @@ var Data: = {
 	"ID": "Home", 
 	"ItemID" : "",
 	"Pixels" : {},
-	"Tags" : []
+	"Tags" : [],
+	"Styles" : ""
 }
 
 var Options := [
@@ -23,20 +24,26 @@ var Options := [
 
 func _ready() -> void:
 	initItem()
-	if Data["Pixels"].size() >= 1:
-		var Total := 0
-		for i in Data["Pixels"].values():
-			AddPixel(i["Pos"], i["Size"], i["Col"], int(i["ID"]))
+	ApplyData()
 	User.connect("AllFocusLost", Callable(self, "DoneEditing"))
 	User.connect("ItemFocusLost", Callable(self, "DoneEditing"))
 
+func ApplyData():
+	for i in $DrawCanvas/View/Pixels.get_children():
+		i.queue_free()
+	if Data["Pixels"].size() >= 1:
+		for i in Data["Pixels"].values():
+			AddPixel(i["Pos"], i["Size"], i["Col"], int(i["ID"]))
+
 func DoneEditing():
 	Editing = false
+	User.DrawingInCanvas = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	Data["Size"] = size
 	Data["Pos"] = position
 	$Holder/Edit.size = size
+	$Holder/Edit.global_position = global_position
 	$Holder/Edit.visible = !Editing
 
 func AddPixel(Pos, Size, Col, index = -1):
@@ -92,6 +99,7 @@ func Clear():
 func _on_edit_pressed() -> void:
 	if ClickedOnce:
 		Editing = true
+		User.DrawingInCanvas = true
 		ClickedOnce = false
 	else:
 		ClickedOnce = true

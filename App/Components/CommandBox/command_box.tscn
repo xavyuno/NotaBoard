@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://doe8fmwxns1tx"]
+
+[ext_resource type="Script" uid="uid://vax7hhxwv8ll" path="res://App/Components/CommandBox/command_box.gd" id="1_g4dos"]
+
+[node name="CommandBox" type="HBoxContainer" unique_id=1358807392]
+script = ExtResource("1_g4dos")
+
+[node name="Keyword" type="LineEdit" parent="." unique_id=562412681]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Command" type="LineEdit" parent="." unique_id=259632503]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Remove" type="Button" parent="." unique_id=259448620]
+layout_mode = 2
+text = "remove"
+
+[connection signal="text_changed" from="Keyword" to="." method="_on_keyword_text_changed"]
+[connection signal="text_changed" from="Command" to="." method="_on_command_text_changed"]
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]

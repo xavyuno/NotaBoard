@@ -3,20 +3,42 @@ Added:
 - Tags: Tags can be assigned to items (can also be searched for)
 - Camera Transition: The camera will smoothly adjust it's position and zoom when changing between boards
 - Saving last accessed board
+- Application arguments: pass args through the application (usually done using a shortcut) by using " -- arg1 arg2" in the target, args are seperated by spaces, available arg so far: test, this starts Notaboard in testing mode, which does not save anything, allowing for testing with the current save file without consequences
+- Load backups: found in settings under User tab, the file name format is Day_Month_Year
+- Toast Notifications: short text on the bottom right will be displayed regarding certain events or actions for 2.5 seconds by default, this can be configured within settings
+- Themes: Styles can be created and applied to items, this can be used to create themes within the work enviroment, Fonts can be changed too
 
-Improved:
+Improved/Altered:
+- Notaboard fps has been upcapped (originally 60)
+- History: Can now be collpased and the sate remains saved, along with the delete all button moved to account tab in settings
+- Font Size:
+	default font size changed from 15 to 20
+	default title font size changed from 15 to 25
 - Search:
 	Search results return with a better format: Board ID, Query and the search result of the item with only the first 100 characters
 	Going to a searched item now positions the camera at the center of the item instead of it's position
 - Settings Saving: The structure of how settings were previously saved has been updated, however this unfortunately breaks the previous settings file
+- Settings menu: The entire settings board has been restructured and organized to make it easier to access features
 - Quick Options: all 3 buttons are can now be assigned a quick option, except for settings for accessing
 - Toolbar: the visibility state of the toolbar is saved
 - Calendar and Settings default zoom and positons to fit the entire screen
+- Note item:
+	The margins when editing and preview are much closer now
+	Command like queries are possible within both the note item and settings, more info will be available in the documentation
+	An option to auto expand the notes, this removes the scroll bar and instead scales the notes item along with the text
+- Todo: 
+	Text within the todo item can be altered by double clicking
+	The title of the todo item is dependant on the font size, this removes the title bar stretching
+- History:
+	The history tab now saves: Changes made to an item and items added, addition to removed items
 
 Fixed:
 - Erasing all not working
 - Board not changing properly to home when erasing data
 - Item performance improved when clicking off the item
+- October not showing in the calendar 
+- Camera stuck trying to transition to the last position of the board when moving the position of the camera immediately after switching boards
+- File "Preview" title scales with the item
 
 Removed:
 - Removed showing the Board ID

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://6o4wmbovw3tg"]
+
+[sub_resource type="GDScript" id="GDScript_cwixq"]
+script/source = "extends Control
+
+var Data := {}
+
+func _ready() -> void:
+	User.DragSelecting = false
+	Data = User.TodoData
+	get_node(\"CheckList/Text\").text = Data[\"Text\"]
+	get_node(\"CheckList/Input\").button_pressed = Data[\"Value\"]
+
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_released(\"Click\"):
+		User.MovingTodo = false
+	if User.MovingTodo:
+		global_position = get_global_mouse_position()
+	else:
+		queue_free()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j8wkc"]
+bg_color = Color(0, 0, 0, 0.392157)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+expand_margin_left = 28.0
+expand_margin_right = 35.0
+
+[node name="TempTodo" type="Control" unique_id=209356961]
+z_index = 2
+layout_mode = 3
+anchor_right = 0.025
+anchor_bottom = 0.045
+offset_bottom = 0.3199997
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 2
+script = SubResource("GDScript_cwixq")
+metadata/_edit_use_anchors_ = true
+
+[node name="CheckList" type="HBoxContainer" parent="." unique_id=679855452]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 0
+offset_right = 224.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
+
+[node name="Input" type="CheckBox" parent="CheckList" unique_id=347290272]
+layout_mode = 2
+mouse_filter = 2
+mouse_behavior_recursive = 2
+
+[node name="Text" type="Button" parent="CheckList" unique_id=1409033760]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_behavior_recursive = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/focus = SubResource("StyleBoxFlat_j8wkc")
+action_mode = 0
+keep_pressed_outside = true
+autowrap_mode = 3

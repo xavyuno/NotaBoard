@@ -11,6 +11,6 @@ func _ready() -> void:
 		$Title.text = str(Keybind.as_text())
 
 func _on_remove_pressed() -> void:
-	Settings.SavedKeybinds[Event].erase(Keybind)
+	Settings.Data["SavedKeybinds"][Event].erase(Keybind)
 	InputMap.action_erase_event(Event, Keybind)
 	queue_free()

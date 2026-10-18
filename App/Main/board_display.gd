@@ -11,16 +11,17 @@ func _ready() -> void :
 	for i in get_children():
 		i.visible = false
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("PreviousBoard"):
 		if PrevID != "":
 			System.SwitchBoard(PrevID, PrevTitle)
 		else:
 			System.SwitchBoard("Home")
 
-func ChangedBoard(Board: String, Title: String, ID = "", CamPos = Vector2(640, 352), CamZoom = 1):
+func ChangedBoard(Board: String, Title: String, ID = "", _CamPos = Vector2(640, 352), _CamZoom = 1):
 	User.PreviousPage = PrevID
 	User.PreviousTitle = PrevTitle
+	User.emit_signal("CreateNotif", "Switched board to " + Title)
 	User.emit_signal("AllFocusLost")
 	if get_node("../../../Boards/" + Board).is_in_group("NoCanvas"):
 		home.visible = true

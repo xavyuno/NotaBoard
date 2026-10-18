@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dcrjbrnt1d24b"]
+
+[ext_resource type="Script" uid="uid://gsg8scv000cy" path="res://App/Components/ScrollDetector/scroll_detector.gd" id="1_vtj5x"]
+
+[node name="ScrollDetector" type="Node" unique_id=135475870]
+script = ExtResource("1_vtj5x")

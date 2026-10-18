@@ -14,21 +14,33 @@ var Data: = {
 	"FontSize" : Settings.Data["DefaultFontSize"],
 	"TitleSize": Settings.Data["DefaultTitleSize"],
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Style" : "",
+	"AutoExpand" : true
 }
 
 var Options := [
 	"Title",
 	"FontSize",
-	"TitleSize"
+	"TitleSize",
+	"AutoExpand"
 ]
 
 var Editing := false
-var Hovering := false
+var MouseHovering := false
 var Displays = []
 
 func _ready() -> void :
 	initItem()
+	ApplyData()
+	Connect(get_children(true), ["mouse_entered", "mouse_exited"])
+	User.connect("PreviewNotes", Callable(self, "PreviewNotes"))
+	User.connect("AllFocusLost", Callable(self, "_on_notes_focus_exited"))
+	User.connect("DeleteItem", Callable(self, "DeleteItem"))
+	Settings.connect("SettingsChanged", UpdateText)
+
+func ApplyData():
+	$Text.fit_content = Data["AutoExpand"]
 	EditNotes(false)
 	UpdateValues(NotesText, "Note", "text")
 	UpdateText()
@@ -36,26 +48,17 @@ func _ready() -> void :
 	UpdateValues($Title, "TitleOn", "visible")
 	ChangeFontSize(Has("FontSize"))
 	ChangeTitleSize(Has("TitleSize"))
-	for i in self.get_children(true):
-		for j in i.get_children(true):
-			if j.has_signal("mouse_entered"):
-				j.connect("mouse_entered", Callable(self, "MouseEntered"))
-				j.connect("mouse_exited", Callable(self, "MouseExited"))
 
-		if i.has_signal("mouse_entered"):
-			i.connect("mouse_entered", Callable(self, "MouseEntered"))
-			i.connect("mouse_exited", Callable(self, "MouseExited"))
-	User.connect("PreviewNotes", Callable(self, "PreviewNotes"))
-	User.connect("AllFocusLost", Callable(self, "_on_notes_focus_exited"))
-	User.connect("RecieveByID", Callable(self, "RecieveByID"))
-	Commands.connect("CreateDisplay", Callable(self, "CreateDisplay"))
-	Commands.connect("CommandHovered", Callable(self, "CommandHovered"))
+func DeleteItem(ItemID):
+	if self.Data["ItemID"] == ItemID:
+		Delete()
 
-func MouseEntered():
+func mouse_entered():
 	if RichText.get_v_scroll_bar().max_value - RichText.size.y >= 0:
 		User.InFocus = true
 
-func MouseExited():
+
+func mouse_exited():
 	User.InFocus = false
 
 func ChangeTitleSize(value : int):
@@ -71,18 +74,22 @@ func ChangeFontSize(value : int):
 	$ScrollContainer/Notes.add_theme_font_size_override("font_size", value)
 	Data["FontSize"] = value
 
-func _process(delta: float) -> void :
+func _process(_delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["Note"] = NotesText.text
 	Data["Title"] = $Title.text
 	Data["TitleOn"] = $Title.visible
+	Data["AutoExpand"] = $Text.fit_content
+	if $ScrollContainer/Notes.get_v_scroll_bar().max_value > 0:
+		$ScrollContainer.custom_minimum_size = $Text.size + Vector2(0, 48)
 	
-	if Input.is_action_just_pressed("Bold") and Input.is_action_pressed("Command") and Editing:
-		RichTextUpdate("b")
-	if Input.is_action_just_pressed("Italic") and Input.is_action_pressed("Command") and Editing:
-		RichTextUpdate("i")
-	
+	QuickType("Bold", "b")
+	QuickType("Italic", "i")
+
+func QuickType(Keybind, command):
+	if Input.is_action_just_pressed(Keybind) and Input.is_action_pressed("Command") and Editing:
+		RichTextUpdate(command)
 
 func EditNotes(GrabFocus = true):
 	RichText.visible = !Editing
@@ -100,11 +107,11 @@ func CommandHovered(Hovered : bool, cmd : String):
 	if !Hovered:
 		pass
 	else:
-		cmd = cmd.replace("display/", "")
-		CreateDisplay(cmd)
+		if "display" in cmd:
+			cmd = cmd.replace("display/", "")
+			CreateDisplay(cmd)
 
 func CreateDisplay(imagePath):
-	print(imagePath)
 	var texture = ImageTexture.create_from_image(Image.load_from_file(ProjectSettings.globalize_path(imagePath)))
 	var display = TextureRect.new()
 	display.texture = texture
@@ -113,44 +120,62 @@ func CreateDisplay(imagePath):
 	if !(display in Displays):
 		Displays.append(display)
 	display.offset_transform_enabled = true
-	display.offset_transform_position = get_global_mouse_position()
-	#display.size = Vector2(500, 500)
+	display.size /= User.CamZoom.x * 2
+	display.offset_transform_position = get_global_mouse_position() - (display.size / 2)
+	
 
 func UpdateText():
 	var Temptext : String = Data["Note"]
-	if Settings.Data["OverrideText"].size() >= 1:
-		for i in Settings.Data["OverrideText"]:
-			var Replacement = (
-				HasCommand("url=", i["Command"]) +
-				HasCommand("color=", i["Color"]) +
-				HasCommand("", i["Bold"]) +
-				#MIDDLE/ THE TEXT BEING REPLACED
-				i["Text"] +
-				# END OF TEXT
-				HasCommand("b", i["Bold"], true) +
-				HasCommand("color", i["Color"], true) +
-				HasCommand("url", i["Command"], true))
-			Temptext = Temptext.replace(i["Text"], 
-				Replacement
-				)
+	if Settings.Data["NoteCommands"].size() >= 1:
+		for i in Settings.Data["NoteCommands"]:
+			var Startcmd = ""
+			var EndCmd = ""
+			var Occurences : Array = i.keys()
+			var reversed = i.values()[0].split(" ")
+			reversed.reverse()
+			for a in i.keys():
+				Occurences.append(a.to_lower())
+				Occurences.append(a.to_upper())
+				Occurences.append(a.capitalize())
+			
+			for j in i.values()[0].split(" "):
+				Startcmd += HasCommand(j, " ")
+			for j in reversed:
+				EndCmd += HasCommand(j, true)
+			for b in Occurences:
+				var Replacement = (
+					Startcmd +
+					#MIDDLE/ THE TEXT BEING REPLACED
+					b +
+					# END OF TEXT
+					EndCmd
+					)
+				Temptext = Temptext.replacen(b, 
+					Replacement
+					)
 	RichText.text = Temptext
 
-func HasCommand(Code : String, text : String, end = false):
-	var output = "[" + Code + text + "]"
+func HasCommand(Code : String, end = false):
+	var output = "[" + Code + "]"
 	if end:
+		Code = Code.split("=")[0]
 		output = "[/" + Code + "]"
-	if text == "":
-		output = ""
 	return output
 
 func _on_text_focus_entered() -> void:
 	Editing = true
 	EditNotes(false)
 
+	if $ScrollContainer/Notes.get_v_scroll_bar().max_value > 0:
+		$ScrollContainer.custom_minimum_size = $Text.size + Vector2(0, 48)
+	else:
+		$ScrollContainer.custom_minimum_size = $Text.size
+
 func _on_text_meta_clicked(meta ) -> void:
-	meta = str(meta).to_lower().split('/')
-	if !Commands.CheckCommand(meta):
-		OS.shell_open(str(meta))
+	for a in str(meta).to_lower().split('|'):
+		meta = a.split('/')
+		if !Commands.CheckCommand(meta):
+			OS.shell_open(str(meta))
 
 func RichTextUpdate(text):
 	if NotesText.get_selected_text():
@@ -162,14 +187,16 @@ func RichTextUpdate(text):
 
 
 func _on_text_meta_hover_started(meta: Variant) -> void:
-	Hovering = true
-	if !Commands.CheckCommand(str(meta).to_lower().split('/')):
-		RichText.tooltip_text = str(meta)
-	else:
-		CreateDisplay(str(meta).replace("display/", ""))
+	MouseHovering = true
+	for a in str(meta).to_lower().split('|'):
+		if !Commands.CheckCommand(a.split('/'), true):
+			RichText.tooltip_text = a
+		else:
+			if "display" in a:
+				CreateDisplay(a.replace("display/", ""))
 
-func _on_text_meta_hover_ended(meta: Variant) -> void:
-	Hovering = false
+func _on_text_meta_hover_ended(_meta: Variant) -> void:
+	MouseHovering = false
 	RichText.tooltip_text = ""
 	while Displays.size() >= 1:
 		Displays[0].queue_free()

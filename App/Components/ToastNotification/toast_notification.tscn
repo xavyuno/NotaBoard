@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://t5wur25g413o"]
+
+[ext_resource type="Script" uid="uid://c851p1e33u8tk" path="res://App/Components/ToastNotification/toast_notification.gd" id="1_ql28r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql28r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q37bw"]
+
+[sub_resource type="Gradient" id="Gradient_hj5mj"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.19919628, 0.3062185, 0.19126022, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
+gradient = SubResource("Gradient_hj5mj")
+
+[sub_resource type="Gradient" id="Gradient_ql28r"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.27051386, 0.4441991, 0.36326078, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q37bw"]
+gradient = SubResource("Gradient_ql28r")
+
+[node name="ToastNotification" type="HBoxContainer" unique_id=1658697692]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 512.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+script = ExtResource("1_ql28r")
+
+[node name="Info" type="Button" parent="." unique_id=878870543]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ql28r")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q37bw")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_q37bw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q37bw")
+text = "Info goes here"
+alignment = 0
+text_overrun_behavior = 1
+clip_text = true
+
+[node name="Progress" type="TextureProgressBar" parent="Info" unique_id=2064198539]
+modulate = Color(1, 1, 1, 0.5)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 4)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+step = 0.001
+value = 50.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_g4v7s")
+texture_progress = SubResource("GradientTexture2D_q37bw")
+
+[node name="Despawn" type="Timer" parent="." unique_id=1045761949]
+one_shot = true
+
+[connection signal="pressed" from="Info" to="." method="_on_info_pressed"]
+[connection signal="timeout" from="Despawn" to="." method="_on_despawn_timeout"]

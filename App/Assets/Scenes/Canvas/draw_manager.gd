@@ -2,7 +2,7 @@ extends Area2D
 
 var Bodies := []
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = get_global_mouse_position()
 	scale = Vector2(Canvas.PixelSize, Canvas.PixelSize)
 	if Canvas.InCanvas:

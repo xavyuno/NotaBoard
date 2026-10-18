@@ -4,7 +4,7 @@ func _ready() -> void :
 	User.connect("StartedDragging", Callable(self, "StartedDragging"))
 	User.connect("StoppedDragging", Callable(self, "StoppedDragging"))
 
-func _process(delta: float) -> void :
+func _process(_delta: float) -> void :
 	global_position = User.MousePos
 
 func StartedDragging():
@@ -19,7 +19,7 @@ func StoppedDragging():
 	if get_child_count() >= 1:
 		for i in get_children():
 			i.queue_free()
-			User.TotalItems -= 1
+			Settings.Data["TotalItems"] -= 1
 
 func _on_clear_focus_pressed() -> void:
 	User.emit_signal("ItemFocusLost")

@@ -18,7 +18,7 @@ func Pressed(ID):
 	selected = ID-1
 	ShowSelected()
 
-func _physics_process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Title.text = Settings.Data["QuickOptions"][selected]
 
 func ShowSelected():

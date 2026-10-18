@@ -9,7 +9,8 @@ var Data: = {
 	"Thumbnail" : null,
 	"ThumbnailPath" : "",
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Styles" : ""
 }
 
 var Options := [
@@ -20,6 +21,9 @@ var Options := [
 
 func _ready() -> void :
 	initItem()
+	ApplyData()
+
+func ApplyData():
 	UpdateValues($Access/Image, "Thumbnail", "texture")
 	if Data.has("Thumbnail"):
 		if Data["Thumbnail"] == null:
@@ -29,10 +33,11 @@ func _ready() -> void :
 	else:
 		$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.Data["UrlAPIKey"]])
 
+
 func GetImage():
 	if GetThumbnailPath():
 		Data.merge({"ThumbnailPath" : ""}, true)
-		var Dir = DirAccess.make_dir_absolute("user://SavedLinkImages")
+		DirAccess.make_dir_absolute("user://SavedLinkImages")
 		var files = DirAccess.get_files_at("user://SavedLinkImages")
 		var filepath
 		if files.size() > 0:
@@ -58,7 +63,7 @@ func GetThumbnailPath():
 	else:
 		return false
 
-func _process(delta: float) -> void :
+func _process(_delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 
@@ -69,13 +74,13 @@ func SetLink(text):
 	$GetLink.request(text)
 	Data["Link"] = text
 
-func _on_get_link_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void :
+func _on_get_link_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void :
 	var img = Image.new()
 	var errJPG = img.load_jpg_from_buffer(body)
 	if errJPG != OK:
 		var errPNG = img.load_png_from_buffer(body)
 		if errPNG != OK:
-			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.UrlAPIKey])
+			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.Data["UrlAPIKey"]])
 			print("failed to get thumbnail")
 			return
 	$Access/Image.visible = true
@@ -84,7 +89,7 @@ func _on_get_link_request_completed(result: int, response_code: int, headers: Pa
 	GetImage()
 	Data["Thumbnail"] = txtr
 
-func _on_get_preview_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_get_preview_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	var link = JSON.parse_string(body.get_string_from_utf8())
 	if link:
 		$GetLink.request(link["image"])

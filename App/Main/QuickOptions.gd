@@ -2,14 +2,14 @@ extends HBoxContainer
 
 func _ready() -> void:
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
-	for i in Settings.Data["QuickOptions"].size():
-		if !(Settings.Data["QuickOptions"][i] in Settings.AvailableQuickOptions):
-			Settings.Data["QuickOptions"][i] = RandomOption()
-			
 	SettingsChanged()
 
 func SettingsChanged():
 	for i in Settings.Data["QuickOptions"].size():
+		if Settings.Data["QuickOptions"].size() < 3:
+			Settings.Data["QuickOptions"].append(RandomOption())
+		if !(Settings.Data["QuickOptions"][i] in Settings.AvailableQuickOptions):
+			Settings.Data["QuickOptions"][i] = RandomOption()
 		get_node("QuickOption" + str(i+1)).tooltip_text = Settings.Data["QuickOptions"][i]
 		get_node("QuickOption" + str(i+1)).icon = load("res://App/Assets/Icons/" + Settings.Data["QuickOptions"][i] + ".png")
 
@@ -18,12 +18,14 @@ func RandomOption():
 	return output.replace("_", "")
 
 func _on_settings_pressed() -> void :
-	if User.CurrentPage != "Settings":
+	if Settings.Data["CurrentPage"] != "Settings":
 		System.SwitchBoard("Settings")
 	else:
 		System.SwitchBoard("Home")
 
 func QuickOption(Index):
+	if Settings.Data["QuickOptions"].size() < Index:
+		return
 	match Settings.Data["QuickOptions"][Index]:
 		"ShowCenter":
 			Settings.Data["ShowCenter"] = !Settings.Data["ShowCenter"]

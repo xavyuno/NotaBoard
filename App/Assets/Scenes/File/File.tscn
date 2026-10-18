@@ -27,14 +27,18 @@ size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxEmpty_aqcpb")
 
 [node name="Title" type="Label" parent="Open" unique_id=1243111331]
-layout_mode = 0
-offset_right = 199.0
-offset_bottom = 32.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99500006
+anchor_bottom = 0.12100001
+offset_right = -1.5258789e-05
+offset_bottom = 0.05599785
 theme_override_fonts/font = ExtResource("3")
 text = "Click to view options"
 label_settings = SubResource("LabelSettings_gyofp")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Image" type="TextureRect" parent="Open" unique_id=291642117]
 layout_mode = 1

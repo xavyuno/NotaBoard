@@ -10,7 +10,8 @@ var Data: = {
 	"Items": [], 
 	"ID": "Home",
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Styles" : ""
 }
 
 var Options := [
@@ -19,7 +20,7 @@ var Options := [
 
 var MouseIndropBar = false
 
-func _process(delta: float) -> void :
+func _process(_delta: float) -> void :
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["Title"] = $Title.text
@@ -33,7 +34,12 @@ func _process(delta: float) -> void :
 
 func _ready() -> void :
 	initItem()
+	ApplyData()
 	User.connect("StoppedDragging", Callable(self, "StoppedDragging"))
+
+func ApplyData():
+	for i in $Items.get_children():
+		i.queue_free()
 	UpdateValues($Title, "Title", "text")
 	for i in Data["Items"]:
 		if Settings.ProgressiveLoading:
