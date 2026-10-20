@@ -3,6 +3,8 @@ extends Control
 @onready var history: ItemList = $Holder/History / HistoryHolder / History
 
 func _ready() -> void :
+	Settings.OriginalData = Settings.Data.duplicate(true)
+	Customization.OriginalData = [Customization.Themes.duplicate(true), Customization.Config.duplicate(true)]
 	Settings.connect("SettingsChanged", Callable(self, "SettingsChanged"))
 	Init()
 	System.SwitchBoard(Settings.Data["CurrentPage"], Settings.Data["PageTitle"])
@@ -12,7 +14,9 @@ func SettingsChanged():
 	$Holder/History.visible = Settings.Data["HistoryCollapsed"]
 
 func DeleteAll():
-	Settings.Data["TotalItems"] = 0
+	Settings.Data = Settings.OriginalData
+	Customization.Themes = Customization.OriginalData[0]
+	Customization.Config = Customization.OriginalData[1]
 	history.clear()
 	User.StoredHistory.clear()
 	User.History.clear()
@@ -27,7 +31,6 @@ func DeleteAll():
 		if !i.is_in_group("Protect"):
 			i.queue_free()
 	User.emit_signal("ChangeBoard", "Home", "Home", "", Settings.Data["CamPosHome"], Settings.Data["CamZoomHome"])
-	$Holder/History/DeleteAll.visible = false
 
 func Init():
 	get_parent().visible = true

@@ -3,6 +3,9 @@ extends Button
 var Downloading: = false
 var Version = ""
 
+func _ready() -> void:
+	$GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
+
 func _process(_delta: float) -> void:
 	if Downloading:
 		$Progress.value = $Download.get_downloaded_bytes()
@@ -36,11 +39,6 @@ func _on_download_request_completed(_result: int, response_code: int, _headers: 
 	else:
 		System.CreateNotif("Failed to install update to location | Error: " + str(response_code), true)
 	await get_tree().create_timer(1).timeout
-
-func _on_settings_visibility_changed() -> void:
-	if get_parent().visible:
-		visible = false
-		$GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
 
 func _on_pressed() -> void:
 	$FileDialog.current_path = Settings.Data["UpdatePath"]

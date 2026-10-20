@@ -42,3 +42,6 @@ func Update(state):
 func _on_text_edit_text_changed(new_text: String) -> void:
 	$Text.text = new_text
 	$"../..".Data["List"][ID]["Text"] = new_text
+
+func _on_double_click_timeout() -> void:
+	ClickedOnce = false

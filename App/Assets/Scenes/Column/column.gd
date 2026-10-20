@@ -42,7 +42,7 @@ func ApplyData():
 		i.queue_free()
 	UpdateValues($Title, "Title", "text")
 	for i in Data["Items"]:
-		if Settings.ProgressiveLoading:
+		if Settings.Data["ProgressiveLoading"]:
 			await get_tree().create_timer(User.LoadDur).timeout
 		InitObjectData(i)
 
@@ -71,7 +71,7 @@ func InitObject(object):
 	$Items.add_child(item)
 	item.InColumn = true
 	Data["Items"].append(item.Data)
-	User.TotalItems += 1
+	Settings.Data["TotalItems"] += 1
 	item.custom_minimum_size = Vector2(96, 96)
 
 func StoppedDragging():

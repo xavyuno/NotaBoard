@@ -31,6 +31,8 @@ func _process(_delta: float) -> void :
 	Data["CachedImage"] = $Open/Image.texture
 
 func LoadFile():
+	if Data["Dir"] == "" or Data["Dir"].validate_filename():
+		return
 	var img = Image.load_from_file(ProjectSettings.globalize_path(Data["Dir"]))
 	var texture
 	if img:

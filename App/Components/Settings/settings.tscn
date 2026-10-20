@@ -185,6 +185,7 @@ offset_top = 28.0
 offset_right = 1696.0
 offset_bottom = 796.0
 current_tab = 0
+tabs_visible = false
 use_hidden_tabs_for_min_size = true
 tab_1/icon = ExtResource("6_r8mbw")
 
@@ -463,50 +464,50 @@ offset_right = 480.0
 offset_bottom = 128.0
 text = "Apply"
 
-[node name="Note" type="Control" parent="Holder/Items/ItemSettings" unique_id=653145188]
-visible = false
-layout_mode = 2
-script = ExtResource("15_5k4gj")
-metadata/_tab_index = 1
-
-[node name="Commands" type="VBoxContainer" parent="Holder/Items/ItemSettings/Note" unique_id=1077702796]
+[node name="Commands" type="VBoxContainer" parent="Holder/Items/ItemSettings/General" unique_id=1077702796]
 layout_mode = 0
 offset_left = 32.0
-offset_top = 24.0
-offset_right = 480.0
-offset_bottom = 344.0
+offset_top = 216.0
+offset_right = 704.0
+offset_bottom = 536.0
 
-[node name="Title" type="Label" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1660831087]
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/Commands" unique_id=1660831087]
 layout_mode = 2
 text = "Text Override / Commands"
 
-[node name="AddCommand" type="HBoxContainer" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1782637031]
+[node name="AddCommand" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/Commands" unique_id=1782637031]
 layout_mode = 2
 
-[node name="Keyword" type="LineEdit" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=299696291]
+[node name="Keyword" type="LineEdit" parent="Holder/Items/ItemSettings/General/Commands/AddCommand" unique_id=299696291]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.25
 placeholder_text = "Keyword"
 expand_to_text_length = true
 
-[node name="Command" type="LineEdit" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=1978186260]
+[node name="Command" type="LineEdit" parent="Holder/Items/ItemSettings/General/Commands/AddCommand" unique_id=1978186260]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Command"
 
-[node name="AddCommand" type="Button" parent="Holder/Items/ItemSettings/Note/Commands/AddCommand" unique_id=1762417034]
+[node name="AddCommand" type="Button" parent="Holder/Items/ItemSettings/General/Commands/AddCommand" unique_id=1762417034]
 layout_mode = 2
 text = "add"
 
-[node name="ScrollCommands" type="ScrollContainer" parent="Holder/Items/ItemSettings/Note/Commands" unique_id=1278627977]
+[node name="ScrollCommands" type="ScrollContainer" parent="Holder/Items/ItemSettings/General/Commands" unique_id=1278627977]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/Note/Commands/ScrollCommands" unique_id=1082507869]
+[node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/Commands/ScrollCommands" unique_id=1082507869]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Note" type="Control" parent="Holder/Items/ItemSettings" unique_id=653145188]
+visible = false
+layout_mode = 2
+script = ExtResource("15_5k4gj")
+metadata/_tab_index = 1
 
 [node name="Interface" type="Control" parent="Holder" unique_id=1086175287]
 visible = false
@@ -630,7 +631,6 @@ text = "On"
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
-edit_alpha = false
 metadata/_edit_group_ = true
 
 [node name="GridCol" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=988312351]
@@ -643,7 +643,6 @@ text = "Change Grid color"
 [node name="GridCol" type="ColorPickerButton" parent="Holder/Interface/Holder/GridCol" unique_id=247615278]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-edit_alpha = false
 metadata/_edit_group_ = true
 
 [node name="BackgroundCol" type="VBoxContainer" parent="Holder/Interface/Holder" unique_id=888449935]
@@ -669,7 +668,6 @@ text = "Change Select drag color"
 [node name="DragColor" type="ColorPickerButton" parent="Holder/Interface/Holder/DragCol" unique_id=2112920102]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-edit_alpha = false
 metadata/_edit_group_ = true
 
 [node name="Account & Data" type="Control" parent="Holder" unique_id=2042403600]
@@ -1062,7 +1060,6 @@ max_lines_visible = 1
 visible_characters_behavior = 3
 metadata/_edit_use_anchors_ = true
 
-[connection signal="visibility_changed" from="." to="Update" method="_on_settings_visibility_changed"]
 [connection signal="pressed" from="Update" to="Update" method="_on_pressed"]
 [connection signal="file_selected" from="Update/FileDialog" to="Update" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="ProjectDir" to="." method="_on_project_dir_pressed"]
@@ -1089,9 +1086,9 @@ metadata/_edit_use_anchors_ = true
 [connection signal="item_selected" from="Holder/Items/ItemSettings/General/ApplyStyle/Select/Item" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_item_item_selected"]
 [connection signal="item_selected" from="Holder/Items/ItemSettings/General/ApplyStyle/ApplyStyle/Style" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_style_item_selected"]
 [connection signal="pressed" from="Holder/Items/ItemSettings/General/ApplyStyle/Apply" to="Holder/Items/ItemSettings/General/ApplyStyle" method="_on_apply_pressed"]
-[connection signal="text_submitted" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/Keyword" to="Holder/Items/ItemSettings/Note" method="_on_keyword_text_submitted"]
-[connection signal="text_submitted" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/Command" to="Holder/Items/ItemSettings/Note" method="_on_command_text_submitted"]
-[connection signal="pressed" from="Holder/Items/ItemSettings/Note/Commands/AddCommand/AddCommand" to="Holder/Items/ItemSettings/Note" method="_on_add_command_pressed"]
+[connection signal="text_submitted" from="Holder/Items/ItemSettings/General/Commands/AddCommand/Keyword" to="Holder/Items/ItemSettings/Note" method="_on_keyword_text_submitted"]
+[connection signal="text_submitted" from="Holder/Items/ItemSettings/General/Commands/AddCommand/Command" to="Holder/Items/ItemSettings/Note" method="_on_command_text_submitted"]
+[connection signal="pressed" from="Holder/Items/ItemSettings/General/Commands/AddCommand/AddCommand" to="Holder/Items/ItemSettings/Note" method="_on_add_command_pressed"]
 [connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/1" to="Holder/Interface/QuickOptions" method="_on_q_1_pressed"]
 [connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/2" to="Holder/Interface/QuickOptions" method="_on_q_2_pressed"]
 [connection signal="pressed" from="Holder/Interface/QuickOptions/QuickHolder/3" to="Holder/Interface/QuickOptions" method="_on_q_2_pressed"]

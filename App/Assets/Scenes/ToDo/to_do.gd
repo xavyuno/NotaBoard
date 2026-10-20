@@ -1,7 +1,7 @@
 extends Item
 
 @onready var input: LineEdit = $AddHolder/Input
-@onready var progress: Label = $Top/Progress
+@onready var progress: Label = $Top/Progress/Label
 
 var Data: = {
 	"Type": "ToDo", 
@@ -15,7 +15,8 @@ var Data: = {
 	"TitleSize": Settings.Data["DefaultTitleSize"],
 	"ShowProgress" : true,
 	"ItemID" : "",
-	"Tags" : []
+	"Tags" : [],
+	"Style" : ""
 }
 
 var Options := [
@@ -41,96 +42,10 @@ func ApplyData():
 	ForceUpdateList(true)
 	UpdateValues($Top/Title, "TitleOn", "visible")
 	UpdateValues($Top/Title, "Title", "text")
-	UpdateValues(progress, "ShowProgress", "visible")
+	UpdateValues($Top/Progress, "ShowProgress", "visible")
+	
 	$Top/Title.add_theme_font_size_override("font_size", Data["TitleSize"])
 	CalculateProgress()
-
-func MovedTodo():
-	if Hovering:
-		User.MovingTodo = false
-		
-		# Cross-board move
-		if User.TargetTodo != null:
-			if User.TargetTodo != User.ParentTodo:
-				var target = User.TargetTodo
-				if target.AddList(User.TodoData["ID"], User.TodoData["Text"], User.TodoData["Value"], true):
-					target.AddList(User.TodoData["ID"], User.TodoData["Text"], User.TodoData["Value"], false, User.MoveIndex)
-					clean_up_move_bars()
-					CalculateProgress()
-					ForceUpdateList()
-					User.MovingTodo = false
-					User.TodoIndex = -1
-					User.MoveIndex = -1
-					User.TargetTodo = null
-					return
-			else:
-				TodoClosed(User.TodoData["ID"])
-		
-		# Same-board move
-		elif HoverMove:
-			if User.TodoIndex <= -1 or User.MoveIndex <= -1:
-				clean_up_move_bars()
-				User.MovingTodo = false
-				User.TargetTodo = null
-				return
-			
-			var PointA = User.TodoIndex - 1
-			var PointB = clamp(User.MoveIndex, 0, get_todo_items().size())
-			
-			if PointA < 0 or PointA >= get_todo_items().size():
-				print("Invalid PointA: ", PointA)
-				clean_up_move_bars()
-				User.MovingTodo = false
-				User.TargetTodo = null
-				return
-			
-			if PointB < 0 or PointB > get_todo_items().size():
-				print("Invalid PointB: ", PointB)
-				clean_up_move_bars()
-				User.MovingTodo = false
-				User.TargetTodo = null
-				return
-			
-			print("Move ", PointA, " to ", PointB, " | Size: ", get_todo_items().size())
-			
-			var todo_items = get_todo_items()
-			var source_item = todo_items[PointA]
-			
-			if PointA == PointB:
-				clean_up_move_bars()
-				User.MovingTodo = false
-				User.TargetTodo = null
-				return
-			
-			$List.remove_child(source_item)
-			
-			var insert_index = PointB
-			if PointB > PointA:
-				insert_index = PointB - 1
-			
-			var current_items = get_todo_items()
-			
-			if insert_index >= current_items.size():
-				$List.add_child(source_item)
-			else:
-				$List.add_child(source_item)
-				$List.move_child(source_item, current_items[insert_index].get_index())
-			
-			ForceUpdateList()
-			CalculateProgress()
-			clean_up_move_bars()
-			User.MovingTodo = false
-			User.TodoIndex = -1
-			User.MoveIndex = -1
-			User.TargetTodo = null
-			return
-		
-		# Cleanup if no move happened
-		clean_up_move_bars()
-		User.MovingTodo = false
-		User.TodoIndex = -1
-		User.MoveIndex = -1
-		User.TargetTodo = null
 
 func get_todo_items():
 	var items = []
@@ -138,12 +53,6 @@ func get_todo_items():
 		if !child.is_in_group("move_bar") and !child.is_in_group("temp"):
 			items.append(child)
 	return items
-
-func clean_up_move_bars():
-	for child in $List.get_children():
-		if child.is_in_group("move_bar"):
-			child.queue_free()
-	HoverMove = false
 
 func ForceUpdateList(useData = false):
 	if !useData:
@@ -185,9 +94,7 @@ func CalculateProgress():
 	var Total = Data["List"].size()
 	if Total <= 0:
 		progress.text = "0%"
-		var stylebox := progress.get_theme_stylebox("normal").duplicate(true)
-		stylebox.bg_color = Color.RED
-		progress.add_theme_stylebox_override("normal", stylebox)
+		$Top/Progress.self_modulate = Color.RED
 	else:
 		var Completed := 0
 		for i in Data["List"].size():
@@ -195,16 +102,15 @@ func CalculateProgress():
 				Completed += 1
 		var progressValue = int(float(Completed) / float(Total) * 100)
 		progress.text = str(progressValue) + "%"
-		var stylebox := progress.get_theme_stylebox("normal").duplicate(true)
-		stylebox.bg_color = Color(1.0 - (float(progressValue) / 100 * 1), (float(progressValue) / 100 * 1), 0.0, 1.0)
-		progress.add_theme_stylebox_override("normal", stylebox)
+		var BGCOL = Color(1.0 - (float(progressValue) / 100 * 1), (float(progressValue) / 100 * 1), 0.0, 1.0)
+		$Top/Progress.self_modulate = BGCOL
 
 func _process(_delta: float) -> void:
 	Data["Pos"] = position
 	Data["Size"] = size
 	Data["TitleOn"] = $Top/Title.visible
 	Data["Title"] = $Top/Title.text
-	Data["ShowProgress"] = progress.visible
+	Data["ShowProgress"] = $Top/Progress.visible
 	$List.visible = true if Data["List"].size() >= 1 else false
 
 func AddList(ID, Text, Value, Moved = false, index = -1):
@@ -237,6 +143,7 @@ func AddList(ID, Text, Value, Moved = false, index = -1):
 			Check.ChangeFontSize(Data["FontSize"])
 			Check.get_node("Close").connect("pressed", TodoClosed.bind(ID))
 			CalculateProgress()
+	CreateStyle()
 	return Output
 
 func _on_add_pressed() -> void:
@@ -250,3 +157,13 @@ func _on_input_text_submitted(new_text: String) -> void:
 
 func _on_title_on_pressed() -> void:
 	$Top/Title.visible = !$Top/Title.visible
+
+
+func _on_progress_pressed() -> void:
+	if $Top/Progress.custom_maximum_size.y == -1:
+		$Top/Progress.custom_maximum_size.y = 6
+		progress.visible = false
+	else:
+		$Top/Progress.custom_maximum_size.y = -1
+		progress.visible = true
+	CalculateProgress()

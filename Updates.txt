@@ -9,6 +9,10 @@ Added:
 - Themes: Styles can be created and applied to items, this can be used to create themes within the work enviroment, Fonts can be changed too
 
 Improved/Altered:
+- Aplha Colors: Most of the alpha's for colors within the settings can be changed (Except background)
+- Todo: The progress bar is below the title of the todo item and can be expanded by clicking on it, this allows for a more minimalistic flow
+- Tool tips for items with outlines only are shown when hovering: File, Link & Canvas
+- User Interface: Notaboard has improved it's UI by intergrating the new Theme system
 - Notaboard fps has been upcapped (originally 60)
 - History: Can now be collpased and the sate remains saved, along with the delete all button moved to account tab in settings
 - Font Size:
@@ -33,6 +37,8 @@ Improved/Altered:
 	The history tab now saves: Changes made to an item and items added, addition to removed items
 
 Fixed:
+- Canvas: The drawing circle only shows when drawing in the canvas
+- Canvas: Panning with right click on a canvas no longer deletes pixels
 - Erasing all not working
 - Board not changing properly to home when erasing data
 - Item performance improved when clicking off the item

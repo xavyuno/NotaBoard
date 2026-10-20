@@ -28,9 +28,11 @@ func ApplyData():
 	if Data.has("Thumbnail"):
 		if Data["Thumbnail"] == null:
 			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.Data["UrlAPIKey"]])
+			$Access.text = "Link Item.\nClick for options."
 		else :
 			$Access/Image.visible = true
 	else:
+		$Access.text = "Link Item.\nClick for options."
 		$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.Data["UrlAPIKey"]])
 
 
@@ -46,12 +48,15 @@ func GetImage():
 			filepath = "user://SavedLinkImages/1.png"
 		$Access/Image.texture.get_image().save_png(filepath)
 		Data["ThumbnailPath"] = filepath
+		$Access.text = ""
 		return filepath
 	else :
-		if $Access/Image.texture:
+		if $Access/Image.texture and Data["ThumbnailPath"] != "":
 			$Access/Image.texture.get_image().save_png(Data["ThumbnailPath"])
+			$Access.text = ""
 			return Data["ThumbnailPath"]
 		else:
+			$Access.text = "Link Item.\nClick for options."
 			return ""
 
 func GetThumbnailPath():
@@ -82,6 +87,7 @@ func _on_get_link_request_completed(_result: int, _response_code: int, _headers:
 		if errPNG != OK:
 			$GetPreview.request("https://api.linkpreview.net/?q=" + Data["Link"], ["X-Linkpreview-Api-Key: " + Settings.Data["UrlAPIKey"]])
 			print("failed to get thumbnail")
+			$Access.text = "Link Item.\nClick for options."
 			return
 	$Access/Image.visible = true
 	var txtr = ImageTexture.create_from_image(img)
@@ -91,7 +97,10 @@ func _on_get_link_request_completed(_result: int, _response_code: int, _headers:
 
 func _on_get_preview_request_completed(_result: int, _response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	var link = JSON.parse_string(body.get_string_from_utf8())
-	if link:
-		$GetLink.request(link["image"])
+	if link is Dictionary:
+		if link["image"] != "":
+			$GetLink.request(link["image"])
+			$Access.text = "Link Item.\nClick for options."
 	else :
+		$Access.text = "Link Item.\nClick for options."
 		print("failed to get LINK")

@@ -250,7 +250,7 @@ func GetFontOptions(node):
 	return Output
 
 func LoadFont(path):
-	if path is String:
+	if path is String and path != "":
 		var font : Font = FontFile.new()
 		font.load_dynamic_font(ProjectSettings.globalize_path(path))
 		if font:
@@ -258,6 +258,6 @@ func LoadFont(path):
 		else:
 			return preload("uid://bnkyxirvuyr1j").duplicate(true)
 	elif path is Font:
-		return path
+		return path.duplicate(true)
 	else:
 		return preload("uid://bnkyxirvuyr1j").duplicate(true)

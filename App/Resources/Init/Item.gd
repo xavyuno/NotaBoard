@@ -13,6 +13,7 @@ func GetData() -> Dictionary:
 
 func UpdateValues(NODE, value, parameter):
 	NODE.call_deferred("set", parameter, Has(value))
+	return Has(value)
 
 # SELECT OBJECT CODE BELOW
 
@@ -94,6 +95,8 @@ func CreateStyle():
 
 func ApplyStyle(Nodes : Array):
 	for i:Node in Nodes:
+		if i.is_in_group("Ignore"):
+			continue
 		if i.has_method("add_theme_font_override") and (i is Button or i is LineEdit or i is RichTextLabel or i is CodeEdit):
 			for j in System.GetFontOptions(i):
 				i.add_theme_font_override(j, 
@@ -106,12 +109,25 @@ func ApplyStyle(Nodes : Array):
 				Style = Customization.Themes[self.Data["Style"]]["Style"].duplicate(true)
 			for j in System.GetStyleOptions(i):
 				if Style is StyleBoxFlat:
+					if i.is_in_group("Left"):
+						Style.set_corner_radius(CORNER_BOTTOM_RIGHT, 0)
+					if i.is_in_group("Right"):
+						Style.set_corner_radius(CORNER_BOTTOM_LEFT, 0)
+					if i.is_in_group("Middle"):
+						Style.set_corner_radius_all(0)
+					if i.is_in_group("Empty"):
+						Style = StyleBoxEmpty.new()
 					if i.is_in_group("Top"):
 						Style.set_corner_radius(CORNER_BOTTOM_LEFT, 0)
 						Style.set_corner_radius(CORNER_BOTTOM_RIGHT, 0)
-					if i.is_in_group("Bottom") and $Title.visible:
-						Style.set_corner_radius(CORNER_TOP_LEFT, 0)
-						Style.set_corner_radius(CORNER_TOP_RIGHT, 0)
+					if i.is_in_group("Bottom"):
+						if self.Data["Type"] == "Notes":
+							if $Title.visible:
+								Style.set_corner_radius(CORNER_TOP_LEFT, 0)
+								Style.set_corner_radius(CORNER_TOP_RIGHT, 0)
+						else:
+							Style.set_corner_radius(CORNER_TOP_LEFT, 0)
+							Style.set_corner_radius(CORNER_TOP_RIGHT, 0)
 				i.add_theme_stylebox_override(j, Style)
 		if i.get_child_count() >= 1:
 			ApplyStyle(i.get_children(true))
@@ -338,9 +354,9 @@ func _input(event: InputEvent) -> void:
 			if !InColumn:
 				size = MouseMove(event, size)
 			else :
-				custom_minimum_size.y = MouseMove(event, size)
+				custom_minimum_size.y = MouseMove(event, size).y
 
-func MouseMove(event : InputEventMouseMotion, vec):
+func MouseMove(event : InputEventMouseMotion, vec) -> Vector2:
 	if !CanDrag:
 		return vec
 	Col.polygon = System.CreateRectangle(Vector2.ZERO, size)

@@ -15,6 +15,7 @@ script = ExtResource("1")
 custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 size_flags_vertical = 3
+tooltip_text = "Link Item"
 
 [node name="Image" type="TextureRect" parent="Access" unique_id=1490202202]
 layout_mode = 1

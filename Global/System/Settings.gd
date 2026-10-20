@@ -9,6 +9,8 @@ var AvailableQuickOptions := [
 	"Hide"
 ]
 
+var OriginalData := {}
+
 var Data = {
 	"BackgroundCol": Color.ROYAL_BLUE,
 	"UpdatePath": "user://TaskManager.exe",
@@ -22,12 +24,12 @@ var Data = {
 	"UrlAPIKey": "",
 	"ProgressiveLoading": false,
 	"TotalBoards": 0,
-	"SelectCol": Color.BLACK,
+	"SelectCol": Color(0.0, 0.0, 0.0, 0.5),
 	"CanSelectCol": true,
-	"DragCol": Color.WHITE,
+	"DragCol": Color(1.0, 1.0, 1.0, 0.5),
 	"GridSnap": false,
 	"GridSize": 16,
-	"GridCol": Color.WHITE,
+	"GridCol": Color(1.0, 1.0, 1.0, 0.5),
 	"CamPosHome": Vector2(640, 352),
 	"CamPosSettings": Vector2(840, 504),
 	"CamPosCalendar": Vector2(640, 352),

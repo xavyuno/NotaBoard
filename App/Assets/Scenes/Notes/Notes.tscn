@@ -17,7 +17,10 @@ layout_mode = 2
 theme_override_constants/caret_width = 0
 theme_override_constants/minimum_character_width = 0
 placeholder_text = "Title"
+keep_editing_on_text_submit = true
+draw_control_chars = true
 caret_blink = true
+caret_force_displayed = true
 
 [node name="CheckFocus" parent="Title" unique_id=919617251 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")

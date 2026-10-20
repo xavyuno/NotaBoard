@@ -8,7 +8,7 @@ content_margin_left = 5.0
 content_margin_top = 2.0
 content_margin_right = 5.0
 content_margin_bottom = 2.0
-bg_color = Color(0.4834036, 0.98400563, 0, 1)
+bg_color = Color(0.86751205, 0.83107024, 0.8553177, 1)
 border_width_left = 1
 border_width_top = 1
 border_width_right = 1
@@ -21,15 +21,15 @@ offset_right = 276.0
 offset_bottom = 104.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 1
+theme_override_constants/separation = 2
 script = ExtResource("1")
 CanDrag = false
 
-[node name="Top" type="HBoxContainer" parent="." unique_id=551586570]
+[node name="Top" type="VBoxContainer" parent="." unique_id=340121864]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Title" type="LineEdit" parent="Top" unique_id=1342100435]
+[node name="Title" type="LineEdit" parent="Top" unique_id=1342100435 groups=["Top"]]
 propagate_maximum_size = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -40,21 +40,38 @@ caret_blink = true
 [node name="CheckFocus" parent="Top/Title" unique_id=189988358 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
-[node name="Progress" type="Label" parent="Top" unique_id=1783018663]
+[node name="Progress" type="Button" parent="Top" unique_id=858430961 groups=["Ignore"]]
+custom_maximum_size = Vector2(-1, 6)
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_j8wkc")
-text = "0%"
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_j8wkc")
+theme_override_styles/focus = SubResource("StyleBoxFlat_j8wkc")
+text = " "
+
+[node name="Label" type="Label" parent="Top/Progress" unique_id=473925684]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="List" type="VBoxContainer" parent="." unique_id=622988544]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+theme_override_constants/separation = 2
 
 [node name="AddHolder" type="HBoxContainer" parent="." unique_id=785894043]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 2
 
-[node name="Input" type="LineEdit" parent="AddHolder" unique_id=1969251404]
+[node name="Input" type="LineEdit" parent="AddHolder" unique_id=1969251404 groups=["Bottom", "Left"]]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Todo text goes here"
@@ -66,11 +83,11 @@ caret_blink = true
 [node name="CheckFocus" parent="AddHolder/Input" unique_id=679378990 node_paths=PackedStringArray("par") instance=ExtResource("6")]
 par = NodePath("..")
 
-[node name="Add" type="Button" parent="AddHolder" unique_id=297714706]
+[node name="Add" type="Button" parent="AddHolder" unique_id=297714706 groups=["Bottom", "Right"]]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.15
 text = "+"
 
+[connection signal="pressed" from="Top/Progress" to="." method="_on_progress_pressed"]
 [connection signal="text_submitted" from="AddHolder/Input" to="." method="_on_input_text_submitted"]
 [connection signal="pressed" from="AddHolder/Add" to="." method="_on_add_pressed"]

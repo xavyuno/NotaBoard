@@ -36,7 +36,7 @@ func ChangeBoard(_Board: String, _Title: String, _ID = "", CamPos = Vector2(640,
 	Travelled = false
 
 func _draw() -> void:
-	if User.DragSelecting and !get_node("../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
+	if  User.DragSelecting and !(User.DrawingInCanvas or Canvas.InCanvas) and !get_node("../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
 		draw_polyline(
 				System.CreateRectangle(DragSelectPos, get_local_mouse_position()),
 			Settings.Data["DragCol"],
@@ -90,7 +90,7 @@ func _physics_process(_delta: float) -> void :
 	drag.get_node("CollisionPolygon2D").disabled = !User.DragSelecting
 
 func CamConditions():
-	if (!User.InFocus and !Input.is_action_pressed("MultiSelect")) and (!User.MouseInCanvas or User.CanvasHidden or User.History.size() <= 9) and !User.DrawingInCanvas:
+	if (!User.InFocus and !Input.is_action_pressed("MultiSelect")) and (!User.MouseInCanvas or User.CanvasHidden or User.History.size() <= 9) and !(User.DrawingInCanvas or Canvas.InCanvas):
 		return true
 	else :
 		return false

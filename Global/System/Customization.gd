@@ -6,6 +6,8 @@ signal Reload
 var SelectedTheme := "Default"
 var DefaultTheme := "Default"
 
+var OriginalData = []
+
 var Themes := {
 	"Default" : {
 		"Style" : preload("uid://cys4q33k6i8ws"),
@@ -14,17 +16,22 @@ var Themes := {
 	"Empty" : {
 		"Style":  preload("uid://bf31usjuypohc"),
 		"Font" : preload("uid://bnkyxirvuyr1j")
+	},
+	"Outline": {
+		"Style" : preload("uid://dgeoaby8qo30b"),
+		"Font": preload("uid://bnkyxirvuyr1j")
 	}
 }
 
 var Config := {
 	"Notes" : "Default",
 	"Board" : "Default",
-	"Canvas" : "Empty",
-	"File" : "Empty",
-	"Link" : "Empty",
+	"Canvas" : "Outline",
+	"File" : "Outline",
+	"Link" : "Outline",
 	"Column" : "Default",
-	"Foldable" : "Default"
+	"Foldable" : "Default",
+	"ToDo": "Default"
 }
 
 func Remove(Style):

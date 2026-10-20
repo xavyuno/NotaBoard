@@ -1,12 +1,12 @@
 extends Control
 
-
+@onready var Command = $"../General/Commands"
 
 func _ready() -> void:
 	Settings.connect("SettingsChanged", Refresh)
 
 func Refresh():
-	for i in $Commands/ScrollCommands/Holder.get_children():
+	for i in Command.get_node("ScrollCommands/Holder").get_children():
 		i.queue_free()
 	var ID = 0
 	for i in Settings.Data["NoteCommands"].size():
@@ -15,7 +15,7 @@ func Refresh():
 		butt.Keyword = data.keys()[0]
 		butt.Command = data.values()[0]
 		butt.ID = i
-		$Commands/ScrollCommands/Holder.add_child(butt)
+		Command.get_node("ScrollCommands/Holder").add_child(butt)
 
 func _on_add_command_pressed() -> void:
 	Execute()
@@ -24,7 +24,7 @@ func Execute():
 	if Settings.Data["NoteCommands"] is Dictionary:
 		Settings.Data["NoteCommands"] = []
 	Settings.Data["NoteCommands"].append(
-	{$Commands/AddCommand/Keyword.text : $Commands/AddCommand/Command.text})
+	{Command.get_node("AddCommand/Keyword").text : Command.get_node("AddCommand/Command").text})
 	Refresh()
 	Settings.emit_signal("SettingsChanged")
 
