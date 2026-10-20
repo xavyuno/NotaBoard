@@ -4,6 +4,7 @@ var Downloading: = false
 var Version = ""
 
 func _ready() -> void:
+	visible = false
 	$GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
 
 func _process(_delta: float) -> void:
