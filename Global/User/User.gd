@@ -73,11 +73,3 @@ var CopiedData = {
 	"Data" : null,
 	"Size" : Vector2.ZERO
 }
-
-var MovingTodo: bool = false
-var TodoData: Dictionary = {}
-var TodoIndex: int = -1
-var MoveIndex: int = -1
-var TargetTodo: Node = null
-var ParentTodo: Node = null
-var HoveringMoveBar: bool = false

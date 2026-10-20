@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b53uovoe76e8a" path="res://App/Components/Settings/style_holder.gd" id="1_32wsx"]
 [ext_resource type="Texture2D" uid="uid://c2o1b6eo7a6f0" path="res://App/Assets/Icons/Settings/icons8-check-32.png" id="1_p31n2"]
-[ext_resource type="Texture2D" uid="uid://cyg4bn043wsqc" path="res://App/Assets/Icons/Settings/icons8-clear-32.png" id="2_32wsx"]
+[ext_resource type="Texture2D" uid="uid://ewu4em5d8inc" path="res://App/Assets/Icons/Canvas/icons8-trash-32.png" id="3_32wsx"]
 
 [node name="StyleHolder" type="HBoxContainer" unique_id=86506594]
 offset_right = 512.0
@@ -33,7 +33,7 @@ icon = ExtResource("1_p31n2")
 [node name="Delete" type="Button" parent="." unique_id=154749567]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-icon = ExtResource("2_32wsx")
+icon = ExtResource("3_32wsx")
 
 [connection signal="pressed" from="Set" to="." method="_on_set_pressed"]
 [connection signal="pressed" from="Delete" to="." method="_on_delete_pressed"]

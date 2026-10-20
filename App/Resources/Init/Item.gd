@@ -17,7 +17,9 @@ func UpdateValues(NODE, value, parameter):
 
 # SELECT OBJECT CODE BELOW
 
-@export var CanDrag := true
+@export var CanMove := true
+@export var CanResizeX := true
+@export var CanResizeY := true
 var Selected := false
 var MultiSelected := false
 var Action := ""
@@ -221,7 +223,7 @@ func button_down():
 		else :
 			User.MultiSelectedObjects.erase(get_path())
 			ext(true)
-	if !CanDrag:
+	if !CanMove:
 		return
 	TimerNode.start()
 
@@ -352,12 +354,14 @@ func _input(event: InputEvent) -> void:
 			position = MouseMove(event, position)
 		if Action == "Resizing":
 			if !InColumn:
-				size = MouseMove(event, size)
+				size = MouseMove(event, size, true)
 			else :
-				custom_minimum_size.y = MouseMove(event, size).y
+				custom_minimum_size.y = MouseMove(event, size, true).y
+			if self.Data["Type"] == "ToDo":
+				size.y = 1
 
-func MouseMove(event : InputEventMouseMotion, vec) -> Vector2:
-	if !CanDrag:
+func MouseMove(event : InputEventMouseMotion, vec, Resizing = false) -> Vector2:
+	if !CanMove:
 		return vec
 	Col.polygon = System.CreateRectangle(Vector2.ZERO, size)
 	var current_mouse = get_global_mouse_position()
@@ -366,6 +370,11 @@ func MouseMove(event : InputEventMouseMotion, vec) -> Vector2:
 	if Settings.Data["GridSnap"]:
 		NewPos = vec + offset
 		NewPos = NewPos.snapped(Vector2(Settings.Data["GridSize"], Settings.Data["GridSize"]))
+	if Resizing:
+		if !CanResizeX:
+			return Vector2(vec.x, NewPos.y)
+		if !CanResizeY:
+			return Vector2(NewPos.x, vec.y)
 	return NewPos
 
 func FocusItem():

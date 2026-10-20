@@ -3,3 +3,8 @@ res://LatestVersion.txt
 res://App/Assets/Scenes/ToDo/check_list.tscn
 res://App/Components/Settings/settings.tscn
 res://App/Components/Settings/update.gd
+res://App/Components/Settings/style_holder.tscn
+res://App/Main/main.tscn
+res://Global/User/User.gd
+res://App/Assets/Scenes/ToDo/ToDo.tscn
+res://App/Resources/Init/Item.gd

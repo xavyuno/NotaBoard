@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://m7tucph1p8p0"]
 
 [ext_resource type="Script" uid="uid://f85bimn24r0r" path="res://App/Assets/Scenes/ToDo/check_list.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://veqoi253elm" path="res://App/Assets/Icons/Settings/icons8-move-32.png" id="2_1pwh0"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="2_j8wkc"]
 
 [node name="CheckList" type="HBoxContainer" unique_id=679855452]
@@ -11,6 +12,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 2
 script = ExtResource("1")
+
+[node name="Move" type="Button" parent="." unique_id=1406556624 groups=["Middle"]]
+visible = false
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+icon = ExtResource("2_1pwh0")
 
 [node name="Input" type="CheckBox" parent="." unique_id=347290272 groups=["Empty"]]
 layout_mode = 2
