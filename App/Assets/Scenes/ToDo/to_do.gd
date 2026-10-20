@@ -59,11 +59,11 @@ func ForceUpdateList(useData = false):
 		Data["List"] = {}
 		var Count = 0
 		for i in $List.get_children():
-			if !i.is_in_group("temp") and !i.is_in_group("move_bar"):
-				i.ID = Count
-				i.name = "Item" + str(Count)
-				Data["List"][Count] = {"Text": i.Text, "Value": i.get_node("Input").button_pressed}
-				Count += 1
+			i.ID = Count
+			i.name = "Item" + str(Count)
+			Data["List"][Count] = {"Text": i.Text, "Value": i.get_node("Input").button_pressed}
+			Count += 1
+			print(Data["List"])
 	else:
 		for i in Data["List"]:
 			AddList(i, Data["List"][i]["Text"], Data["List"][i]["Value"])
@@ -105,6 +105,7 @@ func CalculateProgress():
 		var BGCOL = Color(1.0 - (float(progressValue) / 100 * 1), (float(progressValue) / 100 * 1), 0.0, 1.0)
 		$Top/Progress.self_modulate = BGCOL
 
+
 func _process(_delta: float) -> void:
 	Data["Pos"] = position
 	Data["Size"] = size
@@ -129,6 +130,7 @@ func AddList(ID, Text, Value, Moved = false, index = -1):
 		var Check = preload("res://App/Assets/Scenes/ToDo/check_list.tscn").instantiate()
 		Check.Text = Text
 		Check.get_node("Input").set_pressed_no_signal(Value)
+		Check.get_node("Move").connect("pressed", MovePressed.bind(Check))
 		Check.ID = ID
 		if !Data["List"].has(ID):
 			Data["List"].merge({ID: {"Text": Text, "Value": Value}}, true)
@@ -167,3 +169,29 @@ func _on_progress_pressed() -> void:
 		$Top/Progress.custom_maximum_size.y = -1
 		progress.visible = true
 	CalculateProgress()
+
+func MovePressed(TaskNode):
+	if !User.TodoSwitching:
+		User.TodoSwitching = true
+		User.TodoParentID = Data["ItemID"]
+		User.TodoTask = {
+			"Text": TaskNode.Text,
+			"Value" : TaskNode.Value,
+			"ID": TaskNode.ID
+		}
+		TaskNode.get_node("Move").visible = false
+		User.TodoNode = TaskNode
+	else:
+		if Data["ItemID"] == User.TodoParentID:
+			var TempData = {
+				"Text": TaskNode.Text,
+				"Value" : TaskNode.Value,
+				"ID": TaskNode.ID
+			}
+			TaskNode.SetData(User.TodoTask)
+			User.TodoNode.SetData(TempData)
+			Data["List"].merge({TempData["ID"] : {"Text": User.TodoNode.Text, "Value": User.TodoNode.Value}}, true)
+			Data["List"].merge({User.TodoNode.ID: {"Text": TempData["Text"], "Value": TempData["Value"]}},true)
+			User.TodoNode.get_node("Move").visible = true
+			User.TodoSwitching = false
+			CalculateProgress()

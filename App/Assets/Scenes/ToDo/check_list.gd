@@ -5,11 +5,17 @@ var Editing := false
 var ClickedOnce := false
 var ID := 0
 var Holding := false
+var Value := false
 
 func _ready() -> void:
 	$Text.text = Text
 	$TextEdit.text = Text
 	User.connect("AllFocusLost", Callable(self, "LostFocus"))
+
+func SetData(Data : Dictionary):
+	$Text.text = Data["Text"]
+	Update(Data["Value"])
+	
 
 func LostFocus():
 	Editing = false
@@ -18,6 +24,8 @@ func LostFocus():
 func _process(_delta: float) -> void:
 	$Text.visible = !Editing
 	$TextEdit.visible = Editing
+	Text = $Text.text
+	Value = $Input.button_pressed
 
 func ChangeFontSize(value):
 	$Text.add_theme_font_size_override("font_size", value)

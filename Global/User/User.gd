@@ -73,3 +73,9 @@ var CopiedData = {
 	"Data" : null,
 	"Size" : Vector2.ZERO
 }
+
+#Todo task switching
+var TodoTask := {}
+var TodoSwitching := false
+var TodoParentID = -1
+var TodoNode = null

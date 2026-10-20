@@ -1,5 +1,6 @@
 Changelog for: v2
 Added:
+- Todo: Taks within the todo item can be swapped and moved
 - Tags: Tags can be assigned to items (can also be searched for)
 - Camera Transition: The camera will smoothly adjust it's position and zoom when changing between boards
 - Saving last accessed board

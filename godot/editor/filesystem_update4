@@ -8,3 +8,6 @@ res://App/Main/main.tscn
 res://Global/User/User.gd
 res://App/Assets/Scenes/ToDo/ToDo.tscn
 res://App/Resources/Init/Item.gd
+res://App/Assets/Scenes/ToDo/check_list.gd
+res://App/Assets/Scenes/ToDo/to_do.gd
+res://Updates.txt
