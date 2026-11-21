@@ -1,6 +1,5 @@
 extends ScrollContainer
 
-var ItemNode = null
 var Options := []
 var popupConst = null
 
@@ -10,28 +9,35 @@ func _ready() -> void:
 	visible = false
 
 func DeletePressed():
-	ItemNode.Delete()
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			get_node(j).Delete()
 
 func RatioPressed():
-	var Lowest: float = ItemNode.size.x
-	if ItemNode.size.y < Lowest:
-		Lowest = ItemNode.size.y
-	ItemNode.size = Vector2(Lowest, Lowest)
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			var Lowest: float = get_node(j).size.x
+			if get_node(j).size.y < Lowest:
+				Lowest = get_node(j).size.y
+			get_node(j).size = Vector2(Lowest, Lowest)
 
 func TitlePressed():
-	if ItemNode.has_node("Title"):
-		ItemNode.get_node("Title").visible = !ItemNode.get_node("Title").visible
-	else :
-		ItemNode.get_node("Top/Title").visible = !ItemNode.get_node("Top/Title").visible
-	Customization.emit_signal("ApplyCustomization")
+	for i in System.GetItemFromList(["Notes", "ToDo"]):
+		if get_node(i).has_node("Title"):
+			get_node(i).get_node("Title").visible = !get_node(i).get_node("Title").visible
+		else :
+			get_node(i).get_node("Top/Title").visible = !get_node(i).get_node("Top/Title").visible
+		Customization.emit_signal("ApplyCustomization")
 
 func NotePressed():
-	ItemNode.get_node("Preview").visible = !ItemNode.get_node("Preview").visible
+	for i in System.GetItemFromList(["Notes"]):
+		get_node(i).get_node("Preview").visible = !get_node(i).get_node("Preview").visible
 
 func DirectoryPressed():
-	var dirarray: Array = ItemNode.Data["Dir"].split("/")
-	$"../../FileDialog".current_dir = ItemNode.Data["Dir"].trim_suffix(dirarray[dirarray.size() - 1])
-	$"../../FileDialog".popup(Rect2(0, 0, 600, 600))
+	for i in System.GetItemFromList(["Notes"]):
+		var dirarray: Array = get_node(i).Data["Dir"].split("/")
+		$"../../FileDialog".current_dir = get_node(i).Data["Dir"].trim_suffix(dirarray[dirarray.size() - 1])
+		$"../../FileDialog".popup(Rect2(0, 0, 600, 600))
 
 func CoverPressed():
 	var Filedia := FileDialog.new()
@@ -45,22 +51,26 @@ func CoverPressed():
 	popupConst = Filedia
 
 func OpenPressed():
-	OS.shell_open(ProjectSettings.globalize_path(ItemNode.Data["Dir"]))
+	for i in System.GetItemFromList(["File"]):
+		OS.shell_open(ProjectSettings.globalize_path(get_node(i).Data["Dir"]))
 
 func popup(path):
-	var img = Image.load_from_file(ProjectSettings.globalize_path(path))
-	var imgtxt = ImageTexture.create_from_image(img)
-	ItemNode.ChangeCover(imgtxt)
-	popupConst.queue_free()
+	for i in System.GetItemFromList(["Board"]):
+		var img = Image.load_from_file(ProjectSettings.globalize_path(path))
+		var imgtxt = ImageTexture.create_from_image(img)
+		get_node(i).ChangeCover(imgtxt)
+		popupConst.queue_free()
 
 func ItemFocusLost():
-	User.SelectedObject = null
 	if get_node("../../../../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
 		$"../ItemHolder".visible = false
 		visible = false
 	else:
 		$"../ItemHolder".visible = true
 		visible = false
+
+func MovePressed():
+	User.ShowMoveButton = !User.ShowMoveButton
 
 func ItemFocused(path : NodePath):
 	if get_node("../../../../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
@@ -69,12 +79,15 @@ func ItemFocused(path : NodePath):
 	else:
 		$"../ItemHolder".visible = false
 		visible = true
-	ItemNode = get_node(path)
-	Options = ItemNode.Options
+	
+	Options = []
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+				Options.append_array(get_node(j).Options)
 	if Options.size() <= 0:
 		return
 	for i in $Items.get_children():
-		if !i.name in ["ItemID", "ID", "Tags"]: 
+		if !i.name in ["ItemID", "ID", "Tags", "SelectStyle"]: 
 			i.visible = false
 	for i in Options.size():
 		if !$Items.get_node_or_null(Options[i]):
@@ -86,6 +99,18 @@ func ItemFocused(path : NodePath):
 			but.tooltip_text = but.name
 		else:
 			$Items.get_node(Options[i]).visible = true
+	
+	#Select style
+	$Items/SelectStyle/Style.clear()
+	var id = 0
+	var options = Customization.Themes.keys()
+	options.append("None")
+	for i in options:
+		$Items/SelectStyle/Style.add_item(i)
+		if get_node(path).Data["Style"] is String:
+			if i == get_node(path).Data["Style"]:
+				$Items/SelectStyle/Style.select(id)
+		id += 1
 	$Items/Tags/Options/Input.text = ""
 	ValidateValue($Items/ID, "ID", "text", GetValue("ID: ", "ID"))
 	ValidateValue($Items/ItemID, "ItemID", "text", GetValue("Item ID: ", "ItemID"))
@@ -101,73 +126,102 @@ func ReloadTags():
 		for i in $Items/Tags/Holder.get_children():
 			i.queue_free()
 	var TotalTags = 0
-	for i in ItemNode.Data["Tags"]:
-		var butt = Button.new()
-		butt.text = i
-		butt.name = i
-		butt.tooltip_text = "Click to remove tag"
-		butt.connect("pressed", RemoveTag.bind(TotalTags, i))
-		$Items/Tags/Holder.add_child(butt)
-		TotalTags += 1
+	for a in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[a]:
+			for i in get_node(j).Data["Tags"]:
+				var butt = Button.new()
+				butt.text = i
+				butt.name = i
+				butt.tooltip_text = "Click to remove tag"
+				butt.connect("pressed", RemoveTag.bind(TotalTags, i))
+				$Items/Tags/Holder.add_child(butt)
+				TotalTags += 1
 
 func RemoveTag(ID, Tag):
-	ItemNode.Data["Tags"].remove_at(ID)
-	get_node("Items/Tags/Holder/" + Tag).queue_free()
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			get_node(j).Data["Tags"].remove_at(ID)
+			get_node("Items/Tags/Holder/" + Tag).queue_free()
 
 func GetValue(before, parameter, after = ""):
-	if ItemNode.Data.has(parameter):
-		if before == "" and after == "":
-			return ItemNode.Data[parameter]
-		else :
-			return before + str(ItemNode.Data[parameter]) + after
-	else :
-		return ""
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			if get_node(j).Data.has(parameter):
+				if before == "" and after == "":
+					return get_node(j).Data[parameter]
+				else :
+					return before + str(get_node(j).Data[parameter]) + after
+			else :
+				return ""
 
 func CapturePressed():
-	ItemNode.Capture()
+	for i in System.GetItemFromList(["Canvas"]):
+		get_node(i).Capture()
 
 func ClearPressed():
-	ItemNode.Clear()
+	for i in System.GetItemFromList(["Canvas"]):
+		get_node(i).Clear()
 
 func ThumbnailPressed():
-	OS.shell_open(ProjectSettings.globalize_path(ItemNode.GetImage()))
+	for i in System.GetItemFromList(["Link"]):
+		OS.shell_open(ProjectSettings.globalize_path(get_node(i).GetImage()))
 
 func GoToPressed():
-	OS.shell_open(ItemNode.Data["Link"])
+	for i in System.GetItemFromList(["Link"]):
+		OS.shell_open(get_node(i).Data["Link"])
 
 func ProgressPressed():
-	ItemNode.get_node("Top/Progress").visible = !ItemNode.get_node("Top/Progress").visible
+	for i in System.GetItemFromList(["ToDo"]):
+		get_node(i).get_node("Top/Progress").visible = !get_node(i).get_node("Top/Progress").visible
 
 func ValidateValue(Nodepath, value, parameter, change = ""):
 	change = str(change)
-	if ItemNode.Data.has(value):
-		if change == "":
-			Nodepath.set(parameter, ItemNode.Data[value])
-		else :
-			Nodepath.set(parameter, change)
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			if get_node(j).Data.has(value):
+				if change == "":
+					Nodepath.set(parameter, get_node(j).Data[value])
+				else :
+					Nodepath.set(parameter, change)
 
 func _on_board_value_changed(value: float) -> void:
-	ItemNode.ChangeID(value)
+	for i in System.GetItemFromList(["Board"]):
+		get_node(i).ChangeID(value)
 
 func _on_font_size_value_changed(value: float) -> void:
-	ItemNode.ChangeFontSize(value)
+	for i in System.GetItemFromList(["Notes", "ToDo"]):
+		get_node(i).ChangeFontSize(value)
 
 func _on_title_size_value_changed(value: float) -> void:
-	ItemNode.ChangeTitleSize(value)
+	for i in System.GetItemFromList(["Notes", "ToDo"]):
+		get_node(i).ChangeTitleSize(value)
 
 func _on_file_dialog_file_selected(path: String) -> void:
-	ItemNode.Data["Dir"] = path
-	ItemNode.LoadFile()
+	for i in System.GetItemFromList(["File"]):
+		get_node(i).Data["Dir"] = path
+		get_node(i).LoadFile()
 
 func _on_link_focus_exited() -> void:
-	ItemNode.SetLink($Items/Link.text)
+	for i in System.GetItemFromList(["Link"]):
+		get_node(i).SetLink($Items/Link.text)
 
 func _on_board_name_text_changed(new_text: String) -> void:
-	ItemNode.SetTitle(new_text)
+	for i in System.GetItemFromList(["Board"]):
+		get_node(i).SetTitle(new_text)
 
 func _on_add_pressed() -> void:
-	ItemNode.AddTag($Items/Tags/Options/Input.text)
-	ReloadTags()
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			get_node(j).AddTag($Items/Tags/Options/Input.text)
+			ReloadTags()
 
 func AutoExpandPressed():
-	ItemNode.get_node("Text").fit_content = !ItemNode.get_node("Text").fit_content
+	for i in System.GetItemFromList(["Notes"]):
+		get_node(i).get_node("Text").fit_content = !get_node(i).get_node("Text").fit_content
+
+
+func _on_style_item_selected(index: int) -> void:
+	for i in User.MultiSelectedObjects.keys():
+		for j in User.MultiSelectedObjects[i]:
+			get_node(j).Data["Style"] = $Items/SelectStyle/Style.get_item_text(index)
+			get_node(j).CreateStyle()

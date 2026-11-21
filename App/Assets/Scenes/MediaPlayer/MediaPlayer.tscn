@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cn1t3gqafk5mw"]
+
+[ext_resource type="Script" uid="uid://be64jxpvwh4lx" path="res://App/Assets/Scenes/MediaPlayer/media_player.gd" id="1_v44od"]
+
+[node name="MediaPlayer" type="VBoxContainer" unique_id=1296391538]
+offset_right = 231.0
+offset_bottom = 117.0
+script = ExtResource("1_v44od")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1205686459]
+layout_mode = 2
+size_flags_vertical = 3
+autoplay = true
+expand = true
+loop = true
+
+[node name="Button" type="Button" parent="." unique_id=1063726118]
+layout_mode = 2
+
+[node name="FileDialog" type="FileDialog" parent="Button" unique_id=1980330438]
+title = "Open a File"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="file_selected" from="Button/FileDialog" to="." method="_on_file_dialog_file_selected"]

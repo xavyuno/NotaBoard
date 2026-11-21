@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ditwmlmi3ffb2"]
 
 [ext_resource type="Script" uid="uid://55nfvi2wjybg" path="res://App/Assets/Scenes/File/file.gd" id="1"]
-[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="3"]
+[ext_resource type="FontFile" uid="uid://dted0h48sl1cj" path="res://App/Assets/Fonts/liberation_sans/LiberationSans-Regular.ttf" id="3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aqcpb"]
 
@@ -24,7 +24,6 @@ script = ExtResource("1")
 custom_minimum_size = Vector2(192, 192)
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "File Item"
 theme_override_styles/normal = SubResource("StyleBoxEmpty_aqcpb")
 
 [node name="Title" type="Label" parent="Open" unique_id=1243111331]

@@ -13,6 +13,20 @@ func SettingsChanged():
 		get_node("QuickOption" + str(i+1)).tooltip_text = Settings.Data["QuickOptions"][i]
 		get_node("QuickOption" + str(i+1)).icon = load("res://App/Assets/Icons/" + Settings.Data["QuickOptions"][i] + ".png")
 
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("QuickOption1"):
+		if Settings.Data["CurrentPage"] != "Settings":
+			System.SwitchBoard("Settings")
+		else:
+			System.SwitchBoard("Home")
+	if Input.is_action_just_pressed("QuickOption2") and System.CamConditions():
+		QuickOption(0)
+	if Input.is_action_just_pressed("QuickOption3") and System.CamConditions():
+		QuickOption(1)
+	if Input.is_action_just_pressed("QuickOption4") and System.CamConditions():
+		QuickOption(2)
+
+
 func RandomOption():
 	var output = Settings.AvailableQuickOptions[randi() % Settings.AvailableQuickOptions.size()]
 	return output.replace("_", "")

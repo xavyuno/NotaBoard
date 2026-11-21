@@ -10,10 +10,8 @@ var Warning := false
 func _ready() -> void:
 	if Warning:
 		progress.modulate = Color.RED
-	else:
-		progress.modulate = Color.GREEN
 	progress.modulate.a = .5
-	info.text = Text
+	info.text = " " + Text
 	despawn.wait_time = Settings.Data["NotifTimeout"]
 	despawn.start()
 	progress.max_value = despawn.wait_time

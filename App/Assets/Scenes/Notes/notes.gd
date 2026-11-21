@@ -13,7 +13,7 @@ var Data: = {
 	"TitleOn": true, 
 	"FontSize" : Settings.Data["DefaultFontSize"],
 	"TitleSize": Settings.Data["DefaultTitleSize"],
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Tags" : [],
 	"Style" : "",
 	"AutoExpand" : true
@@ -48,10 +48,6 @@ func ApplyData():
 	UpdateValues($Title, "TitleOn", "visible")
 	ChangeFontSize(Has("FontSize"))
 	ChangeTitleSize(Has("TitleSize"))
-
-func DeleteItem(ItemID):
-	if self.Data["ItemID"] == ItemID:
-		Delete()
 
 func mouse_entered():
 	if RichText.get_v_scroll_bar().max_value - RichText.size.y >= 0:
@@ -92,15 +88,15 @@ func QuickType(Keybind, command):
 		RichTextUpdate(command)
 
 func EditNotes(GrabFocus = true):
+	Editing = GrabFocus
 	RichText.visible = !Editing
 	$ScrollContainer.visible = Editing
+	UpdateText()
 	if GrabFocus:
 		NotesText.grab_focus()
 
 func _on_notes_focus_exited() -> void:
-	if Editing:
-		UpdateText()
-		Editing = false
+	if Selected:
 		EditNotes(false)
 
 func CommandHovered(Hovered : bool, cmd : String):
@@ -122,7 +118,6 @@ func CreateDisplay(imagePath):
 	display.offset_transform_enabled = true
 	display.size /= User.CamZoom.x * 2
 	display.offset_transform_position = get_global_mouse_position() - (display.size / 2)
-	
 
 func UpdateText():
 	var Temptext : String = Data["Note"]
@@ -163,8 +158,7 @@ func HasCommand(Code : String, end = false):
 	return output
 
 func _on_text_focus_entered() -> void:
-	Editing = true
-	EditNotes(false)
+	EditNotes(true)
 
 	if $ScrollContainer/Notes.get_v_scroll_bar().max_value > 0:
 		$ScrollContainer.custom_minimum_size = $Text.size + Vector2(0, 48)

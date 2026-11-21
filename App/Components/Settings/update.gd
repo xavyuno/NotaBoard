@@ -5,14 +5,12 @@ var Version = ""
 
 func _ready() -> void:
 	visible = false
-	$GetVersion.request("https://raw.githubusercontent.com/xavyuno/Task-Manager/main/LatestVersion.txt")
+	$GetVersion.request("https://raw.githubusercontent.com/xavyuno/NotaBoard/main/LatestVersion.txt")
 
 func _process(_delta: float) -> void:
 	if Downloading:
 		$Progress.value = $Download.get_downloaded_bytes()
 		text = "Downloading Update..."
-		$Version.text = str(Version)
-	$Version.visible = Downloading
 
 func _on_get_version_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void :
 	if response_code == 200:
@@ -22,15 +20,15 @@ func _on_get_version_request_completed(_result: int, response_code: int, _header
 			return
 		else :
 			visible = true
-			System.CreateNotif("New update: " + Version)
-			var url = "https://github.com/xavyuno/NotaBoard/releases/download/v%s/NotaBoard.exe" % str(Version)
-			$Download.request(url)
-			Downloading = true
+			System.CreateNotif("New update: " + str(Version))
+			$Version.text = str(Version)
+			$Version.visible = true
 	else:
 		System.CreateNotif("Failed to find newest version.", true)
 
 func _on_download_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void :
 	Downloading = false
+	print(response_code)
 	if response_code == 200:
 		var file = FileAccess.open(Settings.Data["UpdatePath"], FileAccess.WRITE)
 		file.store_buffer(body)
@@ -47,3 +45,6 @@ func _on_pressed() -> void:
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	Settings.Data["UpdatePath"] = path
+	var url = "https://github.com/xavyuno/NotaBoard/releases/download/v%s/NotaBoard.exe" % str(Version)
+	$Download.request(url)
+	Downloading = true

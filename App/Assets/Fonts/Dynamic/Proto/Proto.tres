@@ -1,6 +1,0 @@
-[gd_resource type="FontVariation" format=3 uid="uid://ceh83x3sak3oo"]
-
-[ext_resource type="FontFile" uid="uid://c3nnr1hkh08yr" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Italic.ttf" id="1"]
-
-[resource]
-base_font = ExtResource("1")

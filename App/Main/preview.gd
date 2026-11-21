@@ -10,7 +10,7 @@ func _process(_delta: float) -> void :
 func StartedDragging():
 	if Settings.Data["CurrentPage"].similarity(get_parent().name) < 1:
 		return
-	var obj = User.DraggedObject.instantiate()
+	var obj : Item = User.DraggedObject.instantiate()
 	if obj.Data.has("Board"):
 		obj.Preview = true
 	add_child(obj)
@@ -19,10 +19,9 @@ func StoppedDragging():
 	if get_child_count() >= 1:
 		for i in get_children():
 			i.queue_free()
-			Settings.Data["TotalItems"] -= 1
 
 func _on_clear_focus_pressed() -> void:
 	User.emit_signal("ItemFocusLost")
 	User.emit_signal("AllFocusLost")
-	User.MultiSelectedObjects = []
+	User.MultiSelectedObjects = {}
 	User.MultiCopiedObjects = []

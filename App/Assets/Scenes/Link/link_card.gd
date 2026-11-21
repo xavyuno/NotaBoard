@@ -8,9 +8,9 @@ var Data: = {
 	"ID": "Home",
 	"Thumbnail" : null,
 	"ThumbnailPath" : "",
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Tags" : [],
-	"Styles" : ""
+	"Style" : ""
 }
 
 var Options := [

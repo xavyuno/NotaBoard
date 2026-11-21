@@ -11,10 +11,10 @@ var Data: = {
 	"Pos": Vector2.ZERO, 
 	"Size": Vector2.ZERO, 
 	"ID": "Home", 
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Pixels" : {},
 	"Tags" : [],
-	"Styles" : ""
+	"Style" : {}
 }
 
 var Options := [

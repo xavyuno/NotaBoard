@@ -7,9 +7,9 @@ var Data: = {
 	"ID": "Home", 
 	"Dir": "",
 	"CachedImage" : null,
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Tags" : [],
-	"Styles" : ""
+	"Style" : ""
 }
 
 var Options := [
@@ -31,25 +31,32 @@ func _process(_delta: float) -> void :
 	Data["CachedImage"] = $Open/Image.texture
 
 func LoadFile():
-	if Data["Dir"] == "" or Data["Dir"].validate_filename():
+	if Data["Dir"] == "":
 		return
-	var img = Image.load_from_file(ProjectSettings.globalize_path(Data["Dir"]))
-	var texture
-	if img:
-		texture = ImageTexture.create_from_image(img)
+	var ImageExtensions = ["bmp", "dds", "exr", "hdr", "jpg", "jpeg", "png", "tga", "svg", "svgz", "webp"]
+	if Data["Dir"].split(".")[1] in ImageExtensions:
+		var img = Image.load_from_file(ProjectSettings.globalize_path(Data["Dir"]))
+		var texture
+		if img:
+			texture = ImageTexture.create_from_image(img)
+		else:
+			texture = Has("CachedImage")
+		if texture:
+			$Open / Image.texture = texture
+			$Open / Holder.visible = false
+			$Open / Title.text = ""
+		else:
+			LoadTextContents()
 	else:
-		texture = Has("CachedImage")
-	if texture:
-		$Open / Image.texture = texture
-		$Open / Holder.visible = false
-		$Open / Title.text = ""
-	else:
+		LoadTextContents()
+
+func LoadTextContents():
+		print("1")
 		$Open / Image.texture = null
 		$Open / Title.text = "Click to view options"
 		$Open / Holder.visible = true
 		var file = FileAccess.open(ProjectSettings.globalize_path(Data["Dir"]), FileAccess.READ)
-		var txt
+		print(file.get_as_text())
 		if file:
-			txt = file.get_as_text()
-			$Open / Holder / Preview.text = txt
+			$Open / Holder / Preview.text = file.get_as_text()
 			file.close()

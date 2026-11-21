@@ -6,9 +6,14 @@
 [ext_resource type="Script" uid="uid://4gxh4eyqfeys" path="res://App/Components/Settings/update.gd" id="3_rb2qu"]
 [ext_resource type="Texture2D" uid="uid://cb35hi6ko6w4n" path="res://App/Assets/Icons/Settings/icons8-github-32.png" id="4_24wxk"]
 [ext_resource type="Script" uid="uid://tjxthmxl2vin" path="res://App/Main/Settings/items.gd" id="5_hy4rc"]
+[ext_resource type="Texture2D" uid="uid://3ytmfykr61tm" path="res://App/Assets/Icons/icons8-notes-32.png" id="6_00cms"]
 [ext_resource type="Texture2D" uid="uid://b7mj7mva78t6k" path="res://App/Assets/Icons/Notes.png" id="6_r8mbw"]
+[ext_resource type="StyleBox" uid="uid://cys4q33k6i8ws" path="res://App/Resources/DefaultStyle.tres" id="6_s1m4k"]
+[ext_resource type="Texture2D" uid="uid://d4majk2scr3v6" path="res://App/Assets/Icons/Settings/icons8-interface-32.png" id="7_24wxk"]
+[ext_resource type="Texture2D" uid="uid://0ftccp66mwv4" path="res://App/Assets/Icons/Settings/icons8-management-32.png" id="8_hy4rc"]
 [ext_resource type="Script" uid="uid://cb3vbeqg6kq5g" path="res://App/Components/Settings/apply_style.gd" id="10_fa7pb"]
 [ext_resource type="Texture2D" uid="uid://dv7k1k1cyfpbm" path="res://App/Assets/Icons/Folder.png" id="10_rb2qu"]
+[ext_resource type="Texture2D" uid="uid://dke6bioxpia0l" path="res://App/Assets/Icons/Settings/icons8-about-32.png" id="10_ulpyx"]
 [ext_resource type="Script" uid="uid://c3dxv8u5symor" path="res://App/Main/general.gd" id="13_f7hbk"]
 [ext_resource type="Script" uid="uid://bdfi42atrssq4" path="res://App/Main/edit_style.gd" id="14_1knyj"]
 [ext_resource type="Script" uid="uid://cp50vlb6oxuwx" path="res://App/Main/note.gd" id="15_5k4gj"]
@@ -25,7 +30,8 @@
 [ext_resource type="Script" uid="uid://nfwgx2y3fsek" path="res://App/Main/Settings/changelog.gd" id="22_g5788"]
 [ext_resource type="PackedScene" uid="uid://8r3y5vbqek01" path="res://App/Components/CheckFocus/check_focus.tscn" id="23_b02v3"]
 [ext_resource type="Script" uid="uid://c53nfhq1b5kp7" path="res://App/Main/to_do.gd" id="24_p8odj"]
-[ext_resource type="FontFile" uid="uid://wss58bpb7rd3" path="res://App/Assets/Fonts/0xProto/0xProtoNerdFont-Bold.ttf" id="25_81vni"]
+[ext_resource type="FontFile" uid="uid://dted0h48sl1cj" path="res://App/Assets/Fonts/liberation_sans/LiberationSans-Regular.ttf" id="25_81vni"]
+[ext_resource type="StyleBox" uid="uid://cb45ybrjq3nvu" path="res://App/Resources/ApplicationStyle.tres" id="31_ulpyx"]
 
 [sub_resource type="Gradient" id="Gradient_nqkbx"]
 offsets = PackedFloat32Array(0)
@@ -46,13 +52,6 @@ font_size = 10
 [sub_resource type="LabelSettings" id="LabelSettings_lkim6"]
 font_size = 23
 
-[sub_resource type="Gradient" id="Gradient_1yho4"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(7.70092e-07, 0.667217, 0.471484, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y8ose"]
-gradient = SubResource("Gradient_1yho4")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qt3dg"]
 content_margin_left = 5.0
 content_margin_top = 5.0
@@ -63,15 +62,9 @@ bg_color = Color(0, 0, 0, 0.392157)
 [sub_resource type="LabelSettings" id="LabelSettings_b8p06"]
 font_size = 25
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q72c2"]
-bg_color = Color(0, 0, 0, 0.392157)
-
 [sub_resource type="LabelSettings" id="LabelSettings_xv0o8"]
 font = ExtResource("25_81vni")
 font_size = 55
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwav7"]
-bg_color = Color(0, 0, 0, 0.392157)
 
 [sub_resource type="LabelSettings" id="LabelSettings_nqkbx"]
 font = ExtResource("25_81vni")
@@ -170,8 +163,13 @@ layout_mode = 0
 offset_top = 168.0
 offset_right = 1728.0
 offset_bottom = 1024.0
+theme_override_constants/side_margin = 32
 theme_override_constants/tab_separation = 4
 current_tab = 0
+tab_0/icon = ExtResource("6_00cms")
+tab_1/icon = ExtResource("7_24wxk")
+tab_2/icon = ExtResource("8_hy4rc")
+tab_3/icon = ExtResource("10_ulpyx")
 
 [node name="Items" type="Control" parent="Holder" unique_id=1927063949]
 layout_mode = 2
@@ -279,9 +277,30 @@ min_value = 1.0
 value = 1.0
 prefix = "Corner Detail"
 
-[node name="BgColor" type="ColorPickerButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=628941871]
+[node name="BGCol" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=1216282776]
 layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BGCol" unique_id=1458837500]
+layout_mode = 2
+text = "Background Color"
+
+[node name="BgColor" type="ColorPickerButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BGCol" unique_id=628941871]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "d"
+
+[node name="FontCol" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=1025810566]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/FontCol" unique_id=1549165156]
+layout_mode = 2
+text = "Font Color"
+
+[node name="FontCol" type="ColorPickerButton" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/FontCol" unique_id=1992966380]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "d"
+edit_alpha = false
 
 [node name="Font" type="HBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder" unique_id=828138148]
 layout_mode = 2
@@ -309,9 +328,9 @@ icon = ExtResource("19_qpo1n")
 
 [node name="New" type="Button" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1276804532]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 24.0
 offset_top = 32.0
-offset_right = 416.0
+offset_right = 440.0
 offset_bottom = 64.0
 text = "Create new Theme"
 
@@ -322,6 +341,7 @@ offset_top = -64.0
 offset_right = 1152.0
 offset_bottom = 160.0
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("6_s1m4k")
 text = "This is a button"
 
 [node name="PreviewText" type="TextEdit" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1401904383]
@@ -331,16 +351,17 @@ offset_top = 192.0
 offset_right = 1152.0
 offset_bottom = 416.0
 size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("6_s1m4k")
 text = "This is a text that can be edited"
 placeholder_text = "Enter text you want to be displayed or previewed with the style"
 wrap_mode = 1
 
 [node name="StyleScroll" type="ScrollContainer" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=2057160606]
 layout_mode = 0
-offset_left = 32.0
+offset_left = 24.0
 offset_top = 96.0
-offset_right = 448.0
-offset_bottom = 384.0
+offset_right = 440.0
+offset_bottom = 396.0
 
 [node name="Holder" type="VBoxContainer" parent="Holder/Items/ItemSettings/General/EditStyle/StyleScroll" unique_id=1539852681]
 layout_mode = 2
@@ -349,9 +370,9 @@ size_flags_vertical = 3
 
 [node name="StyleName" type="LineEdit" parent="Holder/Items/ItemSettings/General/EditStyle" unique_id=1279734881]
 layout_mode = 0
-offset_left = 33.0
+offset_left = 24.0
 offset_top = 64.0
-offset_right = 448.0
+offset_right = 440.0
 offset_bottom = 96.0
 placeholder_text = "Theme Name"
 
@@ -534,33 +555,6 @@ text = "Edit Quick Options"
 label_settings = SubResource("LabelSettings_lkim6")
 autowrap_mode = 2
 
-[node name="Selected1" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=1598570354]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 74.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="Selected2" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=10876377]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 74.0
-offset_top = 6.0
-offset_right = 142.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
-[node name="Selected3" type="TextureRect" parent="Holder/Interface/QuickOptions" unique_id=256802939]
-show_behind_parent = true
-layout_mode = 0
-offset_left = 142.0
-offset_top = 6.0
-offset_right = 210.0
-offset_bottom = 74.0
-texture = SubResource("GradientTexture2D_y8ose")
-
 [node name="QuickHolder" type="HBoxContainer" parent="Holder/Interface/QuickOptions" unique_id=1767613724]
 layout_mode = 0
 offset_left = 8.0
@@ -571,17 +565,17 @@ offset_bottom = 72.0
 [node name="1" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=1505091873]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-text = "1"
+icon_alignment = 1
 
 [node name="2" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=924654038]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-text = "2"
+icon_alignment = 1
 
 [node name="3" type="Button" parent="Holder/Interface/QuickOptions/QuickHolder" unique_id=632947970]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
-text = "3"
+icon_alignment = 1
 
 [node name="ScrollHolder" type="ScrollContainer" parent="Holder/Interface/QuickOptions" unique_id=735832969]
 layout_mode = 0
@@ -670,61 +664,74 @@ custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 metadata/_edit_group_ = true
 
-[node name="Account & Data" type="Control" parent="Holder" unique_id=2042403600]
+[node name="Performance" type="VBoxContainer" parent="Holder/Interface" unique_id=1783489133]
+layout_mode = 0
+offset_left = 892.0
+offset_top = 36.0
+offset_right = 1276.0
+offset_bottom = 292.0
+
+[node name="Title" type="Label" parent="Holder/Interface/Performance" unique_id=2076928800]
+layout_mode = 2
+text = "Performance"
+
+[node name="GlobalTheme" type="CheckButton" parent="Holder/Interface/Performance" unique_id=426787004]
+layout_mode = 2
+text = "Load application theme on startup"
+
+[node name="ItemTheme" type="CheckButton" parent="Holder/Interface/Performance" unique_id=608661726]
+layout_mode = 2
+text = "Load item theme on startup"
+
+[node name="User Management" type="Control" parent="Holder" unique_id=2042403600]
 visible = false
 layout_mode = 2
 script = ExtResource("17_f6bhb")
 metadata/_tab_index = 2
 
-[node name="DisplayURL" type="Panel" parent="Holder/Account & Data" unique_id=1862792357]
+[node name="DisplayURL" type="Panel" parent="Holder/User Management" unique_id=1862792357]
 layout_mode = 0
 offset_left = 736.0
 offset_top = 28.0
 offset_right = 1696.0
-offset_bottom = 156.0
+offset_bottom = 164.0
 script = ExtResource("18_tmo7f")
-metadata/_edit_group_ = true
 
-[node name="Title" type="Label" parent="Holder/Account & Data/DisplayURL" unique_id=10848240]
+[node name="Info" type="RichTextLabel" parent="Holder/User Management/DisplayURL" unique_id=729908066]
 layout_mode = 0
-offset_right = 960.0
-offset_bottom = 24.0
-text = "Display link preview"
+offset_left = 28.0
+offset_top = 8.0
+offset_right = 924.0
+offset_bottom = 72.0
+bbcode_enabled = true
+text = "Display Link Preview
+To preview thumbnails of links, retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste the key below"
+fit_content = true
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Info" type="RichTextLabel" parent="Holder/Account & Data/DisplayURL" unique_id=729908066]
+[node name="Key" type="LineEdit" parent="Holder/User Management/DisplayURL" unique_id=663994843]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 928.0
-offset_bottom = 96.0
-bbcode_enabled = true
-text = "To preview thumbnails of links, retreive an api key from: [url]https://my.linkpreview.net/[/url] and paste it within the box below"
-fit_content = true
-autowrap_mode = 2
-
-[node name="Key" type="LineEdit" parent="Holder/Account & Data/DisplayURL" unique_id=663994843]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 78.0
-offset_right = 928.0
-offset_bottom = 110.0
+offset_left = 60.0
+offset_top = 72.0
+offset_right = 924.0
+offset_bottom = 104.0
 placeholder_text = "API Key here"
 alignment = 1
 caret_blink = true
 secret = true
 
-[node name="Hide" type="Button" parent="Holder/Account & Data/DisplayURL" unique_id=720616748]
+[node name="Hide" type="Button" parent="Holder/User Management/DisplayURL" unique_id=720616748]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 78.0
-offset_right = 64.0
-offset_bottom = 110.0
+offset_left = 28.0
+offset_top = 72.0
+offset_right = 60.0
+offset_bottom = 104.0
 icon = ExtResource("19_qpo1n")
 expand_icon = true
 
-[node name="LoadBackup" type="Control" parent="Holder/Account & Data" unique_id=1214822513]
+[node name="LoadBackup" type="Control" parent="Holder/User Management" unique_id=1214822513]
 anchors_preset = 0
 offset_left = 32.0
 offset_top = 348.0
@@ -733,7 +740,7 @@ offset_bottom = 796.0
 script = ExtResource("20_1si8b")
 metadata/_edit_group_ = true
 
-[node name="Panel" type="Panel" parent="Holder/Account & Data/LoadBackup" unique_id=1314934644]
+[node name="Panel" type="Panel" parent="Holder/User Management/LoadBackup" unique_id=1314934644]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -741,7 +748,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Holder/Account & Data/LoadBackup" unique_id=961907846]
+[node name="Label" type="Label" parent="Holder/User Management/LoadBackup" unique_id=961907846]
 layout_mode = 0
 offset_right = 672.0
 offset_bottom = 32.0
@@ -749,7 +756,7 @@ text = "Load Backups"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="Holder/Account & Data/LoadBackup" unique_id=881708305]
+[node name="Scroll" type="ScrollContainer" parent="Holder/User Management/LoadBackup" unique_id=881708305]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -758,28 +765,27 @@ offset_top = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/LoadBackup/Scroll" unique_id=1242264451]
+[node name="Holder" type="VBoxContainer" parent="Holder/User Management/LoadBackup/Scroll" unique_id=1242264451]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Refresh" type="Button" parent="Holder/Account & Data/LoadBackup" unique_id=1438644249]
+[node name="Refresh" type="Button" parent="Holder/User Management/LoadBackup" unique_id=1438644249]
 layout_mode = 0
 offset_left = 640.0
 offset_right = 672.0
 offset_bottom = 32.0
 text = "R"
 
-[node name="Acount" type="Panel" parent="Holder/Account & Data" unique_id=1545828426]
+[node name="Acount" type="Panel" parent="Holder/User Management" unique_id=1545828426]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 28.0
 offset_right = 448.0
 offset_bottom = 316.0
 script = ExtResource("17_npyni")
-metadata/_edit_group_ = true
 
-[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/Acount" unique_id=268680459]
+[node name="Holder" type="VBoxContainer" parent="Holder/User Management/Acount" unique_id=268680459]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -787,71 +793,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="Holder/Account & Data/Acount/Holder" unique_id=265176255]
+[node name="Title" type="Label" parent="Holder/User Management/Acount/Holder" unique_id=265176255]
 layout_mode = 2
 text = "Account"
 
-[node name="Email" type="LineEdit" parent="Holder/Account & Data/Acount/Holder" unique_id=1802436548]
+[node name="Email" type="LineEdit" parent="Holder/User Management/Acount/Holder" unique_id=1802436548]
 layout_mode = 2
 placeholder_text = "Email"
 max_length = 25
 
-[node name="Password" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=1835502360]
+[node name="Password" type="HBoxContainer" parent="Holder/User Management/Acount/Holder" unique_id=1835502360]
 layout_mode = 2
 
-[node name="Password" type="LineEdit" parent="Holder/Account & Data/Acount/Holder/Password" unique_id=552089750]
+[node name="Password" type="LineEdit" parent="Holder/User Management/Acount/Holder/Password" unique_id=552089750]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Password"
 max_length = 20
 secret = true
 
-[node name="HidePassword" type="Button" parent="Holder/Account & Data/Acount/Holder/Password" unique_id=1980881178]
+[node name="HidePassword" type="Button" parent="Holder/User Management/Acount/Holder/Password" unique_id=1980881178]
 layout_mode = 2
-text = "Show/Hide"
+icon = ExtResource("19_qpo1n")
 
-[node name="SaveLoad" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=450124824]
+[node name="SaveLoad" type="HBoxContainer" parent="Holder/User Management/Acount/Holder" unique_id=450124824]
+visible = false
 layout_mode = 2
 
-[node name="Save" type="Button" parent="Holder/Account & Data/Acount/Holder/SaveLoad" unique_id=577836394]
+[node name="Save" type="Button" parent="Holder/User Management/Acount/Holder/SaveLoad" unique_id=577836394]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 
-[node name="Load" type="Button" parent="Holder/Account & Data/Acount/Holder/SaveLoad" unique_id=737425425]
+[node name="Load" type="Button" parent="Holder/User Management/Acount/Holder/SaveLoad" unique_id=737425425]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Load"
 
-[node name="Options" type="HBoxContainer" parent="Holder/Account & Data/Acount/Holder" unique_id=122435738]
+[node name="Options" type="HBoxContainer" parent="Holder/User Management/Acount/Holder" unique_id=122435738]
 layout_mode = 2
 
-[node name="Login" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=1500175522]
+[node name="Login" type="Button" parent="Holder/User Management/Acount/Holder/Options" unique_id=1500175522]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "login"
 
-[node name="Signup" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=457479970]
+[node name="Signup" type="Button" parent="Holder/User Management/Acount/Holder/Options" unique_id=457479970]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Sign up"
 
-[node name="Logout" type="Button" parent="Holder/Account & Data/Acount/Holder/Options" unique_id=15350256]
+[node name="Logout" type="Button" parent="Holder/User Management/Acount/Holder/Options" unique_id=15350256]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Log out"
 
-[node name="Keybinds" type="Panel" parent="Holder/Account & Data" unique_id=1131625774]
+[node name="Keybinds" type="Panel" parent="Holder/User Management" unique_id=1131625774]
 layout_mode = 0
 offset_left = 736.0
-offset_top = 188.0
+offset_top = 196.0
 offset_right = 1696.0
 offset_bottom = 796.0
 size_flags_horizontal = 3
 script = ExtResource("21_bexr3")
 metadata/_edit_group_ = true
 
-[node name="Title" type="Label" parent="Holder/Account & Data/Keybinds" unique_id=1241134998]
+[node name="Title" type="Label" parent="Holder/User Management/Keybinds" unique_id=1241134998]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -861,7 +868,7 @@ text = "Change Keybinds"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ScrollHolder" type="ScrollContainer" parent="Holder/Account & Data/Keybinds" unique_id=617412226]
+[node name="ScrollHolder" type="ScrollContainer" parent="Holder/User Management/Keybinds" unique_id=617412226]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -873,12 +880,12 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Holder" type="VBoxContainer" parent="Holder/Account & Data/Keybinds/ScrollHolder" unique_id=159700858]
+[node name="Holder" type="VBoxContainer" parent="Holder/User Management/Keybinds/ScrollHolder" unique_id=159700858]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="DeleteAll" type="Panel" parent="Holder/Account & Data" unique_id=101609940]
+[node name="DeleteAll" type="Panel" parent="Holder/User Management" unique_id=101609940]
 layout_mode = 0
 offset_left = 480.0
 offset_top = 28.0
@@ -886,7 +893,7 @@ offset_right = 704.0
 offset_bottom = 316.0
 script = ExtResource("19_le1jd")
 
-[node name="Delete" type="Button" parent="Holder/Account & Data/DeleteAll" unique_id=1699379591]
+[node name="Delete" type="Button" parent="Holder/User Management/DeleteAll" unique_id=1699379591]
 self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 0
 offset_left = 32.0
@@ -896,7 +903,7 @@ offset_bottom = 64.0
 text = "Delete ALL Local
 Data"
 
-[node name="DeleteAll" type="VBoxContainer" parent="Holder/Account & Data/DeleteAll" unique_id=322398236]
+[node name="DeleteAll" type="VBoxContainer" parent="Holder/User Management/DeleteAll" unique_id=322398236]
 visible = false
 layout_mode = 0
 offset_left = 32.0
@@ -904,22 +911,22 @@ offset_top = 64.0
 offset_right = 192.0
 offset_bottom = 277.0
 
-[node name="Warning" type="Label" parent="Holder/Account & Data/DeleteAll/DeleteAll" unique_id=68717717]
+[node name="Warning" type="Label" parent="Holder/User Management/DeleteAll/DeleteAll" unique_id=68717717]
 layout_mode = 2
 text = "ARE YOU SURE?
 This permanently deletes all items, history and settings. Can not be Undone."
 autowrap_mode = 2
 
-[node name="DeleteAll" type="HBoxContainer" parent="Holder/Account & Data/DeleteAll/DeleteAll" unique_id=919377309]
+[node name="DeleteAll" type="HBoxContainer" parent="Holder/User Management/DeleteAll/DeleteAll" unique_id=919377309]
 layout_mode = 2
 
-[node name="Yes" type="Button" parent="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll" unique_id=1448228456]
+[node name="Yes" type="Button" parent="Holder/User Management/DeleteAll/DeleteAll/DeleteAll" unique_id=1448228456]
 self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "YES"
 
-[node name="No" type="Button" parent="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll" unique_id=1139486046]
+[node name="No" type="Button" parent="Holder/User Management/DeleteAll/DeleteAll/DeleteAll" unique_id=1139486046]
 self_modulate = Color(0.937034, 0.0859377, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1032,7 +1039,8 @@ offset_left = 256.0
 offset_top = 64.0
 offset_right = 681.0
 offset_bottom = 146.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_q72c2")
+theme_override_styles/normal = ExtResource("31_ulpyx")
+theme_override_styles/focus = ExtResource("31_ulpyx")
 text = "Settings"
 label_settings = SubResource("LabelSettings_xv0o8")
 horizontal_alignment = 1
@@ -1050,7 +1058,8 @@ offset_left = 464.0
 offset_top = 160.0
 offset_right = 889.0
 offset_bottom = 227.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_iwav7")
+theme_override_styles/normal = ExtResource("31_ulpyx")
+theme_override_styles/focus = ExtResource("31_ulpyx")
 text = "Version: v0.3-Alpha"
 label_settings = SubResource("LabelSettings_nqkbx")
 horizontal_alignment = 1
@@ -1061,6 +1070,8 @@ visible_characters_behavior = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Update" to="Update" method="_on_pressed"]
+[connection signal="request_completed" from="Update/Download" to="Update" method="_on_download_request_completed"]
+[connection signal="request_completed" from="Update/GetVersion" to="Update" method="_on_get_version_request_completed"]
 [connection signal="file_selected" from="Update/FileDialog" to="Update" method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="ProjectDir" to="." method="_on_project_dir_pressed"]
 [connection signal="pressed" from="ProjectLink" to="." method="_on_project_link_pressed"]
@@ -1070,8 +1081,10 @@ metadata/_edit_use_anchors_ = true
 [connection signal="toggled" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Border/Holder/BorderBlend" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_border_blend_toggled"]
 [connection signal="focus_exited" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/CornerDetail" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_corner_detail_focus_exited"]
 [connection signal="value_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/CornerDetail" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_corner_detail_value_changed"]
-[connection signal="color_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_color_changed"]
-[connection signal="popup_closed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_popup_closed"]
+[connection signal="color_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BGCol/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_color_changed"]
+[connection signal="popup_closed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/BGCol/BgColor" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_bg_color_popup_closed"]
+[connection signal="color_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/FontCol/FontCol" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_font_col_color_changed"]
+[connection signal="popup_closed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/FontCol/FontCol" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_font_col_popup_closed"]
 [connection signal="text_changed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/FontPath" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_font_path_text_changed"]
 [connection signal="pressed" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/OpenFolder" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_open_folder_pressed"]
 [connection signal="file_selected" from="Holder/Items/ItemSettings/General/EditStyle/ScrollContainer/Holder/Font/FileDialog" to="Holder/Items/ItemSettings/General/EditStyle" method="_on_file_dialog_file_selected"]
@@ -1098,21 +1111,23 @@ metadata/_edit_use_anchors_ = true
 [connection signal="color_changed" from="Holder/Interface/Holder/GridCol/GridCol" to="Holder/Interface" method="_on_grid_col_color_changed"]
 [connection signal="color_changed" from="Holder/Interface/Holder/BackgroundCol/BGPicker" to="Holder/Interface" method="_on_bg_picker_color_changed"]
 [connection signal="color_changed" from="Holder/Interface/Holder/DragCol/DragColor" to="Holder/Interface" method="_on_drag_color_color_changed"]
-[connection signal="meta_clicked" from="Holder/Account & Data/DisplayURL/Info" to="Holder/Account & Data/DisplayURL" method="_on_info_meta_clicked"]
-[connection signal="text_changed" from="Holder/Account & Data/DisplayURL/Key" to="Holder/Account & Data/DisplayURL" method="_on_key_text_changed"]
-[connection signal="pressed" from="Holder/Account & Data/DisplayURL/Hide" to="Holder/Account & Data/DisplayURL" method="_on_hide_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/LoadBackup/Refresh" to="Holder/Account & Data/LoadBackup" method="_on_refresh_pressed"]
-[connection signal="text_changed" from="Holder/Account & Data/Acount/Holder/Email" to="Holder/Account & Data/Acount" method="_on_email_text_changed"]
-[connection signal="text_changed" from="Holder/Account & Data/Acount/Holder/Password/Password" to="Holder/Account & Data/Acount" method="_on_password_text_changed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Password/HidePassword" to="Holder/Account & Data/Acount" method="_on_hide_password_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/SaveLoad/Save" to="Holder/Account & Data/Acount" method="_on_save_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/SaveLoad/Load" to="Holder/Account & Data/Acount" method="_on_load_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Login" to="Holder/Account & Data/Acount" method="_on_login_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Signup" to="Holder/Account & Data/Acount" method="_on_signup_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/Acount/Holder/Options/Logout" to="Holder/Account & Data/Acount" method="_on_logout_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/DeleteAll/Delete" to="Holder/Account & Data/DeleteAll" method="_on_delete_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll/Yes" to="Holder/Account & Data/DeleteAll" method="_on_yes_pressed"]
-[connection signal="pressed" from="Holder/Account & Data/DeleteAll/DeleteAll/DeleteAll/No" to="Holder/Account & Data/DeleteAll" method="_on_no_pressed"]
+[connection signal="toggled" from="Holder/Interface/Performance/GlobalTheme" to="Holder/Interface" method="_on_global_theme_toggled"]
+[connection signal="toggled" from="Holder/Interface/Performance/ItemTheme" to="Holder/Interface" method="_on_item_theme_toggled"]
+[connection signal="meta_clicked" from="Holder/User Management/DisplayURL/Info" to="Holder/User Management/DisplayURL" method="_on_info_meta_clicked"]
+[connection signal="text_changed" from="Holder/User Management/DisplayURL/Key" to="Holder/User Management/DisplayURL" method="_on_key_text_changed"]
+[connection signal="pressed" from="Holder/User Management/DisplayURL/Hide" to="Holder/User Management/DisplayURL" method="_on_hide_pressed"]
+[connection signal="pressed" from="Holder/User Management/LoadBackup/Refresh" to="Holder/User Management/LoadBackup" method="_on_refresh_pressed"]
+[connection signal="text_changed" from="Holder/User Management/Acount/Holder/Email" to="Holder/User Management/Acount" method="_on_email_text_changed"]
+[connection signal="text_changed" from="Holder/User Management/Acount/Holder/Password/Password" to="Holder/User Management/Acount" method="_on_password_text_changed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/Password/HidePassword" to="Holder/User Management/Acount" method="_on_hide_password_pressed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/SaveLoad/Save" to="Holder/User Management/Acount" method="_on_save_pressed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/SaveLoad/Load" to="Holder/User Management/Acount" method="_on_load_pressed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/Options/Login" to="Holder/User Management/Acount" method="_on_login_pressed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/Options/Signup" to="Holder/User Management/Acount" method="_on_signup_pressed"]
+[connection signal="pressed" from="Holder/User Management/Acount/Holder/Options/Logout" to="Holder/User Management/Acount" method="_on_logout_pressed"]
+[connection signal="pressed" from="Holder/User Management/DeleteAll/Delete" to="Holder/User Management/DeleteAll" method="_on_delete_pressed"]
+[connection signal="pressed" from="Holder/User Management/DeleteAll/DeleteAll/DeleteAll/Yes" to="Holder/User Management/DeleteAll" method="_on_yes_pressed"]
+[connection signal="pressed" from="Holder/User Management/DeleteAll/DeleteAll/DeleteAll/No" to="Holder/User Management/DeleteAll" method="_on_no_pressed"]
 [connection signal="meta_clicked" from="Holder/About/Changelog/ScrollContainer/Notes" to="Holder/About" method="_on_notes_meta_clicked"]
 [connection signal="pressed" from="Holder/About/Feedback/Top/SubmitFeedback" to="Holder/About/Feedback/Feedback" method="_on_submit_feedback_pressed"]
 [connection signal="request_completed" from="Holder/About/Feedback/Top/SubmitFeedback/SubmitReq" to="Holder/About/Feedback/Feedback" method="_on_submit_req_request_completed"]

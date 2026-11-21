@@ -14,7 +14,6 @@ func SettingsChanged():
 func _on_update_id_pressed() -> void:
 	User.emit_signal("ForceUpdateID")
 
-
 func _on_load_dur_value_changed(value: float) -> void:
 	Settings.Data["LoadDur"] = value
 

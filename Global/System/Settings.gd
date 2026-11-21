@@ -63,5 +63,9 @@ var Data = {
 	"NotifTimeout" : 2.5,
 	"HistoryCollapsed" : true,
 	"Themes" : {},
-	"ConfigStyles" : {}
+	"ConfigStyles" : {},
+	"UserEstablished": false,
+	"ShareAPI": "",
+	"LoadSystemTheme" : true,
+	"LoadCustomThemes": true
 }

@@ -7,9 +7,9 @@ func _ready() -> void:
 	$Delete.visible = CanDelete
 	$Select.text = Name
 	Customization.connect("ApplyCustomization", Apply)
-	Apply()
+	Apply("")
 
-func Apply():
+func Apply(Alter):
 	if Customization.DefaultTheme == Name:
 		$Select/Default.visible = true
 	else:
@@ -18,10 +18,7 @@ func Apply():
 func _on_delete_pressed() -> void:
 	Customization.Remove(Name)
 	Customization.emit_signal("Reload")
-	Customization.emit_signal("ApplyCustomization")
+	Customization.emit_signal("ApplyCustomization", "Font")
 
 func _on_set_pressed() -> void:
-	if Customization.Styles.has(Name):
-		Customization.DefaultStyle = Name
-	Customization.emit_signal("Reload")
-	Customization.emit_signal("ApplyCustomization")
+	pass

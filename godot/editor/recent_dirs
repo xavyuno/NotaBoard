@@ -1,11 +1,13 @@
+res://App/Assets/Fonts/liberation_sans/
 res://App/Resources/
+res://App/Assets/Scenes/MediaPlayer/
+res://App/Assets/Scenes/ToDo/
 res://App/Components/ScrollDetector/
 C:/Users/xavie/Projects/Godot4/
 res://App/Components/Settings/
 res://Global/System/
 res://App/Components/ToastNotification/
 res://App/Components/CommandBox/
-res://App/Assets/Scenes/ToDo/
 res://App/Components/SuggestionPrompt/
 res://Global/User/
 res://App/Main/Settings/

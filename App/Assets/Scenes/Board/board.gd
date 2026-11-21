@@ -10,7 +10,7 @@ var Data: = {
 	"Cover" : null,
 	"CamPos" : Vector2(640, 352),
 	"CamZoom" : Vector2(1, 1),
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Tags" : [],
 	"Style" : ""
 }
@@ -75,3 +75,33 @@ func _on_board_name_text_submitted(_new_text: String) -> void :
 
 func _on_timer_timeout() -> void:
 	ClickedOnce = false
+
+func CreateBoardLink():
+	$BoardURL.request(
+		"https://brewpage.app/api/json?ns=public",
+		[
+		"Content-Type: application/json",
+
+		],
+		HTTPClient.METHOD_POST,
+		'{"StoredItems": DATA}'.replace("DATA", System.encode(User.StoredHistory))
+)
+
+func UpdateBoardLink():
+	$BoardURL.request(
+		"https://brewpage.app/api/json?ns=public" + "",
+		[
+			"Content-Type: application/json",
+			"X-Master-key: " + Settings.Data["Share"],
+		],
+		HTTPClient.METHOD_PUT,
+		'{"StoredItems": DATA}'.replace("DATA", System.encode(User.StoredHistory))
+	)
+
+
+func _on_board_url_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	if response_code == 200:
+		print(body.get_string_from_utf8())
+	else:
+		print(body.get_string_from_utf8())
+		System.CreateNotif("Error making url for board", true)

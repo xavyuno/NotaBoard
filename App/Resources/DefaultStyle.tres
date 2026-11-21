@@ -11,3 +11,5 @@ border_color = Color(0, 0, 0, 0.3019608)
 corner_radius_top_left = 20
 corner_radius_bottom_right = 30
 corner_detail = 20
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 8

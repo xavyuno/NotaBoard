@@ -14,7 +14,7 @@ var Data: = {
 	"FontSize" : Settings.Data["DefaultFontSize"],
 	"TitleSize": Settings.Data["DefaultTitleSize"],
 	"ShowProgress" : true,
-	"ItemID" : "",
+	"ItemID" : -1,
 	"Tags" : [],
 	"Style" : ""
 }
@@ -24,7 +24,8 @@ var Options := [
 	"Title",
 	"FontSize",
 	"TitleSize",
-	"Progress"
+	"Progress",
+	"Move"
 ]
 var TempTitleSize := 0
 var LetGo := false
@@ -34,7 +35,8 @@ func _ready() -> void:
 	add_to_group("todo_container")
 	initItem()
 	ApplyData()
-	User.connect("MovedTodo", Callable(self, "MovedTodo"))
+	User.connect("SwappingTodo", CreateMoveBars)
+	size.y = 1
 
 func ApplyData():
 	if !Data["List"] is Dictionary:
@@ -59,23 +61,22 @@ func ForceUpdateList(useData = false):
 		Data["List"] = {}
 		var Count = 0
 		for i in $List.get_children():
-			i.ID = Count
-			i.name = "Item" + str(Count)
-			Data["List"][Count] = {"Text": i.Text, "Value": i.get_node("Input").button_pressed}
-			Count += 1
-			print(Data["List"])
+			if !i.is_in_group("Move"):
+				i.ID = Count
+				i.name = str(Count)
+				Data["List"][Count] = {"Text": i.Text, "Value": i.get_node("Input").button_pressed}
+				Count += 1
 	else:
 		for i in Data["List"]:
 			AddList(i, Data["List"][i]["Text"], Data["List"][i]["Value"])
 
-func TodoClosed(ID):
-	if not $List.has_node(str(ID)):
-		return
+func TodoClosed(Task):
+	if Task is Array:
+		Task = Task[0]
 	TempTitleSize = $Top/Title.size.y
-	size.y -= $List.get_node(str(ID)).size.y
-	$List.get_node(str(ID)).queue_free()
 	$Top/Title.size.y = TempTitleSize
-	Data["List"].erase(ID)
+	Data["List"].erase(Task.ID)
+	Task.queue_free()
 	CalculateProgress()
 
 func ChangeTitleSize(value: int):
@@ -170,10 +171,43 @@ func _on_progress_pressed() -> void:
 		progress.visible = true
 	CalculateProgress()
 
+func CreateMoveBars():
+	ForceUpdateList()
+	if int(Data["ItemID"]) == User.TodoParentID:
+		size.y = 1
+		return
+	if !User.TodoSwitching:
+		for i in $List.get_children():
+			if i.is_in_group("Move"):
+				i.queue_free()
+		size.y = 1
+	else:
+		var Count = 0
+		for i in $List.get_child_count() + 1:
+			var butt = preload("res://App/Assets/Scenes/ToDo/move_todo.tscn").instantiate()
+			$List.add_child(butt)
+			$List.move_child(butt, Count)
+			Count += 2
+			butt.connect("pressed", MoveTask.bind(Count))
+
+func MoveTask(Index : int):
+	AddList(
+		User.TodoTask["ID"],
+		User.TodoTask["Text"],
+		User.TodoTask["Value"],
+		false,
+		Index-1
+	)
+	User.TodoSwitching = false
+	User.TodoNode.queue_free()
+	User.emit_signal("SwappingTodo")
+	User.emit_signal("CallItem", User.TodoParentID, "ToDo", "TodoClosed", [User.TodoNode])
+	User.ShowMoveButton = false
+
 func MovePressed(TaskNode):
 	if !User.TodoSwitching:
 		User.TodoSwitching = true
-		User.TodoParentID = Data["ItemID"]
+		User.TodoParentID = int(Data["ItemID"])
 		User.TodoTask = {
 			"Text": TaskNode.Text,
 			"Value" : TaskNode.Value,
@@ -181,8 +215,9 @@ func MovePressed(TaskNode):
 		}
 		TaskNode.get_node("Move").visible = false
 		User.TodoNode = TaskNode
+		User.emit_signal("SwappingTodo")
 	else:
-		if Data["ItemID"] == User.TodoParentID:
+		if int(Data["ItemID"]) == User.TodoParentID:
 			var TempData = {
 				"Text": TaskNode.Text,
 				"Value" : TaskNode.Value,
@@ -195,3 +230,7 @@ func MovePressed(TaskNode):
 			User.TodoNode.get_node("Move").visible = true
 			User.TodoSwitching = false
 			CalculateProgress()
+			User.emit_signal("SwappingTodo")
+			User.ShowMoveButton = false
+		else:
+			pass

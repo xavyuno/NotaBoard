@@ -2,7 +2,11 @@
 
 [ext_resource type="Script" uid="uid://c851p1e33u8tk" path="res://App/Components/ToastNotification/toast_notification.gd" id="1_ql28r"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vp4hy"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ql28r"]
 
@@ -10,14 +14,14 @@
 
 [sub_resource type="Gradient" id="Gradient_hj5mj"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.19919628, 0.3062185, 0.19126022, 1)
+colors = PackedColorArray(0.19966345, 0.3055162, 0.1897483, 0.5)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_g4v7s"]
 gradient = SubResource("Gradient_hj5mj")
 
 [sub_resource type="Gradient" id="Gradient_ql28r"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.27051386, 0.4441991, 0.36326078, 1)
+colors = PackedColorArray(0.2694199, 0.44422638, 0.36396736, 0.5)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_q37bw"]
 gradient = SubResource("Gradient_ql28r")
@@ -31,21 +35,19 @@ theme_override_constants/separation = 0
 script = ExtResource("1_ql28r")
 
 [node name="Info" type="Button" parent="." unique_id=878870543]
+clip_children = 2
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/normal = SubResource("StyleBoxFlat_vp4hy")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ql28r")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q37bw")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_q37bw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_q37bw")
-text = "Info goes here"
+text = " Info goes here"
 alignment = 0
 text_overrun_behavior = 1
-clip_text = true
 
 [node name="Progress" type="TextureProgressBar" parent="Info" unique_id=2064198539]
-modulate = Color(1, 1, 1, 0.5)
-show_behind_parent = true
 custom_minimum_size = Vector2(0, 4)
 layout_mode = 1
 anchors_preset = 15

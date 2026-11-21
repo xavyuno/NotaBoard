@@ -1,26 +1,42 @@
 extends Node
 
-signal ApplyCustomization
+signal ApplyCustomization(alter : String)
 signal Reload
+signal ApplyTheme
 
 var SelectedTheme := "Default"
 var DefaultTheme := "Default"
+var DefaultFont := preload("uid://dted0h48sl1cj")
 
 var OriginalData = []
 
 var Themes := {
 	"Default" : {
 		"Style" : preload("uid://cys4q33k6i8ws"),
-		"Font" : preload("uid://bnkyxirvuyr1j")
+		"Font" : DefaultFont,
+		"FontColor": Color.WHITE
 		},
+	"Application Default" :{
+		"Style": preload("uid://cb45ybrjq3nvu"),
+		"Font": DefaultFont,
+		"FontColor": Color.WHITE
+	},
 	"Empty" : {
 		"Style":  preload("uid://bf31usjuypohc"),
-		"Font" : preload("uid://bnkyxirvuyr1j")
+		"Font" : DefaultFont,
+		"FontColor": Color.WHITE
 	},
 	"Outline": {
 		"Style" : preload("uid://dgeoaby8qo30b"),
-		"Font": preload("uid://bnkyxirvuyr1j")
+		"Font": DefaultFont,
+		"FontColor": Color.WHITE
+	},
+	"LightMode" :{
+		"Style": preload("res://App/Resources/LightMode.tres"),
+		"Font": DefaultFont,
+		"FontColor": Color.BLACK
 	}
+
 }
 
 var Config := {

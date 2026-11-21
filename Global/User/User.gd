@@ -18,15 +18,15 @@ signal SearchByQuery
 signal ApplySearch
 signal DeleteAllItemsByBoard
 signal ApplySaveFile
-signal MovedTodo
-signal MovedTodoSuccess
 signal DeleteItem
 signal UpdateItem
 signal ItemChanged
 signal ApplyItemChange
 signal ForceUpdateID
-signal CreateNotif
+signal CreateNotif(message: String, warning: bool)
 signal DeleteAll
+signal SwappingTodo
+signal CallItem
 
 var SearchQueries := ["Note:", "Title:", "ID:", "Board:", "Type:", "Dir:", "ItemID:", "Tags:"]
 var SearchResults := []
@@ -56,8 +56,7 @@ var PreviousTitle: = "Home"
 var PreviousPos := Vector2.ZERO
 var Boards: = {}
 
-var SelectedObject = null
-var MultiSelectedObjects = []
+var MultiSelectedObjects := {}
 var MultiCopiedObjects := []
 var MultiSelecting = false
 var AllSameSelectedObjects = false
@@ -79,3 +78,8 @@ var TodoTask := {}
 var TodoSwitching := false
 var TodoParentID = -1
 var TodoNode = null
+var ShowMoveButton := false
+
+var ConfineWindow := false
+
+var SidePanelVisible = true

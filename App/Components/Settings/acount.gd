@@ -1,7 +1,12 @@
 extends Panel
 
-func _on_db_data_update(_resource):
+func _on_db_data_update(_resource : FirebaseResource):
+	System.Db_Data.merge(
+		{_resource.key : _resource.data},
+		true
+	)
 	System.DatabaseLoaded = true
+	System.CreateNotif("Database Loaded")
 
 func _ready():
 	Firebase.Auth.login_failed.connect(on_login_failed)
@@ -14,11 +19,14 @@ func SettingsChanged():
 	$Holder/Password/Password.text = Settings.Data["Password"]
 
 func _on_FirebaseAuth_login_succeeded(_auth):
-	System.Db_ref = Firebase.Database.get_database_reference("Data", {})
+	System.CreateNotif("Logged in!")
+	System.CreateNotif("Loading Databse...")
+	
+	System.Db_ref = Firebase.Database.get_database_reference("Data/" + Settings.Data["Email"].split("@")[0], {})
 	System.Db_ref.new_data_update.connect(_on_db_data_update)
 	System.Db_ref.patch_data_update.connect(_on_db_data_update)
 	System.Db_ref.delete_data_update.connect(_on_db_data_update)
-	System.CreateNotif("Logged in!")
+
 	
 func on_login_failed(error_code, message):
 	System.CreateNotif(message + error_code, true)
@@ -34,6 +42,7 @@ func _on_signup_pressed() -> void:
 
 func _on_email_text_changed(new_text: String) -> void:
 	Settings.Data["Email"] = new_text
+	print(System.Db_Data.keys())
 
 func _on_password_text_changed(new_text: String) -> void:
 	Settings.Data["Password"] = new_text

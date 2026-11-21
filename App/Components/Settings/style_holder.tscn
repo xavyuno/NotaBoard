@@ -26,6 +26,7 @@ texture = ExtResource("1_p31n2")
 metadata/_edit_use_anchors_ = true
 
 [node name="Set" type="Button" parent="." unique_id=1076133838]
+visible = false
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 icon = ExtResource("1_p31n2")

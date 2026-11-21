@@ -11,7 +11,7 @@ var Data: = {
 	"ID": "Home",
 	"ItemID" : "",
 	"Tags" : [],
-	"Styles" : ""
+	"Style" : ""
 }
 
 var Options := [

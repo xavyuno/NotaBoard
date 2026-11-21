@@ -35,4 +35,4 @@ func _on_style_item_selected(index: int) -> void:
 func _on_apply_pressed() -> void:
 	Customization.Config[SelectedItem] = SelectedStyle
 	Apply()
-	Customization.emit_signal("ApplyCustomization")
+	Customization.emit_signal("ApplyCustomization", "")

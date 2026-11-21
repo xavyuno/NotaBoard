@@ -1,6 +1,9 @@
 Changelog for: v2
 Added:
-- Todo: Taks within the todo item can be swapped and moved
+- Item options: styles for individual items can be altered
+- Editing: multiple items can be altered, including items of different types
+- Icons to the quick option buttons in settings
+- Todo: Taks within the todo item can be swapped and moved to the same or seperate todo item
 - Tags: Tags can be assigned to items (can also be searched for)
 - Camera Transition: The camera will smoothly adjust it's position and zoom when changing between boards
 - Saving last accessed board
@@ -10,6 +13,8 @@ Added:
 - Themes: Styles can be created and applied to items, this can be used to create themes within the work enviroment, Fonts can be changed too
 
 Improved/Altered:
+- Dragging: The position of the item is set to the mouse position including the offset the mouse position was initially before dragging
+- Searching: multiple queries can be searched by adding a space between each query
 - Aplha Colors: Most of the alpha's for colors within the settings can be changed (Except background)
 - Todo: The progress bar is below the title of the todo item and can be expanded by clicking on it, this allows for a more minimalistic flow
 - Tool tips for items with outlines only are shown when hovering: File, Link & Canvas
@@ -38,6 +43,7 @@ Improved/Altered:
 	The history tab now saves: Changes made to an item and items added, addition to removed items
 
 Fixed:
+- History tooltip shows a maximum of 150 letters of text as the value, so for note items, only 150 characters of the text will be displayed, this is to prevent lagging and performance decrease when notes contain large amounts of texts
 - Canvas: The drawing circle only shows when drawing in the canvas
 - Canvas: Panning with right click on a canvas no longer deletes pixels
 - Erasing all not working
@@ -46,6 +52,8 @@ Fixed:
 - October not showing in the calendar 
 - Camera stuck trying to transition to the last position of the board when moving the position of the camera immediately after switching boards
 - File "Preview" title scales with the item
+- File contents not being displayed
+- Item ID's duplicating
 
 Removed:
 - Removed showing the Board ID
@@ -53,142 +61,9 @@ Removed:
 - Canvas Button from settings
 - Calendar button from settings
 
-Changelog for: v1.7
-- Ctrl + A to select all the items im the current board
-- Items can be de-selected when multi-selecting
-- Made the settings decently kind of organized
-- Keybinds can be changed in settings under 'user'
-- backup save files can be found in the user directory under 'AutoSaves/'
-- Calendar: events can be added and saved
-- Replaced Background for a gradient
-- Foreground removed from canvas
-- Improved selection accuracy
-- Camera positions of: Home, Calendar, Settings & Canvas are saved
-- Editing notes only requires one click instead of double clicking
-- focusing in and out of the window now saves, making saving more reliable
-- History only shows when items has been saved to history as supposed to showing all the time
-- Grid Snapping: Items can be snapped while moving and resizing with `shift`, the grid step can be changed in settings
-- Icons corresponding to the quick option will now be shown
-- Most Ui elements such as: search, item bar, history are hidden while in boards that do not support adding items into them: settings, calendar, etc
-- Any removed quick options will default to a random available quick option
-- Board Name can be changed through the item customize options
-- Default Board title is always set to "Untitled Board"
-- Images loaded from file items will not show a foreground unless hovering over it
-- Complete search system overhaul:
-	Titles, IDs, Notes can be searched for all together within the search bar
-	Or individually searched for using the search query available, Title:, Note:, etc
-	Result will be shown and can be used to go to that specific item regardless of ID
-	hovering over a search result will show it's ID
-	` key to start searching without clicking on the search button
-	Every item has their own individual 'Item ID' now and can be searched using the search bar
-- Canvas Item:
-	FEATURES:
-		Drawing: Double tap the canvas to go into draw mode so no accidental pixels are added or click once to edit the properties of the canvas item
-		Capturing: Turn the canvas into an image file which not only uses far less resources but allows drawing to be saved
-		as it's own image rather than having to screenshot
-		This system is intended for quick and temporary drawings as allowing for draw on board can end up using a lot of resources as this system is not intended for large scaled or detailed drawings
-		This item is still in beta, bugs are to be expected
-- Zooming in a note item that has a scroll bar is disabled (this is to allow for scrolling without zooming in/out)
-- Zooming in/out works within the item bar as long as the history has less than 9 items (no scroll bar)
-- Images within file items are cached and saved, so even if the directory of the image is deleted or changed, the image will still show
-- Removed I and O as keybinds for zooming in and out
-- Removed Preivew notes option
-- Removed Board Title input box
-- Fixed input bar focus lost after pressing enter
-- Fixed drag selecting while in canvas/placing an item
-- Fixed selection outline not showing up while select and dragging
-- Fixed selection outline showing after changing boards
-- Fixed some parts of item selecting not being as smooth or responding
-- Fixed item count not being well... counted
-- Fixed drag and select box showing while in settings or calendar
-- Fixed note item scroll starting at bottom on startup
-- Fixed selection bar not showing/scaling with zoom level
-- Fixed newer values missing in items
-
-
-Changelog for: v1.6
-- Interacting with the to do buttons work now as selecting the entire todo item
-- Thumbnails from links are now saved and can be accessed through the option bar
-- Removed extra options from link item
-- Added options: open link, editing link & thumbnail to option bar
-- Link previews are only shown when using an API key for https://my.linkpreview.net/ (previously some thumnails would show that can be natively accessed by http request. This is done to reduce unnecessary requests)
-- Link items can be scaled vertically. This also solves invisble scaling issues
-- Changelog added to settings
-- Any mouse that has a side button allowing for backtracking will return to the previous board if clicked
-- Board IDs should now be loaded dynamicly (this tries to avoid duplicated board IDs upon board creation)
-- Progress in percentage and color hue shown for todo item along with option to disable showing progress
-- Replaced text editing for notes for a code-like editor text field, allowing for auto brace completion such as, "", (), etc and auto indent
-- Hovering over quick option buttons shows text of what they are linked to
-- New Default Board: Calendar
-- Rename: from "task manager" to "NotaBoard" (to avoid confusion with the already existing task manager on windows)
-- Items pasted will paste in the board you are currently in
-- Items can be cut using ctrl + x
-- Drag selecting is FINALLY possible, no more crtl to multi-select or move items in mass slowly (0.1 second hold delay to drag and select)
-- Board item now has to be double clicked to be opened/go to that board
-- Added confirmation prompt to erasing EVERYTHING button (might just move it to settings board in next update)
-- Selecting an item will outline it with a green color to show it has been selected (also works with multi-select, can be changed in settings)
-- Selecting an item and then multi-selecting will also count the already selected item (previously would only count items during multi-select)
-- Fixed Zooming while scrolling in canvas (Option bar / item bar)
-- Fixed line item able to be added to column item
-- Fixed zooming while searching
-- Fixed items being pasted while in settings or calendar
-- Fixed updating error (turns out i should wait until I finished the update before indexing the version file, especially when pushing to git, oopsie daisies)
-- Added more bugs in the process of adding new features
-
-Things Changed since: v1.4-Beta
-- Added an option to hide the directory in the file item
-- RMB on a history item to remove it from history
-- Shift click on the close button to not add it to the history
-- hovering over a link tag on a notes item will preview the link (usefull for hyperlinks)
-- Item limit: change the amount of items added in TOTAL throughout all boards, Can be changed in settings
-- focusing on an item shows the list of options available for that item
-- Removed item options bar and scaling button
-- Added option to enable/disable option bar
-- Covers can be addedon boards
-- Indicator showing the center of the board & an option to toggle this
-- Previews now show within link items
-- Url thumbnail preview: Users can add their own api from https://my.linkpreview.net/ | found in settings
-- Paste images from clipboard (automatically creates a file item at mouse position and saves that image in the user directory)
-- Paste links from clipboard (automatically creates a link item at mouse position)
-- Thumbnails within link items save. This not only makes loading previews faster but uses less bandwidth
-- Added options for previewing notes and options bar in settings
-- Quick options can be configured in settings
-- Zooming works with mouse wheel now (better late than never)
-- Option to change font size of text and title
-- Change default font size of text and title within the settings
-- Fixed API keys being exposed, #oopsie
-- Todo item: checking the item can be done from the text instead of only the checkbox itself
-- Reseting cam resets it's position as well as zoom. Previously only position
-- Temporary settings section: Not all settings are meant to be saved, such as previewing notes. any short term based settings will be placed there
-- Realzied I messed up the github versioning.. Versions will now follow Vx.x format from now on
-- Camera positions between settings and Home board are saved temporarily during sessions and are reset to center upon log off
-- Camera positions within boards are saved even after log off
-- Added a Calendar board (can be accessed through quick options or settings)
-- Items with buttons can be dragged by holding down on them for 0.5 seconds
-- Removed directory showing within file items
-- Added option to change directory of file items to context menu
-- Added option to open file items to context menu
-- Fixed dragging and scaling with items: would previously scale or move multiple items that were previously selected even when not multi-selecting
-- Font size of title and todo text can be changed within the option menu
-- Fixed items being added back when using the ctrl + z keybind while editing text
-- Some tooltips for buttons added: quick option 1 & 2, home, settings, hide bar
-
-Things Changed since: v0.3-Alpha
-- keybinds to mass resize and move items
-- plugin that updates the todo/checklist in settings
-- This file
-- updated keybinds
-- updated file preview from 100 lines to 10 (for performance)
-- added search bar that searches for that query in any item that has: title, note, ID and should be able to search for everything, except positions, sizes amd points
-- removed the notes item being used in settings
-- more to do's
-- notes now have formatting, e.g: [b]Bold[/b], [i]italic[/i], etc
-- preview button to make hyperlinks within notes click-able
-- fixed boards not updating their ID when placed in a column
-- Items are more visible even if the background color is completely white
-- boards can now be placed inside of other boards and will show their parent ID's
-- added a setting to change the interval between loading items
-- Settings page uses rich text
-- fixed bug where previews would not show inside of a newly created board
-- added feedback box in settings
-- quickly access the home when inside of 2 boards
+Disclosure:
+- The formating of the changelog is done by AI because my own wording my be too vague or might lack understandable context (my original changelog is in the updates.txt), all else is logic written by yours truly, even if it may have redundant or otherwise even un-used functions that i dont even know about
+- Thumbnails retrieved from the url is possible thanks to the api: https://docs.linkpreview.net/ the system only utilizes the api, users generate their own keys and can choose a subscription depending how often they paste links, but the 60 rate limit per hour should suffice, and the thumbnails are stored as cache so this minimizes rates when opening the app=
+- The exact font used in the project comes from: https://www.programmingfonts.org/#oxproto
+- The account/Database is a godot addon that can be found: https://github.com/GodotNuts/GodotFirebase
+- Any and all icons come from: https://icons8.com

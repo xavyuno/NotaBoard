@@ -26,12 +26,15 @@
 [ext_resource type="PackedScene" uid="uid://brwahukao4u0x" path="res://App/Assets/Scenes/Foldable/Foldable.tscn" id="23_y8ose"]
 [ext_resource type="Texture2D" uid="uid://dylix26uaoyu4" path="res://App/Assets/Icons/icons8-settings-32(1).png" id="24"]
 [ext_resource type="Texture2D" uid="uid://br06rtt4ojcwd" path="res://App/Assets/Icons/Settings/icons8-history-32.png" id="24_eab0n"]
+[ext_resource type="Texture2D" uid="uid://cy2e55j3ccokm" path="res://App/Assets/Icons/icons8-media-32.png" id="24_kp0vs"]
 [ext_resource type="Script" uid="uid://dc5f3s7hw57t6" path="res://App/Main/board_display.gd" id="25"]
+[ext_resource type="PackedScene" uid="uid://cn1t3gqafk5mw" path="res://App/Assets/Scenes/MediaPlayer/MediaPlayer.tscn" id="25_b6yyx"]
 [ext_resource type="Texture2D" uid="uid://cyg4bn043wsqc" path="res://App/Assets/Icons/Settings/icons8-clear-32.png" id="25_lkim6"]
 [ext_resource type="Script" uid="uid://cl7x5scpiyb04" path="res://App/Main/options_holder.gd" id="27_eab0n"]
 [ext_resource type="PackedScene" uid="uid://bis3nmllfkujl" path="res://App/Assets/Scenes/Canvas/Canvas.tscn" id="29_58u0p"]
 [ext_resource type="Script" uid="uid://d05krwe7f5uof" path="res://App/Main/search.gd" id="30_eab0n"]
 [ext_resource type="Texture2D" uid="uid://ywymu6b41yok" path="res://App/Assets/Icons/icons8-home-32.png" id="31_iuq4y"]
+[ext_resource type="Texture2D" uid="uid://6iobt1vnbkmc" path="res://App/Assets/Icons/Canvas/icons8-copy-32.png" id="32_b6yyx"]
 [ext_resource type="Script" uid="uid://b3p0clfnsy132" path="res://App/Main/canvas_draw.gd" id="32_lkim6"]
 [ext_resource type="Texture2D" uid="uid://5ms0ith3l5gw" path="res://App/Assets/Icons/Canvas/icons8-create-32.png" id="38_jk7hp"]
 [ext_resource type="Script" uid="uid://cguflyjvtxsw8" path="res://App/Main/notifications.gd" id="47_wd2gd"]
@@ -46,13 +49,6 @@ gradient = SubResource("Gradient_y8ose")
 fill_to = Vector2(1, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yqhvp"]
-
-[sub_resource type="SystemFont" id="SystemFont_0ucvp"]
-font_names = PackedStringArray("Arial")
-generate_mipmaps = true
-force_autohinter = true
-subpixel_positioning = 0
-multichannel_signed_distance_field = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etqv4"]
 bg_color = Color(0, 0, 0, 0.392157)
@@ -106,16 +102,16 @@ theme_override_styles/tab_hovered = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_selected = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_disabled = SubResource("StyleBoxEmpty_yqhvp")
 theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_yqhvp")
-current_tab = 1
+current_tab = 0
 clip_tabs = false
 tabs_visible = false
 script = ExtResource("2")
 
 [node name="Home" parent="Boards" unique_id=551998953 groups=["Protect"] instance=ExtResource("3")]
-visible = false
 layout_mode = 2
 
 [node name="Settings" parent="Boards" unique_id=1383018309 instance=ExtResource("4_iuq4y")]
+visible = false
 layout_mode = 2
 
 [node name="Calendar" type="Control" parent="Boards" unique_id=1532667453 groups=["NoCanvas", "Protect"]]
@@ -311,6 +307,7 @@ offset_right = 168.0
 offset_bottom = 696.0
 
 [node name="ItemHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=1528949264]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
@@ -321,6 +318,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Notes" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=921835727]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Notes"
 icon = ExtResource("8")
@@ -330,6 +328,7 @@ expand_icon = true
 SceneItem = ExtResource("6")
 
 [node name="ToDo" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1242307755]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Todo"
 icon = ExtResource("10")
@@ -339,6 +338,7 @@ expand_icon = true
 SceneItem = ExtResource("11")
 
 [node name="Link" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1088625353]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Link
 "
@@ -349,6 +349,7 @@ expand_icon = true
 SceneItem = ExtResource("13")
 
 [node name="Column" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=88645888]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Column"
 icon = ExtResource("14")
@@ -358,6 +359,7 @@ expand_icon = true
 SceneItem = ExtResource("15")
 
 [node name="Board" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1279098587]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Board"
 icon = ExtResource("16")
@@ -367,6 +369,7 @@ expand_icon = true
 SceneItem = ExtResource("18")
 
 [node name="File" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1652395121]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "File"
 icon = ExtResource("21")
@@ -376,6 +379,7 @@ expand_icon = true
 SceneItem = ExtResource("22")
 
 [node name="Canvas" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1048350965]
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Canvas"
 icon = ExtResource("38_jk7hp")
@@ -386,6 +390,7 @@ SceneItem = ExtResource("29_58u0p")
 
 [node name="Foldable" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=15919019]
 visible = false
+custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 text = "Foldable"
 icon = ExtResource("22_1yho4")
@@ -394,8 +399,18 @@ expand_icon = true
 [node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/Foldable" unique_id=1405003645 instance=ExtResource("9")]
 SceneItem = ExtResource("23_y8ose")
 
-[node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=458539594]
+[node name="MediaPlayer" type="Button" parent="UI/Nodes/Holder/ItemHolder/Items" unique_id=1610667813]
 visible = false
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+text = "Media Player"
+icon = ExtResource("24_kp0vs")
+expand_icon = true
+
+[node name="DragNDrop" parent="UI/Nodes/Holder/ItemHolder/Items/MediaPlayer" unique_id=1207799209 instance=ExtResource("9")]
+SceneItem = ExtResource("25_b6yyx")
+
+[node name="OptionsHolder" type="ScrollContainer" parent="UI/Nodes/Holder" unique_id=458539594]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
@@ -418,9 +433,8 @@ min_value = 1.0
 value = 1.0
 rounded = true
 allow_greater = true
-alignment = 3
 update_on_text_changed = true
-prefix = "Board ID"
+prefix = "Board ID:"
 
 [node name="CheckFocus" parent="UI/Nodes/Holder/OptionsHolder/Items/Board" unique_id=573033933 instance=ExtResource("9_b8p06")]
 
@@ -429,7 +443,6 @@ layout_mode = 2
 min_value = 8.0
 value = 15.0
 rounded = true
-alignment = 3
 update_on_text_changed = true
 prefix = "Font:"
 
@@ -440,7 +453,6 @@ layout_mode = 2
 min_value = 8.0
 value = 15.0
 rounded = true
-alignment = 3
 update_on_text_changed = true
 prefix = "Title:"
 
@@ -481,12 +493,28 @@ layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Tag"
 
+[node name="CheckFocus" parent="UI/Nodes/Holder/OptionsHolder/Items/Tags/Options/Input" unique_id=929074425 instance=ExtResource("9_b8p06")]
+
 [node name="Add" type="Button" parent="UI/Nodes/Holder/OptionsHolder/Items/Tags/Options" unique_id=1557059479]
 layout_mode = 2
 text = "Add"
 
 [node name="Holder" type="VBoxContainer" parent="UI/Nodes/Holder/OptionsHolder/Items/Tags" unique_id=1517765101]
 layout_mode = 2
+
+[node name="SelectStyle" type="HBoxContainer" parent="UI/Nodes/Holder/OptionsHolder/Items" unique_id=1677107405]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Info" type="Label" parent="UI/Nodes/Holder/OptionsHolder/Items/SelectStyle" unique_id=97924138]
+layout_mode = 2
+text = "Style"
+
+[node name="Style" type="OptionButton" parent="UI/Nodes/Holder/OptionsHolder/Items/SelectStyle" unique_id=2027179656]
+layout_mode = 2
+size_flags_horizontal = 3
+text_overrun_behavior = 3
+fit_to_longest_item = false
 
 [node name="HistoryTitle" type="HBoxContainer" parent="UI/Nodes/Holder" unique_id=1187348715]
 layout_mode = 2
@@ -501,7 +529,7 @@ expand_icon = true
 
 [node name="Clear" type="Button" parent="UI/Nodes/Holder/HistoryTitle" unique_id=1417363903]
 layout_mode = 2
-tooltip_text = "Clear History"
+tooltip_text = "Clear History (CANNOT UNDO)"
 icon = ExtResource("25_lkim6")
 
 [node name="History" type="VBoxContainer" parent="UI/Nodes/Holder" unique_id=1764659306]
@@ -516,7 +544,6 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_fonts/font = SubResource("SystemFont_0ucvp")
 select_mode = 1
 allow_reselect = true
 allow_rmb_select = true
@@ -540,13 +567,14 @@ light_mask = 0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 168.0
-offset_bottom = 48.0
+offset_bottom = 44.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+alignment = 1
 script = ExtResource("23")
 
 [node name="Settings" type="Button" parent="UI/QuickOptions" unique_id=118031734]
-custom_minimum_size = Vector2(37, 40)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 tooltip_text = "Settings"
 icon = ExtResource("24")
@@ -554,21 +582,24 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="QuickOption1" type="Button" parent="UI/QuickOptions" unique_id=216327916]
-custom_minimum_size = Vector2(37, 40)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
+icon = ExtResource("32_b6yyx")
 icon_alignment = 1
 expand_icon = true
 
 [node name="QuickOption2" type="Button" parent="UI/QuickOptions" unique_id=1067762448]
-custom_minimum_size = Vector2(37, 40)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
+icon = ExtResource("32_b6yyx")
 icon_alignment = 1
 expand_icon = true
 
 [node name="QuickOption3" type="Button" parent="UI/QuickOptions" unique_id=409667106]
-custom_minimum_size = Vector2(37, 40)
+custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 tooltip_text = "Hide"
+icon = ExtResource("32_b6yyx")
 icon_alignment = 1
 expand_icon = true
 
@@ -727,6 +758,7 @@ script = ExtResource("47_wd2gd")
 [connection signal="focus_exited" from="UI/Nodes/Holder/OptionsHolder/Items/Link" to="UI/Nodes/Holder/OptionsHolder" method="_on_link_focus_exited"]
 [connection signal="text_changed" from="UI/Nodes/Holder/OptionsHolder/Items/BoardName" to="UI/Nodes/Holder/OptionsHolder" method="_on_board_name_text_changed"]
 [connection signal="pressed" from="UI/Nodes/Holder/OptionsHolder/Items/Tags/Options/Add" to="UI/Nodes/Holder/OptionsHolder" method="_on_add_pressed"]
+[connection signal="item_selected" from="UI/Nodes/Holder/OptionsHolder/Items/SelectStyle/Style" to="UI/Nodes/Holder/OptionsHolder" method="_on_style_item_selected"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Title" to="UI/Nodes" method="_on_title_pressed"]
 [connection signal="pressed" from="UI/Nodes/Holder/HistoryTitle/Clear" to="UI/Nodes" method="_on_clear_pressed"]
 [connection signal="item_activated" from="UI/Nodes/Holder/History/HistoryHolder/History" to="UI/Nodes" method="_on_history_item_activated"]

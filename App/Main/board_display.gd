@@ -23,7 +23,8 @@ func ChangedBoard(Board: String, Title: String, ID = "", _CamPos = Vector2(640, 
 	User.PreviousTitle = PrevTitle
 	User.emit_signal("CreateNotif", "Switched board to " + Title)
 	User.emit_signal("AllFocusLost")
-	if get_node("../../../Boards/" + Board).is_in_group("NoCanvas"):
+	User.MultiSelectedObjects = {}
+	if get_node("../../../Boards/" + Board).is_in_group("NoCanvas") or Board in ["Settings", "Calendar"]:
 		home.visible = true
 		home.text = "Home"
 		previous.visible = false

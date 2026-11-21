@@ -60,11 +60,16 @@ func Init():
 		else:
 			User.History = data
 			for i in User.History:
+				var txt = ""
+				for j in i["Data"].keys():
+					txt += str(j) + " : " + str(i["Data"][j]).substr(0, 150) + "\n"
 				if i["Data"]["Type"] != "Line":
 					if Settings.Data["ProgressiveLoading"]:
 						await get_tree().create_timer(User.LoadDur).timeout
 					var img = get_node("Holder/ItemHolder/Items/" + i["Data"]["Type"]).icon
-					history.add_item(i["Action"] + " Item " + i["ID"] + ":" + JSON.stringify(i["Data"], "\t", false, true), img)
+					history.add_item(i["Action"] + " Item " + str(i["ID"]) + ":\n" 
+					+ txt
+					, img)
 
 	var fileSave = System.LoadFile(System.MAINDIR + System.SAVEFILE + System.EXTENSION)
 	if fileSave:
@@ -85,7 +90,7 @@ func Init():
 							 "CamPos" : System.GetOrNull(i, "CamPos", Vector2(640, 352)),
 							 "CamZoom" : System.GetOrNull(i, "CamZoom", Vector2(1, 1), TYPE_VECTOR2)
 							}}, true)
-				initObj(i, false)
+				initObj(i, false, true)
 
 	User.StillLoading = false
 	if Settings.Data["TotalBoards"] <= 0:
@@ -93,8 +98,11 @@ func Init():
 		for i in $"../../Boards".get_children():
 			if int(i.name) > Settings.Data["TotalBoards"]:
 				Settings.Data["TotalBoards"] = int(i.name) + 1
-	Customization.emit_signal("ApplyCustomization")
+	Customization.emit_signal("ApplyCustomization", "")
 	Customization.emit_signal("Reload")
+	Customization.emit_signal("ApplyTheme")
+	if !Settings.Data["UserEstablished"]:
+		User.emit_signal("ForceUpdateID")
 
 func ApplySaveFile():
 	User.StillLoading = true
@@ -110,6 +118,7 @@ func ApplySaveFile():
 	Init()
 
 func _process(_delta: float) -> void :
+	User.SidePanelVisible = visible
 	if get_global_mouse_position().x <= 160:
 		User.MouseInCanvas = true
 	else :
@@ -129,7 +138,7 @@ func _process(_delta: float) -> void :
 			User.MultiCopiedObjects = []
 			for i in User.MultiSelectedObjects:
 				User.MultiCopiedObjects.append(get_node(i).Data)
-			User.MultiSelectedObjects = []
+			User.MultiSelectedObjects = {}
 	if Input.is_action_just_pressed("Cut") and !User.InFocus:
 		if User.SelectedObject:
 			User.CopiedObject = get_node(User.SelectedObject).Data
@@ -140,7 +149,7 @@ func _process(_delta: float) -> void :
 				User.MultiCopiedObjects.append(get_node(i).Data)
 			for i in User.MultiSelectedObjects:
 				get_node(i).queue_free()
-			User.MultiSelectedObjects = []
+			User.MultiSelectedObjects = {}
 		User.emit_signal("ItemFocusLost")
 	if Input.is_action_just_pressed("Paste") and !User.InFocus and !get_node("../../Boards/" + Settings.Data["CurrentPage"]).is_in_group("NoCanvas"):
 		if User.CopiedObject:
@@ -187,15 +196,14 @@ func _process(_delta: float) -> void :
 func Undo(data, emit):
 	initObj(data, emit)
 
-func initObj(data, updateHistory = true):
+func initObj(data, updateHistory = true, previwing = false):
 	var obj = load("res://App/Assets/Scenes/" + data["Type"] + "/" + data["Type"] + ".tscn")
-	System.AddObject(obj, false, data["ID"], data, updateHistory)
+	System.AddObject(obj, false, data["ID"], data, updateHistory, previwing)
 
 func ObjAdded(data, updateHistory : bool):
 	if updateHistory:
 		var img = get_node("Holder/ItemHolder/Items/" + data["Type"]).icon
 		history.add_item("Added Item " + str(Settings.Data["TotalItems"] + 1) + ":" + JSON.stringify(data, "\t", false, true), img)
-		data["ItemID"] = str(Settings.Data["TotalItems"] + 1)
 		User.History.append(
 			{
 				"ID" : data["ItemID"],
@@ -206,7 +214,7 @@ func ObjAdded(data, updateHistory : bool):
 
 func ObjRemoved(data):
 	var img = get_node("Holder/ItemHolder/Items/" + data["Type"]).icon
-	history.add_item("Removed Item " + data["ItemID"] + ":" + JSON.stringify(data, "\t", false, true), img)
+	history.add_item("Removed Item " + str(data["ItemID"]) + ":" + JSON.stringify(data, "\t", false, true), img)
 	User.History.append({
 			"ID" : data["ItemID"],
 			"Action" : "Removed",
@@ -216,7 +224,7 @@ func ObjRemoved(data):
 
 func ItemChanged(data):
 	var img = get_node("Holder/ItemHolder/Items/" + data["Type"]).icon
-	history.add_item("Changed Item " + data["ItemID"] + ":" + JSON.stringify(data, "\t", false, true), img)
+	history.add_item("Changed Item " + str(data["ItemID"]) + ":" + JSON.stringify(data, "\t", false, true), img)
 	User.History.append({
 			"ID" : data["ItemID"],
 			"Action" : "Changed",

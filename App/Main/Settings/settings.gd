@@ -16,7 +16,7 @@ func _on_project_dir_pressed() -> void :
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
 func _on_project_link_pressed() -> void :
-	OS.shell_open("https://github.com/xavyuno/Task-Manager")
+	OS.shell_open("https://github.com/xavyuno/NotaBoard")
 
 func _on_holder_tab_changed(tab: int) -> void:
 	Settings.Data["LastSettings"] = tab

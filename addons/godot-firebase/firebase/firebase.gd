@@ -118,7 +118,8 @@ func _load_config() -> void:
 				else:
 					var value : String = env.get_value(_ENVIRONMENT_VARIABLES, key, "")
 					if value == "":
-						_print("The value for `%s` is not configured. If you are not planning to use it, ignore this message." % key)
+						#_print("The value for `%s` is not configured. If you are not planning to use it, ignore this message." % key)
+						pass
 					else:
 						_config[key] = value
 		else:

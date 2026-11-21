@@ -22,6 +22,7 @@ func LostFocus():
 	Update($Input.button_pressed)
 
 func _process(_delta: float) -> void:
+	$Move.visible = User.ShowMoveButton
 	$Text.visible = !Editing
 	$TextEdit.visible = Editing
 	Text = $Text.text

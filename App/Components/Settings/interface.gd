@@ -12,6 +12,8 @@ func SettingsChanged():
 	$Holder/SelectColor/Holder/On.text = "On" if Settings.Data["CanSelectCol"] else "Off"
 	$Holder/DragCol/DragColor.color = Settings.Data["DragCol"]
 	$Holder/GridCol/GridCol.color = Settings.Data["GridCol"]
+	$Performance/GlobalTheme.button_pressed = Settings.Data["LoadSystemTheme"]
+	$Performance/ItemTheme.button_pressed = Settings.Data["LoadCustomThemes"]
 
 func _on_bg_picker_color_changed(color: Color) -> void:
 	Settings.Data["BackgroundCol"] = color
@@ -36,3 +38,11 @@ func _on_grid_col_color_changed(color: Color) -> void:
 
 func _on_grid_scale_value_changed(value: float) -> void:
 	Settings.Data["GridSize"] = value * 16
+
+
+func _on_global_theme_toggled(toggled_on: bool) -> void:
+	Settings.Data["LoadSystemTheme"] = toggled_on
+
+
+func _on_item_theme_toggled(toggled_on: bool) -> void:
+	Settings.Data["LoadCustomThemes"] = toggled_on

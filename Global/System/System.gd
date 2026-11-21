@@ -49,7 +49,7 @@ func BackupAll():
 		"Settings" : Settings.Data,
 		"Items" : User.StoredHistory,
 		"History" : User.History
-	})
+	}, true)
 	file.close()
 
 func LoadBackups():
@@ -138,8 +138,9 @@ func CreateWarning(Info):
 	get_tree().current_scene.get_node("UI").add_child(WarningUI)
 	return WarningUI
 
-func AddObject(item, _atMouse = true, parent = null, extraData = {}, updateHistory = true):
+func AddObject(item, _atMouse = true, parent = null, extraData = {}, updateHistory = true, Previewing = false):
 	var obj
+	Theme.new()
 	if item is PackedScene:
 		obj = item.instantiate()
 	elif item is Object:
@@ -150,6 +151,9 @@ func AddObject(item, _atMouse = true, parent = null, extraData = {}, updateHisto
 		obj.Data["Board"] = extraData["Board"]
 	if !extraData.is_empty():
 		obj.Data.merge(extraData, true)
+	if !Previewing:
+		Settings.Data["TotalItems"] += 1
+		obj.Data["ItemID"] = Settings.Data["TotalItems"]
 	if parent != null:
 		if get_tree().current_scene.has_node("Boards/" + parent) != null:
 			var board = preload("res://App/Assets/Scenes/NewBoard/NewBoard.tscn").instantiate()
@@ -190,7 +194,8 @@ func GetSpecificType(_Item, TypeArray: Array):
 			result = true
 	return result
 
-var Db_ref = null
+var Db_ref : FirebaseDatabaseReference = null
+var Db_Data = {}
 var DatabaseLoaded := false
 
 func encode(data):
@@ -212,9 +217,9 @@ func SaveOnline():
 
 func LoadOnline():
 	if Db_ref != null and DatabaseLoaded:
-		var FileData = [decode(Db_ref.get_data()[Settings.Data["Email"].split("@")[0]]["StoredItems"]),
-		decode(Db_ref.get_data()[Settings.Data["Email"].split("@")[0]]["History"]),
-		decode(Db_ref.get_data()[Settings.Data["Email"].split("@")[0]]["Settings"])]
+		var FileData = [decode(Db_Data["StoredItems"]),
+		decode(Db_Data["History"]),
+		decode(Db_Data["Settings"])]
 		var Files = [SAVEFILE, HISTORYFILE, SETTINGSFILE]
 	
 		for i in Files.size():
@@ -239,14 +244,26 @@ func GetStyleOptions(node):
 		Output = ["normal", "pressed", "hover", "hover_pressed", "focus", "normal", "focus"]
 	return Output
 
+func GetFontColors(node):
+	var Output = []
+	if node is Button:
+		Output = ["font_color", "font_focus_color", "font_pressed_color", "font_hover_color", "font_hover_pressed_color", ]
+	elif node is CodeEdit or node is LineEdit:
+		Output = ["font_color"]
+	elif node is RichTextLabel:
+		Output = ["default_color"]
+	else:
+		Output = ["font_color", "font_focus_color", "font_pressed_color", "font_hover_color", "font_hover_pressed_color", "font_color", "default_color"]
+	return Output
+
 func GetFontOptions(node):
 	var Output = []
 	if node is Button or node is CodeEdit or node is LineEdit:
 		Output = ["font"]
 	elif node is RichTextLabel:
-		Output = ["normal_font", "bold_font", "bold_italics_font", "italics_font", "mono_font"]
+		Output = ["normal_font"]
 	else:
-		Output = ["font", "normal_font", "bold_font", "bold_italics_font", "italics_font", "mono_font"]
+		Output = ["font", "normal_font"]
 	return Output
 
 func LoadFont(path):
@@ -256,8 +273,33 @@ func LoadFont(path):
 		if font:
 			return font.duplicate(true)
 		else:
-			return preload("uid://bnkyxirvuyr1j").duplicate(true)
+			return Customization.DefaultFont.duplicate(true)
 	elif path is Font:
 		return path.duplicate(true)
 	else:
-		return preload("uid://bnkyxirvuyr1j").duplicate(true)
+		return Customization.DefaultFont.duplicate(true)
+
+func CamConditions():
+	if (!User.InFocus and !Input.is_action_pressed("MultiSelect")) and (!User.MouseInCanvas or User.CanvasHidden or User.History.size() <= 9 or !User.SidePanelVisible) and !(User.DrawingInCanvas or Canvas.InCanvas):
+		return true
+	else :
+		return false
+
+func AddItemToList(path, type):
+	if User.MultiSelectedObjects.has(type):
+		User.MultiSelectedObjects[type].append(path)
+	else:
+		User.MultiSelectedObjects.merge({type : [path]})
+
+func RemoveItemFromList(path, type):
+	if User.MultiSelectedObjects.has(type):
+		User.MultiSelectedObjects[type].erase(path)
+	if User.MultiSelectedObjects[type].size() <= 0:
+		User.MultiSelectedObjects.erase(type)
+
+func GetItemFromList(types):
+	var list = []
+	for i in types:
+		if User.MultiSelectedObjects.has(i):
+			list.append_array(User.MultiSelectedObjects[i])
+	return list
